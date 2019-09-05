@@ -17,8 +17,8 @@ You may not modify the values in the list's nodes, only nodes itself may be chan
 
 ## Python Solution
 **分析：** 我们如果要交换下两个结点，那么很容易想到：
-1. 把当前结点的 next 指向下下个结点 
-2. 把下下个结点的 next 指向当前结点的下个结点 
+1. 把当前结点的 next 指向下下个结点
+2. 把下下个结点的 next 指向当前结点的下个结点
 3. 把当前结点的下个结点的 next 指向下下下个结点
 这样就完成了下两个结点的交换，把当前结点走到下下个结点即可。但是问题在于怎么区分 比如：当前结点是 tmp ，当前结点的下个结点是 tmp.next ，当前结点的下下个结点和当前结点的下个结点的 next 同样都是 tmp.next.next ，就产生了混淆歧义，于是分开他们就好了
 
@@ -41,3 +41,14 @@ class Solution:
         return dummy.next
 ```
 
+```python
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+        tmp, tmp.next = self, head
+        while tmp.next and tmp.next.next:
+            post = tmp.next
+            pre = post.next
+            tmp.next, pre.next, post.next = pre, post, pre.next
+            tmp = post
+        return self.next
+```
