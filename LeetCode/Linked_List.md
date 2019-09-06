@@ -7,23 +7,23 @@
  - [92   Reverse Linked List II](#92---reverse-linked-list-ii)
  - [237  Delete Node in a Linked List](#237--delete-node-in-a-linked-list)
  - [19   Remove Nth Node From End of List](#19---remove-nth-node-from-end-of-list)
- - [83   Remove Duplicates from Sorted List](#)
- - [203  Remove Linked List Elements](#)
- - [82	  Remove Duplicates from Sorted List II](#)
- - [369  Plus One Linked List](#)
- - [2	  Add Two Numbers](#)
- - [160	Intersection of Two Linked Lists](#)
- - [21	  Merge Two Sorted Lists](#)
+ - [83   Remove Duplicates from Sorted List](#83---remove-duplicates-from-sorted-list)
+ - [203  Remove Linked List Elements](#203--remove-linked-list-elements)
+ - [82   Remove Duplicates from Sorted List II](#82---remove-duplicates-from-sorted-list-ii)
+ - [369  Plus One Linked List](#369--plus-one-linked-list)
+ - [2	   Add Two Numbers](#2----add-two-numbers)
+ - [160	 Intersection of Two Linked Lists](#160--intersection-of-two-linked-lists)
+ - [21   Merge Two Sorted Lists](#21---merge-two-sorted-lists)
 ## 提高
- - [234	Palindrome Linked List](#)
- - [143	Reorder List](#)
- - [142	Linked List Cycle II](#)
- - [148  Sort List](#)
- - [25	  Reverse Nodes in k-Group](#)
- - [61	  Rotate List](#)
- - [86   Partition List](#)
- - [23   Merge k Sorted Lists](#)
- - [147	Insertion Sort List ](#)
+ - [234	 Palindrome Linked List](#234--palindrome-linked-list)
+ - [143	 Reorder List](#143--reorder-list)
+ - [142  Linked List Cycle II](#142--linked-list-cycle-ii)
+ - [148  Sort List](#148--sort-list)
+ - [25   Reverse Nodes in k-Group](#25---reverse-nodes-in-k-group)
+ - [61   Rotate List](#61---rotate-list)
+ - [86   Partition List](#86---partition-list)
+ - [23   Merge k Sorted Lists](#23---merge-k-sorted-lists)
+ - [147	 Insertion Sort List](#147--insertion-sort-list)
 
 ## 206  Reverse Linked List
 
@@ -481,6 +481,131 @@ class Solution:
             post = post.next
         post.next = post.next.next
         return head
+```
+
+[返回目录](#00)
+
+## 83   Remove Duplicates from Sorted List
+
+Given a sorted linked list, delete all duplicates such that each element appear only once.
+
+给定已排序的链接列表，删除所有重复项，使每个元素只出现一次。
+
+**Example 1:**
+
+> Input: 1->1->2
+> Output: 1->2
+
+**Example 2:**
+
+> Input: 1->1->2->3->3
+> Output: 1->2->3
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        cur = head
+        while cur:
+            while cur.next and cur.next.val == cur.val:
+                cur.next = cur.next.next
+            cur = cur.next
+        return head
+```
+
+[返回目录](#00)
+
+## 203  Remove Linked List Elements
+
+Remove all elements from a linked list of integers that have value val.
+
+从具有值val的整数的链接列表中删除所有元素。
+
+**Example 1:**
+
+> Input:  1->2->6->3->4->5->6, val = 6
+> Output: 1->2->3->4->5
+
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        dummy = pre = ListNode(0)
+        pre.next = head
+        while head:
+            if head.val == val:
+                pre.next = head.next
+            else:
+                pre = pre.next
+            head = head.next
+        return dummy.next
+```
+
+[返回目录](#00)
+
+## 82   Remove Duplicates from Sorted List II
+
+Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list.
+
+给定已排序的链接列表，删除所有具有重复数字的节点，只留下原始列表中的不同数字。
+
+**Example 1:**
+
+> Input: 1->2->3->3->4->4->5
+> Output: 1->2->5
+
+**Example 2:**
+
+> Input: 1->1->1->2->3
+> Output: 2->3
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        dummy = pre = ListNode(0)
+        pre.next = head
+        while head and head.next:
+            if head.val == head.next.val:
+                while head and head.next and head.val == head.next.val:
+                    head = head.next
+                pre.next = head.next
+                head = head.next
+            else:
+                pre = pre.next
+                head = head.next
+        return dummy.next
 ```
 
 [返回目录](#00)
