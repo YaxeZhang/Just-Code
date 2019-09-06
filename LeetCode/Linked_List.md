@@ -1,28 +1,28 @@
 基础
-[206  Reverse Linked List](#206--reverse-linked-list)
-[141  Linked List Cycle](#141--linked-list-cycle)
-[24	  Swap Nodes in Pairs](#24---swap-nodes-in-pairs)
-[328  Odd Even Linked List](#328--odd-even-linked-list)
-[92   Reverse Linked List II](#92---reverse-linked-list-ii)
-[237  Delete Node in a Linked List](#237--delete-node-in-a-linked-list)
-[19   Remove Nth Node From End of List](#19---remove-nth-node-from-end-of-list)
-[83   Remove Duplicates from Sorted List](#)
-[203  Remove Linked List Elements](#)
-[82	  Remove Duplicates from Sorted List II](#)
-[369  Plus One Linked List](#)
-[2	  Add Two Numbers](#)
-[160	Intersection of Two Linked Lists](#)
-[21	  Merge Two Sorted Lists](#)
+ - [206  Reverse Linked List](#206--reverse-linked-list)
+ - [141  Linked List Cycle](#141--linked-list-cycle)
+ - [24	 Swap Nodes in Pairs](#24---swap-nodes-in-pairs)
+ - [328  Odd Even Linked List](#328--odd-even-linked-list)
+ - [92   Reverse Linked List II](#92---reverse-linked-list-ii)
+ - [237  Delete Node in a Linked List](#237--delete-node-in-a-linked-list)
+ - [19   Remove Nth Node From End of List](#19---remove-nth-node-from-end-of-list)
+ - [83   Remove Duplicates from Sorted List](#)
+ - [203  Remove Linked List Elements](#)
+ - [82	  Remove Duplicates from Sorted List II](#)
+ - [369  Plus One Linked List](#)
+ - [2	  Add Two Numbers](#)
+ - [160	Intersection of Two Linked Lists](#)
+ - [21	  Merge Two Sorted Lists](#)
 提高
-[234	Palindrome Linked List](#)
-[143	Reorder List](#)
-[142	Linked List Cycle II](#)
-[148  Sort List](#)
-[25	  Reverse Nodes in k-Group](#)
-[61	  Rotate List](#)
-[86   Partition List](#)
-[23   Merge k Sorted Lists](#)
-[147	Insertion Sort List ](#)
+ - [234	Palindrome Linked List](#)
+ - [143	Reorder List](#)
+ - [142	Linked List Cycle II](#)
+ - [148  Sort List](#)
+ - [25	  Reverse Nodes in k-Group](#)
+ - [61	  Rotate List](#)
+ - [86   Partition List](#)
+ - [23   Merge k Sorted Lists](#)
+ - [147	Insertion Sort List ](#)
 
 ## 206  Reverse Linked List
 
@@ -186,7 +186,7 @@ class Solution(object):
         return False
 ```
 
-## 24	  Swap Nodes in Pairs
+## 24   Swap Nodes in Pairs
 
 Given a linked list, swap every two adjacent nodes and return its head.
 
@@ -457,7 +457,7 @@ class Solution:
 **分析：**
 solution 1 是一次遍历中最常见的解法，dummy的存在避免了删除结点时删到了头结点的情况。我们要删除这个结点，那么要先找到这个结点的上一个结点并且讲上一个结点的next指给下一个结点。
 
-在【剑指offer】中有一题是**找到**链表中倒数第 k 个结点，并返回。[链表中倒数第 k 个结点](https://blog.csdn.net/Y_axe/article/details/98678354) 我们这道题可以借鉴。如果利用这个我们可以这么写代码：
+在【剑指offer】中有一题是**找到**链表中倒数第 k 个结点，并返回。 - [链表中倒数第 k 个结点](https://blog.csdn.net/Y_axe/article/details/98678354) 我们这道题可以借鉴。如果利用这个我们可以这么写代码：
 
 ```python
 class Solution:
