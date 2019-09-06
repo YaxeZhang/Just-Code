@@ -39,7 +39,7 @@ Reverse a singly linked list.
 ---
 
 ### Python Solution
-**分析：** 反转链表是链表操作里比较经典的题型，操作为用一个单链表储存新的反转后的链表，原链表从前到后把每个节点和链表分开并且添加到新的单链表后边，再讲原链表的head指向head.next 完成head的后移。代码如下：
+**分析：** 反转链表是链表操作里比较经典的题型，操作为用一个单链表储存新的反转后的链表，原链表从前到后把每个节点和链表分开并且添加到新的单链表后边，再将原链表的head指向head.next 完成head的后移。代码如下：
 
 ```python
 # Definition for singly-linked list.
@@ -50,8 +50,6 @@ Reverse a singly linked list.
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        if not head or not head.next:
-            return head
         pre = None
         while head:
             tmp = head.next
@@ -67,8 +65,6 @@ class Solution:
 ```python
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        if not head or not head.next:
-            return head
         pre = None
         while head:
             pre, pre.next, head = head, pre, head.next
@@ -106,20 +102,20 @@ To represent a cycle in the given linked list, we use an integer pos which repre
 **Example 1:**
 
 > Input: head = [3,2,0,-4], pos = 1
-Output: true
-Explanation: There is a cycle in the linked list, where tail connects to the second node.
+> Output: true
+> Explanation: There is a cycle in the linked list, where tail connects to the second node.
 
 **Example 2:**
 
 > Input: head = [1,2], pos = 0
-Output: true
-Explanation: There is a cycle in the linked list, where tail connects to the first node.
+> Output: true
+> Explanation: There is a cycle in the linked list, where tail connects to the first node.
 
 **Example 3:**
 
 > Input: head = [1], pos = -1
-Output: false
-Explanation: There is no cycle in the linked list.
+> Output: false
+> Explanation: There is no cycle in the linked list.
 
 ---
 
@@ -261,12 +257,12 @@ You should try to do it in place. The program should run in O(1) space complexit
 **Example 1:**
 
 > Input: 1->2->3->4->5->NULL
-Output: 1->3->5->2->4->NULL
+> Output: 1->3->5->2->4->NULL
 
 **Example 2:**
 
 > Input: 2->1->3->5->6->4->7->NULL
-Output: 2->3->6->7->1->5->4->NULL
+> Output: 2->3->6->7->1->5->4->NULL
 
 ---
 
@@ -327,7 +323,7 @@ Note: 1 ≤ m ≤ n ≤ length of list.
 **Example 1:**
 
 > Input: 1->2->3->4->5->NULL, m = 2, n = 4
-Output: 1->4->3->2->5->NULL
+> Output: 1->4->3->2->5->NULL
 
 ---
 
@@ -395,14 +391,14 @@ Write a function to delete a node (except the tail) in a singly linked list, giv
 **Example 1:**
 
 > Input: head = [4,5,1,9], node = 5
-Output: [4,1,9]
-Explanation: You are given the second node with value 5, the linked list should become 4 -> 1 -> 9 after calling your function.
+> Output: [4,1,9]
+> Explanation: You are given the second node with value 5, the linked list should become 4 -> 1 -> 9 after calling your function.
 
 **Example 2:**
 
 > Input: head = [4,5,1,9], node = 1
-Output: [4,5,9]
-Explanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.
+> Output: [4,5,9]
+> Explanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.
 
 ---
 
@@ -457,7 +453,7 @@ class Solution:
         pre = post = dummy
         if not head:
             return None
-        for i in range(n + 1):
+        for _ in range(n + 1):
             if not pre:
                 return None
             pre = pre.next
