@@ -1,4 +1,5 @@
-基础
+<span id = "00"></span>
+## 基础
  - [206  Reverse Linked List](#206--reverse-linked-list)
  - [141  Linked List Cycle](#141--linked-list-cycle)
  - [24	 Swap Nodes in Pairs](#24---swap-nodes-in-pairs)
@@ -13,7 +14,7 @@
  - [2	  Add Two Numbers](#)
  - [160	Intersection of Two Linked Lists](#)
  - [21	  Merge Two Sorted Lists](#)
-提高
+## 提高
  - [234	Palindrome Linked List](#)
  - [143	Reorder List](#)
  - [142	Linked List Cycle II](#)
@@ -37,7 +38,7 @@ Reverse a singly linked list.
 
 ---
 
-## Python Solution
+### Python Solution
 **分析：** 反转链表是链表操作里比较经典的题型，操作为用一个单链表储存新的反转后的链表，原链表从前到后把每个节点和链表分开并且添加到新的单链表后边，再讲原链表的head指向head.next 完成head的后移。代码如下：
 
 ```python
@@ -90,6 +91,8 @@ class Solution:
 
 ```
 
+[返回目录](#00)
+
 ## 141  Linked List Cycle
 
 Given a linked list, determine if it has a cycle in it.
@@ -120,7 +123,7 @@ Explanation: There is no cycle in the linked list.
 
 ---
 
-## Python Solution
+### Python Solution
 **分析：**
 
 ```python
@@ -186,6 +189,8 @@ class Solution(object):
         return False
 ```
 
+[返回目录](#00)
+
 ## 24   Swap Nodes in Pairs
 
 Given a linked list, swap every two adjacent nodes and return its head.
@@ -203,7 +208,7 @@ You may not modify the values in the list's nodes, only nodes itself may be chan
 
 ---
 
-## Python Solution
+### Python Solution
 **分析：** 我们如果要交换下两个结点，那么很容易想到：
 1. 把当前结点的 next 指向下下个结点
 2. 把下下个结点的 next 指向当前结点的下个结点
@@ -241,6 +246,8 @@ class Solution:
         return self.next
 ```
 
+[返回目录](#00)
+
 ## 328  Odd Even Linked List
 
 Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.
@@ -263,7 +270,7 @@ Output: 2->3->6->7->1->5->4->NULL
 
 ---
 
-## Python Solution
+### Python Solution
 **分析：** 将链表分成奇偶两条然后进行拼接即可，重点是边界判断
 
 ```python
@@ -304,6 +311,8 @@ class Solution:
         return head
 ```
 
+[返回目录](#00)
+
 ## 92   Reverse Linked List II
 
 Reverse a linked list from position m to n. Do it in one-pass.
@@ -322,7 +331,7 @@ Output: 1->4->3->2->5->NULL
 
 ---
 
-## Python Solution
+### Python Solution
 **分析：** 思路比较简单，可以参考[Reverse Linked List ](https://blog.csdn.net/Y_axe/article/details/99718252) 的解法，找到要反转的头和尾，进行反转操作即可
 
 ```python
@@ -375,6 +384,8 @@ class Solution:
         return head
 ```
 
+[返回目录](#00)
+
 ## 237  Delete Node in a Linked List
 
 Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.
@@ -395,7 +406,7 @@ Explanation: You are given the third node with value 1, the linked list should b
 
 ---
 
-## Python Solution
+### Python Solution
 **分析：** 有点蠢的题。
 
 ```python
@@ -415,6 +426,8 @@ class Solution:
         node.next = node.next.next
 ```
 
+[返回目录](#00)
+
 ## 19   Remove Nth Node From End of List
 
 Given a linked list, remove the n-th node from the end of list and return its head.
@@ -433,7 +446,7 @@ Given n will always be valid.
 
 ---
 
-## Python Solution
+#### Python Solution
 
 #### solution 1
 ```python
@@ -473,3 +486,5 @@ class Solution:
         post.next = post.next.next
         return head
 ```
+
+[返回目录](#00)
