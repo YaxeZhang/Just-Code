@@ -1,7 +1,5 @@
 ## 题目描述
 
-
-
 Given a linked list, determine if it has a cycle in it.
 
 To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail connects to. If pos is -1, then there is no cycle in the linked list.
@@ -68,6 +66,19 @@ class Solution(object):
             return True
         except:
             return False
+```
+
+**更简洁！！**
+
+```Python
+class Solution(object):
+    def hasCycle(self, head):
+        fast = slow = head
+        while fast and fast.next:
+            fast, slow = fast.next.next, slow.next
+            if fast == slow:
+                return True
+        return False
 ```
 
 **破坏型解法，不推荐**

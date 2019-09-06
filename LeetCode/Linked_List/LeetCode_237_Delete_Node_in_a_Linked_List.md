@@ -1,6 +1,5 @@
 ## 题目描述
 
-
 Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.
 
 编写一个函数来删除单链表中的节点（尾部除外），只允许访问该节点。

@@ -1,4 +1,3 @@
- 
 ## 题目描述
 Given a linked list, remove the n-th node from the end of list and return its head.
 
@@ -7,7 +6,7 @@ Given a linked list, remove the n-th node from the end of list and return its he
 **Example :**
 
 > Given linked list: **1->2->3->4->5**, and **n = 2**.
-> 
+>
 > After removing the second node from the end, the linked list becomes **1->2->3->5**.
 
 **Note:**
@@ -35,7 +34,7 @@ class Solution:
         post.next = post.next.next
         return dummy.next
 ```
-**分析：** 
+**分析：**
 solution 1 是一次遍历中最常见的解法，dummy的存在避免了删除结点时删到了头结点的情况。我们要删除这个结点，那么要先找到这个结点的上一个结点并且讲上一个结点的next指给下一个结点。
 
 在【剑指offer】中有一题是**找到**链表中倒数第 k 个结点，并返回。[链表中倒数第 k 个结点](https://blog.csdn.net/Y_axe/article/details/98678354) 我们这道题可以借鉴。如果利用这个我们可以这么写代码：
@@ -54,4 +53,3 @@ class Solution:
         post.next = post.next.next
         return head
 ```
-

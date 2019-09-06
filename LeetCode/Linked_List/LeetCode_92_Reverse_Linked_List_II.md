@@ -1,6 +1,4 @@
- ## 题目描述
-
-
+## 题目描述
 
 Reverse a linked list from position m to n. Do it in one-pass.
 
@@ -76,4 +74,3 @@ class Solution:
                 head = cur
         return head
 ```
-
