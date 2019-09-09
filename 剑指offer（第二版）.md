@@ -10,6 +10,8 @@
    - [10.斐波那契数列](#10斐波那契数列)
    - [11.旋转数组中的最小数字](#11旋转数组中的最小数字)
    - [15.二进制中 1 的个数](#15二进制中-1-的个数)
+   - [18.删除列表中重复的结点](#18删除列表中重复的结点)
+   - [21.调整数组顺序使奇数位于偶数前面](#21调整数组顺序使奇数位于偶数前面)
    - [22.链表中倒数第 k 个结点](#22链表中倒数第-k-个结点)
    - [23.链表中环的入口结点](#23链表中环的入口结点)
    - [24.反转链表](#24反转链表)
@@ -293,6 +295,56 @@ class Solution:
             count += 1
             n &= (n - 1)
         return count
+```
+
+[回到目录](#00)
+
+### 18.删除列表中重复的结点
+#### 题目描述
+在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+#### 解法：
+
+```python
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def deleteDuplication(self, pHead):
+        dummy = tmp = ListNode(0)
+        tmp.next = pHead
+        while pHead and pHead.next:
+            if pHead.val == pHead.next.val:
+                while pHead and pHead.next and pHead.val == pHead.next.val:
+                    pHead = pHead.next
+                tmp.next = pHead.next
+                pHead = pHead.next
+            else:
+                tmp = tmp.next
+                pHead = pHead.next
+        return dummy.next
+```
+
+[回到目录](#00)
+
+### 21.调整数组顺序使奇数位于偶数前面
+#### 题目描述
+输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分。
+#### 解法：
+
+```python
+class Solution:
+    def reOrderArray(self, array):
+        if not array:
+            return None
+        i, j = 0, len(array) - 1
+        while i <= j:
+            while i <= len(array) - 1 and array[i] % 2 == 1:
+                i += 1
+            while j >= 0 and array[j] % 2 == 0:
+                j -= 1
+            array[i], array[j] = array[j], array[i]
+        return array
 ```
 
 [回到目录](#00)
