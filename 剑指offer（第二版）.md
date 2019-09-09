@@ -17,6 +17,7 @@
    - [24.反转链表](#24反转链表)
    - [25.合并两个排序的链表](#25合并两个排序的链表)
    - [27.二叉树的镜像](#27二叉树的镜像)
+   - [39.数组中出现次数超过一半的数字](#39数组中出现次数超过一半的数字)
    - [52.两个链表的第一个公共结点](#52两个链表的第一个公共结点)
    - [57.和为S的两个数](#57和为S的两个数)
    - [58.翻转字符串]()
@@ -535,6 +536,35 @@ class Solution:
         if root.right:               # 但是涉及函数调用，会让速度更慢
             self.Mirror(root.right)
         return root
+```
+
+[回到目录](#00)
+
+### 39.数组中出现次数超过一半的数字
+#### 题目描述
+数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。
+#### 解法：
+
+```python
+class Solution:
+    def MoreThanHalfNum_Solution(self, numbers):
+        if not numbers:
+            return 0
+        candidate = numbers[0]
+        count = 1
+        for i in range(1,len(numbers)):
+            if numbers[i] == candidate:
+                count += 1
+            else:
+                count -= 1
+                if count == 0:
+                    candidate = numbers[i]
+                    count = 1
+        # 上面是摩尔投票法，下面为验证，这样可以保证时间复杂度在 O(n) 。
+        if numbers.count(candidate) * 2 > len(numbers):
+            return candidate
+        else:
+            return 0
 ```
 
 [回到目录](#00)
