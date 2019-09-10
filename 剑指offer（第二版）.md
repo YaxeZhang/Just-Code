@@ -266,17 +266,20 @@ class Solution:
     def minNumberInRotateArray(self, rotateArray):
         if not rotateArray:
             return 0
-        i, j = 0, len(rotateArray) - 1
-        while i + 1 < j:
-            mid = int(i + (j - i) / 2)
-            if rotateArray[mid] > rotateArray[j]:
-                i = mid
+        start, end = 0, len(rotateArray) - 1
+        while start + 1 < end:
+            mid = int(start + (end - start) / 2)
+            if rotateArray[mid] > rotateArray[end]:
+                start = mid
             else:
-                j = mid
-        if rotateArray[i] <= rotateArray[j]:
-            return rotateArray[i]
+                if rotateArray[mid] < rotateArray[end]:
+                    end = mid
+                else:
+                    end -= 1
+        if rotateArray[start] > rotateArray[end]:
+            return rotateArray[end]
         else:
-            return rotateArray[j]
+            return rotateArray[start]
 ```
 
 [回到目录](#00)
