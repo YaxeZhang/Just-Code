@@ -609,3 +609,47 @@ class Solution:
 ```
 
 [返回目录](#00)
+
+## 86   Partition List
+
+Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+
+You should preserve the original relative order of the nodes in each of the two partitions.
+
+给定链表和值x，对其进行分区，使得小于x的所有节点都在大于或等于x的节点之前。
+
+您应该保留两个分区中每个分区中节点的原始相对顺序。
+
+**Example**
+
+> Input: head = 1->4->3->2->5->2, x = 3
+> Output: 1->2->2->4->3->5
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def partition(self, head: ListNode, x: int) -> ListNode:
+        dummy = less = ListNode(0)
+        dummy2 = other = ListNode(0)
+        while head:
+            if head.val < x:
+                less.next = less = head
+            else:
+                other.next = other = head
+            head = head.next
+        other.next = None
+        less.next = dummy2.next
+        return dummy.next
+```
+
+[返回目录](#00)
