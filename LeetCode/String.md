@@ -39,7 +39,7 @@
 158	Read N Characters Given Read4 II - Call multiple times
 ## Substring		
  - [76. Minimum Window Substring](76-minimum-window-substring)
-30	Substring with Concatenation of All Words
+ - [30	Substring with Concatenation of All Words]()
  - [3. Longest Substring Without Repeating Characters](3-longest-substring-without-repeating-characters)
 340	Longest Substring with At Most K Distinct Characters
 395	Longest Substring with At Least K Repeating Characters
