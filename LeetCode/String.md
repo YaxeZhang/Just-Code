@@ -38,9 +38,9 @@
 157	Read N Characters Given Read4
 158	Read N Characters Given Read4 II - Call multiple times
 ## Substring		
- - [76. Minimum Window Substring](76.-minimum-window-substring)
+ - [76. Minimum Window Substring](76-minimum-window-substring)
 30	Substring with Concatenation of All Words
- - [3. Longest Substring Without Repeating Characters](3.-longest-substring-without-repeating-characters)
+ - [3. Longest Substring Without Repeating Characters](3-longest-substring-without-repeating-characters)
 340	Longest Substring with At Most K Distinct Characters
 395	Longest Substring with At Least K Repeating Characters
 159	Longest Substring with At Most Two Distinct Characters
@@ -66,7 +66,7 @@
 187	Repeated DNA Sequences
 
 
-## 76. Minimum Window Substring
+## 76 Minimum Window Substring
 
 Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
 
@@ -104,7 +104,7 @@ class Solution:
 
 [返回目录](#00)
 
-## 3. Longest Substring Without Repeating Characters
+## 3 Longest Substring Without Repeating Characters
 
 Given a string, find the length of the longest substring without repeating characters.
 
