@@ -2,7 +2,7 @@
 ## 基础		
 7	Reverse Integer
 165	Compare Version Numbers
-66	Plus One
+ - [66. Plus One](#66-plus-one)
 8	String to Integer (atoi)
 258	Add Digits
 67	Add Binary
@@ -43,6 +43,49 @@
 397	Integer Replacement
 368	Largest Divisible Subset
 
+## 66. Plus One
+
+Given a non-empty array of digits representing a non-negative integer, plus one to the integer.
+
+The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.
+
+You may assume the integer does not contain any leading zero, except the number 0 itself.
+
+给定表示非负整数的非空数字数组，加上整数的1。
+
+存储数字使得最高有效数字位于列表的开头，并且数组中的每个元素包含单个数字。
+
+您可以假设整数不包含任何前导零，除了数字0本身。
+
+**Example:1**
+
+> Input: [1,2,3]
+> Output: [1,2,4]
+> Explanation: The array represents the integer 123.
+
+**Example:2**
+
+> Input: [4,3,2,1]
+> Output: [4,3,2,2]
+> Explanation: The array represents the integer 4321.
+---
+
+### Python Solution
+**分析：** 从后往前找到第一位不为 9 的数字加一返回数组即可，如果为 9 ，将这一位置 0 ，继续向前寻找。如果都为 9 ，则在数组头部插入 1 。
+
+```python
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        for i in range(len(digits)):
+            if digits[~i] < 9:
+                digits[~i] += 1
+                return digits
+            digits[~i] = 0
+        digits.insert(0, 1)
+        return digits
+```
+
+[返回目录](#00)
 
 ## 167. Two Sum II
 
