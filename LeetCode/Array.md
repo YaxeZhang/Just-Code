@@ -18,7 +18,7 @@
  - [244	Shortest Word Distance II]
  - [245	Shortest Word Distance III]
  - [217. Contains Duplicate](#217-contains-duplicate)
- - [219	Contains Duplicate II]
+ - [219. Contains Duplicate II](#219-contains-duplicate-ii)
  - [220	Contains Duplicate III]
  - [55	Jump Game]
  - [45	Jump Game II]
@@ -91,6 +91,41 @@ Your function should return true if any value appears at least twice in the arra
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
         return len(nums) > len(set(nums))
+```
+
+[返回目录](#00)
+
+## 219. Contains Duplicate II
+
+Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k.
+
+给定一个整数数组和一个整数k，找出数组中是否存在两个不同的索引i和j，使得nums [i] = nums [j]并且i和j之间的绝对差值最多为k。
+
+**Example:1**
+
+> Input: nums = [1,2,3,1], k = 3
+> Output: true
+
+**Example:2**
+
+> Input: nums = [1,2,3,1,2,3], k = 2
+> Output: false
+
+---
+
+### Python Solution
+**分析：** 建立哈希表，存储距离最近的上一次索引，判断距离，如果满足条件了将 flag 设为 True ，否则不满足返回 flag = Flase 。
+
+```python
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        used = {}
+        flag = False
+        for i, v in enumerate(nums):
+            if v in used and not flag:
+                flag = (i - used[v] <= k)
+            used[v] = i
+        return flag
 ```
 
 [返回目录](#00)
