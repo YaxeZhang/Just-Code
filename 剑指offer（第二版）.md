@@ -448,8 +448,8 @@ class Solution:
             return pHead
         else:
             newHead = self.ReverseList(pHead.next)
-            pHead.next.next=pHead
-            pHead.next=None
+            pHead.next.next = pHead
+            pHead.next = None
             return newHead
 ```
 

@@ -477,7 +477,7 @@ class Solution:
         if not pre:          #用来处理 pre 此时是头指针的情况
             return  head.next
         while pre.next:      #和剑指offer相比其实是提前了一位
-            pre=pre.next
+            pre = pre.next
             post = post.next
         post.next = post.next.next
         return head
