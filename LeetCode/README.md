@@ -1,6 +1,6 @@
 # LeetCode_Python
 
-## [Array.md](#https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/Array.md)
+ [Array.md](#https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/Array.md)
 ## [BFS.md](#https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/BFS.md)
 ## [Backtracking.md](#https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/Backtracking.md)
 ## [Binary_Search.md](#https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/Binary_Search.md)
