@@ -1,6 +1,6 @@
 <span id = "00"></span>
 ## 一维		
- - [70	Climbing Stairs]
+ - [70. Climbing Stairs](#70-climbing-stairs)
  - [62	Unique Paths]
  - [63	Unique Paths II]
  - [120	Triangle	很少考]
@@ -27,25 +27,52 @@
  - [10	Regular Expression Matching]
  - [44	Wildcard Matching]
 
-##
+## 70. Climbing Stairs
 
-Given
+You are climbing a stair case. It takes n steps to reach to the top.
 
-给
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+Note: Given n will be a positive integer.
+
+你正在爬楼梯。它需要n步才能达到顶峰。 
+
+每次你可以爬1或2步。您可以通过多少不同的方式登顶？ 
+
+注意：给定n将是一个正整数。
 
 **Example**
 
-> Input: numbers = [2,7,11,15], target = 9
-> Output: [1,2]
-> Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.
+> Input: 2
+> Output: 2
+> Explanation: There are two ways to climb to the top.
+> 1. 1 step + 1 step
+> 2. 2 steps
 
 ---
 
 ### Python Solution
-**分析：**
+**分析：** 从简单到难理解动态规划，即利用前面的子问题的解求得后面问题的解。不递归调用，而只是存储子问题解并且通过状态转移来解决。
 
 ```python
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n <= 2:
+            return n
+        dp = [0] * n
+        dp[0], dp[1] = 1, 2
+        for i in range(2,n):
+            dp[i] = dp[i - 1] + dp[i- 2]
+        return dp[-1]
+```
 
+```python
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        a, b = 1, 0
+        for _ in range(n + 1):
+            a, b = a + b, a
+        return b
 ```
 
 [返回目录](#00)
