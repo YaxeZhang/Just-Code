@@ -4,7 +4,7 @@
  - [26	Remove Duplicates from Sorted Array]
  - [80	Remove Duplicates from Sorted Array II]
  - [277	Find the Celebrity]
- - [189	Rotate Array]
+ - [189. Rotate Array](#189-rotate-array)
  - [41	First Missing Positive]
  - [299	Bulls and Cows]
  - [134	Gas Station]
@@ -63,6 +63,62 @@
  - [376	Wiggle Subsequence]
  - [280	Wiggle Sort]
  - [324	Wiggle Sort II]
+
+## 189. Rotate Array
+
+Given an array, rotate the array to the right by k steps, where k is non-negative.
+
+给定一个数组，将数组向右旋转k步，其中k为非负数。
+
+**Example:1**
+
+> Input: [1,2,3,4,5,6,7] and k = 3
+> Output: [5,6,7,1,2,3,4]
+> Explanation:
+> rotate 1 steps to the right: [7,1,2,3,4,5,6]
+> rotate 2 steps to the right: [6,7,1,2,3,4,5]
+> rotate 3 steps to the right: [5,6,7,1,2,3,4]
+
+**Example:2**
+
+> Input: [-1,-100,3,99] and k = 2
+> Output: [3,99,-1,-100]
+> Explanation:
+> rotate 1 steps to the right: [99,-1,-100,3]
+> rotate 2 steps to the right: [3,99,-1,-100]
+
+---
+
+### Python Solution
+**分析：** 可以用 Python 的链表的交换做，也可以通过翻转来做，推荐第二种Solution
+
+**Solution 1:**
+
+```python
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        k %= len(nums)
+        if k == 0:return
+        nums[:k], nums[k:] = nums[-k:], nums[:-k]
+```
+
+**Solution 2:**
+
+```python
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        def reverse(i, j):
+            while i < j:
+                nums[i], nums[j] = nums[j], nums[i]
+                i += 1
+                j -= 1
+        k %= len(nums)
+        reverse(0, len(nums) - 1)
+        reverse(0, k - 1)
+        reverse(k, len(nums) - 1)
+```
+
+[返回目录](#00)
 
 ## 217. Contains Duplicate
 
