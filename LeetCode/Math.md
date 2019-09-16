@@ -15,11 +15,12 @@
  - [204	Count Primes]
 ## Sum		
  - [1	Two Sum]
- - [167. Two Sum II](167-two-sum-ii)
+ - [167. Two Sum II](#167-two-sum-ii)
  - [15	3Sum]
  - [16	3Sum Closest]
  - [259	3Sum Smaller]
  - [18	4Sum]
+ - [611. Valid Triangle Number](#611-valid-triangle-number)
 ## 很少考		
  - [231	Power of Two]
  - [326	Power of Three]
@@ -118,6 +119,45 @@ class Solution:
                 j -= 1
             else:
                 return i + 1, j + 1
+```
+
+[返回目录](#00)
+
+## 611. Valid Triangle Number
+
+Given an array consists of non-negative integers, your task is to count the number of triplets chosen from the array that can make triangles if we take them as side lengths of a triangle.
+
+给定一个由非负整数组成的数组，你的任务是计算从可以组成三角形的数组中选择的三元组的数量，如果我们将它们作为三角形的边长。
+
+**Example**
+
+> Input: [2,2,3,4]
+> Output: 3
+> Explanation:
+> Valid combinations are:
+> 2,3,4 (using the first 2)
+> 2,3,4 (using the second 2)
+> 2,2,3
+
+---
+
+### Python Solution
+**分析：** 这道题是中等难度的题，但其实是 Two Sum 类型题的变形。非常漂亮的解法，如果暴力法的话需要 O(n^3) 的时间复杂度，但是如果巧妙运用双指针，可以缩减为 O(n^2) 。我们按照从短到长将边设为 a, b, c 三边，排序后从最后取 c 的值，如果边 a 和边 b 的长度超过边 c 的长度，那么直接加上可能的个数 (b - a)，否则移动 a 使得相加之和变大。
+
+```python
+class Solution:
+    def triangleNumber(self, nums: List[int]) -> int:
+        nums.sort()
+        res = 0
+        for c in range(len(nums) - 1, 1, -1):
+            a, b = 0, c - 1
+            while a < b:
+                if nums[a] + nums[b] > nums[c]:
+                    res += b - a
+                    b -= 1
+                else:
+                    a += 1
+        return res
 ```
 
 [返回目录](#00)
