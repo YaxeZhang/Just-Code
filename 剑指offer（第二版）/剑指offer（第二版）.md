@@ -115,9 +115,9 @@ class Solution:
     def printListFromTailToHead(self, listNode):
         res = []
         while listNode:
-            res.insert(0, listNode.val)
+            res.append(listNode.val)
             listNode = listNode.next
-        return res
+        return res[::-1]
 ```
 
 [回到目录](#00)
