@@ -680,6 +680,29 @@ class Solution:
 
 [回到目录](#00)
 
+### 59.队列的最大值
+#### 题目描述
+给定一个数组和滑动窗口的大小，请找出所有滑动窗口的最大值。例如，输入数组{2,3,4,2,6,2,5,1}和数字3，那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}。
+#### 解法：
+
+```python
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        dq = collections.deque()             # 使用双向队列解决本题
+        res = []
+        for i, v in enumerate(nums):
+            while dq and nums[dq[-1]] < v:   # dq中如果存在多个元素
+                dq.pop()                     # 一定是降序排列的
+            dq += i,
+            if dq[0] == i - k:               # 判断dq中第一位是否有效
+                dq.popleft()
+            if i >= k - 1:                   # 满足滑动窗口长度才有输出
+                res += nums[dq[0]],
+        return res
+```
+
+[回到目录](#00)
+
 ### 66.构建乘积数组
 #### 题目描述
 给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1],其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。

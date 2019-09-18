@@ -41,8 +41,9 @@
  - [327	Count of Range Sum]
  - [289	Game of Life]
 ## Interval		
- - [57	Insert Interval]
- - [56	Merge Intervals]
+ - [57. Insert Interval](#57-insert-interval)
+ - [56. Merge Intervals](#56-merge-intervals)
+ - [986. Interval List Intersections](#986-interval-list-intersections)
  - [252	Meeting Rooms]
  - [253	Meeting Rooms II]
  - [352	Data Stream as Disjoint Intervals]
@@ -227,6 +228,134 @@ class Solution:
                 dq.popleft()
             if i >= k - 1:
                 res += nums[dq[0]],
+        return res
+```
+
+[返回目录](#00)
+
+## 57. Insert Interval
+
+Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
+
+You may assume that the intervals were initially sorted according to their start times.
+
+给定一组非重叠区间，在区间中插入新区间（必要时合并）。 您可以假设区间最初是根据其下限排序的。
+
+**Example**
+
+> Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+> Output: [[1,2],[3,10],[12,16]]
+> Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+
+---
+
+### Python Solution
+**分析：** 虽然这是一道 Hard 难度的题，但其实并没有难度。Talk is cheap, show you the code.
+
+```python
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        start, end = newInterval
+        left, right = [], []
+        for i in intervals:
+            if i[1] < start:
+                left += i,
+            elif i[0] > end:
+                right += i,
+            else:
+                start = min(start, i[0])
+                end = max(end, i[1])
+        return left + [[start, end]] + right
+```
+
+[返回目录](#00)
+
+## 56. Merge Intervals
+
+Given a collection of intervals, merge all overlapping intervals.
+
+给定包含一些区间的集合，合并所有重叠的区间。
+
+**Example**
+
+> Input: [[1,3],[2,6],[8,10],[15,18]]
+> Output: [[1,6],[8,10],[15,18]]
+> Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+
+---
+
+### Python Solution
+**分析：** 先根据区间下限对给定的区间集合进行排序，然后逐个区间与 res 中存在的最后一个区间进行比较。如果没有交集，则将新的区间存入 res 作为新的最后一个区间；如果有交集，则将最后一个区间的上限更新为更大的那个上限。
+
+```python
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key = lambda x : x[0])
+        res = []
+        for i in intervals:
+            if not res or res[-1][1] < i[0]:
+                res += i,
+            else:
+                res[-1][1] = max(res[-1][1], i[1])
+        return res
+```
+
+**优化** 在 LeetCode 上提交发现 Runtime 较低，应该是每次都对 res 进行读取的原因，所以我们设置两个变量来降低读取 res 的频率。但是它带来的问题就是需要判断区间集合是否为空。
+
+```python
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        if not intervals:
+            return []
+        intervals.sort(key = lambda x : x[0])
+        res = []
+        l, r = intervals[0]
+        for i in range(1, len(intervals)):
+            il, ir = intervals[i]
+            if r < il:
+                res += [l, r],
+                l, r = il, ir
+            else:
+                r = max(r, ir)
+        res += [l, r],
+        return res
+```
+
+[返回目录](#00)
+
+## 986. Interval List Intersections
+
+Given two lists of closed intervals, each list of intervals is pairwise disjoint and in sorted order.
+
+Return the intersection of these two interval lists.
+
+(Formally, a closed interval [a, b] (with a <= b) denotes the set of real numbers x with a <= x <= b.  The intersection of two closed intervals is a set of real numbers that is either empty, or can be represented as a closed interval.  For example, the intersection of [1, 3] and [2, 4] is [2, 3].)
+
+给定两个闭合间隔列表，每个间隔列表是成对不相交的并且按排序顺序。 返回这两个间隔列表的交集。 （形式上，闭区间[a，b]（a <= b）表示实数x的集合，其中a <= x <= b。两个闭区间的交集是一组空的实数 或者可以表示为闭区间。例如，[1,3]和[2,4]的交集是[2,3]。）
+
+**Example**
+
+> Input: A = [[0,2],[5,10],[13,23],[24,25]], B = [[1,5],[8,12],[15,24],[25,26]]
+> Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+> Reminder: The inputs and the desired output are lists of Interval objects, and not arrays or lists.
+
+---
+
+### Python Solution
+**分析：** 双指针进行比对，如果有交集则在 res 中添加。移动拥有更小末尾的指针，进行判断下一个区间和当前较大末尾的区间是否有交集。
+
+```python
+class Solution:
+    def intervalIntersection(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
+        res = []
+        i = j = 0
+        while i < len(A) and j < len(B):
+            a1, a2 = A[i][0], A[i][1]
+            b1, b2 = B[j][0], B[j][1]
+            if b2 >= a1 and a2 >= b1:
+                res += [max(a1, b1), min(a2, b2)],
+            if a2 < b2: i += 1
+            else: j += 1
         return res
 ```
 
