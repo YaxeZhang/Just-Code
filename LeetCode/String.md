@@ -45,7 +45,7 @@
  - [395	Longest Substring with At Least K Repeating Characters]
  - [159	Longest Substring with At Most Two Distinct Characters]
 ## Palindrome		
- - [125	Valid Palindrome]
+ - [125. Valid Palindrome](#125-valid-palindrome)
  - [266	Palindrome Permutation]
  - [5	Longest Palindromic Substring]
  - [9	Palindrome Number]
@@ -147,4 +147,64 @@ class Solution:
         return maxLength
 ```
 
- - [返回目录](#00)
+[返回目录](#00)
+
+## 125. Valid Palindrome
+
+Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+Note: For the purpose of this problem, we define empty string as valid palindrome.
+
+给定一个字符串，确定它是否是回文，只考虑字母数字字符并忽略大小写。 注意：出于此问题的目的，我们将空字符串定义为有效的回文。
+
+**Example**
+
+> Input: "A man, a plan, a canal: Panama"
+> Output: true
+
+---
+
+### Python Solution
+**分析：** 很容易想到我们如果先用 isalnum() 将字符或者数字选出来是不是就转换成了判断字符串是不是回文字符串的问题。那么我们用 Python 的列表表达式就可以 Pythonic 地解决这个要求。
+
+```python
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s = [i.lower() for i in s if i.isalpha() or i.isdigit()]
+        return s == s[::-1]
+```
+
+**进阶** 但实际上我们的构成新列表 s 的操作时间复杂度为 O(n)， 空间复杂度为 O(n)。之后的进行判断是否为回文字符串的操作话费相同，显得比较粗鲁。因此我们想能不能更优雅地解决判断回文字符串的要求。于是有了下面的代码：
+
+```python
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s = [i.lower() for i in s if i.isalnum()]
+        i, j = 0, len(s) - 1
+        while i < j:
+            if s[i] != s[j]:
+                return False
+            i += 1
+            j -= 1
+        return True
+```
+
+**再进阶** 利用双指针一前一后进行判断是否相同只要 O(n) 时间复杂度和 O(1) 的空间复杂度，比之前更有效率了。但是列表 s 仍然会花费 O(n) 的空间，所以我们将双指针不再局限在筛选后的 list 上，而是在原来的字符串上就开始工作。一前一后逼近，每次移动后判断当前位是否为字符或者数字，然后进行比较。这样只对字符串进行了一次遍历，所以只用了 O(n) 的时间复杂度，而且空间复杂度为 O(1) 。
+
+```python
+class Solution:
+    def isPalindrome(self, s):
+        i, j = 0, len(s) - 1
+        while i < j:
+            while not s[i].isalnum() and i < j:
+                i += 1
+            while not s[j].isalnum() and i < j:
+                j -= 1
+            if s[i].lower() != s[j].lower():
+                return 0
+            i += 1
+            j -= 1
+        return True
+```
+
+[返回目录](#00)
