@@ -1,12 +1,12 @@
 <span id = "00"></span>
 ## 基础
  - [389. Find the Difference](#389-find-the-difference)
- - [136	Single Number]
+ - [136. Single Number](#136-single-number)
  - [318	Maximum Product of Word Lengths]
 ## 很少考			
  - [393	UTF-8 Validation]
  - [201. Bitwise AND of Numbers Range](#201-bitwise-and-of-numbers-range)
- - [371	Sum of Two Integers emove Element]
+ - [371. Sum of Two Integers](#371-sum-of-two-integers)
  - [338	Counting Bits]
  - [89	Gray Code]
  - [268	Missing Number]
@@ -43,10 +43,14 @@ Find the letter that was added in t.
 ### Python Solution
 **分析：** 将 s 中字符转成它的 ASCII 码，然后进行异或，得到的结果与同样处理的 t 进行异或，最后的结果既是 t 中多出来的值的 ASCII 码，恢复成字符即可。
 
+```python
 from functools import reduce
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
         return chr(reduce(int.__xor__, map(ord, s+t)))
+```
+
+**Solution2:** 这样的话更好理解一点
 
 ```python
 class Solution:
@@ -57,31 +61,38 @@ class Solution:
 [返回目录](#00)
 
 
-## 201. Bitwise AND of Numbers Range
+## 136. Single Number
 
-Given a range [m, n] where 0 <= m <= n <= 2147483647, return the bitwise AND of all numbers in this range, inclusive.
+Given a non-empty array of integers, every element appears twice except for one. Find that single one.
 
-给定范围[m，n]，其中0 <= m <= n <= 2147483647，返回此范围内所有数字的按位AND，包括端值。
+给定一个非空的整数数组，除了一个元素外，每个元素都会出现两次。找一个单一的。
 
 **Example**
 
-> Input: [5,7]
-> Output: 4
+> Input: [4,1,2,1,2]
+> Output: 4201. Bitwise AND of Numbers Range
 
 ---
 
 ### Python Solution
-**分析：** 只要找到两端的公共部分即可。
+**分析：** 很经典的一个位运算异或的题目。
 
 ```python
 class Solution:
-   def rangeBitwiseAnd(self, m: int, n: int) -> int:
-       shift = 0
-       while m and m != n:   # NOTE: break when m == 0
-           m >>= 1
-           n >>= 1
-           shift += 1
-       return m << shift
+    def singleNumber(self, nums: List[int]) -> int:
+        res = 0
+        for i in nums:
+            res ^= i
+        return res
+```
+
+**reduce 的一个用法** 这里我们同样可以通过 reduce() 函数来完成，只是提供思路，但效率没有上面的高（涉及导入包、调用函数之类）
+
+```python
+from functools import reduce
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        return reduce(int.__xor__, nums)
 ```
 
  [返回目录](#00)
@@ -111,6 +122,33 @@ class Solution:
             n >>= 1
             shift += 1
         return m << shift
+```
+
+[返回目录](#00)
+
+## 371. Sum of Two Integers
+
+Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -.
+
+计算两个整数a和b的总和，但不允许使用运算符+和 - 。
+
+**Example**
+
+> Input: a = -2, b = 3
+> Output: 1
+
+---
+
+### Python Solution
+**分析：** 通过位运算来实现。异或是两者不同的位，与运算是两者相同需要进位的位，将这两个相加即可完成两个数的加法。同样异或结果和与运算结果也是通过这样来完成相加的。因为 Python 没有整型溢出，所以需要规定个范围掩码，当 num2 超过 mask 时，num1 也要和 mask 做 与 。
+
+```python
+class Solution:
+    def Add(self, num1, num2):
+        mask = 0xffffffff
+        while num2 & mask:
+            num1, num2 = num1 ^ num2, (num1 & num2) << 1
+        return num1 & mask if num2 > mask else num1
 ```
 
 [返回目录](#00)
