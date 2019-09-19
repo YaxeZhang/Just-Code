@@ -58,7 +58,7 @@
  - [228	Summary Ranges]
  - [163	Missing Ranges]
 ## Sort		
- - [88	Merge Sorted Array]
+ - [88. Merge Sorted Array](#88-merge-sorted-array)
  - [75	Sort Colors]
  - [283. Move Zeroes](#283-move-zeroes)
  - [376	Wiggle Subsequence]
@@ -386,6 +386,43 @@ class Solution:
             while sum >= s:
                 i, sum, res = i + 1, sum - nums[i], min(res, j - i + 1)
         return 0 if res == float('inf') else res
+```
+
+[返回目录](#00)
+
+## 88. Merge Sorted Array
+
+Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+
+给定两个排序的整数数组nums1和nums2，将nums2合并为nums1作为一个排序的数组。。
+
+**Example**
+
+> Input:
+> nums1 = [1,2,3,0,0,0], m = 3
+> nums2 = [2,5,6],       n = 3
+> 
+> Output: [1,2,2,3,5,6]
+
+---
+
+### Python Solution
+**分析：** 从尾部进行数组的比较和填充不会移动之前的元素，比较高效。最后确保 nums2 中的元素全部移到了 nums1 中，因为 nums2 的前几个元素可能比 nums1 的第一个元素都小。
+
+```python
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        while m > 0 and n > 0:
+            if nums1[m - 1] >= nums2[n - 1]:
+                nums1[m + n - 1] = nums1[m - 1]
+                m -= 1
+            else:
+                nums1[m + n - 1] = nums2[n - 1]
+                n -= 1
+        nums1[:n] = nums2[:n]
 ```
 
 [返回目录](#00)
