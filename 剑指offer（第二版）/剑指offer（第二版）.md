@@ -20,6 +20,7 @@
    - [39.数组中出现次数超过一半的数字](#39数组中出现次数超过一半的数字)
    - [52.两个链表的第一个公共结点](#52两个链表的第一个公共结点)
    - [57.和为S的两个数](#57和为S的两个数)
+   - [55.二叉树的深度](#55二叉树的深度)
    - [58.翻转字符串](#58翻转字符串)
    - [59.队列的最大值](#59队列的最大值)
    - [65.不用加减乘除做加法](#65.不用加减乘除做加法)
@@ -621,6 +622,28 @@ class Solution:
             p1 = p1.next if p1 else pHead2
             p2 = p2.next if p2 else pHead1
         return p1
+```
+
+[回到目录](#00)
+
+### 55.二叉树的深度
+#### 题目描述
+输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。
+#### 解法：
+
+```python
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def TreeDepth(self, pRoot):
+        if not pRoot:
+            return 0
+        depthleft = self.TreeDepth(pRoot.left)
+        depthright = self.TreeDepth(pRoot.right)
+        return max(depthleft, depthright) + 1
 ```
 
 [回到目录](#00)
