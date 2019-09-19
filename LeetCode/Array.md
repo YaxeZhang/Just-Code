@@ -5,7 +5,7 @@
  - [80	Remove Duplicates from Sorted Array II]
  - [277	Find the Celebrity]
  - [189. Rotate Array](#189-rotate-array)
- - [41	First Missing Positive]
+ - [41. First Missing Positive](#41-first-missing-positive)
  - [299	Bulls and Cows]
  - [134	Gas Station]
  - [118	Pascal's Triangle]
@@ -91,7 +91,7 @@ Given an array, rotate the array to the right by k steps, where k is non-negativ
 ---
 
 ### Python Solution
-**分析：** 可以用 Python 的链表的交换做，也可以通过翻转来做，推荐第二种Solution
+**分析：** 可以用 Python 的列表的交换做，也可以通过翻转来做，推荐第二种Solution
 
 **Solution 1:**
 
@@ -117,6 +117,42 @@ class Solution:
         reverse(0, len(nums) - 1)
         reverse(0, k - 1)
         reverse(k, len(nums) - 1)
+```
+
+[返回目录](#00)
+
+## 41. First Missing Positive
+
+Given an unsorted integer array, find the smallest missing positive integer.
+
+给定未排序的整数数组，找到最小的缺失正整数。
+
+**Example:1**
+
+> Input: [3,4,-1,1]
+> Output: 2
+
+**Example:2**
+
+> Input: [1,2,0]
+Output: 3
+
+---
+
+### Python Solution
+**分析：** Hard 难度的题目，但是思路很简单：就是把 1 到 len(nums) 的数放到对应下标（即减一）的位置，然后从头遍历，找到第一个不满足条件的值。
+
+```python
+class Solution:
+    def firstMissingPositive(self, nums):
+        for i in range(len(nums)):
+            while 0 <= nums[i] < len(nums) and nums[nums[i] - 1] != nums[i]:
+                tmp = nums[i] - 1
+                nums[i], nums[tmp] = nums[tmp], nums[i]
+        for i, v in enumerate(nums):
+            if v != i + 1:
+                return i + 1
+        return len(nums) + 1
 ```
 
 [返回目录](#00)
@@ -401,7 +437,7 @@ Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one s
 > Input:
 > nums1 = [1,2,3,0,0,0], m = 3
 > nums2 = [2,5,6],       n = 3
-> 
+>
 > Output: [1,2,2,3,5,6]
 
 ---

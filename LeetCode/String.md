@@ -165,7 +165,7 @@ Note: For the purpose of this problem, we define empty string as valid palindrom
 ---
 
 ### Python Solution
-**分析：** 很容易想到我们如果先用 isalnum() 将字符或者数字选出来是不是就转换成了判断字符串是不是回文字符串的问题。那么我们用 Python 的列表表达式就可以 Pythonic 地解决这个要求。
+**分析：** 很容易想到我们如果先用 isalnum() 将字符或者数字选出来是不是就转换成了判断字符串是不是回文字符串的问题。那么我们用 Python 的列表推导式就可以 Pythonic 地解决这个要求。
 
 ```python
 class Solution:
