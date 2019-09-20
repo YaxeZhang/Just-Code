@@ -70,7 +70,7 @@ Given a non-empty array of integers, every element appears twice except for one.
 **Example**
 
 > Input: [4,1,2,1,2]
-> Output: 4201. Bitwise AND of Numbers Range
+> Output: 4
 
 ---
 

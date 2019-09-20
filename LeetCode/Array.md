@@ -489,7 +489,8 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        zero, i, two = -1, 0, len(nums)
+        zero = i = 0
+        two = len(nums)
         while i < two:
             if nums[i] == 1:
                 i += 1
@@ -497,8 +498,8 @@ class Solution:
                 two -= 1
                 nums[i], nums[two] = nums[two], nums[i]
             else:
-                zero += 1
                 nums[i], nums[zero] = nums[zero], nums[i]
+                zero += 1
                 i += 1
 ```
 

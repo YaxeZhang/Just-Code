@@ -632,11 +632,10 @@ The digits are stored such that the most significant digit is at the head of the
 
 ```python
 # Definition for singly-linked list.
-class ListNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
+#class ListNode(object):
+#    def __init__(self, x):
+#        self.val = x
+#        self.next = None
 
 # Two pointers solution.
 class Solution(object):
@@ -659,6 +658,64 @@ class Solution(object):
                 right.val = 0
                 right = right.next
         return dummy if dummy.val else dummy.next
+```
+
+[返回目录](#00)
+
+## 2	   Add Two Numbers
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+您将获得两个非空链表，表示两个非负整数。数字以相反的顺序存储，每个节点包含一个数字。添加两个数字并将其作为链接列表返回。
+
+**Example**
+
+```
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+Explanation: 342 + 465 = 807.
+```
+
+---
+
+### Python Solution
+**分析：** 自我感觉十分优美的 O(1) 空间的解法，随便选一个链表作为主线，将相同长度的部分加上来，然后把剩余的部分拼接过来，如果有进位则顺理成章转化为 369，Plus One 问题。这里链表已经倒序，操作更加简便。
+
+```python
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        flag = 0
+        dummy = p1 = ListNode(0); p2 = ListNode(0)
+        p1.next , p2.next = l1, l2
+
+        while p1.next and p2.next:
+            p1 = p1.next
+            p2 = p2.next
+            sumval = p1.val + p2.val + flag
+            p1.val = sumval % 10
+            flag = sumval >= 10
+
+        p1.next = p1.next or p2.next
+
+        while flag and p1.next:
+            p1 = p1.next
+            if p1.val == 9:
+                p1.val = 0
+            else:
+                p1.val += 1
+                flag = 0
+
+        if flag:
+            while p1.next:
+                p1 = p1.next
+            p1.next = ListNode(1)
+
+        return dummy.next
 ```
 
 [返回目录](#00)
