@@ -59,7 +59,7 @@
  - [163	Missing Ranges]
 ## Sort		
  - [88. Merge Sorted Array](#88-merge-sorted-array)
- - [75	Sort Colors]
+ - [75. Sort Colors](#75-sort-colors)
  - [283. Move Zeroes](#283-move-zeroes)
  - [376	Wiggle Subsequence]
  - [280	Wiggle Sort]
@@ -463,6 +463,47 @@ class Solution:
 
 [返回目录](#00)
 
+## 75. Sort Colors
+
+Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+
+Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+
+给定一个具有红色，白色或蓝色的n个对象的数组，对它们进行就地排序，使相同颜色的对象相邻，颜色顺序为红色，白色和蓝色。
+
+这里，我们将使用整数0,1和2分别表示红色，白色和蓝色。
+
+**Example**
+
+> Input: [2,0,2,1,1,0]
+> Output: [0,0,1,1,2,2]
+
+---
+
+### Python Solution
+**分析：** 三路快排的思想，用三个指针，但是只关注左边 0 的位置和右边 2 的位置即可，排序交换完结果肯定中键都是 1 。
+
+```python
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        zero, i, two = -1, 0, len(nums)
+        while i < two:
+            if nums[i] == 1:
+                i += 1
+            elif nums[i] == 2:
+                two -= 1
+                nums[i], nums[two] = nums[two], nums[i]
+            else:
+                zero += 1
+                nums[i], nums[zero] = nums[zero], nums[i]
+                i += 1
+```
+
+[返回目录](#00)
+
 ## 283. Move Zeroes
 
 Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
@@ -488,7 +529,6 @@ class Solution:
                 if i != k:
                     nums[i], nums[k] = nums[k], nums[i]
                 k += 1
-
 ```
 
 [返回目录](#00)
