@@ -60,15 +60,20 @@ You may assume the integer does not contain any leading zero, except the number 
 
 **Example:1**
 
-> Input: [1,2,3]
-> Output: [1,2,4]
-> Explanation: The array represents the integer 123.
+```
+Input: [1,2,3]
+Output: [1,2,4]
+Explanation: The array represents the integer 123.
+```
 
 **Example:2**
 
-> Input: [4,3,2,1]
-> Output: [4,3,2,2]
-> Explanation: The array represents the integer 4321.
+```
+Input: [4,3,2,1]
+Output: [4,3,2,2]
+Explanation: The array represents the integer 4321.
+```
+
 ---
 
 ### Python Solution
@@ -99,9 +104,11 @@ The function twoSum should return indices of the two numbers such that they add 
 
 **Example**
 
-> Input: numbers = [2,7,11,15], target = 9
-> Output: [1,2]
-> Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.
+```
+Input: numbers = [2,7,11,15], target = 9
+Output: [1,2]
+Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.
+```
 
 ---
 
@@ -131,13 +138,15 @@ Given an array consists of non-negative integers, your task is to count the numb
 
 **Example**
 
-> Input: [2,2,3,4]
-> Output: 3
-> Explanation:
-> Valid combinations are:
-> 2,3,4 (using the first 2)
-> 2,3,4 (using the second 2)
-> 2,2,3
+```
+Input: [2,2,3,4]
+Output: 3
+Explanation:
+Valid combinations are:
+2,3,4 (using the first 2)
+2,3,4 (using the second 2)
+2,2,3
+```
 
 ---
 

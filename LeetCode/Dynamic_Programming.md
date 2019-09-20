@@ -35,19 +35,21 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 
 Note: Given n will be a positive integer.
 
-你正在爬楼梯。它需要n步才能达到顶峰。 
+你正在爬楼梯。它需要n步才能达到顶峰。
 
-每次你可以爬1或2步。您可以通过多少不同的方式登顶？ 
+每次你可以爬1或2步。您可以通过多少不同的方式登顶？
 
 注意：给定n将是一个正整数。
 
 **Example**
 
-> Input: 2
-> Output: 2
-> Explanation: There are two ways to climb to the top.
-> 1. 1 step + 1 step
-> 2. 2 steps
+```
+Input: 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+```
 
 ---
 

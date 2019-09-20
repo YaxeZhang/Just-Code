@@ -28,15 +28,15 @@ Find the letter that was added in t.
 
 **Example**
 
-> Input:
-> s = "abcd"
-> t = "abcde"
->
-> Output:
-> e
->
-> Explanation:
-> 'e' is the letter that was added.
+```
+Input:
+s = "abcd"
+t = "abcde"
+Output:
+e
+Explanation:
+'e' is the letter that was added.
+```
 
 ---
 
@@ -69,8 +69,10 @@ Given a non-empty array of integers, every element appears twice except for one.
 
 **Example**
 
-> Input: [4,1,2,1,2]
-> Output: 4
+```
+Input: [4,1,2,1,2]
+Output: 4
+```
 
 ---
 
@@ -105,8 +107,10 @@ Given a range [m, n] where 0 <= m <= n <= 2147483647, return the bitwise AND of 
 
 **Example**
 
-> Input: [5,7]
-> Output: 4
+```
+Input: [5,7]
+Output: 4
+```
 
 ---
 
@@ -134,8 +138,10 @@ Calculate the sum of two integers a and b, but you are not allowed to use the op
 
 **Example**
 
-> Input: a = -2, b = 3
-> Output: 1
+```
+Input: a = -2, b = 3
+Output: 1
+```
 
 ---
 

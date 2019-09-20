@@ -74,8 +74,10 @@ Given a string S and a string T, find the minimum window in S which will contain
 
 **Example**
 
-> Input: S = "ADOBECODEBANC", T = "ABC"
-> Output: "BANC"
+```
+Input: S = "ADOBECODEBANC", T = "ABC"
+Output: "BANC"
+```
 
 ---
 
@@ -112,21 +114,27 @@ Given a string, find the length of the longest substring without repeating chara
 
 **Example:1**
 
-> Input: "abcabcbb"
-> Output: 3
-> Explanation: The answer is "abc", with the length of 3.
+```
+Input: "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+```
 
 **Example:2**
 
-> Input: "bbbbb"
-> Output: 1
-> Explanation: The answer is "b", with the length of 1.
+```
+Input: "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+```
 
 **Example:3**
 
-> Input: "pwwkew"
-> Output: 3
-> Explanation: The answer is "wke", with the length of 3.
+```
+Input: "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+```
 
 ---
 
@@ -159,8 +167,10 @@ Note: For the purpose of this problem, we define empty string as valid palindrom
 
 **Example**
 
-> Input: "A man, a plan, a canal: Panama"
-> Output: true
+```
+Input: "A man, a plan, a canal: Panama"
+Output: true
+```
 
 ---
 

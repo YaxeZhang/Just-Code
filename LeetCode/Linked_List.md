@@ -33,8 +33,10 @@ Reverse a singly linked list.
 
 **Example 1:**
 
-> Input: 1->2->3->4->5->NULL
-> Output: 5->4->3->2->1->NULL
+```
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+```
 
 ---
 
@@ -101,21 +103,27 @@ To represent a cycle in the given linked list, we use an integer pos which repre
 
 **Example 1:**
 
-> Input: head = [3,2,0,-4], pos = 1
-> Output: true
-> Explanation: There is a cycle in the linked list, where tail connects to the second node.
+```
+Input: head = [3,2,0,-4], pos = 1
+Output: true
+Explanation: There is a cycle in the linked list, where tail connects to the second node.
+```
 
 **Example 2:**
 
-> Input: head = [1,2], pos = 0
-> Output: true
-> Explanation: There is a cycle in the linked list, where tail connects to the first node.
+```
+Input: head = [1,2], pos = 0
+Output: true
+Explanation: There is a cycle in the linked list, where tail connects to the first node.
+```
 
 **Example 3:**
 
-> Input: head = [1], pos = -1
-> Output: false
-> Explanation: There is no cycle in the linked list.
+```
+Input: head = [1], pos = -1
+Output: false
+Explanation: There is no cycle in the linked list.
+```
 
 ---
 
@@ -200,7 +208,9 @@ You may not modify the values in the list's nodes, only nodes itself may be chan
 
 **Example 1:**
 
-> Given 1->2->3->4, you should return the list as 2->1->4->3.
+```
+Given 1->2->3->4, you should return the list as 2->1->4->3.
+```
 
 ---
 
@@ -256,13 +266,17 @@ You should try to do it in place. The program should run in O(1) space complexit
 
 **Example 1:**
 
-> Input: 1->2->3->4->5->NULL
-> Output: 1->3->5->2->4->NULL
+```
+Input: 1->2->3->4->5->NULL
+Output: 1->3->5->2->4->NULL
+```
 
 **Example 2:**
 
-> Input: 2->1->3->5->6->4->7->NULL
-> Output: 2->3->6->7->1->5->4->NULL
+```
+Input: 2->1->3->5->6->4->7->NULL
+Output: 2->3->6->7->1->5->4->NULL
+```
 
 ---
 
@@ -322,8 +336,10 @@ Note: 1 ≤ m ≤ n ≤ length of list.
 
 **Example 1:**
 
-> Input: 1->2->3->4->5->NULL, m = 2, n = 4
-> Output: 1->4->3->2->5->NULL
+```
+Input: 1->2->3->4->5->NULL, m = 2, n = 4
+Output: 1->4->3->2->5->NULL
+```
 
 ---
 
@@ -390,15 +406,19 @@ Write a function to delete a node (except the tail) in a singly linked list, giv
 
 **Example 1:**
 
-> Input: head = [4,5,1,9], node = 5
-> Output: [4,1,9]
-> Explanation: You are given the second node with value 5, the linked list should become 4 -> 1 -> 9 after calling your function.
+```
+Input: head = [4,5,1,9], node = 5
+Output: [4,1,9]
+Explanation: You are given the second node with value 5, the linked list should become 4 -> 1 -> 9 after calling your function.
+```
 
 **Example 2:**
 
-> Input: head = [4,5,1,9], node = 1
-> Output: [4,5,9]
-> Explanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.
+```
+Input: head = [4,5,1,9], node = 1
+Output: [4,5,9]
+Explanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.
+```
 
 ---
 
@@ -432,9 +452,10 @@ Given a linked list, remove the n-th node from the end of list and return its he
 
 **Example :**
 
-> Given linked list: **1->2->3->4->5**, and **n = 2**.
->
-> After removing the second node from the end, the linked list becomes **1->2->3->5**.
+```
+Given linked list: **1->2->3->4->5**, and **n = 2**.
+After removing the second node from the end, the linked list becomes **1->2->3->5**.
+```
 
 **Note:**
 
@@ -493,13 +514,17 @@ Given a sorted linked list, delete all duplicates such that each element appear 
 
 **Example 1:**
 
-> Input: 1->1->2
-> Output: 1->2
+```
+Input: 1->1->2
+Output: 1->2
+```
 
 **Example 2:**
 
-> Input: 1->1->2->3->3
-> Output: 1->2->3
+```
+Input: 1->1->2->3->3
+Output: 1->2->3
+```
 
 ---
 
@@ -533,9 +558,10 @@ Remove all elements from a linked list of integers that have value val.
 
 **Example 1:**
 
-> Input:  1->2->6->3->4->5->6, val = 6
-> Output: 1->2->3->4->5
-
+```
+Input:  1->2->6->3->4->5->6, val = 6
+Output: 1->2->3->4->5
+```
 
 ---
 
@@ -572,13 +598,17 @@ Given a sorted linked list, delete all nodes that have duplicate numbers, leavin
 
 **Example 1:**
 
-> Input: 1->2->3->3->4->4->5
-> Output: 1->2->5
+```
+Input: 1->2->3->3->4->4->5
+Output: 1->2->5
+```
 
 **Example 2:**
 
-> Input: 1->1->1->2->3
-> Output: 2->3
+```
+Input: 1->1->1->2->3
+Output: 2->3
+```
 
 ---
 
@@ -622,8 +652,10 @@ The digits are stored such that the most significant digit is at the head of the
 
 **Example**
 
-> Input: 1->2->3
-> Output: 1->2->4
+```
+Input: 1->2->3
+Output: 1->2->4
+```
 
 ---
 
@@ -720,6 +752,112 @@ class Solution:
 
 [返回目录](#00)
 
+## 160	 Intersection of Two Linked Lists
+
+Write a program to find the node at which the intersection of two singly linked lists begins.
+
+编写程序以找到两个相交单链表的公共结点。
+
+---
+
+### Python Solution
+**分析：** 两种解法，推荐第二种（显得高智商）。解法一：先遍历一次两个链表，获得它们的长度。因为有共同结点的话一定是共同结点之后都是相同的，所以让长的那个链表先走他们的长度之差，然后一同走直到两个链表的结点都是那一个。或者走到头，不存在公共结点。解法二：思路是将两个链表拼接，就可以忽略长度差，因为第二遍遍历时必定离末尾相同的距离。
+
+```python
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        lenA = lenB = 0
+        h1, h2 = headA, headB
+
+        while h1:
+            h1 = h1.next
+            lenA += 1
+
+        while h2:
+            h2 = h2.next
+            lenB += 1
+
+        if lenA > lenB:
+            for i in range(lenA - lenB):
+                headA = headA.next
+        else:
+            for i in range(lenB - lenA):
+                headB = headB.next
+
+        while headA and headB:
+            if headA == headB:
+                return headA
+            headA = headA.next
+            headB = headB.next
+
+        return None
+```
+
+**Solution2:**
+
+```python
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        p1, p2 = headA, headB
+        while p1 != p2:
+            p1 = p1.next if p1 else headB
+            p2 = p2.next if p2 else headA
+        return p1
+```
+
+[返回目录](#00)
+
+## 21   Merge Two Sorted Lists
+
+Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
+
+合并两个已排序的链接列表并将其作为新列表返回。 新列表应该通过拼接前两个列表的节点来完成。
+
+**Example**
+
+```
+Input: 1->2->4, 1->3->4
+Output: 1->1->2->3->4->4
+```
+
+---
+
+### Python Solution
+**分析：** 进行比较哪个值小取哪个，然后被取值的往前走一步，没有比较之后把多的补到后面即可。
+
+```python
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        dummy = tmp = ListNode(0)
+        while l1 and l2:
+            if l1.val <= l2.val:
+                tmp.next = l1
+                l1 = l1.next
+            else:
+                tmp.next = l2
+                l2 = l2.next
+            tmp = tmp.next
+        tmp.next = l1 or l2
+        return dummy.next
+```
+
+[返回目录](#00)
+
 ## 86   Partition List
 
 Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
@@ -732,8 +870,10 @@ You should preserve the original relative order of the nodes in each of the two 
 
 **Example**
 
-> Input: head = 1->4->3->2->5->2, x = 3
-> Output: 1->2->2->4->3->5
+```
+Input: head = 1->4->3->2->5->2, x = 3
+Output: 1->2->2->4->3->5
+```
 
 ---
 
@@ -741,7 +881,6 @@ You should preserve the original relative order of the nodes in each of the two 
 **分析：**
 
 ```python
-# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x

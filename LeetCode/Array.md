@@ -73,20 +73,24 @@ Given an array, rotate the array to the right by k steps, where k is non-negativ
 
 **Example:1**
 
-> Input: [1,2,3,4,5,6,7] and k = 3
-> Output: [5,6,7,1,2,3,4]
-> Explanation:
-> rotate 1 steps to the right: [7,1,2,3,4,5,6]
-> rotate 2 steps to the right: [6,7,1,2,3,4,5]
-> rotate 3 steps to the right: [5,6,7,1,2,3,4]
+```
+Input: [1,2,3,4,5,6,7] and k = 3
+Output: [5,6,7,1,2,3,4]
+Explanation:
+rotate 1 steps to the right: [7,1,2,3,4,5,6]
+rotate 2 steps to the right: [6,7,1,2,3,4,5]
+rotate 3 steps to the right: [5,6,7,1,2,3,4]
+```
 
 **Example:2**
 
-> Input: [-1,-100,3,99] and k = 2
-> Output: [3,99,-1,-100]
-> Explanation:
-> rotate 1 steps to the right: [99,-1,-100,3]
-> rotate 2 steps to the right: [3,99,-1,-100]
+```
+Input: [-1,-100,3,99] and k = 2
+Output: [3,99,-1,-100]
+Explanation:
+rotate 1 steps to the right: [99,-1,-100,3]
+rotate 2 steps to the right: [3,99,-1,-100]
+```
 
 ---
 
@@ -129,13 +133,17 @@ Given an unsorted integer array, find the smallest missing positive integer.
 
 **Example:1**
 
-> Input: [3,4,-1,1]
-> Output: 2
+```
+Input: [3,4,-1,1]
+Output: 2
+```
 
 **Example:2**
 
-> Input: [1,2,0]
+```
+Input: [1,2,0]
 Output: 3
+```
 
 ---
 
@@ -167,13 +175,17 @@ Your function should return true if any value appears at least twice in the arra
 
 **Example:1**
 
-> Input: [1,2,3,1]
-> Output: true
+```
+Input: [1,2,3,1]
+Output: true
+```
 
 **Example:2**
 
-> Input: [1,2,3,4]
-> Output: false
+```
+Input: [1,2,3,4]
+Output: false
+```
 
 ---
 
@@ -196,13 +208,17 @@ Given an array of integers and an integer k, find out whether there are two dist
 
 **Example:1**
 
-> Input: nums = [1,2,3,1], k = 3
-> Output: true
+```
+Input: nums = [1,2,3,1], k = 3
+Output: true
+```
 
 **Example:2**
 
-> Input: nums = [1,2,3,1,2,3], k = 2
-> Output: false
+```
+Input: nums = [1,2,3,1,2,3], k = 2
+Output: false
+```
 
 ---
 
@@ -279,9 +295,11 @@ You may assume that the intervals were initially sorted according to their start
 
 **Example**
 
-> Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
-> Output: [[1,2],[3,10],[12,16]]
-> Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+```
+Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+Output: [[1,2],[3,10],[12,16]]
+Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+```
 
 ---
 
@@ -314,9 +332,11 @@ Given a collection of intervals, merge all overlapping intervals.
 
 **Example**
 
-> Input: [[1,3],[2,6],[8,10],[15,18]]
-> Output: [[1,6],[8,10],[15,18]]
-> Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+```
+Input: [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+```
 
 ---
 
@@ -371,9 +391,11 @@ Return the intersection of these two interval lists.
 
 **Example**
 
-> Input: A = [[0,2],[5,10],[13,23],[24,25]], B = [[1,5],[8,12],[15,24],[25,26]]
-> Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
-> Reminder: The inputs and the desired output are lists of Interval objects, and not arrays or lists.
+```
+Input: A = [[0,2],[5,10],[13,23],[24,25]], B = [[1,5],[8,12],[15,24],[25,26]]
+Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+Reminder: The inputs and the desired output are lists of Interval objects, and not arrays or lists.
+```
 
 ---
 
@@ -405,9 +427,12 @@ Given an array of n positive integers and a positive integer s, find the minimal
 
 **Example**
 
-> Input: s = 7, nums = [2,3,1,2,4,3]
-> Output: 2
-> Explanation: the subarray [4,3] has the minimal length under the problem constraint.
+```
+Input: s = 7, nums = [2,3,1,2,4,3]
+Output: 2
+Explanation: the subarray [4,3] has the minimal length under the problem constraint.
+```
+
 ---
 
 ### Python Solution
@@ -434,11 +459,12 @@ Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one s
 
 **Example**
 
-> Input:
-> nums1 = [1,2,3,0,0,0], m = 3
-> nums2 = [2,5,6],       n = 3
->
-> Output: [1,2,2,3,5,6]
+```
+Input:
+nums1 = [1,2,3,0,0,0], m = 3
+nums2 = [2,5,6],       n = 3
+Output: [1,2,2,3,5,6]
+```
 
 ---
 
@@ -475,8 +501,10 @@ Here, we will use the integers 0, 1, and 2 to represent the color red, white, an
 
 **Example**
 
-> Input: [2,0,2,1,1,0]
-> Output: [0,0,1,1,2,2]
+```
+Input: [2,0,2,1,1,0]
+Output: [0,0,1,1,2,2]
+```
 
 ---
 
@@ -513,8 +541,10 @@ Given an array nums, write a function to move all 0's to the end of it while mai
 
 **Example**
 
-> Input: [0,1,0,3,12]
-> Output: [1,3,12,0,0]
+```
+Input: [0,1,0,3,12]
+Output: [1,3,12,0,0]
+```
 
 ---
 
