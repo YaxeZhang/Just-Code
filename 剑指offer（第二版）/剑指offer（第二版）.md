@@ -23,7 +23,8 @@
    - [55.二叉树的深度](#55二叉树的深度)
    - [58.翻转字符串](#58翻转字符串)
    - [59.队列的最大值](#59队列的最大值)
-   - [65.不用加减乘除做加法](#65.不用加减乘除做加法)
+   - [62.圆圈中最后剩下的数字](#62圆圈中最后剩下的数字)
+   - [65.不用加减乘除做加法](#65不用加减乘除做加法)
    - [66.构建乘积数组](#66构建乘积数组)
 
 ### 3.数组中重复的数字
@@ -722,6 +723,36 @@ class Solution:
             if i >= k - 1:                   # 满足滑动窗口长度才有输出
                 res += nums[dq[0]],
         return res
+```
+
+[回到目录](#00)
+
+### 62.圆圈中最后剩下的数字
+#### 题目描述
+题目：0,1,...,n-1这n个数字拍成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里身下的最后一个数字。
+#### 解法：
+
+**递归法** 代码不好理解并且递归深度大，不推荐。在牛客网上无法 AC 。但思路正确。
+
+```python
+class Solution:
+    def LastRemaining_Solution(self, n, m):
+        if n < 1 or m < 1:
+            return -1
+        return 0 if n == 1 else (self.LastRemaining_Solution(n - 1, m) + m) % n
+```
+
+**循环迭代法**
+
+```python
+class Solution:
+    def LastRemaining_Solution(self, n, m):
+        if n < 1 or m < 1:
+            return -1
+        last = 0
+        for i in range(2,n + 1):
+            last = (last + m) % i
+        return last
 ```
 
 [回到目录](#00)
