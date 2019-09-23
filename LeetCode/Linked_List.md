@@ -984,6 +984,60 @@ class Solution:
 
 [返回目录](#00)
 
+## 142  Linked List Cycle II
+
+Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
+
+To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail connects to. If pos is -1, then there is no cycle in the linked list.
+
+给定一个链表，返回循环开始的节点。 如果没有循环，则返回null。
+
+为了表示给定链表中的循环，我们使用一个整数pos表示尾部连接到的链表中的位置（索引为0）。 如果pos为-1，则链接列表中没有循环。
+
+**Example1:**
+
+```
+Input: head = [3,2,0,-4], pos = 1
+Output: tail connects to node index 1
+Explanation: There is a cycle in the linked list, where tail connects to the second node.
+```
+
+**Example2:**
+
+```
+Input: head = [1,2], pos = 0
+Output: tail connects to node index 0
+Explanation: There is a cycle in the linked list, where tail connects to the first node.
+```
+
+---
+
+### Pythonic Solution
+**分析：** 快慢指针找到相交的那点后，一个从那个点出发另一个从头出发，相遇的点既是环的入口
+
+```python
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        fast = slow = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                slow = head
+                while fast != slow:
+                    fast = fast.next
+                    slow = slow.next
+                return fast
+        return None
+```
+
+[返回目录](#00)
+
 ## 86   Partition List
 
 Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.

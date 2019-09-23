@@ -398,8 +398,6 @@ class Solution:
 #         self.next = None
 class Solution:
     def EntryNodeOfLoop(self, pHead):
-        if not pHead or not pHead.next:
-            return None
         pre = post = pHead
         while pre and pre.next:       # 确保快指针有意义没有到头
             post = post.next          # 慢指针走一步
