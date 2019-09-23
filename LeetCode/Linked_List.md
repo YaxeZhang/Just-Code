@@ -2,6 +2,7 @@
 ## 基础
  - [206  Reverse Linked List](#206--reverse-linked-list)
  - [141  Linked List Cycle](#141--linked-list-cycle)
+ - [876  Middle of the Linked List](#876--middle-of-the-linked-list)
  - [24	 Swap Nodes in Pairs](#24---swap-nodes-in-pairs)
  - [328  Odd Even Linked List](#328--odd-even-linked-list)
  - [92   Reverse Linked List II](#92---reverse-linked-list-ii)
@@ -44,7 +45,6 @@ Output: 5->4->3->2->1->NULL
 **分析：** 反转链表是链表操作里比较经典的题型，操作为用一个单链表储存新的反转后的链表，原链表从前到后把每个节点和链表分开并且添加到新的单链表后边，再将原链表的head指向head.next 完成head的后移。代码如下：
 
 ```python
-# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
@@ -131,7 +131,6 @@ Explanation: There is no cycle in the linked list.
 **分析：**
 
 ```python
-# Definition for singly-linked list.
 # class ListNode(object):
 #     def __init__(self, x):
 #         self.val = x
@@ -195,6 +194,46 @@ class Solution(object):
 
 [返回目录](#00)
 
+## 876  Middle of the Linked List
+
+Given a non-empty, singly linked list with head node head, return a middle node of linked list.
+
+If there are two middle nodes, return the second middle node.
+
+给定具有头节点头的非空的单链表，返回链表的中间节点。
+
+如果有两个中间节点，则返回第二个中间节点。
+
+**Example**
+
+```
+Input: [1,2,3,4,5,6]
+Output: Node 4 from this list (Serialization: [4,5,6])
+Since the list has two middle nodes with values 3 and 4, we return the second one.
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def middleNode(self, head: ListNode) -> ListNode:
+        pre = post =head
+        while pre and pre.next:
+            pre = pre.next.next
+            post = post.next
+        return post
+```
+
+[返回目录](#00)
+
 ## 24   Swap Nodes in Pairs
 
 Given a linked list, swap every two adjacent nodes and return its head.
@@ -222,7 +261,6 @@ Given 1->2->3->4, you should return the list as 2->1->4->3.
 这样就完成了下两个结点的交换，把当前结点走到下下个结点即可。但是问题在于怎么区分 比如：当前结点是 tmp ，当前结点的下个结点是 tmp.next ，当前结点的下下个结点和当前结点的下个结点的 next 同样都是 tmp.next.next ，就产生了混淆歧义，于是分开他们就好了
 
 ```python
-# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
@@ -284,7 +322,6 @@ Output: 2->3->6->7->1->5->4->NULL
 **分析：** 将链表分成奇偶两条然后进行拼接即可，重点是边界判断
 
 ```python
-# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
@@ -347,7 +384,6 @@ Output: 1->4->3->2->5->NULL
 **分析：** 思路比较简单，可以参考[Reverse Linked List ](https://blog.csdn.net/Y_axe/article/details/99718252) 的解法，找到要反转的头和尾，进行反转操作即可
 
 ```python
-# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
@@ -426,7 +462,6 @@ Explanation: You are given the third node with value 1, the linked list should b
 **分析：** 有点蠢的题。
 
 ```python
-# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
@@ -532,7 +567,6 @@ Output: 1->2->3
 **分析：**
 
 ```python
-# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
@@ -569,7 +603,6 @@ Output: 1->2->3->4->5
 **分析：**
 
 ```python
-# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
@@ -616,7 +649,6 @@ Output: 2->3
 **分析：**
 
 ```python
-# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
@@ -663,7 +695,6 @@ Output: 1->2->4
 **分析：** 现将链表翻转然后找到第一位不为 9 的数字，加一再翻转回来，遍历过的为 9 的数字均置为 0 。
 
 ```python
-# Definition for singly-linked list.
 #class ListNode(object):
 #    def __init__(self, x):
 #        self.val = x
@@ -854,6 +885,101 @@ class Solution:
             tmp = tmp.next
         tmp.next = l1 or l2
         return dummy.next
+```
+
+[返回目录](#00)
+
+## 234	 Palindrome Linked List
+
+Given a singly linked list, determine if it is a palindrome.
+
+给定一个单链表，确定它是否是回文。
+
+**Example**
+
+```
+Input: 1->2->2->1
+Output: true
+```
+
+---
+
+### Pythonic Solution
+**分析：** 快慢指针取到中间，同时翻转前半部与后半部比较。
+
+```python
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        rev = None
+        slow = fast = head
+        while fast and fast.next:
+            fast = fast.next.next
+            rev, rev.next, slow = slow, rev, slow.next
+        if fast:
+            slow = slow.next
+        while rev and rev.val == slow.val:
+            slow = slow.next
+            rev = rev.next
+        return not rev
+```
+
+[返回目录](#00)
+
+## 143	 Reorder List
+
+Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+
+You may not modify the values in the list's nodes, only nodes itself may be changed.
+
+给定一个单链表L：L0→L1→…→Ln-1→Ln， 将其重新排序为：L0→Ln→L1→Ln-1→L2→Ln-2→…
+
+您不能修改列表节点中的值，只能更改节点本身
+
+**Example**
+
+```
+Given 1->2->3->4->5, reorder it to 1->5->2->4->3.
+```
+
+---
+
+### Pythonic Solution
+**分析：** 快慢指针取到中间，将后半部翻转然后两个链表交叉合并。
+
+```python
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def reorderList(self, head):
+        if not head:
+            return
+
+        # find the mid point
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        # reverse the second half in-place
+        pre, node = None, slow
+        while node:
+            pre, pre.next, node = node, pre, node.next
+
+        # Merge in-place; Note : the last node of "first" and "second" are the same
+        first, second = head, pre
+        while second.next:
+            first.next, first = second, first.next
+            second.next, second = first, second.next
+        return
 ```
 
 [返回目录](#00)
