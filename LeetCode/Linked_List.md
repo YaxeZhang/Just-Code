@@ -1038,6 +1038,68 @@ class Solution:
 
 [返回目录](#00)
 
+## 61   Rotate List
+
+Given a linked list, rotate the list to the right by k places, where k is non-negative.
+
+给定一个链表，将列表向右旋转k个位置，其中k为非负数。
+
+**Example1:**
+
+```
+Input: 1->2->3->4->5->NULL, k = 2
+Output: 4->5->1->2->3->NULL
+Explanation:
+rotate 1 steps to the right: 5->1->2->3->4->NULL
+rotate 2 steps to the right: 4->5->1->2->3->NULL.
+```
+
+**Example2:**
+
+```
+Input: 0->1->2->NULL, k = 4
+Output: 2->0->1->NULL
+Explanation:
+rotate 1 steps to the right: 2->0->1->NULL
+rotate 2 steps to the right: 1->2->0->NULL
+rotate 3 steps to the right: 0->1->2->NULL
+rotate 4 steps to the right: 2->0->1->NULL
+```
+
+---
+
+### Pythonic Solution
+**分析：** k 大于链表长度时仍优先，所以先取得链表长度，k 对其取模，之后快慢指针找到倒数 k 的结点，从它的后一位将链表分为两部分，交换顺序即可。
+
+```python
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def rotateRight(self, head: ListNode, k: int) -> ListNode:
+        if not head:
+            return head
+        c, count = head, 0
+        while c:
+            count += 1
+            c = c.next
+        k %= count
+        if not k:
+            return head
+        fast = slow = head
+        for _ in range(k):
+            fast = fast.next
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+        fast.next, dummy, slow.next = head, slow.next, None
+        return dummy
+```
+
+[返回目录](#00)
+
 ## 86   Partition List
 
 Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
