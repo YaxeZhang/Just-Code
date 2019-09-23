@@ -1038,6 +1038,55 @@ class Solution:
 
 [返回目录](#00)
 
+## 25   Reverse Nodes in k-Group
+
+Given a linked list, reverse the nodes of a linked list k at a time and return its modified list.
+
+k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k then left-out nodes in the end should remain as it is.
+
+给定一个链表，一次反转链表k的节点并返回其修改后的列表。
+
+k是一个正整数，并且小于或等于链接列表的长度。 如果节点数不是k的倍数，那么最后剩下的节点应保持原样。
+
+**Example**
+
+```
+Given this linked list: 1->2->3->4->5
+
+For k = 2, you should return: 2->1->4->3->5
+
+For k = 3, you should return: 3->2->1->4->5
+```
+
+---
+
+### Pythonic Solution
+**分析：** 利用 while True 和 count 进行循环计数，使得剩余满足 k 的时候才翻转，否则不变。如果 count 等于 k ，那么对于这一段的链表进行翻转即可。
+
+```python
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        dummy = tmp = ListNode(0)
+        tmp.next = left = right = head
+        while True:
+            count = 0
+            while right and count < k:
+                right = right.next
+                count += 1
+            if count == k:
+                pre, cur = right, left
+                for _ in range(k):
+                    pre, pre.next, cur = cur, pre, cur.next
+                tmp.next, tmp, left = pre, left, right
+            else:
+                return dummy.next
+```
+
 ## 61   Rotate List
 
 Given a linked list, rotate the list to the right by k places, where k is non-negative.
