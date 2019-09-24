@@ -889,7 +889,7 @@ class Solution:
 
 [返回目录](#00)
 
-## 234	 Palindrome Linked List
+## 234  Palindrome Linked List
 
 Given a singly linked list, determine if it is a palindrome.
 
@@ -930,7 +930,7 @@ class Solution:
 
 [返回目录](#00)
 
-## 143	 Reorder List
+## 143  Reorder List
 
 Given a singly linked list L: L0→L1→…→Ln-1→Ln,
 reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
