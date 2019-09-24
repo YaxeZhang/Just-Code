@@ -725,7 +725,7 @@ class Solution(object):
 
 [返回目录](#00)
 
-## 2	   Add Two Numbers
+## 2    Add Two Numbers
 
 You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
 
@@ -783,7 +783,7 @@ class Solution:
 
 [返回目录](#00)
 
-## 160	 Intersection of Two Linked Lists
+## 160  Intersection of Two Linked Lists
 
 Write a program to find the node at which the intersection of two singly linked lists begins.
 
