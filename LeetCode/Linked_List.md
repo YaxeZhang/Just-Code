@@ -26,6 +26,7 @@
  - [23   Merge k Sorted Lists](#23---merge-k-sorted-lists)
  - [147	 Insertion Sort List](#147--insertion-sort-list)
  - [138  Copy List with Random Pointer](#138--copy-list-with-random-pointer)
+ - [1019 Next Greater Node In Linked List](#1019-next-greater-node-in-linked-list)
 
 ## 206  Reverse Linked List
 
@@ -1254,8 +1255,59 @@ class Solution:
             tmp.next = tmp.next.next if p3.next else None
             p3 = p3.next
             tmp = tmp.next
-            
+
         return dummy
+```
+
+[返回目录](#00)
+
+## 1019 Next Greater Node In Linked List
+
+We are given a linked list with head as the first node.  Let's number the nodes in the list: node_1, node_2, node_3, ... etc.
+
+Each node may have a next larger value: for node_i, next_larger(node_i) is the node_j.val such that j > i, node_j.val > node_i.val, and j is the smallest possible choice.  If such a j does not exist, the next larger value is 0.
+
+Return an array of integers answer, where answer[i] = next_larger(node_{i+1}).
+
+我们获得了一个链接列表，其中head为第一个节点。 让我们为列表中的节点编号：node_1，node_2，node_3等....
+
+每个节点可能有一个更大的值：对于node_i，next_larger（node_i）是node_j.val，因此j> i，node_j.val> node_i.val，而j是最小的选择。 如果不存在这样的j，则下一个较大的值为0.
+
+返回整数答案数组，其中answer [i] = next_larger（node_ {i + 1}）。
+
+**Example**
+
+```
+Input: [1,7,5,1,9,2,5,1]
+Output: [7,9,9,9,0,5,0,0]
+```
+
+---
+
+### Python Solution
+**分析：** 1.Save the linked list values and access them from back to front for easy addition to list.
+2.Use list to save the maximum value that occurred before.
+
+```python
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def nextLargerNodes(self, head: ListNode) -> List[int]:
+        if not head:
+            return head
+        p, res, dq = head, [], []
+        while p:
+            res.append(p.val)
+            p = p.next
+        for i in range(len(res) - 1, -1, -1):
+            while dq and dq[-1] <= res[i]:
+                dq.pop()
+            dq.append(res[i])
+            res[i] = dq[-2] if len(dq) > 1 else 0
+        return res
 ```
 
 [返回目录](#00)
