@@ -2,6 +2,7 @@
 ## 基础
  - [389. Find the Difference](#389-find-the-difference)
  - [136. Single Number](#136-single-number)
+ - [137. Single Number II](#137-single-number-ii)
  - [318	Maximum Product of Word Lengths]
 ## 很少考			
  - [393	UTF-8 Validation]
@@ -12,7 +13,6 @@
  - [268	Missing Number]
  - [191	Number of 1 Bits]
  - [190	Reverse Bits]
- - [137	Single Number II]
  - [260	Single Number III]
 
 
@@ -97,7 +97,55 @@ class Solution:
         return reduce(int.__xor__, nums)
 ```
 
- [返回目录](#00)
+[返回目录](#00)
+
+## 137. Single Number II
+
+Given a non-empty array of integers, every element appears three times except for one, which appears exactly once. Find that single one.
+
+Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+给定一个非空的整数数组，每个元素出现三次，除了一次，恰好出现一次。 找到那一个。
+
+注意：您的算法应具有线性运行时复杂度。 您可以在不使用额外内存的情况下实现它吗？
+
+**Example**
+
+```
+Input: [0,1,0,1,0,1,99]
+Output: 99
+```
+
+---
+
+### Python Solution
+**分析：** 炫酷！！！
+
+```python
+class Solution:
+    def singleNumber(self, nums):
+        ans = 0
+        for i in range(32):
+            cnt = 0
+            for n in nums:
+                if (n >> i) & 1:
+                    cnt += 1
+            if cnt % 3:
+                ans |= 1 << i
+        return ans if ans < 2**31 else ans - 2**32
+```
+
+```python
+class Solution:
+    def singleNumber(self, nums):
+        a = b = 0
+        for n in nums:
+            a = (a ^ n) & ~b
+            b = (b ^ n) & ~a
+        return a
+```
+
+[返回目录](#00)
 
 ## 201. Bitwise AND of Numbers Range
 
