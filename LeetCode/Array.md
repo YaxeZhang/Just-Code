@@ -8,8 +8,8 @@
  - [41. First Missing Positive](#41-first-missing-positive)
  - [299	Bulls and Cows]
  - [134	Gas Station]
- - [118	Pascal's Triangle]
- - [119	Pascal's Triangle II]
+ - [118. Pascal's Triangle](#118-pascals-triangle)
+ - [119. Pascal's Triangle II](#119-pascals-triangle-ii)
  - [169	Majority Element]
  - [229	Majority Element II]
  - [274	H-Index]
@@ -30,6 +30,7 @@
  - [287	Find the Duplicate Number]
  - [135	Candy]
  - [330	Patching Array]
+ - [78. Subsets](#78-subsets)
 ## 提高		
  - [4	Median of Two Sorted Arrays]
  - [321	Create Maximum Number]
@@ -159,6 +160,74 @@ class Solution:
 
 [返回目录](#00)
 
+## 118. Pascal's Triangle
+
+Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
+
+给定一个非负整数numRows，生成Pascal三角形的第一个numRows。
+
+**Example:1**
+
+```
+Input: 5
+Output:
+[
+     [1],
+    [1,1],
+   [1,2,1],
+  [1,3,3,1],
+ [1,4,6,4,1]
+]
+```
+
+---
+
+### Python Solution
+**分析：** 杨辉三角,注意条件即可.
+
+```python
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        if not numRows:
+            return []
+        res = [[1]]
+        for i in range(1, numRows):
+            res += [[1] + [res[-1][i] + res[-1][i + 1] for i in range(len(res[-1]) - 1)] + [1]]
+        return res
+```
+
+[返回目录](#00)
+
+## 119. Pascal's Triangle II
+
+Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle.
+
+给定非负索引k（其中k≤33），返回Pascal三角形的第k个索引行。
+
+**Example:1**
+
+```
+Input: 3
+Output: [1,3,3,1]
+```
+
+---
+
+### Python Solution
+**分析：** 杨辉三角的第 k 层,注意条件空间 O(k) ,所以我们要先构造好 res 。
+
+```python
+class Solution:
+    def getRow(self, rowIndex):
+        res = [1] * (rowIndex+1)
+        for i in range(2, rowIndex+1):
+            for j in range(i-1, 0, -1):
+                res[j] += res[j-1]
+        return res
+```
+
+[返回目录](#00)
+
 ## 217. Contains Duplicate
 
 Given an array of integers, find if the array contains any duplicates.
@@ -229,6 +298,50 @@ class Solution:
                 flag = (i - used[v] <= k)
             used[v] = i
         return flag
+```
+
+[返回目录](#00)
+
+## 78. Subsets
+
+Given a set of distinct integers, nums, return all possible subsets (the power set).
+
+Note: The solution set must not contain duplicate subsets.
+
+给定一组不同的整数nums，返回所有可能的子集（幂集）。 注意：解决方案集不得包含重复的子集。
+
+**Example:1**
+
+```
+Input: nums = [1,2,3]
+Output:
+[
+  [3],
+  [1],
+  [2],
+  [1,2,3],
+  [1,3],
+  [2,3],
+  [1,2],
+  []
+]
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        subsets = [[]]
+        for n in nums:
+            subsets += [s + [n] for s in subsets]
+        return subsets
+
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        return reduce(lambda subsets, n: subsets + [s + [n] for s in subsets], nums, [[]])
 ```
 
 [返回目录](#00)
