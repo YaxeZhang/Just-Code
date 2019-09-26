@@ -25,6 +25,7 @@
  - [86   Partition List](#86---partition-list)
  - [23   Merge k Sorted Lists](#23---merge-k-sorted-lists)
  - [147	 Insertion Sort List](#147--insertion-sort-list)
+ - [138  Copy List with Random Pointer](#138--copy-list-with-random-pointer)
 
 ## 206  Reverse Linked List
 
@@ -1192,6 +1193,69 @@ class Solution:
         other.next = None
         less.next = dummy2.next
         return dummy.next
+```
+
+[返回目录](#00)
+
+## 138  Copy List with Random Pointer
+
+A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+
+Return a deep copy of the list.
+
+给定一个链表，使每个节点包含一个附加的随机指针，该指针可以指向列表中的任何节点或为空。
+
+返回列表的深层副本。
+
+**Example**
+
+```
+Input:
+{"$id":"1","next":{"$id":"2","next":null,"random":{"$ref":"2"},"val":2},"random":{"$ref":"2"},"val":1}
+
+Explanation:
+Node 1's value is 1, both of its next and random pointer points to Node 2.
+Node 2's value is 2, its next pointer points to null and its random pointer points to itself.
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, next, random):
+        self.val = val
+        self.next = next
+        self.random = random
+"""
+class Solution:
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        if not head:
+            return None
+        p1 = p2 = p3 = head
+
+        while p1:
+            tmp = Node(p1.val, p1.next, None)
+            p1.next = tmp
+            p1 = p1.next.next
+
+        while p2:
+            tmp = p2.next
+            tmp.random = p2.random.next if p2.random else None
+            p2 = p2.next.next
+
+        tmp = dummy = p3.next
+        while p3:
+            p3.next = tmp.next
+            tmp.next = tmp.next.next if p3.next else None
+            p3 = p3.next
+            tmp = tmp.next
+            
+        return dummy
 ```
 
 [返回目录](#00)

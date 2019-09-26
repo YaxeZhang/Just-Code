@@ -17,6 +17,7 @@
    - [24.反转链表](#24反转链表)
    - [25.合并两个排序的链表](#25合并两个排序的链表)
    - [27.二叉树的镜像](#27二叉树的镜像)
+   - [35.复杂链表的复制](#35复杂链表的复制)
    - [39.数组中出现次数超过一半的数字](#39数组中出现次数超过一半的数字)
    - [42.连续子数组的最大和](#42连续子数组的最大和)
    - [52.两个链表的第一个公共结点](#52两个链表的第一个公共结点)
@@ -543,6 +544,43 @@ class Solution:
         if root.right:               # 但是涉及函数调用，会让速度更慢
             self.Mirror(root.right)
         return root
+```
+
+[回到目录](#00)
+
+### 35.复杂链表的复制
+#### 题目描述
+输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）
+#### 解法：
+
+```python
+# class RandomListNode:
+#     def __init__(self, x):
+#         self.label = x
+#         self.next = None
+#         self.random = None
+class Solution:
+    # 返回 RandomListNode
+    def Clone(self, pHead):
+        if not pHead:
+            return None
+        p1 = p2 = p3 = pHead
+        while p1:
+            tmp = RandomListNode(p1.label)
+            tmp.next = p1.next
+            tmp.random = None
+            p1.next = tmp
+            p1 = p1.next.next
+        while p2:
+            tmp = p2.next
+            tmp.random = p2.random.next if p2.random else None
+            p2 = p2.next.next
+        dummy = tmp = p3.next
+        while p3:
+            p3.next = p3.next.next
+            tmp.next = p3.next.next if p3.next else None
+            p3, tmp = p3.next, tmp.next
+        return dummy
 ```
 
 [回到目录](#00)
