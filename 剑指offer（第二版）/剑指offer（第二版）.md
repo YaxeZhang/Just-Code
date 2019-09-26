@@ -17,6 +17,7 @@
    - [24.反转链表](#24反转链表)
    - [25.合并两个排序的链表](#25合并两个排序的链表)
    - [27.二叉树的镜像](#27二叉树的镜像)
+   - [30.包含min函数的栈](#30包含min函数的栈)
    - [35.复杂链表的复制](#35复杂链表的复制)
    - [39.数组中出现次数超过一半的数字](#39数组中出现次数超过一半的数字)
    - [42.连续子数组的最大和](#42连续子数组的最大和)
@@ -545,6 +546,41 @@ class Solution:
         if root.right:               # 但是涉及函数调用，会让速度更慢
             self.Mirror(root.right)
         return root
+```
+
+[回到目录](#00)
+
+### 30.包含min函数的栈
+#### 题目描述
+定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））。
+#### 解法：
+
+```python
+class MinStack:
+
+    def __init__(self):
+        self.stack = []
+        self.stkmin = []
+
+    def push(self, x: int) -> None:
+        if not self.stkmin or self.getMin() > x:
+            self.stkmin.append(x)
+        else:
+            self.stkmin.append(self.getMin())
+        self.stack.append(x)
+
+    def pop(self) -> None:
+        if self.stack:
+            self.stkmin.pop()
+            return self.stack.pop()
+
+    def top(self) -> int:
+        if self.stack:
+            return self.stack[-1]
+
+    def getMin(self) -> int:
+        if self.stkmin:
+            return self.stkmin[-1]
 ```
 
 [回到目录](#00)
