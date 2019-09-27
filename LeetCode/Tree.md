@@ -1,6 +1,6 @@
 <span id = "00"></span>
 基础
- - [144	Binary Tree Preorder Traversal]
+ - [144. Binary Tree Preorder Traversal](#144-binary-tree-preorder-traversal)
  - [94	Binary Tree Inorder Traversal]
  - [145	Binary Tree Postorder Traversal]
  - [102	Binary Tree Level Order Traversal]
@@ -38,7 +38,7 @@ BST
  - [270	Closest Binary Search Tree Value]
  - [272	Closest Binary Search Tree Value II]
  - [99	Recover Binary Search Tree]
-重要程度	
+重要程度
  - [156	Binary Tree Upside Down]
  - [114	Flatten Binary Tree to Linked List]
  - [255	Verify Preorder Sequence in Binary Search Tree]
@@ -53,25 +53,68 @@ BST
  - [95	Unique Binary Search Trees II]
  - [331	Verify Preorder Serialization of a Binary Tree]
 
-##
+## 144. Binary Tree Preorder Traversal
 
-Given
+Given a binary tree, return the preorder traversal of its nodes' values.
 
-给
+给定一个二叉树，返回其节点值的前序遍历。
 
 **Example**
 
 ```
+Input: [1,null,2,3]
+   1
+    \
+     2
+    /
+   3
 
+Output: [1,2,3]
 ```
 
 ---
 
 ### Python Solution
-**分析：**
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
 
 ```python
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        res = []
+        self.dfs(root, res)
+        return res
+
+    def dfs(self,root, res):
+        if root:
+            res.append(root.val)
+            self.dfs(root.left, res)
+            self.dfs(root.right, res)
+
+# 更剪短些
+class Solution:
+    def preorderTraversal(self, root):
+        return [] if not root else [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right)
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        stack, res = [root], []
+        while stack:
+            node = stack.pop()
+            if node:
+                res.append(node.val)
+                stack.append(node.right)
+                stack.append(node.left)
+        return res
 ```
 
 [返回目录](#00)
