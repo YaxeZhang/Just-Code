@@ -24,7 +24,18 @@ Preorder
 BFS
  - [107	Binary Tree Level Order Traversal II]
  - [103	Binary Tree Zigzag Level Order Traversal]
- - [199	Binary Tree Right Side View]
+ - [199	Binary Tree Right Side View]class Solution:
+    def inorderTraversal(self, root):
+        res, stack = [], []
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                node = stack.pop()
+                res.append(node.val)
+                root = node.right
+        return res
 BST
  - [98	Validate Binary Search Tree]
  - [235	Lowest Common Ancestor of a Binary Search Tree]
@@ -174,15 +185,15 @@ class Solution:
 class Solution:
     def inorderTraversal(self, root):
         res, stack = [], []
-        while True:
-            while root:
+        while stack or root:
+            if root:
                 stack.append(root)
                 root = root.left
-            if not stack:
-                return res
-            node = stack.pop()
-            res.append(node.val)
-            root = node.right
+            else:
+                node = stack.pop()
+                res.append(node.val)
+                root = node.right
+        return res
 ```
 
 [返回目录](#00)
