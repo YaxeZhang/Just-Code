@@ -12,7 +12,7 @@
  - [50	Pow(x, n)]
  - [367	Valid Perfect Square]
  - [365	Water and Jug Problem]
- - [204	Count Primes]
+ - [204. Count Primes](204-count-primes)
 ## Sum		
  - [1	Two Sum]
  - [167. Two Sum II](#167-two-sum-ii)
@@ -89,6 +89,40 @@ class Solution:
             digits[~i] = 0
         digits.insert(0, 1)
         return digits
+```
+
+[返回目录](#00)
+
+## 204. Count Primes
+
+Count the number of prime numbers less than a non-negative number, n.
+
+计算小于非负数n的质数数。
+
+**Example:1**
+
+```
+Input: 10
+Output: 4
+Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.
+```
+
+---
+
+### Python Solution
+**分析：** 最优化的素数生成。固定好空间，关键点在 sqrt(n) + 1 和 pr[i * i: n: i] = [0] * len(pr[i * i: n: i])
+
+```python
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n < 3:
+            return 0
+        pr = [1] * n
+        pr[0] = pr[1] = 0
+        for i in range(2, int(n ** 0.5) + 1):
+            if pr[i]:
+                pr[i * i: n: i] = [0] * len(pr[i * i: n: i])
+        return sum(pr)
 ```
 
 [返回目录](#00)
