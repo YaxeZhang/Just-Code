@@ -1,7 +1,7 @@
 <span id = "00"></span>
 基础
  - [144. Binary Tree Preorder Traversal](#144-binary-tree-preorder-traversal)
- - [94	Binary Tree Inorder Traversal]
+ - [94. Binary Tree Inorder Traversal](#94-binary-tree-inorder-traversal)
  - [145	Binary Tree Postorder Traversal]
  - [102	Binary Tree Level Order Traversal]
 Preorder
@@ -115,6 +115,74 @@ class Solution:
                 stack.append(node.right)
                 stack.append(node.left)
         return res
+```
+
+[返回目录](#00)
+
+## 94. Binary Tree Inorder Traversal
+
+Given a binary tree, return the inorder traversal of its nodes' values.
+
+给定一个二叉树，返回其节点值的中序遍历。
+
+**Example**
+
+```
+Input: [1,null,2,3]
+   1
+    \
+     2
+    /
+   3
+
+Output: [1,3,2]
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        res = []
+        self.dfs(root, res)
+        return res
+
+    def dfs(self,root, res):
+        if root:
+            self.dfs(root.left, res)
+            res.append(root.val)
+            self.dfs(root.right, res)
+
+# 更剪短些
+class Solution:
+    def inorderTraversal(self, root):
+        return [] if not root else self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def inorderTraversal(self, root):
+        res, stack = [], []
+        while True:
+            while root:
+                stack.append(root)
+                root = root.left
+            if not stack:
+                return res
+            node = stack.pop()
+            res.append(node.val)
+            root = node.right
 ```
 
 [返回目录](#00)
