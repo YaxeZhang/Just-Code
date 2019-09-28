@@ -2,9 +2,8 @@
 基础
  - [144. Binary Tree Preorder Traversal](#144-binary-tree-preorder-traversal)
  - [94. Binary Tree Inorder Traversal](#94-binary-tree-inorder-traversal)
- - [145	Binary Tree Postorder Traversal]
+ - [145. Binary Tree Postorder Traversal](#145-binary-tree-postorder-traversal)
  - [102	Binary Tree Level Order Traversal]
-Preorder
  - [100	Same Tree]
  - [101	Symmetric Tree]
  - [226	Invert Binary Tree]
@@ -14,7 +13,6 @@ Preorder
  - [129	Sum Root to Leaf Numbers]
  - [298	Binary Tree Longest Consecutive Sequence]
  - [111	Minimum Depth of Binary Tree]
-Preorder
  - [104	Maximum Depth of Binary Tree]
  - [110	Balanced Binary Tree]
  - [124	Binary Tree Maximum Path Sum]
@@ -25,17 +23,6 @@ BFS
  - [107	Binary Tree Level Order Traversal II]
  - [103	Binary Tree Zigzag Level Order Traversal]
  - [199	Binary Tree Right Side View]class Solution:
-    def inorderTraversal(self, root):
-        res, stack = [], []
-        while stack or root:
-            if root:
-                stack.append(root)
-                root = root.left
-            else:
-                node = stack.pop()
-                res.append(node.val)
-                root = node.right
-        return res
 BST
  - [98	Validate Binary Search Tree]
  - [235	Lowest Common Ancestor of a Binary Search Tree]
@@ -194,6 +181,72 @@ class Solution:
                 res.append(node.val)
                 root = node.right
         return res
+```
+
+[返回目录](#00)
+
+## 145. Binary Tree Postorder Traversal
+
+Given a binary tree, return the inorder traversal of its nodes' values.
+
+给定一个二叉树，返回其节点值的中序遍历。
+
+**Example**
+
+```
+Input: [1,null,2,3]
+   1
+    \
+     2
+    /
+   3
+
+Output: [3,2,1]
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        res = []
+        self.dfs(root, res)
+        return res
+
+    def dfs(self,root, res):
+        if root:
+            self.dfs(root.left, res)
+            self.dfs(root.right, res)
+            res.append(root.val)
+
+# 更剪短些
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val] if root else []
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def postorderTraversal(self, root):
+        stack, res = [root], []
+        while stack:
+            node = stack.pop()
+            if node:
+                res.append(node.val)
+                stack.append(node.left)
+                stack.append(node.right)
+        return res[::-1]
 ```
 
 [返回目录](#00)
