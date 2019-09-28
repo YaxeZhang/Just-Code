@@ -14,6 +14,7 @@
  - [298	Binary Tree Longest Consecutive Sequence]
  - [111	Minimum Depth of Binary Tree]
  - [104	Maximum Depth of Binary Tree]
+ - [559. Maximum Depth of N-ary Tree](#559-maximum-depth-of-n-ary-tree)
  - [110	Balanced Binary Tree]
  - [124	Binary Tree Maximum Path Sum]
  - [250	Count Univalue Subtrees]
@@ -298,6 +299,37 @@ class Solution:
             tmp = [(node.left, node.right) for node in level]
             level = [leaf for n in tmp for leaf in n if leaf]
         return res
+```
+
+[返回目录](#00)
+
+## 559. Maximum Depth of N-ary Tree
+
+Given a n-ary tree, find its maximum depth.
+
+The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+给定n元树，找到其最大深度。 最大深度是沿着从根节点到最远叶节点的最长路径的节点数。
+
+
+---
+
+### Python Solution
+**分析：** 其实和二叉树的最大深度类似，只是多加了个循环。
+
+```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, children):
+        self.val = val
+        self.children = children
+"""
+class Solution(object):
+    def maxDepth(self, root):
+        if not root: return 0
+        if not root.children: return 1
+        return max(self.maxDepth(node) for node in root.children) + 1  
 ```
 
 [返回目录](#00)
