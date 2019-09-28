@@ -13,7 +13,7 @@
  - [129	Sum Root to Leaf Numbers]
  - [298	Binary Tree Longest Consecutive Sequence]
  - [111	Minimum Depth of Binary Tree]
- - [104	Maximum Depth of Binary Tree]
+ - [104. Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree)
  - [559. Maximum Depth of N-ary Tree](#559-maximum-depth-of-n-ary-tree)
  - [110	Balanced Binary Tree]
  - [124	Binary Tree Maximum Path Sum]
@@ -299,6 +299,71 @@ class Solution:
             tmp = [(node.left, node.right) for node in level]
             level = [leaf for n in tmp for leaf in n if leaf]
         return res
+```
+
+[返回目录](#00)
+
+## 104. Maximum Depth of Binary Tree
+
+Given a binary tree, find its maximum depth.
+
+The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+Note: A leaf is a node with no children.
+
+给定二叉树，找到其最大深度。
+
+最大深度是沿着从根节点到最远叶节点的最长路径的节点数。
+
+注意：叶子是没有子节点的节点。
+
+**Example**
+
+```
+Given binary tree [3,9,20,null,null,15,7],
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its depth = 3.
+```
+
+---
+
+### Python Solution
+**分析：** 递归和迭代法。推荐递归。
+
+```python
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        return max(self.maxDepth(root.right), self.maxDepth(root.left)) + 1
+
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        ans = 0
+        if not root:
+            return 0
+        DFS = [] # stack
+        DFS.append((root,1))
+        while DFS:
+            root, depth = DFS.pop()
+            if depth > ans:
+                ans = depth
+            if root.left:
+                DFS.append((root.left, depth + 1))
+            if root.right:
+                DFS.append((root.right, depth + 1))
+        return ans
 ```
 
 [返回目录](#00)
