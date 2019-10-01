@@ -13,7 +13,7 @@
  - [293	Flip Game]
  - [294	Flip Game II]
  - [290	Word Pattern]
- - [242	Valid Anagram]
+ - [242. Valid Anagram](#242-valid-anagram)
  - [49	Group Anagrams]
  - [249	Group Shifted Strings]
  - [87	Scramble String]
@@ -65,6 +65,34 @@
  - [115	Distinct Subsequences]
  - [187	Repeated DNA Sequences]
 
+
+## 242. Valid Anagram
+
+Given two strings s and t , write a function to determine if t is an anagram of s.
+
+给定两个字符串s和t，编写一个函数来确定t是否是s的字谜。
+
+**Example**
+
+```
+Input: s = "anagram", t = "nagaram"
+Output: true
+```
+
+---
+
+### Python Solution
+**分析：** 简单题，用排序或者用字典。这里用的是内置的 Counter。
+
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return collections.Counter(s) == collections.Counter(t)
+        
+        return sorted(s) == sorted(t)
+```
+
+[返回目录](#00)
 
 ## 76 Minimum Window Substring
 
