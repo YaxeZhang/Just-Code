@@ -29,7 +29,7 @@
  - [233	Number of Digit One]
  - [319	Bulb Switcher]
  - [292	Nim Game]
- - [202	Happy Number]
+ - [202. Happy Number](#202-happy-number)
  - [400	Nth Digit]
  - [263	Ugly Number]
  - [264	Ugly Number II]
@@ -201,6 +201,43 @@ class Solution:
                 else:
                     a += 1
         return res
+```
+
+[返回目录](#00)
+
+## 202. Happy Number
+
+Write an algorithm to determine if a number is "happy".
+
+A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.
+
+编写算法以确定数字是否为“ happy”。 一个快乐的数字是由以下过程定义的数字：以任何正整数开头，用该数字的平方和代替该数字，然后重复该过程，直到该数字等于1（它将停留在该位置），否则它就会循环 在不包含1的循环中无休止地循环。以1结尾的那些数字是快乐数字。
+
+**Example**
+
+```
+Input: 19
+Output: true
+Explanation: 
+12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1
+```
+
+---
+
+### Python Solution
+**分析：** 用集合保留出现过的数字保证它不是在循环。
+
+```python
+class Solution:
+    def isHappy(self, n):
+        stop = {1}
+        while n not in stop:
+            stop.add(n)
+            n = sum(int(d)**2 for d in str(n))
+        return n == 1
 ```
 
 [返回目录](#00)
