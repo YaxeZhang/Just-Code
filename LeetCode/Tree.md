@@ -4,6 +4,7 @@
  - [94. Binary Tree Inorder Traversal](#94-binary-tree-inorder-traversal)
  - [145. Binary Tree Postorder Traversal](#145-binary-tree-postorder-traversal)
  - [102. Binary Tree Level Order Traversal](#102-binary-tree-level-order-traversal)
+ - [107. Binary Tree Level Order Traversal II](#107-binary-tree-level-order-traversal-ii)
  - [100	Same Tree]
  - [101	Symmetric Tree]
  - [226	Invert Binary Tree]
@@ -22,7 +23,6 @@
  - [337	House Robber III]
  - [617. Merge Two Binary Trees](#617-merge-two-binary-trees)
 BFS
- - [107	Binary Tree Level Order Traversal II]
  - [103	Binary Tree Zigzag Level Order Traversal]
  - [199	Binary Tree Right Side View]class Solution:
 BST
@@ -189,9 +189,9 @@ class Solution:
 
 ## 145. Binary Tree Postorder Traversal
 
-Given a binary tree, return the inorder traversal of its nodes' values.
+Given a binary tree, return the postorder traversal of its nodes' values.
 
-给定一个二叉树，返回其节点值的中序遍历。
+给定一个二叉树，返回其节点值的后序遍历。
 
 **Example**
 
@@ -300,6 +300,56 @@ class Solution:
             tmp = [(node.left, node.right) for node in level]
             level = [leaf for n in tmp for leaf in n if leaf]
         return res
+```
+
+[返回目录](#00)
+
+## 107. Binary Tree Level Order Traversal II
+
+Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
+
+给定一个二叉树，返回其节点值的自下而上的级别顺序遍历。 （即，从左到右，从叶到根逐级）。
+
+**Example**
+
+```
+For example:
+Given binary tree [3,9,20,null,null,15,7],
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its bottom-up level order traversal as:
+[
+  [15,7],
+  [9,20],
+  [3]
+]
+```
+
+---
+
+### Python Solution
+**分析：** 分层存储，每次输出当层并且将下一层的在赋值到这里。
+
+```python
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        level, res = [root], []
+        while level:
+            res.append([node.val for node in level])
+            tmp = [(node.left, node.right) for node in level]
+            level = [leaf for n in tmp for leaf in n if leaf]
+        return res[::-1]
 ```
 
 [返回目录](#00)
