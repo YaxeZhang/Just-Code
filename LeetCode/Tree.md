@@ -5,7 +5,7 @@
  - [145. Binary Tree Postorder Traversal](#145-binary-tree-postorder-traversal)
  - [102. Binary Tree Level Order Traversal](#102-binary-tree-level-order-traversal)
  - [107. Binary Tree Level Order Traversal II](#107-binary-tree-level-order-traversal-ii)
- - [100	Same Tree]
+ - [100. Same Tree](#100-same-tree)
  - [101	Symmetric Tree]
  - [226	Invert Binary Tree]
  - [257	Binary Tree Paths]
@@ -350,6 +350,89 @@ class Solution:
             tmp = [(node.left, node.right) for node in level]
             level = [leaf for n in tmp for leaf in n if leaf]
         return res[::-1]
+```
+
+[返回目录](#00)
+
+## 100. Same Tree
+
+Given two binary trees, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical and the nodes have the same value.
+
+给定两个二进制树，编写一个函数来检查它们是否相同。
+
+如果两个二叉树在结构上相同并且节点具有相同的值，则认为它们是相同的。
+
+**Example**
+
+```
+Input:     1         1
+          / \       / \
+         2   1     1   2
+
+        [1,2,1],   [1,1,2]
+
+Output: false
+```
+
+---
+
+### Python Solution
+**分析：** 递归和迭代法。推荐递归。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        if p and q:
+            return p.val == q.val and self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+        return p is q
+```
+
+**DFS**
+
+```Python
+class Solution:
+    def isSameTree(self, p, q):
+        stack = [(p, q)]
+        while stack:
+            n1, n2 = stack.pop()
+            if n1 and n2 and n1.val == n2.val:
+                stack.append((n1.right, n2.right))
+                stack.append((n1.left, n2.left))
+            elif not n1 and not n2:
+                continue
+            else:
+                return False
+        return True
+```
+
+**BFS**
+
+```Python
+class Solution:
+    def isSameTree(self, p, q):
+        dq = collections.deque()
+        dq.append((p, q))
+        while dq:
+            len_dq = len(dq)
+            for _ in range(len_dq):
+                n1, n2 = dq.popleft()
+                if n1 and n2 and n1.val == n2.val:
+                    dq.append((n1.left, n2.left))
+                    dq.append((n1.right, n2.right))
+                elif not n1 and not n2:
+                    continue
+                else:
+                    return False
+        return True
 ```
 
 [返回目录](#00)
