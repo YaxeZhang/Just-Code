@@ -422,16 +422,14 @@ class Solution:
         dq = collections.deque()
         dq.append((p, q))
         while dq:
-            len_dq = len(dq)
-            for _ in range(len_dq):
-                n1, n2 = dq.popleft()
-                if n1 and n2 and n1.val == n2.val:
-                    dq.append((n1.left, n2.left))
-                    dq.append((n1.right, n2.right))
-                elif not n1 and not n2:
-                    continue
-                else:
-                    return False
+            n1, n2 = dq.popleft()
+            if n1 and n2 and n1.val == n2.val:
+                dq.append((n1.left, n2.left))
+                dq.append((n1.right, n2.right))
+            elif not n1 and not n2:
+                continue
+            else:
+                return False
         return True
 ```
 
