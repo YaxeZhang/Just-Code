@@ -7,7 +7,7 @@
  - [107. Binary Tree Level Order Traversal II](#107-binary-tree-level-order-traversal-ii)
  - [100. Same Tree](#100-same-tree)
  - [101. Symmetric Tree](#101-symmetric-tree)
- - [226	Invert Binary Tree]
+ - [226. Invert Binary Tree](#226-invert-binary-tree)
  - [257	Binary Tree Paths]
  - [112	Path Sum]
  - [113	Path Sum II]
@@ -502,6 +502,67 @@ class Solution:
             else:
                 return False
         return True
+```
+
+[返回目录](#00)
+
+## 226. Invert Binary Tree
+
+Invert a binary tree.
+
+左右翻转二叉树。
+
+**Example**
+
+```
+Input:
+
+     4
+   /   \
+  2     7
+ / \   / \
+1   3 6   9
+Output:
+
+     4
+   /   \
+  7     2
+ / \   / \
+9   6 3   1
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root:
+            root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+            return root
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def invertTree(self, root):
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                node.left, node.right = node.right, node.left
+                stack.extend([node.left, node.right])
+        return root
 ```
 
 [返回目录](#00)
