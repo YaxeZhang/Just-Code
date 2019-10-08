@@ -6,7 +6,7 @@
  - [102. Binary Tree Level Order Traversal](#102-binary-tree-level-order-traversal)
  - [107. Binary Tree Level Order Traversal II](#107-binary-tree-level-order-traversal-ii)
  - [100. Same Tree](#100-same-tree)
- - [101	Symmetric Tree]
+ - [101. Symmetric Tree](#101-symmetric-tree)
  - [226	Invert Binary Tree]
  - [257	Binary Tree Paths]
  - [112	Path Sum]
@@ -407,7 +407,7 @@ class Solution:
             if n1 and n2 and n1.val == n2.val:
                 stack.append((n1.right, n2.right))
                 stack.append((n1.left, n2.left))
-            elif not n1 and not n2:
+            elif n1 is n2:
                 continue
             else:
                 return False
@@ -419,14 +419,85 @@ class Solution:
 ```Python
 class Solution:
     def isSameTree(self, p, q):
-        dq = collections.deque()
-        dq.append((p, q))
+        dq = collections.deque([(p, q)])
         while dq:
             n1, n2 = dq.popleft()
             if n1 and n2 and n1.val == n2.val:
-                dq.append((n1.left, n2.left))
-                dq.append((n1.right, n2.right))
-            elif not n1 and not n2:
+                dq.extend([(n1.left, n2.left), (n1.right, n2.right)])
+            elif n1 is n2:
+                continue
+            else:
+                return False
+        return True
+```
+
+[返回目录](#00)
+
+## 101. Symmetric Tree
+
+Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+给定一棵二叉树，检查它是否是其自身的镜像（即，围绕其中心对称）。
+
+**Example**
+
+```
+For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+
+But the following [1,2,2,null,3,null,3] is not:
+
+    1
+   / \
+  2   2
+   \   \
+   3    3
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        return self.compare(root.left, root.right)
+
+    def compare(self, p, q):
+        if p and q:
+            return p.val == q.val and self.compare(p.left, q.right) and self.compare(p.right, q.left)
+        return p is q
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        dq = collections.deque([(root.left, root.right)])
+        while dq:
+            l, r = dq.popleft()
+            if l and r and l.val == r.val:
+                dq.extend([(l.right, r.left), (l.left, r.right)])
+            elif l is r:
                 continue
             else:
                 return False
