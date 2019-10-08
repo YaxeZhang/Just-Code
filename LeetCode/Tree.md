@@ -96,7 +96,7 @@ class Solution:
             self.dfs(root.left, res)
             self.dfs(root.right, res)
 
-# 更剪短些
+# More easier
 class Solution:
     def preorderTraversal(self, root):
         return [] if not root else [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right)
@@ -162,7 +162,7 @@ class Solution:
             res.append(root.val)
             self.dfs(root.right, res)
 
-# 更剪短些
+# More easier
 class Solution:
     def inorderTraversal(self, root):
         return [] if not root else self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
@@ -230,7 +230,7 @@ class Solution:
             self.dfs(root.right, res)
             res.append(root.val)
 
-# 更剪短些
+# More easier
 class Solution:
     def postorderTraversal(self, root: TreeNode) -> List[int]:
         return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val] if root else []
