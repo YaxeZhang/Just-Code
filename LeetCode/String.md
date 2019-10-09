@@ -12,7 +12,7 @@
  - [205	Isomorphic Strings]
  - [293	Flip Game]
  - [294	Flip Game II]
- - [290	Word Pattern]
+ - [290. Word Pattern](#290-word-pattern)
  - [242. Valid Anagram](#242-valid-anagram)
  - [49	Group Anagrams]
  - [249	Group Shifted Strings]
@@ -65,6 +65,43 @@
  - [115	Distinct Subsequences]
  - [187	Repeated DNA Sequences]
 
+
+## 290. Word Pattern
+
+Given a pattern and a string str, find if str follows the same pattern.
+
+Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.
+
+给定一个模式和一个字符串str，找出str是否遵循相同的模式。 在此跟随是指完全匹配，因此模式中的字母与str中的非空单词之间存在双射
+
+**Example**
+
+```
+Input: pattern = "abba", str = "dog cat cat dog"
+Output: true
+```
+
+---
+
+### Python Solution
+**分析：** 将单词字母转化为序列进行比较。
+
+```python
+class Solution:
+    def wordPattern(self, pattern: str, str: str) -> bool:
+        s = pattern
+        t = str.split()
+        return list(map(s.find, s)) == list(map(t.index, t))
+```
+
+```python
+class Solution:
+    def wordPattern(self, pattern: str, str: str) -> bool:
+        f = lambda s: map({}.setdefault, s, range(len(s)))
+        return list(f(pattern)) == list(f(str.split()))
+```
+
+[返回目录](#00)
 
 ## 242. Valid Anagram
 
