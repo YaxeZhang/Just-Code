@@ -14,7 +14,7 @@
  - [113. Path Sum II](#113-path-sum-ii)
  - [129. Sum Root to Leaf Numbers](#129-sum-root-to-leaf-numbers)
  - [298	Binary Tree Longest Consecutive Sequence]
- - [111	Minimum Depth of Binary Tree]
+ - [111. Minimum Depth of Binary Tree](#111-minimum-depth-of-binary-tree)
  - [104. Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree)
  - [559. Maximum Depth of N-ary Tree](#559-maximum-depth-of-n-ary-tree)
  - [110	Balanced Binary Tree]
@@ -900,6 +900,78 @@ class Solution:
                 stack.append((node.left, st + str(node.left.val)))
             if node.right:
                 stack.append((node.right, st + str(node.right.val)))
+        return res
+```
+
+[返回目录](#00)
+
+## 111. Minimum Depth of Binary Tree
+
+Given a binary tree, find its minimum depth.
+
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+给定二叉树，找到其最小深度。 最小深度是沿着从根节点到最近的叶节点的最短路径的节点数。
+
+**Example**
+
+```
+Given binary tree [3,9,20,null,null,15,7],
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its minimum depth = 2.
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def minDepth(self, root):
+        if not root: return 0
+        d, D = sorted(map(self.minDepth, (root.left, root.right)))
+        return 1 + (d or D)
+
+class Solution:
+    def minDepth(self, root):
+        if not root:
+            return 0
+        if not root.left:
+            return self.minDepth(root.right) + 1
+        if not root.right:
+            return self.minDepth(root.left) + 1
+        return 1 + min(self.minDepth(root.right), self.minDepth(root.left))
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        stack, res = [(root, 1)], float('inf')
+        while stack:
+            node, depth = stack.pop()
+            if not node.left and not node.right:
+                res = min(res, depth)
+            if node.left:
+                stack.append((node.left, depth + 1))
+            if node.right:
+                stack.append((node.right, depth + 1))
         return res
 ```
 
