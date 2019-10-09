@@ -10,7 +10,7 @@
  - [101. Symmetric Tree](#101-symmetric-tree)
  - [226. Invert Binary Tree](#226-invert-binary-tree)
  - [257. Binary Tree Paths](#257-binary-tree-paths)
- - [112	Path Sum]
+ - [112. Path Sum](#112-path-sum)
  - [113	Path Sum II]
  - [129	Sum Root to Leaf Numbers]
  - [298	Binary Tree Longest Consecutive Sequence]
@@ -680,6 +680,70 @@ class Solution:
             if node.right:
                 stack.append((node.right, path + '->' + str(node.right.val)))
         return paths
+```
+
+[返回目录](#00)
+
+## 112. Path Sum
+
+Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+
+给定一个二叉树和一个和，确定该树是否具有从根到叶的路径，以使该路径上的所有值加起来等于给定的和。
+
+**Example**
+
+```
+Given the below binary tree and sum = 22,
+
+      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \      \
+7    2      1
+return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def hasPathSum(self, root, sum):
+        if not root:
+            return False
+        if not root.left and not root.right and root.val == sum:
+            return True
+        return self.hasPathSum(root.left, sum - root.val) or self.hasPathSum(root.right, sum - root.val)
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def hasPathSum(self, root, sum):
+        if not root:
+            return False
+        stack = [(root, root.val)]
+        while stack:
+            node, cur = stack.pop()
+            if not node.left and not node.right and cur == sum:
+                return True
+            if node.left:
+                stack.append((node.left, cur + node.left.val))
+            if node.right:
+                stack.append((node.right, cur + node.right.val))
+        return False
 ```
 
 [返回目录](#00)
