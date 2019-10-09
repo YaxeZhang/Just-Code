@@ -11,7 +11,7 @@
  - [226. Invert Binary Tree](#226-invert-binary-tree)
  - [257. Binary Tree Paths](#257-binary-tree-paths)
  - [112. Path Sum](#112-path-sum)
- - [113	Path Sum II]
+ - [113. Path Sum II](#113-path-sum-ii)
  - [129	Sum Root to Leaf Numbers]
  - [298	Binary Tree Longest Consecutive Sequence]
  - [111	Minimum Depth of Binary Tree]
@@ -744,6 +744,87 @@ class Solution:
             if node.right:
                 stack.append((node.right, cur + node.right.val))
         return False
+```
+
+[返回目录](#00)
+
+## 113. Path Sum II
+
+Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+
+给定一棵二叉树和一个和，找到所有从根到叶的路径，其中每个路径的和等于给定的和。
+
+**Example**
+
+```
+Given the below binary tree and sum = 22,
+
+      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \    / \
+7    2  5   1
+Return:
+
+[
+   [5,4,11,2],
+   [5,8,4,5]
+]
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def pathSum(self, root: TreeNode, tsum: int) -> List[List[int]]:
+        if not root :
+            return []
+            
+        temp, res = [], []
+
+        def DFTS(root):
+            temp.append(root.val)
+            if not root.left and not root.right and sum(temp) == tsum:
+                res.append(temp.copy())
+            if root.left:
+                DFTS(root.left)
+            if root.right:
+                DFTS(root.right)
+            temp.pop()
+
+        DFTS(root)
+        return res
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def pathSum(self, root: TreeNode, Psum: int) -> List[List[int]]:
+        if not root:
+            return []
+        stack, res = [(root, [root.val])], []
+        while stack:
+            node, cur = stack.pop()
+            if not node.left and not node.right and sum(cur) == Psum:
+                res.append(cur)
+            if node.left:
+                stack.append((node.left, cur + [node.left.val]))
+            if node.right:
+                stack.append((node.right, cur + [node.right.val]))
+        return res
 ```
 
 [返回目录](#00)
