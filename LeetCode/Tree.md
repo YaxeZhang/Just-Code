@@ -9,7 +9,7 @@
  - [100. Same Tree](#100-same-tree)
  - [101. Symmetric Tree](#101-symmetric-tree)
  - [226. Invert Binary Tree](#226-invert-binary-tree)
- - [257	Binary Tree Paths]
+ - [257. Binary Tree Paths](#257-binary-tree-paths)
  - [112	Path Sum]
  - [113	Path Sum II]
  - [129	Sum Root to Leaf Numbers]
@@ -24,7 +24,7 @@
  - [337	House Robber III]
  - [617. Merge Two Binary Trees](#617-merge-two-binary-trees)
 BFS
- - [199	Binary Tree Right Side View]class Solution:
+ - [199	Binary Tree Right Side View]
 BST
  - [98	Validate Binary Search Tree]
  - [235	Lowest Common Ancestor of a Binary Search Tree]
@@ -615,6 +615,71 @@ class Solution:
                 node.left, node.right = node.right, node.left
                 stack.extend([node.left, node.right])
         return root
+```
+
+[返回目录](#00)
+
+## 257. Binary Tree Paths
+
+Given a binary tree, return all root-to-leaf paths.
+
+给定一棵二叉树，返回所有从根到叶的路径。
+
+**Example**
+
+```
+Input:
+
+   1
+ /   \
+2     3
+ \
+  5
+
+Output: ["1->2->5", "1->3"]
+
+Explanation: All root-to-leaf paths are: 1->2->5, 1->3
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def binaryTreePaths(self, root):
+        if not root:
+            return []
+        return [str(root.val) + '->' + path
+                for kid in (root.left, root.right) if kid
+                for path in self.binaryTreePaths(kid)] or [str(root.val)]
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def binaryTreePaths(self, root: TreeNode) -> List[str]:
+        if not root:
+            return []
+        paths, stack = [], [(root, str(root.val))]
+        while stack:
+            node, path = stack.pop()
+            if not node.left and not node.right:
+                paths.append(path)
+            if node.left:
+                stack.append((node.left, path + '->' + str(node.left.val)))
+            if node.right:
+                stack.append((node.right, path + '->' + str(node.right.val)))
+        return paths
 ```
 
 [返回目录](#00)
