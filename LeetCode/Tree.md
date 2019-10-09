@@ -17,7 +17,7 @@
  - [111. Minimum Depth of Binary Tree](#111-minimum-depth-of-binary-tree)
  - [104. Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree)
  - [559. Maximum Depth of N-ary Tree](#559-maximum-depth-of-n-ary-tree)
- - [110	Balanced Binary Tree]
+ - [110. Balanced Binary Tree](#110-balanced-binary-tree)
  - [124	Binary Tree Maximum Path Sum]
  - [250	Count Univalue Subtrees]
  - [366	Find Leaves of Binary Tree]
@@ -1094,6 +1094,62 @@ class Solution(object):
         if not root: return 0
         if not root.children: return 1
         return max(self.maxDepth(node) for node in root.children) + 1  
+```
+
+[返回目录](#00)
+
+## 110. Balanced Binary Tree
+
+Given a binary tree, determine if it is height-balanced.
+
+For this problem, a height-balanced binary tree is defined as:
+
+a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+
+给定一棵二叉树，确定它是否是高度平衡的。 
+
+对于此问题，将高度平衡的二叉树定义为： 一棵二叉树，其中每个节点的两个子树的深度相差不超过1。
+
+**Example**
+
+```
+Given the following tree [1,2,2,3,3,null,null,4,4]:
+
+       1
+      / \
+     2   2
+    / \
+   3   3
+  / \
+ 4   4
+Return false.
+```
+
+---
+
+### Python Solution
+**分析：** 
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def isBalanced(self, root):
+        
+        def check(root):
+            if not root: return 0
+            left = check(root.left)
+            right = check(root.right)
+            if left == -1 or right == -1 or abs(left - right) > 1:
+                return -1
+            return max(left, right) + 1
+        
+        return check(root) != -1
 ```
 
 [返回目录](#00)
