@@ -297,8 +297,7 @@ class Solution:
         level, res = [root], []
         while level:
             res.append([node.val for node in level])
-            tmp = [(node.left, node.right) for node in level]
-            level = [leaf for n in tmp for leaf in n if leaf]
+            level = [kid for node in level for kid in (node.left, node.right) if kid]
         return res
 ```
 
@@ -347,8 +346,7 @@ class Solution:
         level, res = [root], []
         while level:
             res.append([node.val for node in level])
-            tmp = [(node.left, node.right) for node in level]
-            level = [leaf for n in tmp for leaf in n if leaf]
+            level = [kid for node in level for kid in (node.left, node.right) if kid]
         return res[::-1]
 ```
 
@@ -398,8 +396,7 @@ class Solution:
         flag = 1
         while level:
             res.append([node.val for node in level][::flag])
-            tmp = [(node.left, node.right) for node in level]
-            level = [leaf for n in tmp for leaf in n if leaf]
+            level = [kid for node in level for kid in (node.left, node.right) if kid]
             flag *= -1
         return res
 ```
