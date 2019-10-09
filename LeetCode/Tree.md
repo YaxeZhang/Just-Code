@@ -5,6 +5,7 @@
  - [145. Binary Tree Postorder Traversal](#145-binary-tree-postorder-traversal)
  - [102. Binary Tree Level Order Traversal](#102-binary-tree-level-order-traversal)
  - [107. Binary Tree Level Order Traversal II](#107-binary-tree-level-order-traversal-ii)
+ - [103. Binary Tree Zigzag Level Order Traversal](#103-binary-tree-zigzag-level-order-traversal)
  - [100. Same Tree](#100-same-tree)
  - [101. Symmetric Tree](#101-symmetric-tree)
  - [226. Invert Binary Tree](#226-invert-binary-tree)
@@ -23,7 +24,6 @@
  - [337	House Robber III]
  - [617. Merge Two Binary Trees](#617-merge-two-binary-trees)
 BFS
- - [103	Binary Tree Zigzag Level Order Traversal]
  - [199	Binary Tree Right Side View]class Solution:
 BST
  - [98	Validate Binary Search Tree]
@@ -350,6 +350,58 @@ class Solution:
             tmp = [(node.left, node.right) for node in level]
             level = [leaf for n in tmp for leaf in n if leaf]
         return res[::-1]
+```
+
+[返回目录](#00)
+
+## 103. Binary Tree Zigzag Level Order Traversal
+
+Given a binary tree, return the zigzag level order traversal of its nodes' values. (ie, from left to right, then right to left for the next level and alternate between).
+
+给定一个二叉树，返回其节点值的之字形级别顺序遍历。 （即，从左到右，然后从右到左进入下一个级别，并在它们之间交替）。
+
+**Example**
+
+```
+For example:
+Given binary tree [3,9,20,null,null,15,7],
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its zigzag level order traversal as:
+[
+  [3],
+  [20,9],
+  [15,7]
+]
+```
+
+---
+
+### Python Solution
+**分析：** 分层存储，每次输出当层并且将下一层的在赋值到这里。
+
+```python
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        level, res = [root], []
+        flag = 1
+        while level:
+            res.append([node.val for node in level][::flag])
+            tmp = [(node.left, node.right) for node in level]
+            level = [leaf for n in tmp for leaf in n if leaf]
+            flag *= -1
+        return res
 ```
 
 [返回目录](#00)
