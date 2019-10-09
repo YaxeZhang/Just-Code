@@ -12,7 +12,7 @@
  - [257. Binary Tree Paths](#257-binary-tree-paths)
  - [112. Path Sum](#112-path-sum)
  - [113. Path Sum II](#113-path-sum-ii)
- - [129	Sum Root to Leaf Numbers]
+ - [129. Sum Root to Leaf Numbers](#129-sum-root-to-leaf-numbers)
  - [298	Binary Tree Longest Consecutive Sequence]
  - [111	Minimum Depth of Binary Tree]
  - [104. Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree)
@@ -791,7 +791,7 @@ class Solution:
     def pathSum(self, root: TreeNode, tsum: int) -> List[List[int]]:
         if not root :
             return []
-            
+
         temp, res = [], []
 
         def DFTS(root):
@@ -824,6 +824,82 @@ class Solution:
                 stack.append((node.left, cur + [node.left.val]))
             if node.right:
                 stack.append((node.right, cur + [node.right.val]))
+        return res
+```
+
+[返回目录](#00)
+
+## 129. Sum Root to Leaf Numbers
+
+Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
+
+An example is the root-to-leaf path 1->2->3 which represents the number 123.
+
+Find the total sum of all root-to-leaf numbers.
+
+给定一个仅包含0-9数字的二叉树，每个从根到叶的路径都可以表示一个数字。
+
+一个示例是从根到叶的路径1-> 2-> 3，它表示数字123。
+
+找到所有从根到叶的数字的总和。
+
+**Example**
+
+```
+Input: [4,9,0,5,1]
+    4
+   / \
+  9   0
+ / \
+5   1
+Output: 1026
+Explanation:
+The root-to-leaf path 4->9->5 represents the number 495.
+The root-to-leaf path 4->9->1 represents the number 491.
+The root-to-leaf path 4->0 represents the number 40.
+Therefore, sum = 495 + 491 + 40 = 1026.
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        def f(root):
+            if not root:
+                return []
+            return [str(root.val) + path
+                    for kid in (root.left, root.right) if kid
+                    for path in f(kid)] or [str(root.val)]
+        return sum(map(int,f(root)))
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        stack, res = [(root, str(root.val))], 0
+        while stack:
+            node, st = stack.pop()
+            if not node.left and not node.right:
+                res += int(st)
+            if node.left:
+                stack.append((node.left, st + str(node.left.val)))
+            if node.right:
+                stack.append((node.right, st + str(node.right.val)))
         return res
 ```
 
