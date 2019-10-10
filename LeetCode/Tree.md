@@ -23,8 +23,7 @@
  - [366	Find Leaves of Binary Tree]
  - [337	House Robber III]
  - [617. Merge Two Binary Trees](#617-merge-two-binary-trees)
-BFS
- - [199	Binary Tree Right Side View]
+ - [199. Binary Tree Right Side View](#199-binary-tree-right-side-view)
 BST
  - [98. Validate Binary Search Tree](#98-validate-binary-search-tree)
  - [235	Lowest Common Ancestor of a Binary Search Tree]
@@ -1183,6 +1182,54 @@ class Solution:
             return t1
         else:
             return t1 or t2
+```
+
+[返回目录](#00)
+
+## 199. Binary Tree Right Side View
+
+Given a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+
+给定一个二叉树，想象一下自己站在树的右侧，返回从上到下可以看到的节点的值。
+
+**Example**
+
+```
+Input: [1,2,3,null,5,null,4]
+Output: [1, 3, 4]
+Explanation:
+
+   1            <---
+ /   \
+2     3         <---
+ \     \
+  5     4       <---
+```
+
+---
+
+### Python Solution
+**分析：** 考察的是 BST 。
+
+**BST**
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def rightSideView(self, root: TreeNode) -> List[int]:
+        if not root:
+            return []
+        level, res = [root], []
+        while level:
+            res.append(level[-1].val)
+            level = [leaf for node in level for leaf in (node.left, node.right) if leaf]
+        return res
 ```
 
 [返回目录](#00)
