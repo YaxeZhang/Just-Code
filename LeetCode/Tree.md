@@ -291,12 +291,12 @@ return its level order traversal as:
 
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        if not root:
-            return []
-        level, res = [root], []
-        while level:
-            res.append([node.val for node in level])
-            level = [kid for node in level for kid in (node.left, node.right) if kid]
+        res = []
+        if root:
+            level = [root]
+            while level:
+                res.append([node.val for node in level])
+                level = [kid for node in level for kid in (node.left, node.right) if kid]
         return res
 ```
 
@@ -339,13 +339,13 @@ return its bottom-up level order traversal as:
 #         self.right = None
 
 class Solution:
-    def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        if not root:
-            return []
-        level, res = [root], []
-        while level:
-            res.append([node.val for node in level])
-            level = [kid for node in level for kid in (node.left, node.right) if kid]
+    def levelOrderBottom(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        if root:
+            level = [root]
+            while level:
+                res.append([node.val for node in level])
+                level = [kid for node in level for kid in (node.left, node.right) if kid]
         return res[::-1]
 ```
 
@@ -388,15 +388,15 @@ return its zigzag level order traversal as:
 #         self.right = None
 
 class Solution:
-    def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        if not root:
-            return []
-        level, res = [root], []
-        flag = 1
-        while level:
-            res.append([node.val for node in level][::flag])
-            level = [kid for node in level for kid in (node.left, node.right) if kid]
-            flag *= -1
+    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        if root:
+            level = [root]
+            flag = 1
+            while level:
+                res.append([node.val for node in level][::flag])
+                level = [kid for node in level for kid in (node.left, node.right) if kid]
+                flag *= -1
         return res
 ```
 
@@ -1223,12 +1223,12 @@ Explanation:
 
 class Solution:
     def rightSideView(self, root: TreeNode) -> List[int]:
-        if not root:
-            return []
-        level, res = [root], []
-        while level:
-            res.append(level[-1].val)
-            level = [leaf for node in level for leaf in (node.left, node.right) if leaf]
+        res = []
+        if root:
+            level = [root]
+            while level:
+                res.append(level[-1].val)
+                level = [leaf for node in level for leaf in (node.left, node.right) if leaf]
         return res
 ```
 
