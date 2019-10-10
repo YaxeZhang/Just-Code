@@ -26,7 +26,7 @@
 BFS
  - [199	Binary Tree Right Side View]
 BST
- - [98	Validate Binary Search Tree]
+ - [98. Validate Binary Search Tree](#98-validate-binary-search-tree)
  - [235	Lowest Common Ancestor of a Binary Search Tree]
  - [236	Lowest Common Ancestor of a Binary Tree]
  - [108	Convert Sorted Array to Binary Search Tree]
@@ -1103,7 +1103,7 @@ For this problem, a height-balanced binary tree is defined as:
 
 a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
 
-给定一棵二叉树，确定它是否是高度平衡的。 
+给定一棵二叉树，确定它是否是高度平衡的。
 
 对于此问题，将高度平衡的二叉树定义为： 一棵二叉树，其中每个节点的两个子树的深度相差不超过1。
 
@@ -1125,7 +1125,7 @@ Return false.
 ---
 
 ### Python Solution
-**分析：** 
+**分析：**
 
 ```python
 # Definition for a binary tree node.
@@ -1137,7 +1137,7 @@ Return false.
 
 class Solution(object):
     def isBalanced(self, root):
-        
+
         def check(root):
             if not root: return 0
             left = check(root.left)
@@ -1145,7 +1145,7 @@ class Solution(object):
             if left == -1 or right == -1 or abs(left - right) > 1:
                 return -1
             return max(left, right) + 1
-        
+
         return check(root) != -1
 ```
 
@@ -1183,6 +1183,119 @@ class Solution:
             return t1
         else:
             return t1 or t2
+```
+
+[返回目录](#00)
+
+## 98. Validate Binary Search Tree
+
+Given a binary tree, determine if it is a valid binary search tree (BST).
+
+Assume a BST is defined as follows:
+
+The left subtree of a node contains only nodes with keys less than the node's key.
+The right subtree of a node contains only nodes with keys greater than the node's key.
+Both the left and right subtrees must also be binary search trees.
+
+给定一个二叉树，请确定它是否为有效的二叉树（BST）。
+
+假设BST定义如下：
+
+节点的左子树仅包含键小于节点键的节点。
+节点的右子树仅包含键大于该节点的键的节点。
+左子树和右子树都必须也是二进制搜索树。
+
+**Example**
+
+```
+5
+/ \
+1   4
+ / \
+3   6
+
+Input: [5,1,4,null,null,3,6]
+Output: false
+Explanation: The root node's value is 5 but its right child's value is 4.
+```
+
+---
+
+### Python Solution
+**分析：**
+
+**递归大法好啊，简单又方便**
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def isValidBST(self, root: TreeNode, lower=float('-inf'), upper=float('inf')) -> bool:
+        return not root or (lower < root.val < upper
+		       and (self.isValidBST(root.left, lower, root.val) if root.left else True)
+			   and (self.isValidBST(root.right, root.val, upper) if root.right else True))
+
+class Solution:
+    def isValidBST(self, root: TreeNode) -> bool:
+        def validate(root, big, small):
+            if not root: return True
+            if root.val >= big or root.val <= small: return False
+            return validate(root.left, root.val, small) and validate(root.right, big, root.val)
+        return validate(root, float('inf'), float('-inf'))
+```
+
+**利用 BST 中序遍历的性质**
+
+```python
+class Solution:      # 效率居高，推荐这一种解法
+    def isValidBST(self, root: TreeNode) -> bool:
+        stack = []
+        cur = root
+        pre = None
+        while len(stack) or cur:
+            if cur:
+                stack.append(cur)
+                cur = cur.left
+            else:
+                p = stack.pop()
+                if pre and p.val <= pre.val:
+                    return False
+                pre = p
+                cur = p.right
+        return True
+
+class Solution:       # 效率极低
+    def isValidBST(self, root: TreeNode) -> bool:
+        def inorder(root):
+            return [] if not root else inorder(root.left) + [root.val] + inorder(root.right)
+        tmp = inorder(root)
+        for i in range(1, len(tmp)):
+            if tmp[i] <= tmp[i - 1]:
+                return False
+        return True
+
+class Solution:      # 效率还可以
+    def isValidBST(self, root: TreeNode) -> bool:
+        def inorder(root):
+            stack, res = [], []
+            while stack or root:
+                if root:
+                    stack.append(root)
+                    root = root.left
+                else:
+                    node = stack.pop()
+                    res.append(node.val)
+                    root = node.right
+            return res
+        tmp = inorder(root)
+        for i in range(1, len(tmp)):
+            if tmp[i] <= tmp[i - 1]:
+                return False
+        return True
 ```
 
 [返回目录](#00)
