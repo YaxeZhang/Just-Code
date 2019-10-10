@@ -26,7 +26,7 @@
  - [199. Binary Tree Right Side View](#199-binary-tree-right-side-view)
 BST
  - [98. Validate Binary Search Tree](#98-validate-binary-search-tree)
- - [235. Lowest Common Ancestor of a Binary Search Tree](#235-lowest-common-ancestor-of-a-binary Search Tree)
+ - [235. Lowest Common Ancestor of a Binary Search Tree](#235-lowest-common-ancestor-of-a-binary-search-tree)
  - [236	Lowest Common Ancestor of a Binary Tree]
  - [108	Convert Sorted Array to Binary Search Tree]
  - [109	Convert Sorted List to Binary Search Tree]
@@ -1255,11 +1255,11 @@ Both the left and right subtrees must also be binary search trees.
 **Example**
 
 ```
-5
-/ \
-1   4
+  5
  / \
-3   6
+1   4
+   / \
+  3   6
 
 Input: [5,1,4,null,null,3,6]
 Output: false
