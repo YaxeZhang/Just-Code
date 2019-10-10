@@ -26,7 +26,7 @@
  - [199. Binary Tree Right Side View](#199-binary-tree-right-side-view)
 BST
  - [98. Validate Binary Search Tree](#98-validate-binary-search-tree)
- - [235	Lowest Common Ancestor of a Binary Search Tree]
+ - [235. Lowest Common Ancestor of a Binary Search Tree](#235-lowest-common-ancestor-of-a-binary Search Tree)
  - [236	Lowest Common Ancestor of a Binary Tree]
  - [108	Convert Sorted Array to Binary Search Tree]
  - [109	Convert Sorted List to Binary Search Tree]
@@ -1343,6 +1343,58 @@ class Solution:      # 效率还可以
             if tmp[i] <= tmp[i - 1]:
                 return False
         return True
+```
+
+[返回目录](#00)
+
+## 235. Lowest Common Ancestor of a Binary Search Tree
+
+Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.
+
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+
+给定二叉搜索树（BST），请在BST中找到两个给定节点的最低公共祖先（LCA）。
+
+根据Wikipedia上LCA的定义：“最低的共同祖先被定义为两个节点p和q之间，这是T中同时具有p和q作为后代的最低节点（在这里我们允许节点成为其自身的后代）。 ”
+
+**Example**
+
+```
+Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4
+Output: 2
+Explanation: The LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def lowestCommonAncestor(self, root, p, q):
+        if p.val < root.val > q.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        if p.val > root.val < q.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        return root
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def lowestCommonAncestor(self, root, p, q):
+        while (root.val - p.val) * (root.val - q.val) > 0:     # root.val 在左右中间，那么 root 就是最低公共祖先
+            root = (root.left, root.right)[p.val > root.val]
+        return root
 ```
 
 [返回目录](#00)
