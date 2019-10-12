@@ -28,6 +28,7 @@ BST
  - [98. Validate Binary Search Tree](#98-validate-binary-search-tree)
  - [235. Lowest Common Ancestor of a Binary Search Tree](#235-lowest-common-ancestor-of-a-binary-search-tree)
  - [236	Lowest Common Ancestor of a Binary Tree]
+ - [1123. Lowest Common Ancestor of Deepest Leaves](#1123-lowest-common-ancestor-of-deepest-leaves)
  - [108	Convert Sorted Array to Binary Search Tree]
  - [109	Convert Sorted List to Binary Search Tree]
  - [173	Binary Search Tree Iterator]
@@ -1395,6 +1396,73 @@ class Solution:
         while (root.val - p.val) * (root.val - q.val) > 0:     # root.val 在左右中间，那么 root 就是最低公共祖先
             root = (root.left, root.right)[p.val > root.val]
         return root
+```
+
+[返回目录](#00)
+
+## 1123. Lowest Common Ancestor of Deepest Leaves
+
+Given a rooted binary tree, return the lowest common ancestor of its deepest leaves.
+
+Recall that:
+
+The node of a binary tree is a leaf if and only if it has no children
+The depth of the root of the tree is 0, and if the depth of a node is d, the depth of each of its children is d+1.
+The lowest common ancestor of a set S of nodes is the node A with the largest depth such that every node in S is in the subtree with root A.
+
+给定一棵有根的二叉树，返回其最深叶的最低共同祖先。
+
+回想一下：
+
+二叉树的节点只有当没有子节点时才是叶子。树的根深度为0，并且如果节点的深度为d，则其每个子节点的深度为d +1。 一组节点S中最低的公共祖先是深度最大的节点A，这样S中的每个节点都在具有根A的子树中。
+
+**Example**
+
+```
+Input: root = [1,2,3]
+Output: [1,2,3]
+Explanation:
+The deepest leaves are the nodes with values 2 and 3.
+The lowest common ancestor of these leaves is the node with value 1.
+The answer returned is a TreeNode object (not an array) with serialization "[1,2,3]".
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def lcaDeepestLeaves(self, root):
+
+        def helper(root):
+            if root is None:
+                return [None,0]
+            left = helper(root.left)
+            right = helper(root.right)
+            maxh = max(left[1],right[1])
+            if left[1] < right[1]:
+                return [right[0],maxh+1]
+            elif left[1] > right[1]:
+                return [left[0],maxh+1]
+            else:
+                return [root,maxh+1]
+        res = helper(root)
+        return res[0]
+```
+
+**迭代法**
+
+```python
+
 ```
 
 [返回目录](#00)
