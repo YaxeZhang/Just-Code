@@ -61,30 +61,6 @@ class Solution:
         return False
 ```
 
-```golang
-func duplicateInArray(nums []int) int {
-    if nums == nil {
-        return -1
-    }
-    for _, v := range nums{
-        if v >= len(nums) || v < 0 {
-            return -1
-        }
-    }
-    for i, _ := range nums{
-        for nums[i] != i {
-            if nums[i] == nums[nums[i]] {
-                return nums[i]
-            } else {
-                idx := nums[i]
-                nums[i], nums[idx] = nums[idx], nums[i]
-            }
-        }
-    }
-    return -1
-}
-```
-
 **使用 O(1) 空间的解法**
 
 ```python
@@ -99,23 +75,6 @@ class Solution(object):
             f = nums[f]
             s = nums[s]
         return s
-```
-
-```golang
-func duplicateInArray(nums []int) int {
-    var f, s int
-    for f == 0 || f != s {
-        f = nums[nums[f]]
-        s = nums[s]
-    }
-
-    f = 0
-    for f != s {
-        f = nums[f]
-        s = nums[s]
-    }
-    return s;
-}
 ```
 
 [回到目录](#00)
