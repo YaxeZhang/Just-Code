@@ -47,10 +47,11 @@ class Solution:
     def duplicate(self, numbers, duplication):
         if not numbers:
             return False
-        for i in range(len(numbers)):
-            if numbers[i] >= len(numbers) or numbers[i] < 0:
+        for i, v in enumerate(numbers):
+            if v >= len(numbers) or v < 0:
                 return False
-            while numbers[i] != i:                      # 一直交换一直到 numbers[i] 等于 i
+        for i in range(len(numbers)):
+            while numbers[i] != i:
                 if numbers[i] == numbers[numbers[i]]:
                     duplication[0] = numbers[i]
                     return True
