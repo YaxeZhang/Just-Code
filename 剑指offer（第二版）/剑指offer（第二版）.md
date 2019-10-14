@@ -1,5 +1,5 @@
 <span id = "00">手机 Openhub 用户无法实现 Markdown 页内跳转，请点击右上角选择外部浏览器打开（已提交 Openhub issue...）</span>
-# 剑指offer Python题解
+# 剑指offer Python/Golang题解
    - [03.数组中重复的数字](#3数组中重复的数字)
    - [04.二维数组中的查找](#4二维数组中的查找)
    - [05.替换空格](#5替换空格)
@@ -59,6 +59,63 @@ class Solution:
                     idx = numbers[i]
                     numbers[i], numbers[idx] = numbers[idx], numbers[i]
         return False
+```
+
+```golang
+func duplicateInArray(nums []int) int {
+    if nums == nil {
+        return -1
+    }
+    for _, v := range nums{
+        if v >= len(nums) || v < 0 {
+            return -1
+        }
+    }
+    for i, _ := range nums{
+        for nums[i] != i {
+            if nums[i] == nums[nums[i]] {
+                return nums[i]
+            } else {
+                idx := nums[i]
+                nums[i], nums[idx] = nums[idx], nums[i]
+            }
+        }
+    }
+    return -1
+}
+```
+
+**使用 O(1) 空间的解法**
+
+```python
+class Solution(object):
+    def duplicateInArray(self, nums):
+        f = s = 0
+        while f == 0 or f != s:
+            f = nums[nums[f]]
+            s = nums[s]
+        f = 0
+        while f != s:
+            f = nums[f]
+            s = nums[s]
+        return s
+```
+
+```golang
+func duplicateInArray(nums []int) int {
+    var f, s int
+    for f == 0 || f != s {
+        f = nums[nums[f]]
+        s = nums[s]
+    }
+
+    f = 0
+    for f != s {
+        f = nums[f]
+        s = nums[s]
+    }
+    return s;
+}
 ```
 
 [回到目录](#00)
