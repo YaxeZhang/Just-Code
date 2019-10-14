@@ -261,9 +261,9 @@ class Solution:
 class Solution:
     def Fibonacci(self, n):
         res=[0, 1, 1]
-        for _ in range(n - 2):
+        for _ in range(n):
             res[0], res[1], res[2] = res[1], res[2], res[1] + res[2]
-        return res[-1] if n > 2 else res[n]
+        return res[0] if n > 2 else res[n]
 ```
 
 ```python
