@@ -32,7 +32,7 @@ BST
  - [108	Convert Sorted Array to Binary Search Tree]
  - [109	Convert Sorted List to Binary Search Tree]
  - [173	Binary Search Tree Iterator]
- - [230	Kth Smallest Element in a BST]
+ - [230. Kth Smallest Element in a BST](#230-kth-smallest-element-in-a-bst)
  - [297	Serialize and Deserialize Binary Tree]
  - [285	Inorder Successor in BST]
  - [270	Closest Binary Search Tree Value]
@@ -1463,6 +1463,67 @@ class Solution(object):
 
 ```python
 
+```
+
+[返回目录](#00)
+
+## 230. Kth Smallest Element in a BST
+
+Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
+
+给定一个二叉搜索树，编写一个函数kthSmallest在其中找到第k个最小的元素。
+
+**Example**
+
+```
+Input: root = [3,1,4,null,2], k = 1
+   3
+  / \
+ 1   4
+  \
+   2
+Output: 1
+
+
+Input: root = [5,3,6,2,4,null,null,1], k = 3
+       5
+      / \
+     3   6
+    / \
+   2   4
+  /
+ 1
+Output: 3
+```
+
+---
+
+### Python Solution
+**分析：**
+
+
+**迭代法**
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        stack= []
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            node = stack.pop()
+            k -= 1
+            if not k: return node.val
+            root = node.right
+        return None
 ```
 
 [返回目录](#00)

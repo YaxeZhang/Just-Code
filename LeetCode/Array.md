@@ -19,7 +19,7 @@
  - [245	Shortest Word Distance III]
  - [217. Contains Duplicate](#217-contains-duplicate)
  - [219. Contains Duplicate II](#219-contains-duplicate-ii)
- - [220	Contains Duplicate III]
+ - [220. Contains Duplicate III](#220-contains-duplicate-iii)
  - [55	Jump Game]
  - [45	Jump Game II]
  - [11	Container With Most Water]
@@ -298,6 +298,44 @@ class Solution:
                 flag = (i - used[v] <= k)
             used[v] = i
         return flag
+```
+
+[返回目录](#00)
+
+## 220. Contains Duplicate III
+
+Given an array of integers, find out whether there are two distinct indices i and j in the array such that the absolute difference between nums[i] and nums[j] is at most t and the absolute difference between i and j is at most k.
+
+给定一个整数数组，请找出数组中是否存在两个不同的索引i和j，以使 nums[i] 和 nums[j] 之间的绝对差最大为 t，并且i和j之间的绝对差最大为 k
+
+**Example:1**
+
+```
+Input: nums = [1,0,1,1], k = 1, t = 2
+Output: true
+```
+
+**Example:2**
+
+```
+Input: nums = [1,5,9,1,5,9], k = 2, t = 3
+Output: false
+```
+
+---
+
+### Python Solution
+**分析：** 暴力法加了个判断效率还奇高？
+
+```python
+class Solution:
+    def containsNearbyAlmostDuplicate(self, nums: List[int], k: int, t: int) -> bool:
+        if t == 0 and len(nums) == len(set(nums)): return False
+        for i in range(len(nums)):
+            for j in range(1, k + 1):
+                if i + j >= len(nums): break
+                if abs(nums[i] - nums[i + j]) <= t: return True
+        return False
 ```
 
 [返回目录](#00)
