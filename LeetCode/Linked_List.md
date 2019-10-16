@@ -142,13 +142,11 @@ class Solution(object):
     def hasCycle(self, head):
         if not head or not head.next:
             return False
-        slow = head
-        fast = head.next
+        slow, fast = head, head.next
         while slow != fast:
             if not fast or not fast.next:
                 return False
-            slow = slow.next
-            fast = fast.next.next
+            slow, fast = slow.next, fast.next.next
         return True
 ```
 
@@ -158,11 +156,9 @@ class Solution(object):
 class Solution(object):
     def hasCycle(self, head):
         try:
-            slow = head
-            fast = head.next
+            slow, fast = head, head.next
             while slow is not fast:
-                slow = slow.next
-                fast = fast.next.next
+                slow, fast = slow.next, fast.next.next
             return True
         except:
             return False
@@ -229,8 +225,7 @@ class Solution:
     def middleNode(self, head: ListNode) -> ListNode:
         pre = post =head
         while pre and pre.next:
-            pre = pre.next.next
-            post = post.next
+            post, pre = post.next, pre.next.next
         return post
 ```
 
@@ -418,20 +413,18 @@ class Solution:
 ```python
 class Solution:
     def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
-        pre, post = head, None
-        for _ in range(m - 1):
+        pre = head
+        dummy = post = ListNode(0)
+        post.next = head
+        for i in range(m-1):
             post = pre
             pre = pre.next
-        for _ in range(n - m):
+        for i in range(n-m):
             cur = pre.next
             pre.next = cur.next
-            if post:
-                cur.next = post.next
-                post.next = cur
-            else:
-                cur.next = head
-                head = cur
-        return head
+            cur.next = post.next
+            post.next = cur
+        return dummy.next
 ```
 
 [返回目录](#00)
