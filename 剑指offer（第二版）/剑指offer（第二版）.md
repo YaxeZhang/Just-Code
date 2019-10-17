@@ -600,6 +600,39 @@ class MinStack:
             return self.stkmin[-1]
 ```
 
+**进阶牛逼版 O(1)空间复杂度 O(1)时间复杂度**
+
+```python
+class MinStack:
+
+    def __init__(self):
+        self.stack = []
+        self.mins = 0
+
+    def push(self, x: int) -> None:
+        if not self.stack:
+            self.mins = x
+            self.stack.append(0)
+        else:
+            compare = x - self.mins
+            self.stack.append(compare)
+            self.mins = x if compare < 0 else self.mins            
+
+    def pop(self) -> None:
+        top1 = self.stack.pop()
+        if top1 < 0:
+            self.mins = self.mins - top1
+
+    def top(self) -> int:
+        if self.stack[-1] > 0:
+            return self.mins + self.stack[-1]
+        else:
+            return self.mins
+
+    def getMin(self) -> int:
+        return self.mins
+```
+
 [回到目录](#00)
 
 ### 35.复杂链表的复制
