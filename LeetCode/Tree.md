@@ -27,7 +27,7 @@
 BST
  - [98. Validate Binary Search Tree](#98-validate-binary-search-tree)
  - [235. Lowest Common Ancestor of a Binary Search Tree](#235-lowest-common-ancestor-of-a-binary-search-tree)
- - [236	Lowest Common Ancestor of a Binary Tree]
+ - [236. Lowest Common Ancestor of a Binary Tree](#236-lowest-common-ancestor-of-a-binary-tree)
  - [1123. Lowest Common Ancestor of Deepest Leaves](#1123-lowest-common-ancestor-of-deepest-leaves)
  - [108	Convert Sorted Array to Binary Search Tree]
  - [109	Convert Sorted List to Binary Search Tree]
@@ -1396,6 +1396,85 @@ class Solution:
         while (root.val - p.val) * (root.val - q.val) > 0:     # root.val 在左右中间，那么 root 就是最低公共祖先
             root = (root.left, root.right)[p.val > root.val]
         return root
+```
+
+[返回目录](#00)
+
+## 236. Lowest Common Ancestor of a Binary Tree
+
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+
+给定二叉树，找到树中两个给定节点的最低公共祖先（LCA）。
+
+根据Wikipedia上LCA的定义：“最低的共同祖先定义为两个节点p和q之间，作为T中同时具有p和q作为后代的最低节点（我们允许节点成为其自身的后代）。 ”
+
+**Example**
+
+```
+Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+Output: 5
+Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+```
+
+---
+
+### Python Solution
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root == None:
+            return None
+        if root == p or root == q:
+            return root
+        m = self.lowestCommonAncestor(root.left,p,q)
+        n = self.lowestCommonAncestor(root.right,p,q)
+        if(m and n):
+            return root
+        elif m:
+            return m
+        else:
+            return n
+```
+
+**可简化为**
+
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root in (None, p, q): return root
+        left, right = (self.lowestCommonAncestor(kid, p, q)
+                       for kid in (root.left, root.right))
+        return root if left and right else left or right
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        parents = {root: None}
+        stack = [root]
+        while p not in parents or q not in parents:
+            node = stack.pop()
+            if node.left:
+                parents[node.left] = node
+                stack.append(node.left)
+            if node.right:
+                parents[node.right] = node
+                stack.append(node.right)
+
+        ancestors = set()
+        while p:
+            ancestors.add(p)
+            p = parents[p]
+
+        while q not in ancestors:
+            q = parents[q]
+        return q
 ```
 
 [返回目录](#00)
