@@ -1635,7 +1635,7 @@ Return the following binary tree:
 ---
 
 ### Python Solution
-**分析：**
+**分析：** 和下面一题的思路一样，复杂写法不再赘述，看下一题的分析即可。
 
 ```python
 class Solution:
@@ -1682,7 +1682,7 @@ Return the following binary tree:
 ---
 
 ### Python Solution
-**分析：**
+**分析：** 两种都非常好理解，第一种是找到根节点，然后将 inorder 查分为两半继续寻找，问题在于如何找到 根节点在 inorder 的位置，下面第一种解法有点傻，更高效的是建立一个哈希表，占用 O(n) 的空间、查询时间为O(1)。第二种解法呢则非常聪明，不用找根节点的位置，构建 root.right 时每次都调用的是 postorder 最后一个元素，终点是 root.val 。构建 root.right 的时候终点是 None。
 
 ```python
 # class TreeNode:
