@@ -44,8 +44,8 @@ BST
  - [255	Verify Preorder Sequence in Binary Search Tree]
  - [333	Largest BST Subtree]
  - [222	Count Complete Tree Nodes]
- - [105	Construct Binary Tree from Preorder and Inorder Traversal]
- - [106	Construct Binary Tree from Inorder and Postorder Traversal]
+ - [105. Construct Binary Tree from Preorder and Inorder Traversal](#105-construct-binary-tree-from-preorder-and-inorder-traversal)
+ - [106. Construct Binary Tree from Inorder and Postorder Traversal](#106-construct-binary-tree-from-inorder-and-postorder-traversal)
  - [116	Populating Next Right Pointers in Each Node]
  - [117	Populating Next Right Pointers in Each Node II]
  - [314	Binary Tree Vertical Order Traversal]
@@ -1603,6 +1603,117 @@ class Solution:
             if not k: return node.val
             root = node.right
         return None
+```
+
+[返回目录](#00)
+
+## 105. Construct Binary Tree from Preorder and Inorder Traversal
+
+Given preorder and inorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+
+给定一棵树的前序和有序遍历，构造二叉树。
+
+注意： 您可以假定树中不存在重复项。
+
+**Example**
+
+```
+preorder = [3,9,20,15,7]
+inorder = [9,3,15,20,7]
+Return the following binary tree:
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def predfs(stop):
+            if preorder and inorder[-1] != stop:
+                root = TreeNode(preorder.pop())
+                root.left = predfs(root.val)
+                inorder.pop()
+                root.right = predfs(stop)
+                return root
+        preorder.reverse()
+        inorder.reverse()
+        return predfs(None)
+```
+
+[返回目录](#00)
+
+## 106. Construct Binary Tree from Inorder and Postorder Traversal
+
+Given inorder and postorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+
+给定一棵树的有序和后序遍历，构造二叉树。
+
+注意： 您可以假定树中不存在重复项。
+
+**Example**
+
+```
+inorder = [9,3,15,20,7]
+postorder = [9,15,7,20,3]
+Return the following binary tree:
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
+        if inorder:
+            ind = inorder.index(postorder.pop())
+            root = TreeNode(inorder[ind])
+            root.right = self.buildTree(inorder[ind+1:], postorder)
+            root.left = self.buildTree(inorder[:ind], postorder)
+            return root
+```
+
+**easier**
+
+```python
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
+        def postdfs(stop):
+            if postorder and inorder[-1] != stop:
+                root = TreeNode(postorder.pop())
+                root.right = postdfs(root.val)
+                inorder.pop()
+                root.left = postdfs(stop)
+                return root
+        return postdfs(None)
 ```
 
 [返回目录](#00)
