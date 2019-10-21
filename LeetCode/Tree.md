@@ -49,8 +49,8 @@ BST
  - [116	Populating Next Right Pointers in Each Node]
  - [117	Populating Next Right Pointers in Each Node II]
  - [314	Binary Tree Vertical Order Traversal]
- - [96	Unique Binary Search Trees]
- - [95	Unique Binary Search Trees II]
+ - [96. Unique Binary Search Trees](#96-unique-binary-search-trees)
+ - [95. Unique Binary Search Trees II](#95-unique-binary-search-trees-ii)
  - [331	Verify Preorder Serialization of a Binary Tree]
 
 ## 144. Binary Tree Preorder Traversal
@@ -1714,6 +1714,134 @@ class Solution:
                 root.left = postdfs(stop)
                 return root
         return postdfs(None)
+```
+
+[返回目录](#00)
+
+## 96. Unique Binary Search Trees
+
+Given n, how many structurally unique BST's (binary search trees) that store values 1 ... n?
+
+给定n，多少个结构唯一的BST（二进制搜索树）存储值1 ... n？
+
+**Example**
+
+```
+Input: 3
+Output: 5
+Explanation:
+Given n = 3, there are a total of 5 unique BST's:
+
+   1         3     3      2      1
+    \       /     /      / \      \
+     3     2     1      1   3      2
+    /     /       \                 \
+   2     1         2                 3
+```
+
+---
+
+### Python Solution
+**分析：** Catalan number
+
+```python
+class Solution:
+    def numTrees(self, n: int) -> int:
+        if n == 0:
+            return 0
+        dp = [0 for i in range(n + 1)]
+        dp[0], dp[1] = 1, 1
+        for i in range(2, n + 1):
+            for j in range(i//2):
+                dp[i] += dp[j] * dp[i - 1 - j] * 2        
+            if i % 2 != 0:
+                dp[i] += dp[i//2] * dp[i//2]        
+        return dp[-1]
+```
+
+**数学解法**
+
+```python
+class Solution:
+    def numTrees(self, n: int) -> int:
+        ans = 1
+        for i in range(1, n+1):
+            ans = ans*(i+n)/i
+        return int(ans/(n+1))
+```
+
+[返回目录](#00)
+
+## 95. Unique Binary Search Trees II
+
+Given an integer n, generate all structurally unique BST's (binary search trees) that store values 1 ... n.
+
+给定整数n，生成所有存储值1 ... n的结构上唯一的BST（二进制搜索树）。
+
+**Example**
+
+```
+Input: 3
+Output: 5
+Explanation:
+Given n = 3, there are a total of 5 unique BST's:
+
+   1         3     3      2      1
+    \       /     /      / \      \
+     3     2     1      1   3      2
+    /     /       \                 \
+   2     1         2                 3
+```
+
+---
+
+### Python Solution
+**分析：** Catalan number
+
+```python
+class Solution:
+    def generateTrees(self, n: int) -> List[TreeNode]:
+        memo = {}
+
+        def subtrees(start, end):
+            if start > end: return [None]
+            if (start, end) in memo: return memo[(start, end)]
+            ans = []
+            for i in range(start, end+1):
+                left = subtrees(start, i-1)
+                right = subtrees(i+1, end)
+                for l in left:
+                    for r in right:
+                        root = TreeNode(i)
+                        root.left = l
+                        root.right = r
+                        ans.append(root)
+            memo[(start, end)] = ans
+            return ans
+
+        return subtrees(1, n) if n >= 1 else []
+
+```
+
+**简单但慢**
+
+```python
+from functools import lru_cache
+class Solution:
+    def generateTrees(self, n):
+        if not n: return []
+        def node(val, left, right):
+            node = TreeNode(val)
+            node.left = left
+            node.right = right
+            return node
+        @lru_cache(maxsize=None)
+        def trees(first, last):
+            return [node(root, left, right)
+                    for root in range(first, last+1)
+                    for left in trees(first, root-1)
+                    for right in trees(root+1, last)] or [None]
+        return trees(1, n)
 ```
 
 [返回目录](#00)
