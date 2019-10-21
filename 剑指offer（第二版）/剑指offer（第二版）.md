@@ -18,6 +18,7 @@
    - [25.合并两个排序的链表](#25合并两个排序的链表)
    - [27.二叉树的镜像](#27二叉树的镜像)
    - [30.包含min函数的栈](#30包含min函数的栈)
+   - [32.从上到下打印二叉树](#32从上到下打印二叉树)
    - [35.复杂链表的复制](#35复杂链表的复制)
    - [39.数组中出现次数超过一半的数字](#39数组中出现次数超过一半的数字)
    - [42.连续子数组的最大和](#42连续子数组的最大和)
@@ -631,6 +632,31 @@ class MinStack:
 
     def getMin(self) -> int:
         return self.mins
+```
+
+[回到目录](#00)
+
+### 32.从上到下打印二叉树
+#### 题目描述
+从上往下打印出二叉树的每个节点，同层节点从左至右打印。
+#### 解法：
+
+```python
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    # 返回从上到下每个节点值列表，例：[1,2,3]
+    def PrintFromTopToBottom(self, root):
+        res = []
+        if root:
+            level = [root]
+            while level:
+                res.extend([x.val for x in level])
+                level = [leaf for node in level for leaf in (node.left, node.right) if leaf]
+        return res
 ```
 
 [回到目录](#00)

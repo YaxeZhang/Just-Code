@@ -1282,24 +1282,21 @@ Output: [7,9,9,9,0,5,0,0]
 2.Use list to save the maximum value that occurred before.
 
 ```python
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
 class Solution:
     def nextLargerNodes(self, head: ListNode) -> List[int]:
         if not head:
-            return head
-        p, res, dq = head, [], []
+            return None
+        p, tmp, stack = head, [], []
         while p:
-            res.append(p.val)
+            tmp.append(p.val)
             p = p.next
-        for i in range(len(res) - 1, -1, -1):
-            while dq and dq[-1] <= res[i]:
-                dq.pop()
-            dq.append(res[i])
-            res[i] = dq[-2] if len(dq) > 1 else 0
+        res = [0] * len(tmp)
+        for i in range(len(tmp)):
+            while stack and stack[-1][1] < tmp[i]:
+                idx, _ = stack.pop()
+                res[idx] = tmp[i]
+            stack.append((i, tmp[i]))
+
         return res
 ```
 
