@@ -43,7 +43,7 @@ BST
  - [114	Flatten Binary Tree to Linked List]
  - [255	Verify Preorder Sequence in Binary Search Tree]
  - [333	Largest BST Subtree]
- - [222	Count Complete Tree Nodes]
+ - [222. Count Complete Tree Nodes](#222-count-complete-tree-nodes)
  - [105. Construct Binary Tree from Preorder and Inorder Traversal](#105-construct-binary-tree-from-preorder-and-inorder-traversal)
  - [106. Construct Binary Tree from Inorder and Postorder Traversal](#106-construct-binary-tree-from-inorder-and-postorder-traversal)
  - [116. Populating Next Right Pointers in Each Node](#116-populating-next-right-pointers-in-each-node)
@@ -1603,6 +1603,57 @@ class Solution:
             if not k: return node.val
             root = node.right
         return None
+```
+
+[返回目录](#00)
+
+## 222. Count Complete Tree Nodes
+
+Given a complete binary tree, count the number of nodes.
+
+给定完整的二叉树，计算节点数。
+
+**Example**
+
+```
+Input:
+    1
+   / \
+  2   3
+ / \  /
+4  5 6
+
+Output: 6
+```
+
+---
+
+### Python Solution
+**分析：** 考验的思想应该是二分法，要充分利用完全二叉树的性质。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def countNodes(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        leftDepth = self.getDepth(root.left)
+        rightDepth = self.getDepth(root.right)
+        if leftDepth == rightDepth:
+            return pow(2, leftDepth) + self.countNodes(root.right)
+        else:
+            return pow(2, rightDepth) + self.countNodes(root.left)
+
+    def getDepth(self, root):
+        if not root:
+            return 0
+        return 1 + self.getDepth(root.left)
 ```
 
 [返回目录](#00)
