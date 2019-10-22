@@ -46,8 +46,8 @@ BST
  - [222	Count Complete Tree Nodes]
  - [105. Construct Binary Tree from Preorder and Inorder Traversal](#105-construct-binary-tree-from-preorder-and-inorder-traversal)
  - [106. Construct Binary Tree from Inorder and Postorder Traversal](#106-construct-binary-tree-from-inorder-and-postorder-traversal)
- - [116	Populating Next Right Pointers in Each Node]
- - [117	Populating Next Right Pointers in Each Node II]
+ - [116. Populating Next Right Pointers in Each Node](#116-populating-next-right-pointers-in-each-node)
+ - [117. Populating Next Right Pointers in Each Node II](#117-populating-next-right-pointers-in-each-node-ii)
  - [314	Binary Tree Vertical Order Traversal]
  - [96. Unique Binary Search Trees](#96-unique-binary-search-trees)
  - [95. Unique Binary Search Trees II](#95-unique-binary-search-trees-ii)
@@ -1714,6 +1714,124 @@ class Solution:
                 root.left = postdfs(stop)
                 return root
         return postdfs(None)
+```
+
+[返回目录](#00)
+
+## 116. Populating Next Right Pointers in Each Node
+
+You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition:
+```
+struct Node {
+  int val;
+  Node *left;
+  Node *right;
+  Node *next;
+}
+```
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+Initially, all next pointers are set to NULL.
+
+您将得到一棵完美的二叉树，其中所有叶子都在同一水平上，每个父级都有两个孩子。
+
+填充每个下一个指针以指向其下一个右节点。 如果没有下一个右节点，则下一个指针应设置为NULL。
+
+最初，所有下一个指针都设置为NULL。
+
+---
+
+### Python Solution
+**分析：** 递归法，需要额外空间的迭代法，不需要额外空间的迭代法。思路简单易懂。
+
+```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, left, right, next):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+
+        def ans(root):
+            if not root:
+                return
+            if not root.left or not root.right:
+                return
+            root.left.next = root.right
+            if root.next and root.next.left:
+                root.right.next = root.next.left
+            ans(root.left)
+            ans(root.right)
+            return
+
+        ans(root)
+        return root
+```
+
+**额外空间的迭代法**
+
+```python
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return
+        cur = [root]
+        while cur:
+            for i in range(len(cur) - 1):
+                cur[i].next = cur[i+1]
+            cur = [node for n in cur for node in (n.left, n.right) if node]
+        return root
+```
+
+**O(1)空间的迭代法**
+
+```python
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root: return
+        cur, tmp = root, root.left
+        while cur.left:
+            cur.left.next = cur.right
+            if cur.next:
+                cur.right.next = cur.next.left
+                cur = cur.next
+            else:
+                cur = tmp
+                tmp = cur.left
+        return root
+```
+
+[返回目录](#00)
+
+## 117. Populating Next Right Pointers in Each Node II
+
+Similar to the previous question, but the complete binary tree is changed to an ordinary binary tree.
+
+和上一题大致类似，不过完全二叉树改为一颗普通的二叉树。
+
+---
+
+### Python Solution
+**分析：** 需要额外空间的迭代法，不需要额外空间的迭代法。思路简单易懂。
+
+**额外空间的迭代法**
+
+```python
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return
+        cur = [root]
+        while cur:
+            for i in range(len(cur) - 1):
+                cur[i].next = cur[i+1]
+            cur = [node for n in cur for node in (n.left, n.right) if node]
+        return root
 ```
 
 [返回目录](#00)
