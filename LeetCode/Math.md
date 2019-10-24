@@ -1,6 +1,6 @@
 <span id = "00"></span>
 ## 基础		
- - [7	Reverse Integer]
+ - [7. Reverse Integer](#7-reverse-integer)
  - [165	Compare Version Numbers]
  - [66. Plus One](#66-plus-one)
  - [8	String to Integer (atoi)]
@@ -43,6 +43,47 @@
  - [360	Sort Transformed Array]
  - [397	Integer Replacement]
  - [368	Largest Divisible Subset]
+
+## 7. Reverse Integer
+
+Given a 32-bit signed integer, reverse digits of an integer.
+
+给定一个32位带符号整数，整数的倒置的数字。
+
+**Example:1**
+
+```
+Input: -123
+Output: -321
+
+Input: 120
+Output: 21
+```
+
+---
+
+### Python Solution
+**分析：** 考查的是数学解法而不是 int 转 str 倒置。
+
+```python
+class Solution:
+    def reverse(self, x):
+        result = 0
+
+        if x < 0:
+            symbol = -1
+            x = -x
+        else:
+            symbol = 1
+
+        while x:
+            result = result * 10 + x % 10
+            x //= 10
+
+        return 0 if result > pow(2, 31) else result * symbol
+```
+
+[返回目录](#00)
 
 ## 66. Plus One
 
@@ -218,7 +259,7 @@ A happy number is a number defined by the following process: Starting with any p
 ```
 Input: 19
 Output: true
-Explanation: 
+Explanation:
 12 + 92 = 82
 82 + 22 = 68
 62 + 82 = 100
