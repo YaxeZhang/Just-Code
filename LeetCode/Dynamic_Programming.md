@@ -108,7 +108,7 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
 ```python
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        dp = [0]*len(nums)
+        dp = [0 for _ in range(len(nums))]
         dp[0] = nums[0]
         for i in range(1, len(nums)):
             dp[i] = max(dp[i-1]+nums[i], nums[i])
@@ -163,7 +163,7 @@ Output: 28
 ```python
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        dp = [[1] * n] * m
+        dp = [[1 for _ in range(n)] for _ in range(m)]
         for i in range(1, m):
             for j in range(1, n):
                 dp[i][j] = dp[i-1][j] + dp[i][j-1]
@@ -176,7 +176,7 @@ class Solution:
 ```python
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        dp = [1] * n
+        dp = [1 for _ in range(n)]
         for i in range(1, m):
             for j in range(1, n):
                 dp[j] = dp[j] + dp[j-1]
@@ -265,7 +265,7 @@ class Solution:
         if obstacleGrid[0][0] == 1 or obstacleGrid[-1][-1] == 1:
             return 0
         m, n = len(obstacleGrid), len(obstacleGrid[0])
-        dp = [0] * n
+        dp = [0 for _ in range(n)]
         dp[0] = 1
         for i in range(m):
             if obstacleGrid[i][0] == 1:
