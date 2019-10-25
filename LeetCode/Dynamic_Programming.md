@@ -4,7 +4,7 @@
  - [53. Maximum Subarray](#53-maximum-subarray)
  - [62. Unique Paths](#62-unique-paths)
  - [63. Unique Paths II](#63-unique-paths-ii)
- - [120	Triangle	很少考]
+ - [120. Triangle	很少考](#120-triangle)
  - [279	Perfect Squares]
  - [139	Word Break]
  - [375	Guess Number Higher or Lower II]
@@ -276,6 +276,51 @@ class Solution:
                 else:
                     dp[j] = 0
         return dp[-1]
+```
+
+[返回目录](#00)
+
+## 120. Triangle
+
+Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
+
+给定一个三角形，找到从上到下的最小路径总和。您可以将每一步移至下面一行中的相邻数字。
+
+**Example**
+
+```
+For example, given the following triangle
+
+[
+     [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+]
+The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
+```
+
+---
+
+### Python Solution
+**分析：** 从低向上找到更小的值合并到最开始的一个元素。
+
+```python
+class Solution(object):
+    def minimumTotal(self, triangle):
+        dp = triangle[-1][:]
+        for i in range(len(triangle)-2, -1, -1):
+            for j in range(i+1):
+                dp[j] = min(dp[j], dp[j+1]) + triangle[i][j]
+        return dp[0]
+```
+
+**写成一行的形式：**
+
+```python
+class Solution(object):
+    def minimumTotal(self, triangle):
+        return reduce(lambda a, b:[min(a[i], a[i+1])+n for i, n in enumerate(b)], triangle[::-1])[0]
 ```
 
 [返回目录](#00)
