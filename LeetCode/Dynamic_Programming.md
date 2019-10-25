@@ -3,7 +3,7 @@
  - [70. Climbing Stairs](#70-climbing-stairs)
  - [53. Maximum Subarray](#53-maximum-subarray)
  - [62. Unique Paths](#62-unique-paths)
- - [63	Unique Paths II]
+ - [63. Unique Paths II](#63-unique-paths-ii)
  - [120	Triangle	很少考]
  - [279	Perfect Squares]
  - [139	Word Break]
@@ -191,6 +191,91 @@ from math import factorial
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         return int(factorial(n+m-2) / (factorial(n-1) * factorial(m-1)))
+```
+
+[返回目录](#00)
+
+## 63. Unique Paths II
+
+A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+Now consider if some obstacles are added to the grids. How many unique paths would there be?
+
+An obstacle and empty space is marked as 1 and 0 respectively in the grid.
+
+机器人位于m x n网格的左上角（在下图中标记为“开始”）。 机器人只能在任何时间点上下移动。 机器人试图到达网格的右下角（在下图中标记为“完成”）。 现在考虑是否在网格中添加了一些障碍。 会有多少条独特的路径？ 障碍物和空白区域在网格中分别标记为1和0。
+
+**Example**
+
+```
+Input:
+[
+  [0,0,0],
+  [0,1,0],
+  [0,0,0]
+]
+Output: 2
+Explanation:
+There is one obstacle in the middle of the 3x3 grid above.
+There are two ways to reach the bottom-right corner:
+1. Right -> Right -> Down -> Down
+2. Down -> Down -> Right -> Right
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        if not obstacleGrid or not obstacleGrid[0]:
+            return 0
+        if obstacleGrid[0][0] == 1 or obstacleGrid[-1][-1] == 1:
+            return 0
+        m, n = len(obstacleGrid), len(obstacleGrid[0])
+        dp = [[0 for x in range(n)] for y in range(m)]
+        #dp = [[0] * n] * m    和上一行的区别为这一行实际上是浅拷贝。非常不安全。
+        i = j = 0
+        while i < m and obstacleGrid[i][0] == 0:
+                dp[i][0] = 1
+                i += 1
+        while j < n and obstacleGrid[0][j] == 0:
+                dp[0][j] = 1
+                j += 1
+        for i in range(1, m):
+            for j in range(1, n):
+                if obstacleGrid[i][j] == 1:
+                    dp[i][j] = 0
+                else:
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+        return dp[-1][-1]
+```
+
+**可简化为一维**
+
+```python
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        if not obstacleGrid or not obstacleGrid[0]:
+            return 0
+        if obstacleGrid[0][0] == 1 or obstacleGrid[-1][-1] == 1:
+            return 0
+        m, n = len(obstacleGrid), len(obstacleGrid[0])
+        dp = [0] * n
+        dp[0] = 1
+        for i in range(m):
+            if obstacleGrid[i][0] == 1:
+                dp[0] = 0
+            for j in range(1, n):
+                if obstacleGrid[i][j] == 0:
+                    dp[j] = dp[j] + dp[j - 1]
+                else:
+                    dp[j] = 0
+        return dp[-1]
 ```
 
 [返回目录](#00)
