@@ -1,10 +1,9 @@
 ## LeetCode_Python
 
 #### [数组 Array](https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/Array.md)
-#### [广度优先搜索 BFS](https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/BFS.md)
+#### [广度优先搜索 BFS & 深度优先搜索 DFS](https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/DFS%26BFS.md)
 #### [回溯法 Backtracking](https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/Backtracking.md)
 #### [二分搜索 Binary_Search](https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/Binary_Search.md)
-#### [深度优先搜索 DFS](https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/DFS.md)
 #### [动态规划 Dynamic_Programming](https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/Dynamic_Programming.md)
 #### [哈希表 Hash_Table](https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/Hash_Table.md)   
 #### [堆 Heap](https://github.com/YaxeZhang/Just-Interview/blob/master/LeetCode/Heap.md)
