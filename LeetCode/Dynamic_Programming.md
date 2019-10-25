@@ -2,7 +2,7 @@
 ## 一维		
  - [70. Climbing Stairs](#70-climbing-stairs)
  - [53. Maximum Subarray](#53-maximum-subarray)
- - [62	Unique Paths]
+ - [62. Unique Paths](#62-unique-paths)
  - [63	Unique Paths II]
  - [120	Triangle	很少考]
  - [279	Perfect Squares]
@@ -123,6 +123,74 @@ class Solution:
             curr = max(nums[i], curr + nums[i])
             best = max(best, curr)
         return best
+```
+
+[返回目录](#00)
+
+## 62. Unique Paths
+
+A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+How many possible unique paths are there?
+
+机器人位于 m x n 矩阵的左上角（在下图中标记为“开始”）。 机器人只能在任何时间点上下移动。 机器人试图到达网格的右下角（在下图中标记为“完成”）。 有多少种可能的独特路径？
+
+**Example**
+
+```
+Example 1:
+Input: m = 3, n = 2
+Output: 3
+Explanation:
+From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -> Right -> Down
+2. Right -> Down -> Right
+3. Down -> Right -> Right
+
+Example 2:
+
+Input: m = 7, n = 3
+Output: 28
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp = [[1] * n] * m
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[i][j] = dp[i-1][j] + dp[i][j-1]
+
+        return dp[-1][-1]
+```
+
+**可简化为一维**
+
+```python
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp = [1] * n
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[j] = dp[j] + dp[j-1]
+        return dp[-1]
+```
+
+**数学方法**
+
+```python
+from math import factorial
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        return int(factorial(n+m-2) / (factorial(n-1) * factorial(m-1)))
 ```
 
 [返回目录](#00)
