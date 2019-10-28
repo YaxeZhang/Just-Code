@@ -51,7 +51,7 @@ BST
  - [314	Binary Tree Vertical Order Traversal]
  - [96. Unique Binary Search Trees](#96-unique-binary-search-trees)
  - [95. Unique Binary Search Trees II](#95-unique-binary-search-trees-ii)
- - [331	Verify Preorder Serialization of a Binary Tree]
+ - [331. Verify Preorder Serialization of a Binary Tree](#331-verify-preorder-serialization-of-a-binary-tree)
 
 ## 144. Binary Tree Preorder Traversal
 
@@ -1989,7 +1989,6 @@ class Solution:
             return ans
 
         return subtrees(1, n) if n >= 1 else []
-
 ```
 
 **简单但慢**
@@ -2011,6 +2010,47 @@ class Solution:
                     for left in trees(first, root-1)
                     for right in trees(root+1, last)] or [None]
         return trees(1, n)
+```
+
+[返回目录](#00)
+
+## 331. Verify Preorder Serialization of a Binary Tree
+
+One way to serialize a binary tree is to use pre-order traversal. When we encounter a non-null node, we record the node's value. If it is a null node, we record using a sentinel value such as #.
+
+序列化二叉树的一种方法是使用顺序遍历。当我们遇到非空节点时，我们记录该节点的值。如果它是一个空节点，我们将使用诸如＃之类的前哨值进行记录。
+
+**Example**
+
+```
+Example 1:
+
+Input: "9,3,4,#,#,1,#,#,2,#,6,#,#"
+Output: true
+Example 2:
+
+Input: "1,#"
+Output: false
+Example 3:
+
+Input: "9,#,#,1"
+Output: false
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+class Solution(object):
+    def isValidSerialization(self, preorder):
+        s = 1
+        for is_null in map(lambda c: c == '#', preorder.split(',')):
+            if not s:
+                return False     
+            s = s - 1 if is_null else s + 1              
+        return not s
 ```
 
 [返回目录](#00)
