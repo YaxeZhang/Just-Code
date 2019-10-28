@@ -5,7 +5,7 @@
  - [62. Unique Paths](#62-unique-paths)
  - [63. Unique Paths II](#63-unique-paths-ii)
  - [120. Triangle	很少考](#120-triangle)
- - [279	Perfect Squares]
+ - [279. Perfect Squares](#279-perfect-squares)
  - [139	Word Break]
  - [375	Guess Number Higher or Lower II]
  - [312	Burst Balloons]
@@ -321,6 +321,44 @@ class Solution(object):
 class Solution(object):
     def minimumTotal(self, triangle):
         return reduce(lambda a, b:[min(a[i], a[i+1])+n for i, n in enumerate(b)], triangle[::-1])[0]
+```
+
+[返回目录](#00)
+
+## 279. Perfect Squares
+
+Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
+
+给定一个正整数n，求和为n的最小平方数（例如1、4、9、16，...）。
+
+**Example**
+
+```
+Example 1:
+
+Input: n = 12
+Output: 3
+Explanation: 12 = 4 + 4 + 4.
+Example 2:
+
+Input: n = 13
+Output: 2
+Explanation: 13 = 4 + 9.
+```
+
+---
+
+### Python Solution
+**分析：**  DP 解法。
+
+```python
+class Solution(object):
+    _dp = [0]
+    def numSquares(self, n):
+        dp = self._dp
+        while len(dp) <= n:
+            dp += min(dp[-i*i] for i in range(1, int(len(dp)**0.5+1))) + 1,
+        return dp[n]
 ```
 
 [返回目录](#00)
