@@ -2,7 +2,7 @@
 ## DFS & BFS
  - [200. Number of Islands](#200-number-of-islands)
  - [286	Walls and Gates]
- - [130	Surrounded Regions]
+ - [130. Surrounded Regions](#130-surrounded-regions)
  - [339	Nested List Weight Sum]
  - [364	Nested List Weight Sum II]
  - [127	Word Ladder]
@@ -92,6 +92,121 @@ class Solution:
                                 stack.append((x_d, y_d))
 
         return res
+```
+
+[返回目录](#00)
+
+## 130. Surrounded Regions
+
+Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
+
+A region is captured by flipping all 'O's into 'X's in that surrounded region.
+
+给定一个包含“ X”和“ O”（字母O）的2D板，捕获被“ X”包围的所有区域。
+
+通过将所有“ O”翻转到该包围区域中的“ X”来捕获区域。
+
+**Example**
+
+```
+X X X X
+X O O X
+X X O X
+X O X X
+After running your function, the board should be:
+
+X X X X
+X X X X
+X X X X
+X O X X
+```
+
+---
+
+### Python Solution
+**分析：** 此题类似于围棋，就是先落子最后判断哪些被吃掉了。解决方法分为 DFS 和 BFS 两种。
+
+```python
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        if not board: return
+        m, n = len(board), len(board[0])
+
+        def dfs(i, j):
+            if board[i][j] == 'O':
+                board[i][j] = 'D'
+                for x, y in [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]:
+                    if 0 <= x < m and 0 <= y < n:
+                        dfs(x, y)
+
+        for i in range(m):
+            dfs(i, 0)
+            dfs(i, n-1)
+
+        for i in range(n):
+            dfs(0, i)
+            dfs(m-1, i)
+
+        for x in range(m):
+            for y in range(n):
+                if board[x][y] == 'D':
+                    board[x][y] = 'O'
+                else:
+                    board[x][y] = 'X'
+```
+
+**BFS**
+
+```Python
+from collections import deque
+
+class Solution:
+
+    def bfs(self, board, start_i, start_j):
+        m, n = len(board), len(board[0])
+
+        q = deque()
+        q.append((start_i,start_j))
+
+        while q:
+            i, j = q.popleft()
+
+            if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
+                board[i][j] = 's'
+                q.extend([(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)])
+
+
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        if len(board) == 0:
+            return
+
+        # go round the border and run bfs from every 'O' found, those 'O's found
+        # by the bfs stay - encoded 's'
+        m, n = len(board), len(board[0])
+
+
+        for i in range(m):
+            if board[i][0] == 'O':
+                self.bfs(board, i, 0)
+            if board[i][n-1] == 'O':
+                self.bfs(board, i, n-1)
+
+        for j in range(n):
+            if board[0][j] == 'O':
+                self.bfs(board, 0, j)
+            if board[m-1][j] == 'O':
+                self.bfs(board, m-1, j)
+
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 's':
+                    board[i][j] = 'O'
+                else:
+                    board[i][j] = 'X'
+            
 ```
 
 [返回目录](#00)
