@@ -401,20 +401,7 @@ Output: false
 ---
 
 ### Python Solution
-**分析：** 两种解法，一种是逐个遍历，True表示可以到达这个地方，一直推导到最后一个,之所以是 len(s)+1 是因为最后一位必须要取到。另一种是简便写法。
-
-```python
-class Solution(object):
-    def wordBreak(self, s, wordDict):
-        dp = [False] * (len(s) + 1)
-        dp[0] = True
-        for i in range(len(s)):
-            if dp[i]:
-                for j in range(i + 1, len(s) + 1):
-                    if s[i:j] in wordDict:
-                        dp[j] = True     
-        return dp[-1]
-```
+**分析：** 两种解法，一种是逐个遍历，True表示可以到达这个地方，一直推导到最后一个,之所以是 len(s)+1 是因为最后一位必须要取到。另一种是递归的做法。
 
 ```python
 class Solution:
@@ -425,6 +412,18 @@ class Solution:
         for i in range(1, len(s)+1):
             ok += any(ok[j] and s[j:i] in words for j in range(max(0, i-max_len),i)),
         return ok[-1]
+```
+
+```python
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        dic = dict()
+        def helper(s):
+            if not s: return True
+            elif s in dic: return dic[s]
+            else:dic[s]=any(helper(s[len(w):]) for w in wordDict if w==s[:len(w)])
+            return dic[s]
+        return helper(s)
 ```
 
 [返回目录](#00)
