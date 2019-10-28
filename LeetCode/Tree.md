@@ -13,14 +13,14 @@
  - [112. Path Sum](#112-path-sum)
  - [113. Path Sum II](#113-path-sum-ii)
  - [129. Sum Root to Leaf Numbers](#129-sum-root-to-leaf-numbers)
- - [298	Binary Tree Longest Consecutive Sequence]
+ - [298	Binary Tree Longest Consecutive Sequence] **?**
  - [111. Minimum Depth of Binary Tree](#111-minimum-depth-of-binary-tree)
  - [104. Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree)
  - [559. Maximum Depth of N-ary Tree](#559-maximum-depth-of-n-ary-tree)
  - [110. Balanced Binary Tree](#110-balanced-binary-tree)
  - [124	Binary Tree Maximum Path Sum]
- - [250	Count Univalue Subtrees]
- - [366	Find Leaves of Binary Tree]
+ - [250	Count Univalue Subtrees] **?**
+ - [366	Find Leaves of Binary Tree] **?**
  - [337	House Robber III]
  - [617. Merge Two Binary Trees](#617-merge-two-binary-trees)
  - [199. Binary Tree Right Side View](#199-binary-tree-right-side-view)
@@ -34,21 +34,21 @@ BST
  - [173	Binary Search Tree Iterator]
  - [230. Kth Smallest Element in a BST](#230-kth-smallest-element-in-a-bst)
  - [297	Serialize and Deserialize Binary Tree]
- - [285	Inorder Successor in BST]
- - [270	Closest Binary Search Tree Value]
- - [272	Closest Binary Search Tree Value II]
+ - [285	Inorder Successor in BST] **?**
+ - [270	Closest Binary Search Tree Value] **?**
+ - [272	Closest Binary Search Tree Value II] **?**
  - [99	Recover Binary Search Tree]
 重要程度
- - [156	Binary Tree Upside Down]
+ - [156	Binary Tree Upside Down] **?**
  - [114	Flatten Binary Tree to Linked List]
- - [255	Verify Preorder Sequence in Binary Search Tree]
- - [333	Largest BST Subtree]
+ - [255	Verify Preorder Sequence in Binary Search Tree] **?**
+ - [333	Largest BST Subtree] **?**
  - [222. Count Complete Tree Nodes](#222-count-complete-tree-nodes)
  - [105. Construct Binary Tree from Preorder and Inorder Traversal](#105-construct-binary-tree-from-preorder-and-inorder-traversal)
  - [106. Construct Binary Tree from Inorder and Postorder Traversal](#106-construct-binary-tree-from-inorder-and-postorder-traversal)
  - [116. Populating Next Right Pointers in Each Node](#116-populating-next-right-pointers-in-each-node)
  - [117. Populating Next Right Pointers in Each Node II](#117-populating-next-right-pointers-in-each-node-ii)
- - [314	Binary Tree Vertical Order Traversal]
+ - [314	Binary Tree Vertical Order Traversal] **?**
  - [96. Unique Binary Search Trees](#96-unique-binary-search-trees)
  - [95. Unique Binary Search Trees II](#95-unique-binary-search-trees-ii)
  - [331. Verify Preorder Serialization of a Binary Tree](#331-verify-preorder-serialization-of-a-binary-tree)
@@ -2040,7 +2040,7 @@ Output: false
 ---
 
 ### Python Solution
-**分析：**
+**分析：** 利用了二叉树的一个性质，空结点的个数比非空结点的个数多一个。
 
 ```python
 class Solution(object):
