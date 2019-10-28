@@ -6,7 +6,7 @@
  - [63. Unique Paths II](#63-unique-paths-ii)
  - [120. Triangle	很少考](#120-triangle)
  - [279. Perfect Squares](#279-perfect-squares)
- - [139	Word Break]
+ - [139. Word Break](#139-word-break)
  - [375	Guess Number Higher or Lower II]
  - [312	Burst Balloons]
  - [322	Coin Change]
@@ -359,6 +359,72 @@ class Solution(object):
         while len(dp) <= n:
             dp += min(dp[-i*i] for i in range(1, int(len(dp)**0.5+1))) + 1,
         return dp[n]
+```
+
+[返回目录](#00)
+
+## 139. Word Break
+
+Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
+
+Note:
+
+The same word in the dictionary may be reused multiple times in the segmentation.
+You may assume the dictionary does not contain duplicate words.
+
+给定一个非空字符串s和包含非空单词列表的字典wordDict，请确定s是否可以分段为一个或多个字典单词的以空格分隔的序列。
+
+注意：
+
+字典中的同一单词在细分中可能会重复使用多次。 您可能会认为词典中没有重复的单词。
+
+**Example**
+
+```
+Example 1:
+
+Input: s = "leetcode", wordDict = ["leet", "code"]
+Output: true
+Explanation: Return true because "leetcode" can be segmented as "leet code".
+Example 2:
+
+Input: s = "applepenapple", wordDict = ["apple", "pen"]
+Output: true
+Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
+             Note that you are allowed to reuse a dictionary word.
+Example 3:
+
+Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+Output: false
+```
+
+---
+
+### Python Solution
+**分析：** 两种解法，一种是逐个遍历，True表示可以到达这个地方，一直推导到最后一个,之所以是 len(s)+1 是因为最后一位必须要取到。另一种是简便写法。
+
+```python
+class Solution(object):
+    def wordBreak(self, s, wordDict):
+        dp = [False] * (len(s) + 1)
+        dp[0] = True
+        for i in range(len(s)):
+            if dp[i]:
+                for j in range(i + 1, len(s) + 1):
+                    if s[i:j] in wordDict:
+                        dp[j] = True     
+        return dp[-1]
+```
+
+```python
+class Solution:
+    def wordBreak(self, s, words):
+        ok = [True]
+        max_len = max(map(len,words+['']))
+        words = set(words)
+        for i in range(1, len(s)+1):
+            ok += any(ok[j] and s[j:i] in words for j in range(max(0, i-max_len),i)),
+        return ok[-1]
 ```
 
 [返回目录](#00)
