@@ -31,7 +31,7 @@ BST
  - [1123. Lowest Common Ancestor of Deepest Leaves](#1123-lowest-common-ancestor-of-deepest-leaves)
  - [108	Convert Sorted Array to Binary Search Tree]
  - [109	Convert Sorted List to Binary Search Tree]
- - [173	Binary Search Tree Iterator]
+ - [173. Binary Search Tree Iterator](#173-binary-search-tree-iterator)
  - [230. Kth Smallest Element in a BST](#230-kth-smallest-element-in-a-bst)
  - [297	Serialize and Deserialize Binary Tree]
  - [285	Inorder Successor in BST] **?**
@@ -1542,6 +1542,69 @@ class Solution(object):
 
 ```python
 
+```
+
+[返回目录](#00)
+
+## 173. Binary Search Tree Iterator
+
+Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
+
+Calling next() will return the next smallest number in the BST.
+
+在二叉搜索树（BST）上实现迭代器。您的迭代器将使用BST的根节点进行初始化。 调用next（）将返回BST中的下一个最小数字
+
+**Example**
+
+```
+BSTIterator iterator = new BSTIterator(root);
+iterator.next();    // return 3
+iterator.next();    // return 7
+iterator.hasNext(); // return true
+iterator.next();    // return 9
+iterator.hasNext(); // return true
+iterator.next();    // return 15
+iterator.hasNext(); // return true
+iterator.next();    // return 20
+iterator.hasNext(); // return false
+```
+
+---
+
+### Python Solution
+**分析：** 考察的是二叉搜索树的中序遍历。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class BSTIterator(object):
+
+    def __init__(self, root):
+        self.visit = root
+        self.stack = []
+
+    def next(self):
+        while self.visit:
+            self.stack.append(self.visit)
+            self.visit = self.visit.left
+        node = self.stack.pop()
+        self.visit = node.right
+        return node.val
+
+    def hasNext(self):
+        return self.visit or self.stack
+
+
+
+# Your BSTIterator object will be instantiated and called as such:
+# obj = BSTIterator(root)
+# param_1 = obj.next()
+# param_2 = obj.hasNext()
 ```
 
 [返回目录](#00)
