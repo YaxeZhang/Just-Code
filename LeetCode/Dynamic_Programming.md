@@ -7,7 +7,7 @@
  - [120. Triangle	很少考](#120-triangle)
  - [279. Perfect Squares](#279-perfect-squares)
  - [139. Word Break](#139-word-break)
- - [375	Guess Number Higher or Lower II]
+ - [375. Guess Number Higher or Lower II](#375-guess-number-higher-or-lower-ii)
  - [312	Burst Balloons]
  - [322	Coin Change]
 ## 股票最大利润问题
@@ -426,6 +426,62 @@ class Solution:    # 效率很高!
               dic[s]=any(helper(s[len(w):]) for w in wordDict if s.startswith(w))
               return dic[s]
         return helper(s)
+```
+
+[返回目录](#00)
+
+## 375. Guess Number Higher or Lower II
+
+We are playing the Guess Game. The game is as follows:
+
+I pick a number from 1 to n. You have to guess which number I picked.
+
+Every time you guess wrong, I'll tell you whether the number I picked is higher or lower.
+
+However, when you guess a particular number x, and you guess wrong, you pay $x. You win the game when you guess the number I picked.
+
+我们正在玩猜猜游戏。 游戏如下：我选择一个从1到n的数字。 您必须猜测我选了哪个号码。 每次您猜错了，我都会告诉您我选的数字是高还是低。 但是，当您猜一个特定的数字x时，如果您猜错了，您需要支付$ x。 当您猜到我选的号码时，您就赢得了比赛。
+
+**Example**
+
+```
+n = 10, I pick 8.
+
+First round:  You guess 5, I tell you that it's higher. You pay $5.
+Second round: You guess 7, I tell you that it's higher. You pay $7.
+Third round:  You guess 9, I tell you that it's lower. You pay $9.
+
+Game over. 8 is the number I picked.
+
+You end up paying $5 + $7 + $9 = $21.
+```
+
+---
+
+### Python Solution
+**分析：** 一种是自下向上的带备忘录的动态规划，一种是递归的做法。
+
+```python
+class Solution(object):
+    def getMoneyAmount(self, n):
+        need = [[0] * (n+1) for _ in range(n+1)]
+        for lo in range(n, 0, -1):
+            for hi in range(lo+1, n+1):
+                need[lo][hi] = min(x + max(need[lo][x-1], need[x+1][hi])
+                                   for x in range(lo, hi))
+        return need[1][n]
+```
+
+```python
+class Solution(object):
+    def getMoneyAmount(self, n):
+        def play(l = 1, h = n, dp = {}):
+            if l >= h: return 0
+            if (l, h) not in dp:
+                dp[(l, h)] = min(g + max(play(l, g - 1, dp), play(g + 1, h, dp)) for g in range((l + h) / 2, h))
+            return dp[(l, h)]
+
+        return play()
 ```
 
 [返回目录](#00)
