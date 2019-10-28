@@ -8,7 +8,7 @@
  - [393	UTF-8 Validation]
  - [201. Bitwise AND of Numbers Range](#201-bitwise-and-of-numbers-range)
  - [371. Sum of Two Integers](#371-sum-of-two-integers)
- - [338	Counting Bits]
+ - [338. Counting Bits](#338-counting-bits)
  - [89	Gray Code]
  - [268	Missing Number]
  - [191	Number of 1 Bits]
@@ -203,6 +203,51 @@ class Solution:
         while num2 & mask:
             num1, num2 = num1 ^ num2, (num1 & num2) << 1
         return num1 & mask if num2 > mask else num1
+```
+
+[返回目录](#00)
+
+## 338. Counting Bits
+
+Given a non negative integer number num. For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1's in their binary representation and return them as an array.
+
+给定一个非负整数num。对于0≤i≤num范围内的每个数字i，以二进制表示形式计算1的数目，并将它们作为数组返回。
+
+**Example**
+
+```
+Example 1:
+
+Input: 2
+Output: [0,1,1]
+
+Example 2:
+
+Input: 5
+Output: [0,1,1,2,1,2]
+```
+
+---
+
+### Python Solution
+**分析：** 第一种解法有点类似于找规律但是可以将大数分解为小的部分进行求解。第二种解法就是根据数的二进制表示了。
+
+```python
+class Solution:
+    def countBits(self, num: int) -> List[int]:
+      res = [0]
+      while len(res) <= num:
+          res += [i+1 for i in res]
+      return res[:num+1]
+```
+
+```python
+class Solution:
+    def countBits(self, num: int) -> List[int]:
+        ans = [0] * (num+1)
+        for i in range(1,num+1):
+            ans[i] = ans[i & (i-1)] + 1
+        return ans
 ```
 
 [返回目录](#00)

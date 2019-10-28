@@ -4,7 +4,7 @@
  - [14	Longest Common Prefix]
  - [58	Length of Last Word]
  - [387	First Unique Character in a String]
- - [383	Ransom Note]
+ - [383. Ransom Note](#383-ransom-note)
  - [344	Reverse String]
  - [151	Reverse Words in a String]
  - [186	Reverse Words in a String II]
@@ -66,6 +66,44 @@
  - [187	Repeated DNA Sequences]
 
 
+## 383. Ransom Note
+
+Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.
+
+Each letter in the magazine string can only be used once in your ransom note.
+
+给定一个任意的赎金票据字符串和另一个包含所有杂志字母的字符串，编写一个函数，如果可以从杂志中构造赎金票据，则该函数将返回true； 否则，它将返回false。 杂志字符串中的每个字母只能在赎金记录中使用一次。
+
+**Example**
+
+```
+canConstruct("a", "b") -> false
+canConstruct("aa", "ab") -> false
+canConstruct("aa", "aab") -> true
+```
+
+---
+
+### Python Solution
+**分析：** 一种是用 count，一种是用 Counter。
+
+```python
+class Solution:
+   def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+       for letter in set(ransomNote):
+           if ransomNote.count(letter) > magazine.count(letter):
+               return False
+       return True
+```
+
+```python
+class Solution:
+    def canConstruct(self, ransomNote, magazine):
+        return not collections.Counter(ransomNote) - collections.Counter(magazine)
+```
+
+[返回目录](#00)
+
 ## 290. Word Pattern
 
 Given a pattern and a string str, find if str follows the same pattern.
@@ -125,7 +163,7 @@ Output: true
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         return collections.Counter(s) == collections.Counter(t)
-        
+
         return sorted(s) == sorted(t)
 ```
 
