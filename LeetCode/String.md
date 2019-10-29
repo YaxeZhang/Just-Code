@@ -24,7 +24,7 @@
  - [358	Rearrange String k Distance Apart]
  - [316	Remove Duplicate Letters]
  - [271	Encode and Decode Strings]
- - [168	Excel Sheet Column Title]
+ - [168. Excel Sheet Column Title](#168-excel-sheet-column-title)
  - [171. Excel Sheet Column Number](#171-excel-sheet-column-number)
  - [13	Roman to Integer]
  - [12	Integer to Roman]
@@ -165,6 +165,42 @@ class Solution:
         return collections.Counter(s) == collections.Counter(t)
 
         return sorted(s) == sorted(t)
+```
+
+[返回目录](#00)
+
+## 168. Excel Sheet Column Title
+
+Given a positive integer, return its corresponding column title as appear in an Excel sheet.
+
+给定一个正整数，返回其相应的列标题，如Excel工作表中所示。
+
+**Example**
+
+```
+1 -> A
+2 -> B
+3 -> C
+...
+26 -> Z
+27 -> AA
+28 -> AB
+...
+```
+
+---
+
+### Python Solution
+**分析：** 这是一道很简单的题，注意 (n - 1) % 26 而不是 n % 26 来避免 52 是 AZ 的情况。
+
+```python
+class Solution:
+    def convertToTitle(self, n: int) -> str:
+        res = ''
+        while n:
+            n, mod = divmod(n - 1, 26)
+            res = chr(mod + 65) + res
+        return res
 ```
 
 [返回目录](#00)
