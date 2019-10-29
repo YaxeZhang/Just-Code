@@ -13,6 +13,7 @@
  - [82   Remove Duplicates from Sorted List II](#82---remove-duplicates-from-sorted-list-ii)
  - [369  Plus One Linked List](#369--plus-one-linked-list)
  - [2	   Add Two Numbers](#2----add-two-numbers)
+ - [445  Add Two Numbers II](#445--add-two-numbers-ii)
  - [160	 Intersection of Two Linked Lists](#160--intersection-of-two-linked-lists)
  - [21   Merge Two Sorted Lists](#21---merge-two-sorted-lists)
 ## 提高
@@ -774,6 +775,104 @@ class Solution:
             p1.next = ListNode(1)
 
         return dummy.next
+```
+
+[返回目录](#00)
+
+## 445  Add Two Numbers II
+
+You are given two non-empty linked lists representing two non-negative integers. The most significant digit comes first and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Follow up:
+What if you cannot modify the input lists? In other words, reversing the lists is not allowed.
+
+您将获得两个非空链表，它们代表两个非负整数。 最重要的数字在前，并且它们的每个节点都包含一个数字。 将两个数字相加，并将其作为链表返回。 您可能会假设两个数字除了数字0本身以外都不包含任何前导零。
+
+跟进：如果无法修改输入列表怎么办？ 换句话说，不允许反转列表。
+
+**Example**
+
+```
+Input: (7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 8 -> 0 -> 7
+```
+
+---
+
+### Python Solution
+**分析：** 两种解法，一种和上题一样是原地操作的 O(1) 的空间，一种是创建新的链表。
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+
+        def countlength(root):
+            cnt = 0
+            while root:
+                root = root.next
+                cnt += 1
+            return cnt
+
+        c1, c2 = l1, l2
+        len1, len2 = countlength(c1), countlength(c2)
+        if len2 > len1:
+            len1, len2, l1, l2 = len2, len1, l2, l1
+        dummy1 = tmp = tmp1 = ListNode(0)
+        tmp.next = l1
+
+        for _ in range(len1 - len2):
+            tmp = tmp.next
+            if tmp.val != 9:
+                tmp1 = tmp
+
+        cur = tmp.next
+        while cur:
+            val = cur.val + l2.val
+            cur.val = val % 10
+            if val < 9:
+                tmp1 = cur
+            elif val > 9:
+                while tmp1 != cur:
+                    tmp1.val = (tmp1.val + 1) % 10
+                    tmp1 = tmp1.next
+            cur, l2 = cur.next, l2.next
+
+        return dummy1 if dummy1.val else dummy1.next
+```
+
+```python
+class Solution:
+    def addTwoNumbers(self, l1: 'ListNode', l2: 'ListNode') -> 'ListNode':
+        if not l1 and not l2:
+            return None
+
+        l1_num = 0
+        while l1:
+            l1_num = l1_num * 10 + l1.val
+            l1 = l1.next
+
+        l2_num = 0
+        while l2:
+            l2_num = l2_num * 10 + l2.val
+            l2 = l2.next
+
+        lsum = l1_num + l2_num
+
+        head = ListNode(None)
+        cur = head
+        for istr in str(lsum):
+            cur.next = ListNode(int(istr))
+            cur = cur.next
+
+        return head.next
 ```
 
 [返回目录](#00)
