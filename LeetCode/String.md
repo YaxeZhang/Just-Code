@@ -25,7 +25,7 @@
  - [316	Remove Duplicate Letters]
  - [271	Encode and Decode Strings]
  - [168	Excel Sheet Column Title]
- - [171	Excel Sheet Column Number]
+ - [171. Excel Sheet Column Number](#171-excel-sheet-column-number)
  - [13	Roman to Integer]
  - [12	Integer to Roman]
  - [273	Integer to English Words]
@@ -165,6 +165,48 @@ class Solution:
         return collections.Counter(s) == collections.Counter(t)
 
         return sorted(s) == sorted(t)
+```
+
+[返回目录](#00)
+
+## 171. Excel Sheet Column Number
+
+Given a column title as appear in an Excel sheet, return its corresponding column number.
+
+给定列标题（如Excel工作表中所示），返回其对应的列号。
+
+**Example**
+
+```
+A -> 1
+B -> 2
+C -> 3
+...
+Z -> 26
+AA -> 27
+AB -> 28
+...
+```
+
+---
+
+### Python Solution
+**分析：** 这是一道很简单的题，不过可以用来熟悉 reduce 的用法。r 为之前叠加的结果，c 为当前的字符， s 是 c 取值的地方，0 是 r 的初始值。多用就熟悉了。
+
+```python
+class Solution:
+    def titleToNumber(self, s: str) -> int:
+        res = 0
+        for i in s:
+            res = res * 26 + ord(i) - 64
+        return res
+```
+
+```python
+from functools import reduce
+class Solution:
+    def titleToNumber(self, s: str) -> int:
+        return reduce(lambda r, c: 26*r + ord(c)-64, s, 0)
 ```
 
 [返回目录](#00)
