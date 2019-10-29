@@ -20,6 +20,8 @@
  - [234	 Palindrome Linked List](#234--palindrome-linked-list)
  - [143	 Reorder List](#143--reorder-list)
  - [142  Linked List Cycle II](#142--linked-list-cycle-ii)
+ - [430  Flatten a Multilevel Doubly Linked List](#430--flatten-a-multilevel-doubly-linked-list)
+ - [114  Flatten Binary Tree to Linked List](#114--flatten-binary-tree-to-linked-list)
  - [148  Sort List](#148--sort-list)
  - [25   Reverse Nodes in k-Group](#25---reverse-nodes-in-k-group)
  - [61   Rotate List](#61---rotate-list)
@@ -1128,6 +1130,151 @@ class Solution:
                     slow = slow.next
                 return fast
         return None
+```
+
+[返回目录](#00)
+
+## 430  Flatten a Multilevel Doubly Linked List
+
+You are given a doubly linked list which in addition to the next and previous pointers, it could have a child pointer, which may or may not point to a separate doubly linked list. These child lists may have one or more children of their own, and so on, to produce a multilevel data structure, as shown in the example below.
+
+Flatten the list so that all the nodes appear in a single-level, doubly linked list. You are given the head of the first level of the list.
+
+您将获得一个双向链接列表，该列表除了下一个和上一个指针外，还可以具有一个子指针，该子指针可以指向也可以不指向单独的双向链接列表。 这些子列表可能具有自己的一个或多个子列表，依此类推，以产生一个多级数据结构，如下例所示。 展平列表，以便所有节点都出现在单级双链接列表中。 您将获得列表第一级的头指针。
+
+**Example1:**
+
+```
+Input:
+ 1---2---3---4---5---6--NULL
+         |
+         7---8---9---10--NULL
+             |
+             11--12--NULL
+
+Output:
+1-2-3-7-8-11-12-9-10-4-5-6-NULL
+```
+
+---
+
+### Pythonic Solution
+**分析：** 利用栈辅助来进行赋值。
+
+```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, prev, next, child):
+        self.val = val
+        self.prev = prev
+        self.next = next
+        self.child = child
+"""
+class Solution:
+    def flatten(self, head: 'Node') -> 'Node':
+        if not head:
+            return  
+        dummy = Node(0,None,head,None)
+
+        stack = [head]
+        prev = dummy
+
+        while stack:
+            root = stack.pop()
+            root.prev = prev
+            prev.next = root
+            if root.next:
+                stack.append(root.next)
+                root.next = None
+            if root.child:
+                stack.append(root.child)
+                root.child = None
+            prev = root        
+
+        dummy.next.prev = None
+        return dummy.next
+```
+
+[返回目录](#00)
+
+## 114  Flatten Binary Tree to Linked List
+
+Given a binary tree, flatten it to a linked list in-place.
+
+给定一棵二叉树，将其平整化为就地链表。
+
+**Example1:**
+
+```
+For example, given the following tree:
+
+    1
+   / \
+  2   5
+ / \   \
+3   4   6
+The flattened tree should look like:
+
+1
+ \
+  2
+   \
+    3
+     \
+      4
+       \
+        5
+         \
+          6
+```
+
+---
+
+### Pythonic Solution
+**分析：** 两种做法，一种是迭代实现，一种是递归实现。但都是利用一个值保存上一个或下一个结点。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def flatten(self, root: TreeNode) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        if not root:return
+        stack = [root]
+        tmp = None
+        while stack:
+            node = stack.pop()
+            if node:
+                stack.append(node.right)
+                stack.append(node.left)
+                node.left = None
+                if tmp:
+                    tmp.right = node
+                tmp = node
+```
+
+```python
+class Solution:
+    def __init__(self):
+        self.prev = None
+
+    def flatten(self, root):
+        if not root:
+            return None
+        self.flatten(root.right)
+        self.flatten(root.left)
+
+        root.right = self.prev
+        root.left = None
+        self.prev = root
 ```
 
 [返回目录](#00)
