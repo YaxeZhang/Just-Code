@@ -26,7 +26,7 @@
  - [271	Encode and Decode Strings]
  - [168. Excel Sheet Column Title](#168-excel-sheet-column-title)
  - [171. Excel Sheet Column Number](#171-excel-sheet-column-number)
- - [13	Roman to Integer]
+ - [13. Roman to Integer](#13-roman-to-integer)
  - [12	Integer to Roman]
  - [273	Integer to English Words]
  - [246	Strobogrammatic Number]
@@ -243,6 +243,77 @@ from functools import reduce
 class Solution:
     def titleToNumber(self, s: str) -> int:
         return reduce(lambda r, c: 26*r + ord(c)-64, s, 0)
+```
+
+[返回目录](#00)
+
+## 13. Roman to Integer
+
+Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+
+Symbol       Value
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+For example, two is written as II in Roman numeral, just two one's added together. Twelve is written as, XII, which is simply X + II. The number twenty seven is written as XXVII, which is XX + V + II.
+
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+I can be placed before V (5) and X (10) to make 4 and 9.
+X can be placed before L (50) and C (100) to make 40 and 90.
+C can be placed before D (500) and M (1000) to make 400 and 900.
+Given a roman numeral, convert it to an integer. Input is guaranteed to be within the range from 1 to 3999.
+
+罗马数字由七个不同的符号表示：I，V，X，L，C，D和M.符号值I 1 V 5 X 10 L 50 C 100 D 500 M 1000例如，两个以罗马数字II表示，只是两个加在一起。十二写为XII，简称X + II。数字二十七写为XXVII，即XX + V + II。罗马数字通常从左到右从大到小书写。但是，四个数字不是IIII。取而代之的是，数字四被写为IV。因为一个在五之前，所以我们减去它等于四。相同的原则适用于编号为IX的数字9。在六种情况下使用减法：我可以放在V（5）和X（10）之前以得到4和9.X可以放在L（50）和C（100）之前以得到40和90。可以放在D（500）和M（1000）的前面，以得到400和900。给定罗马数字，请将其转换为整数。输入保证在1到3999的范围内。
+
+**Example**
+
+```
+Example 1:
+
+Input: "III"
+Output: 3
+Example 2:
+
+Input: "IV"
+Output: 4
+Example 3:
+
+Input: "IX"
+Output: 9
+Example 4:
+
+Input: "LVIII"
+Output: 58
+Explanation: L = 50, V= 5, III = 3.
+Example 5:
+
+Input: "MCMXCIV"
+Output: 1994
+Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+```
+
+---
+
+### Python Solution
+**分析：** 用字典会简单很多，再用 mini 存储当前较小值来判断加还是减。
+
+```python
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        dic = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        res = mini = 0
+        for i in s[::-1]:
+            if dic[i] < mini:
+                res -= dic[i]
+            else:
+                res += dic[i]
+            mini = dic[i]
+        return res
 ```
 
 [返回目录](#00)
