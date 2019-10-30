@@ -44,7 +44,7 @@
    - [44.数字序列中某一位的数字]
    - [45.把数组排成最小的数]
    - [46.把数字翻译成字符串]
-   - [47.礼物的最大价值]
+   - [47.礼物的最大价值](#47礼物的最大价值)
    - [48.最长不含重复字符的子字符串](#48最长不含重复字符的子字符串)
    - [49.丑数]
    - [50.第一个只出现一次的字符]
@@ -845,6 +845,28 @@ class Solution:
             cur = max(array[i], array[i] + cur)
             best = max(best, cur)
         return best
+```
+
+[回到目录](#00)
+
+### 47.礼物的最大价值
+#### 题目描述
+在一个m×n的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于0）。
+你可以从棋盘的左上角开始拿格子里的礼物，并每次向右或者向下移动一格直到到达棋盘的右下角。
+给定一个棋盘及其上面的礼物，请计算你最多能拿到多少价值的礼物？
+#### 解法：
+
+```python
+class Solution(object):
+    def getMaxValue(self, grid):
+        dp = [0] * len(grid[0])
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if j > 0:
+                    dp[j] = grid[i][j] + max(dp[j-1], dp[j])
+                else:
+                    dp[j] = grid[i][j] + dp[j]
+        return dp[-1]
 ```
 
 [回到目录](#00)
