@@ -25,7 +25,7 @@
    - [25.合并两个排序的链表](#25合并两个排序的链表)
    - [26.树的子结构]
    - [27.二叉树的镜像](#27二叉树的镜像)
-   - [28.对称的二叉树]
+   - [28.对称的二叉树](#28对称的二叉树)
    - [29.顺时针打印矩阵]
    - [30.包含min函数的栈](#30包含min函数的栈)
    - [31.栈的压入弹出序列](#31栈的压入弹出序列)
@@ -596,6 +596,53 @@ class Solution:
         if root.right:               # 但是涉及函数调用，会让速度更慢
             self.Mirror(root.right)
         return root
+```
+
+[回到目录](#00)
+
+### 28.对称的二叉树
+#### 题目描述
+请实现一个函数，用来判断一棵二叉树是不是对称的。
+
+如果一棵二叉树和它的镜像一样，那么它是对称的。
+#### 输入描述
+
+```golang
+如下图所示二叉树[1,2,2,3,4,4,3,null,null,null,null,null,null,null,null]为对称二叉树：
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+如下图所示二叉树[1,2,2,null,4,4,3,null,null,null,null,null,null]不是对称二叉树：
+    1
+   / \
+  2   2
+   \ / \
+   4 4  3
+```
+
+#### 解法：
+
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def isSymmetric(self, root):
+        if not root: return True
+
+        def isSym(p, q):
+            if p and q:
+                return p.val == q.val and isSym(p.left, q.right) and isSym(p.right, q.left)
+            return p is q
+
+        return isSym(root.left, root.right)
 ```
 
 [回到目录](#00)
