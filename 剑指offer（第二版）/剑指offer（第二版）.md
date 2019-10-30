@@ -944,6 +944,36 @@ class Solution:
 
 [回到目录](#00)
 
+### 54.二叉搜索树的第k个结点
+#### 题目描述
+给定一棵二叉搜索树，请找出其中的第k小的结点。
+
+你可以假设树和k都存在，并且1≤k≤树的总结点数。
+#### 解法：
+
+```python
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def kthNode(self, root, k):
+        stack = []
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            node = stack.pop()
+            k -= 1
+            if not k: return node
+            root = node.right
+          return None
+```
+
+[回到目录](#00)
+
 ### 55.二叉树的深度
 #### 题目描述
 输入一棵二叉树，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。
