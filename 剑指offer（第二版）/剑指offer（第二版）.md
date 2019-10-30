@@ -31,7 +31,7 @@
    - [31.栈的压入弹出序列](#31栈的压入弹出序列)
    - [32.从上到下打印二叉树](#32从上到下打印二叉树)
    - [33.二叉搜索树的后序遍历序列]
-   - [34.二叉树中和为某一值的路径]
+   - [34.二叉树中和为某一值的路径](#34二叉树中和为某一值的路径)
    - [35.复杂链表的复制](#35复杂链表的复制)
    - [36.二叉搜索树与双向链表]
    - [37.序列化二叉树]
@@ -765,6 +765,63 @@ class Solution:
 ```
 
 [回到目录](#00)
+
+### 34.二叉树中和为某一值的路径
+#### 题目描述
+输入一棵二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。
+从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
+#### 解法：
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def pathSum(self, root: TreeNode, tsum: int) -> List[List[int]]:
+        if not root :
+            return []
+
+        temp, res = [], []
+
+        def DFTS(root):
+            temp.append(root.val)
+            if not root.left and not root.right and sum(temp) == tsum:
+                res.append(temp.copy())
+            if root.left:
+                DFTS(root.left)
+            if root.right:
+                DFTS(root.right)
+            temp.pop()
+
+        DFTS(root)
+        return res
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def pathSum(self, root: TreeNode, Psum: int) -> List[List[int]]:
+        if not root:
+            return []
+        stack, res = [(root, [root.val])], []
+        while stack:
+            node, cur = stack.pop()
+            if not node.left and not node.right and sum(cur) == Psum:
+                res.append(cur)
+            if node.left:
+                stack.append((node.left, cur + [node.left.val]))
+            if node.right:
+                stack.append((node.right, cur + [node.right.val]))
+        return res
+```
+
+[返回目录](#00)
 
 ### 35.复杂链表的复制
 #### 题目描述
