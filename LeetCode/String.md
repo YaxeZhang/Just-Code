@@ -27,7 +27,7 @@
  - [168. Excel Sheet Column Title](#168-excel-sheet-column-title)
  - [171. Excel Sheet Column Number](#171-excel-sheet-column-number)
  - [13. Roman to Integer](#13-roman-to-integer)
- - [12	Integer to Roman]
+ - [12. Integer to Roman](#12-integer-to-roman)
  - [273	Integer to English Words]
  - [246	Strobogrammatic Number]
  - [247	Strobogrammatic Number II]
@@ -314,6 +314,54 @@ class Solution:
                 res += dic[i]
             mini = dic[i]
         return res
+```
+
+[返回目录](#00)
+
+## 12. Integer to Roman
+
+题目就是上一道题的反向程序
+
+**Example**
+
+```
+Example 1:
+
+Input: 3
+Output: "III"
+Example 2:
+
+Input: 4
+Output: "IV"
+Example 3:
+
+Input: 9
+Output: "IX"
+Example 4:
+
+Input: 58
+Output: "LVIII"
+Explanation: L = 50, V = 5, III = 3.
+Example 5:
+
+Input: 1994
+Output: "MCMXCIV"
+Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+```
+
+---
+
+### Python Solution
+**分析：** 没有什么意义的题目。
+
+```python
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        M = ["", "M", "MM", "MMM"]
+        C = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
+        X = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
+        I = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
+        return M[num//1000] + C[(num%1000)//100] + X[(num%100)//10] + I[num%10]
 ```
 
 [返回目录](#00)
