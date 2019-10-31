@@ -19,7 +19,7 @@
 ## 二维		
  - [256	Paint House]
  - [265	Paint House II]
- - [64	Minimum Path Sum]
+ - [64. Minimum Path Sum](#64-minimum-path-sum)
  - [72	Edit Distance]
  - [97	Interleaving String]
  - [174	Dungeon Game]
@@ -531,6 +531,54 @@ class Solution:
             min_p = min(min_p, prices[i])
             max_v = max(max_v, prices[i] - min_p)
         return max_v
+```
+
+[返回目录](#00)
+
+## 64. Minimum Path Sum
+
+Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+
+Note: You can only move either down or right at any point in time.
+
+给定一个m×n的网格，其中填充有非负数，请找到一条从左上到右下的路径，该路径将沿其路径的所有数字的总和最小化。
+
+注意：您只能在任何时间点向下或向右移动。
+
+**Example**
+
+```
+Input:
+[
+  [1,3,1],
+  [1,5,1],
+  [4,2,1]
+]
+Output: 7
+Explanation: Because the path 1→3→1→1→1 minimizes the sum.
+```
+
+---
+
+### Python Solution
+**分析：** 二维的动态规划，是比较简单的题目，有点类似于[剑指 offer #47 礼物最大价值](https://github.com/YaxeZhang/Just-Interview/blob/master/%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89.md#47%E7%A4%BC%E7%89%A9%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%B7%E5%80%BC)，但是区别在于最大价值对于第一行的初始化不用特意初始化，而求最小的值的话第一行是必须向后逐个累加的，所以第一行初始化要用前缀和。当然二维的可以写成一维的，这里就只给出一维 dp 的写法。
+
+**一维的解法**
+
+```python
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        dp = grid[0][:]
+        for i in range(1, n):
+            dp[i] += dp[i-1]
+        for i in range(1, m):
+            for j in range(n):
+                if j > 0:
+                    dp[j] = grid[i][j] + min(dp[j], dp[j-1])
+                else:
+                    dp[j] = grid[i][j] + dp[j]
+        return dp[-1]
 ```
 
 [返回目录](#00)
