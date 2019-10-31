@@ -23,7 +23,7 @@
  - [72	Edit Distance]
  - [97	Interleaving String]
  - [174	Dungeon Game]
- - [221	Maximal Square]
+ - [221. Maximal Square](#221-maximal-square)
  - [85	Maximal Rectangle]
  - [363	Max Sum of Rectangle No Larger Than K]
 ## 化简		
@@ -531,6 +531,61 @@ class Solution:
             min_p = min(min_p, prices[i])
             max_v = max(max_v, prices[i] - min_p)
         return max_v
+```
+
+[返回目录](#00)
+
+## 221. Maximal Square
+
+Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+
+给定一个填充有0和1的2D二进制矩阵，找到仅包含1的最大正方形并返回其面积。
+
+**Example**
+
+```
+Input:
+
+1 0 1 0 0
+1 0 1 1 1
+1 1 1 1 1
+1 0 0 1 0
+
+Output: 4
+```
+
+---
+
+### Python Solution
+**分析：** 二维的动态规划，将 dp[i][j] 作为矩形的右下角则只用考虑 dp[i-1][j], dp[i][j-1], A[i-1][j-1] 的最小值即可，当然也可以简化成一维的动态规划。而是否需要额外的空间来建立 dp 矩阵就看具体想法和要求了。
+
+```python
+class Solution:
+    def maximalSquare(self, A):
+        for i in range(len(A)):
+            for j in range(len(A[i])):
+                A[i][j] = int(A[i][j])
+                if A[i][j] and i and j:
+                    A[i][j] = min(A[i-1][j], A[i-1][j-1], A[i][j-1]) + 1
+        return len(A) and max(map(max, A)) ** 2
+```
+
+**一维的解法**
+
+```python
+class Solution:
+    def maximalSquare(self, A):
+        area = 0
+        if A:
+            p = [0] * len(A[0])
+            for row in A:
+                s = list(map(int, row))
+                for j, c in enumerate(s[1:], 1):
+                    if s[j]:
+                        s[j] = min(p[j-1], p[j], s[j-1]) + 1
+                area = max(area, max(s) ** 2)
+                p = s
+        return area
 ```
 
 [返回目录](#00)
