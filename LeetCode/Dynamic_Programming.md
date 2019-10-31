@@ -8,7 +8,7 @@
  - [279. Perfect Squares](#279-perfect-squares)
  - [139. Word Break](#139-word-break)
  - [375. Guess Number Higher or Lower II](#375-guess-number-higher-or-lower-ii)
- - [312	Burst Balloons]
+ - [312. Burst Balloons](#312-burst-balloons)
  - [322	Coin Change]
 ## 股票最大利润问题
  - [121. Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)
@@ -17,8 +17,8 @@
  - [188	Best Time to Buy and Sell Stock IV]
  - [309	Best Time to Buy and Sell Stock with Cooldown]
 ## 二维		
- - [256	Paint House]
- - [265	Paint House II]
+ - [256	Paint House] **?**
+ - [265	Paint House II] **?**
  - [64. Minimum Path Sum](#64-minimum-path-sum)
  - [72	Edit Distance]
  - [97	Interleaving String]
@@ -482,6 +482,46 @@ class Solution(object):
             return dp[(l, h)]
 
         return play()
+```
+
+[返回目录](#00)
+
+## 312. Burst Balloons
+
+Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number on it represented by array nums. You are asked to burst all the balloons. If the you burst balloon i you will get nums[left] * nums[i] * nums[right] coins. Here left and right are adjacent indices of i. After the burst, the left and right then becomes adjacent.
+
+Find the maximum coins you can collect by bursting the balloons wisely.
+
+给定n个气球，索引从0到n-1。 每个气球上都涂有一个数字，该数字由数组num表示。 要求您爆破所有气球。 如果您爆破气球i，您将获得nums [left] * nums [i] * nums [right]个硬币。 这里的左和右是i的相邻索引。 爆破后，左右会相邻。 明智地爆破气球，找到可以收集的最大硬币数。
+
+**Example**
+
+```
+Input: [3,1,5,8]
+Output: 167
+Explanation: nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
+             coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167
+```
+
+---
+
+### Python Solution
+**分析：** 这道题没搞懂，感觉和暴力一样，头大。
+
+```python
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
+        nums = [1] + [x for x in nums if x > 0] + [1]
+        n = len(nums)
+        dp = [[0] * n for _ in range(n)]
+        for j in range(1, n):
+            for i in range(j - 2, -1, -1):
+                ans = 0
+                for mid in range(i + 1, j):
+                    tmp = nums[i] * nums[mid] * nums[j] + dp[i][mid] + dp[mid][j]       
+                    if tmp > ans: ans = tmp
+                dp[i][j] = ans
+        return dp[0][n - 1]
 ```
 
 [返回目录](#00)
