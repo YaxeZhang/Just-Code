@@ -356,7 +356,7 @@ class Solution(object):
     _dp = [0]
     def numSquares(self, n):
         dp = self._dp
-        while len(dp) <= n:
+        while len(dp) <= n:   # 下面这句话的意思是求出所以能加一个平方数（即一个操作）到目前位置的dp[?]。
             dp += min(dp[-i*i] for i in range(1, int(len(dp)**0.5+1))) + 1,
         return dp[n]
 ```

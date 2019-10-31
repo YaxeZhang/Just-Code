@@ -52,6 +52,7 @@ BST
  - [96. Unique Binary Search Trees](#96-unique-binary-search-trees)
  - [95. Unique Binary Search Trees II](#95-unique-binary-search-trees-ii)
  - [331. Verify Preorder Serialization of a Binary Tree](#331-verify-preorder-serialization-of-a-binary-tree)
+ - [968. Binary Tree Cameras](#968-binary-tree-cameras)
 
 ## 144. Binary Tree Preorder Traversal
 
@@ -2114,6 +2115,78 @@ class Solution(object):
                 return False     
             s = s - 1 if is_null else s + 1              
         return not s
+```
+
+[返回目录](#00)
+
+## 968. Binary Tree Cameras
+
+Given a binary tree, we install cameras on the nodes of the tree.
+
+Each camera at a node can monitor its parent, itself, and its immediate children.
+
+Calculate the minimum number of cameras needed to monitor all nodes of the tree.
+
+给定一棵二叉树，我们在树的节点上安装摄像机。 节点上的每个摄像机都可以监视其父代，自身及其直系子代。 计算监视树的所有节点所需的最少摄像机数量。
+
+**Example**
+
+```
+Input: [0,0,null,0,null,0,null,null,0]
+Output: 2
+Explanation: At least two cameras are needed to monitor all nodes of the tree. The above image shows one of the valid configurations of camera placement.
+```
+
+---
+
+### Python Solution
+**分析：** 这是一道 hard 的题，但是理解了之后会觉得思路很清晰、简单。一种方法是利用递归到达最底端，标记 3 种状态，0 是未监管，1 是当前结点有摄像机，2 是为空或者被子代的摄像机监管。这样就非常好处理，自底向上推导并记录摄像机的个数。另一种是动态规划，可以理解一下。两种方法对于状态的定义码不一样，看的时候不要混淆。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def minCameraCover(self, root: TreeNode) -> int:
+        self.res = 0
+        def dfs(node):
+            if not node:
+                return 2
+            l = dfs(node.left)
+            r = dfs(node.right)
+            if l==0 or r ==0:
+                self.res += 1
+                return 1
+            if l == 1 or r == 1 :
+                return 2
+            return 0
+
+        return (dfs(root) == 0) + self.res
+```
+
+```python
+class Solution(object):
+    def minCameraCover(self, root):
+        def solve(node):
+            # 0: Strict ST; All nodes below this are covered, but not this one
+            # 1: Normal ST; All nodes below and incl this are covered - no camera
+            # 2: Placed camera; All nodes below this are covered, plus camera here
+
+            if not node: return 0, 0, float('inf')
+            L = solve(node.left)
+            R = solve(node.right)
+
+            dp0 = L[1] + R[1]
+            dp1 = min(L[2] + min(R[1:]), R[2] + min(L[1:]))
+            dp2 = 1 + min(L) + min(R)
+
+            return dp0, dp1, dp2
+
+        return min(solve(root)[1:])
 ```
 
 [返回目录](#00)
