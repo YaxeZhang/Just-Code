@@ -35,7 +35,7 @@
  - [264	Ugly Number II]
  - [306	Additive Number]
  - [172	Factorial Trailing Zeroes]
- - [343	Integer Break]
+ - [343. Integer Break](#343-integer-break)
  - [396	Rotate Function]
  - [390	Elimination Game]
  - [386	Lexicographical Numbers]
@@ -279,6 +279,43 @@ class Solution:
             stop.add(n)
             n = sum(int(d)**2 for d in str(n))
         return n == 1
+```
+
+[返回目录](#00)
+
+## 343. Integer Break
+
+Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get.
+
+给定一个正整数n，请将其分解为至少两个正整数的和，并使这些整数的乘积最大化。 返回您可以获得的最大产品。
+
+**Example**
+
+```
+Input: 10
+Output: 36
+Explanation: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36.
+```
+
+---
+
+### Python Solution
+**分析：** 动态规划做法和数学贪婪做法。
+
+```python
+class Solution(object):
+    def integerBreak(self,n):
+        dp = [0]*(n+1)
+        for i in range(2,n+1):
+            for j in range(1,i):
+                dp[i] = max(dp[i], max(dp[j]*(i-j), j*(i-j)))
+        return dp[n]
+```
+
+```python
+class Solution(object):
+    def integerBreak(self,n):
+        return n - 1 if n < 4 else 3 ** ((n-2) // 3) * ((n-2) % 3 + 2)
 ```
 
 [返回目录](#00)

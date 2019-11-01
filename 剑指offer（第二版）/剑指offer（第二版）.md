@@ -11,7 +11,7 @@
    - [11.旋转数组中的最小数字](#11旋转数组中的最小数字)
    - [12.矩阵中的路径]
    - [13.机器人的运动范围]
-   - [14.剪绳子]
+   - [14.剪绳子](#14剪绳子)
    - [15.二进制中 1 的个数](#15二进制中-1-的个数)
    - [16.数值的整数次方]
    - [17.打印从1到最大的n位数]
@@ -339,6 +339,33 @@ class Solution:
             return rotateArray[end]
         else:
             return rotateArray[start]
+```
+
+[回到目录](#00)
+
+### 14.剪绳子
+#### 题目描述
+给你一根长度为 n 绳子，请把绳子剪成 m 段（m、n 都是整数，2≤n≤58 并且 m≥2）。
+
+每段的绳子的长度记为k[0]、k[1]、……、k[m]。k[0]k[1] … k[m] 可能的最大乘积是多少？
+
+例如当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到最大的乘积18。
+#### 解法：
+
+```python
+class Solution(object):
+    def maxProductAfterCutting(self,n):
+        dp = [0]*(n+1)
+        for i in range(2,n+1):
+            for j in range(1,i):
+                dp[i] = max(dp[i], max(dp[j]*(i-j), j*(i-j)))
+        return dp[n]
+```
+
+```python
+class Solution(object):
+    def maxProductAfterCutting(self,n):
+        return n - 1 if n < 4 else 3 ** ((n-2) // 3) * ((n-2) % 3 + 2)
 ```
 
 [回到目录](#00)
