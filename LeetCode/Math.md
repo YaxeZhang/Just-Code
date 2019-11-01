@@ -39,7 +39,7 @@
  - [396	Rotate Function]
  - [390	Elimination Game]
  - [386	Lexicographical Numbers]
- - [357	Count Numbers with Unique Digits]
+ - [357. Count Numbers with Unique Digits](#357-count-numbers-with-unique-digits)
  - [360	Sort Transformed Array]
  - [397	Integer Replacement]
  - [368	Largest Divisible Subset]
@@ -316,6 +316,43 @@ class Solution(object):
 class Solution(object):
     def integerBreak(self,n):
         return n - 1 if n < 4 else 3 ** ((n-2) // 3) * ((n-2) % 3 + 2)
+```
+
+[返回目录](#00)
+
+## 357. Count Numbers with Unique Digits
+
+Given a non-negative integer n, count all numbers with unique digits, x, where 0 ≤ x < 10**n.
+
+给定一个非负整数n，计算所有具有唯一数字x的数字，其中0≤x <10**n。
+
+**Example**
+
+```
+Input: 2
+Output: 91
+Explanation: The answer should be the total numbers in the range of 0 ≤ x < 100,
+             excluding 11,22,33,44,55,66,77,88,99
+```
+
+---
+
+### Python Solution
+**分析：** 简单数学概率题。
+
+```python
+class Solution(object):
+    def countNumbersWithUniqueDigits(self, n):
+        if n < 1:
+            return 1
+        if n > 10:
+            return 0
+        ret = cur = d = 9
+        for _ in range(n - 1):
+            cur *= d
+            ret += cur
+            d -= 1
+        return ret + 1
 ```
 
 [返回目录](#00)

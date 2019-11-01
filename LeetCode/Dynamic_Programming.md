@@ -27,7 +27,7 @@
  - [85	Maximal Rectangle]
  - [363	Max Sum of Rectangle No Larger Than K]
 ## 化简		
- - [198	House Robber]
+ - [198. House Robber](#198-house-robber)
  - [213	House Robber II]
  - [276	Paint Fence]
  - [91	Decode Ways]
@@ -674,6 +674,53 @@ class Solution:
                 area = max(area, max(s) ** 2)
                 p = s
         return area
+```
+
+[返回目录](#00)
+
+## 198. House Robber
+
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+您是计划在街道上抢房屋的专业强盗。 每栋房屋都藏有一定数量的钱，阻止您抢劫每座房屋的唯一限制是相邻房屋都已连接了安全系统，如果在同一晚闯入两栋相邻房屋，它将自动与警方联系。 给定一个表示每个房屋的金额的非负整数列表，请确定您今晚可以盗用的最大金额，而无需通知警察。
+
+**Example**
+
+```
+Input: [2,7,9,3,1]
+Output: 12
+Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+             Total amount you can rob = 2 + 9 + 1 = 12.
+```
+
+---
+
+### Python Solution
+**分析：** 当前房间偷不偷取决于上上间加当前房间的价值和上一间的值哪个大。状态方程在下面。当然 如果看穿了以后就可以简化成第二种写法。处理 base case 更干净简单。
+
+```python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums: return 0
+        if len(nums) == 1: return nums[0]
+        dp = nums[:]
+        dp[1] = max(dp[0], dp[1])
+        for i in range(2, len(nums)):
+            dp[i] = max(nums[i] + dp[i-2], dp[i-1])
+        return dp[-1]
+```
+
+**看破实质后的解脱**
+
+```python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        prev1, prev2 = 0, 0
+        for num in nums:
+            prev1, prev2 = max(prev2 + num, prev1), prev1
+        return prev1
 ```
 
 [返回目录](#00)
