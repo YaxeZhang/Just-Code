@@ -1,7 +1,7 @@
 <span id = "00"></span>
 ## 基础		
  - [28	Implement strStr()]
- - [14	Longest Common Prefix]
+ - [14. Longest Common Prefix](14-longest-common-prefix)
  - [58	Length of Last Word]
  - [387	First Unique Character in a String]
  - [383. Ransom Note](#383-ransom-note)
@@ -65,6 +65,68 @@
  - [115	Distinct Subsequences]
  - [187	Repeated DNA Sequences]
 
+
+## 14. Longest Common Prefix
+
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+
+编写一个函数以在字符串数组中找到最长的公共前缀字符串。 如果没有公共前缀，则返回一个空字符串“”。
+
+**Example**
+
+```
+Example 1:
+
+Input: ["flower","flow","flight"]
+Output: "fl"
+Example 2:
+
+Input: ["dog","racecar","car"]
+Output: ""
+Explanation: There is no common prefix among the input strings.
+```
+
+---
+
+### Python Solution
+**分析：** 最长公共前缀 Python 里已经有实现了，但是面试考察点肯定不是这个，我们可以用 ASCII 码的排序来决定差的最大的两个字符串，方法一如下。当然我们可以用 zip(* ） 来转置 zip 的矩阵进行判断。解法如下：
+
+```python
+class Solution:
+    def longestCommonPrefix(self, m):
+        if not m: return ''
+        s1 = min(m)
+        s2 = max(m)
+
+        for i, c in enumerate(s1):
+            if c != s2[i]:
+                return s1[:i] #stop until hit the split index
+        return s1
+```
+
+**Zip(* )**
+
+```python
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        sz, ret = zip(*strs), ""
+        for c in sz:
+            if len(set(c)) > 1: break
+            ret += c[0]
+        return ret
+```
+
+**Python 已经实现的 commonprefix**
+
+```python
+class Solution:
+    def longestCommonPrefix(self, strs):
+        return os.path.commonprefix(strs)
+```
+
+[返回目录](#00)
 
 ## 383. Ransom Note
 
