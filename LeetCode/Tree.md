@@ -29,7 +29,7 @@ BST
  - [235. Lowest Common Ancestor of a Binary Search Tree](#235-lowest-common-ancestor-of-a-binary-search-tree)
  - [236. Lowest Common Ancestor of a Binary Tree](#236-lowest-common-ancestor-of-a-binary-tree)
  - [1123. Lowest Common Ancestor of Deepest Leaves](#1123-lowest-common-ancestor-of-deepest-leaves)
- - [108	Convert Sorted Array to Binary Search Tree]
+ - [108. Convert Sorted Array to Binary Search Tree](#108-convert-sorted-array-to-binary-search-tree)
  - [109	Convert Sorted List to Binary Search Tree]
  - [173. Binary Search Tree Iterator](#173-binary-search-tree-iterator)
  - [230. Kth Smallest Element in a BST](#230-kth-smallest-element-in-a-bst)
@@ -1543,6 +1543,54 @@ class Solution(object):
 
 ```python
 
+```
+
+[返回目录](#00)
+
+## 108. Convert Sorted Array to Binary Search Tree
+
+Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+
+For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+
+给定一个数组，其中元素按升序排序，请将其转换为高度平衡的BST。 对于此问题，将高度平衡的二叉树定义为二叉树，其中每个节点的两个子树的深度相差不超过1。
+
+**Example**
+
+```
+Given the sorted array: [-10,-3,0,5,9],
+
+One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
+
+      0
+     / \
+   -3   9
+   /   /
+ -10  5
+```
+
+---
+
+### Python Solution
+**分析：** 很简单弱智的题目。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        if not nums:
+            return None
+        mid = len(nums) // 2
+        root = TreeNode(nums[mid])
+        root.left = self.sortedArrayToBST(nums[:mid])
+        root.right = self.sortedArrayToBST(nums[mid + 1:])
+        return root
 ```
 
 [返回目录](#00)
