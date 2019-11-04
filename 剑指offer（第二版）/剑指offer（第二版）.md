@@ -33,7 +33,7 @@
    - [33.二叉搜索树的后序遍历序列]
    - [34.二叉树中和为某一值的路径](#34二叉树中和为某一值的路径)
    - [35.复杂链表的复制](#35复杂链表的复制)
-   - [36.二叉搜索树与双向链表]
+   - [36.二叉搜索树与双向链表](#36二叉搜索树与双向链表)
    - [37.序列化二叉树](#37序列化二叉树)
    - [38.字符串的排列]
    - [39.数组中出现次数超过一半的数字](#39数组中出现次数超过一半的数字)
@@ -883,6 +883,43 @@ class Solution:
             tmp.next = p3.next.next if p3.next else None
             p3, tmp = p3.next, tmp.next
         return dummy
+```
+
+[回到目录](#00)
+
+### 36.二叉搜索树与双向链表
+#### 题目描述
+输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。
+注意：需要返回双向链表最左侧的节点。
+#### 解法：
+
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def convert(self, root):
+        if not root: return None
+        prev = None
+        stack = []
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            node = stack.pop()
+            node.left = prev
+            if prev:
+                prev.right = node
+            root = node.right
+            prev = node
+        cur = prev
+        while cur.left:
+            cur = cur.left
+        return cur
 ```
 
 [回到目录](#00)
