@@ -34,7 +34,7 @@
    - [34.二叉树中和为某一值的路径](#34二叉树中和为某一值的路径)
    - [35.复杂链表的复制](#35复杂链表的复制)
    - [36.二叉搜索树与双向链表]
-   - [37.序列化二叉树]
+   - [37.序列化二叉树](#37序列化二叉树)
    - [38.字符串的排列]
    - [39.数组中出现次数超过一半的数字](#39数组中出现次数超过一半的数字)
    - [40.最小的k个数]
@@ -46,7 +46,7 @@
    - [46.把数字翻译成字符串]
    - [47.礼物的最大价值](#47礼物的最大价值)
    - [48.最长不含重复字符的子字符串](#48最长不含重复字符的子字符串)
-   - [49.丑数]
+   - [49.丑数](#49丑数)
    - [50.第一个只出现一次的字符]
    - [51.数组中的逆序对]
    - [52.两个链表的第一个公共节点](#52两个链表的第一个公共节点)
@@ -887,6 +887,51 @@ class Solution:
 
 [回到目录](#00)
 
+### 37.序列化二叉树
+#### 题目描述
+请实现两个函数，分别用来序列化和反序列化二叉树。
+您需要确保二叉树可以序列化为字符串，并且可以将此字符串反序列化为原始树结构。
+#### 解法：
+
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+
+    def serialize(self, root):
+        def doit(node):
+            if node:
+                vals.append(str(node.val))
+                doit(node.left)
+                doit(node.right)
+            else:
+                vals.append('#')
+        vals = []
+        doit(root)
+        return ','.join(vals)
+
+
+    def deserialize(self, data):
+        def doit():
+            val = next(vals)
+            if val == '#':
+                return None
+            node = TreeNode(int(val))
+            node.left = doit()
+            node.right = doit()
+            return node
+        vals = iter(data.split(','))
+        return doit()
+
+```
+
+[返回目录](#00)
+
 ### 39.数组中出现次数超过一半的数字
 #### 题目描述
 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。
@@ -976,6 +1021,36 @@ class Solution:
 ```
 
 [返回目录](#00)
+
+### 49.丑数
+#### 题目描述
+我们把只包含质因子2、3和5的数称作丑数（Ugly Number）。
+例如6、8都是丑数，但14不是，因为它包含质因子7。
+求第n个丑数的值。
+#### 解法：
+
+```python
+class Solution:
+    def nthUglyNumber(self, n):
+        ugly = [1]
+        i2 = i3 = i5 = 0
+        while len(ugly) < n:
+            while ugly[i2] * 2 <= ugly[-1]: i2 += 1
+            while ugly[i3] * 3 <= ugly[-1]: i3 += 1
+            while ugly[i5] * 5 <= ugly[-1]: i5 += 1
+            ugly.append(min(ugly[i2] * 2, ugly[i3] * 3, ugly[i5] * 5))
+        return ugly[-1]
+```
+
+```python
+class Solution:
+    ugly = sorted(2**a * 3**b * 5**c
+                  for a in range(32) for b in range(20) for c in range(14))
+    def nthUglyNumber(self, n):
+        return self.ugly[n-1]
+```
+
+[回到目录](#00)
 
 ### 52.两个链表的第一个公共节点
 #### 题目描述

@@ -33,7 +33,7 @@ BST
  - [109	Convert Sorted List to Binary Search Tree]
  - [173. Binary Search Tree Iterator](#173-binary-search-tree-iterator)
  - [230. Kth Smallest Element in a BST](#230-kth-smallest-element-in-a-bst)
- - [297	Serialize and Deserialize Binary Tree]
+ - [297. Serialize and Deserialize Binary Tree](#297-serialize-and-deserialize-binary-tree)
  - [285	Inorder Successor in BST] **?**
  - [270	Closest Binary Search Tree Value] **?**
  - [272	Closest Binary Search Tree Value II] **?**
@@ -1667,6 +1667,74 @@ class Solution:
             if not k: return node.val
             root = node.right
         return None
+```
+
+[返回目录](#00)
+
+## 297. Serialize and Deserialize Binary Tree
+
+Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.
+
+Design an algorithm to serialize and deserialize a binary tree. There is no restriction on how your serialization/deserialization algorithm should work. You just need to ensure that a binary tree can be serialized to a string and this string can be deserialized to the original tree structure.
+
+序列化是将数据结构或对象转换为位序列的过程，以便可以将其存储在文件或内存缓冲区中，或者通过网络连接链接进行传输，以便稍后在相同或另一个计算机环境中进行重构。 设计一种用于对二叉树进行序列化和反序列化的算法。 序列化/反序列化算法的工作方式没有任何限制。 您只需要确保可以将二叉树序列化为字符串，并且可以将该字符串反序列化为原始树结构。
+
+**Example**
+
+```
+You may serialize the following tree:
+
+    1
+   / \
+  2   3
+     / \
+    4   5
+
+as "[1,2,3,null,null,4,5]"
+```
+
+---
+
+### Python Solution
+**分析：**  考察的其实就是遍历和恢复，不过突出点在 iter() 和 next() 上。
+
+
+**迭代法**
+
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Codec:
+
+    def serialize(self, root):
+        def doit(node):
+            if node:
+                vals.append(str(node.val))
+                doit(node.left)
+                doit(node.right)
+            else:
+                vals.append('#')
+        vals = []
+        doit(root)
+        return ','.join(vals)
+
+    def deserialize(self, data):
+        def doit():
+            val = next(vals)
+            if val == '#':
+                return None
+            node = TreeNode(int(val))
+            node.left = doit()
+            node.right = doit()
+            return node
+        vals = iter(data.split(','))
+        return doit()
+
 ```
 
 [返回目录](#00)
