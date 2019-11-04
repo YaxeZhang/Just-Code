@@ -56,7 +56,7 @@
  - [267	Palindrome Permutation II]
 ## Parentheses		
  - [20	Valid Parentheses]
- - [22	Generate Parentheses]
+ - [22. Generate Parentheses](#22-generate-parentheses)
  - [32	Longest Valid Parentheses]
  - [241	Different Ways to Add Parentheses]
  - [301	Remove Invalid Parentheses]
@@ -515,6 +515,59 @@ class Solution:
             i += 1
             j -= 1
         return True
+```
+
+[返回目录](#00)
+
+## 22. Generate Parentheses
+
+Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+给定n对括号，编写一个函数以生成格式正确的括号的所有组合。
+
+**Example**
+
+```
+For example, given n = 3, a solution set is:
+
+[
+  "((()))",
+  "(()())",
+  "(())()",
+  "()(())",
+  "()()()"
+]
+```
+
+---
+
+### Python Solution
+**分析：** 第一种回溯法？， 第二种感觉有点暴力的意思，只不过智能一点
+
+```python
+class Solution(object):
+    def generateParenthesis(self, N):
+        def generate(p, left, right, pars = []):
+            if left:
+                generate(p + '(', left - 1, right)
+            if right > left:
+                generate(p + ')', left, right - 1)
+            if not right:
+                pars.append(p)
+            return pars
+        return generate('', N, N)
+```
+
+```python
+class Solution(object):
+    def generateParenthesis(self, N):
+        if N == 0: return ['']
+        ans = []
+        for c in range(N):
+            for left in self.generateParenthesis(c):
+                for right in self.generateParenthesis(N-1-c):
+                    ans.append('({}){}'.format(left, right))
+        return ans
 ```
 
 [返回目录](#00)
