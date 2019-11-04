@@ -31,7 +31,7 @@
  - [292	Nim Game]
  - [202. Happy Number](#202-happy-number)
  - [400	Nth Digit]
- - [263	Ugly Number]
+ - [263. Ugly Number](#263-ugly-number)
  - [264	Ugly Number II]
  - [306	Additive Number]
  - [172	Factorial Trailing Zeroes]
@@ -279,6 +279,50 @@ class Solution:
             stop.add(n)
             n = sum(int(d)**2 for d in str(n))
         return n == 1
+```
+
+[返回目录](#00)
+
+## 263. Ugly Number
+
+Write a program to check whether a given number is an ugly number.
+
+Ugly numbers are positive numbers whose prime factors only include 2, 3, 5.
+
+编写程序以检查给定的数字是否是丑陋的数字。 丑数是正数，其主要因子仅包括2、3、5。
+
+**Example**
+
+```
+Example 1:
+
+Input: 6
+Output: true
+Explanation: 6 = 2 × 3
+Example 2:
+
+Input: 8
+Output: true
+Explanation: 8 = 2 × 2 × 2
+Example 3:
+
+Input: 14
+Output: false
+Explanation: 14 is not ugly since it includes another prime factor 7.
+```
+
+---
+
+### Python Solution
+**分析：** 只是简单地判断一个数是不是丑数。
+
+```python
+class Solution:
+    def isUgly(self, num: int) -> bool:
+        for p in 2, 3, 5:
+            while num % p == 0 < num:
+                num /= p
+        return num == 1
 ```
 
 [返回目录](#00)
