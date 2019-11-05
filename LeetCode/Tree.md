@@ -16,6 +16,7 @@
  - [298	Binary Tree Longest Consecutive Sequence] **?**
  - [111. Minimum Depth of Binary Tree](#111-minimum-depth-of-binary-tree)
  - [104. Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree)
+ - [662. Maximum Width of Binary Tree](#662-maximum-width-of-binary-tree)
  - [559. Maximum Depth of N-ary Tree](#559-maximum-depth-of-n-ary-tree)
  - [110. Balanced Binary Tree](#110-balanced-binary-tree)
  - [124. Binary Tree Maximum Path Sum](#124-binary-tree-maximum-path-sum)
@@ -1061,6 +1062,99 @@ class Solution:
                     dq.append(node.right)
             depth += 1
         return depth
+```
+
+[返回目录](#00)
+
+## 662. Maximum Width of Binary Tree
+
+Given a binary tree, write a function to get the maximum width of the given tree. The width of a tree is the maximum width among all levels. The binary tree has the same structure as a full binary tree, but some nodes are null.
+
+The width of one level is defined as the length between the end-nodes (the leftmost and right most non-null nodes in the level, where the null nodes between the end-nodes are also counted into the length calculation.
+
+给定一棵二叉树，编写一个函数以获取给定树的最大宽度。 树的宽度是所有级别之间的最大宽度。 二进制树与完整的二进制树具有相同的结构，但是某些节点为空。 一层的宽度定义为末端节点之间的长度（该层中最左边和最右边的非空节点，其中末端节点之间的空节点也计入长度计算中。
+
+**Example**
+
+```
+Example 1:
+
+Input:
+
+           1
+         /   \
+        3     2
+       / \     \  
+      5   3     9
+
+Output: 4
+Explanation: The maximum width existing in the third level with the length 4 (5,3,null,9).
+Example 2:
+
+Input:
+
+          1
+         /  
+        3    
+       / \       
+      5   3     
+
+Output: 2
+Explanation: The maximum width existing in the third level with the length 2 (5,3).
+Example 3:
+
+Input:
+
+          1
+         / \
+        3   2
+       /        
+      5      
+
+Output: 2
+Explanation: The maximum width existing in the second level with the length 2 (3,2).
+Example 4:
+
+Input:
+
+          1
+         / \
+        3   2
+       /     \  
+      5       9
+     /         \
+    6           7
+Output: 8
+Explanation:The maximum width existing in the fourth level with the length 8 (6,null,null,null,null,null,null,7).
+
+```
+---
+
+### Python Solution
+**分析：** 其实是一道非常简单的题，不过要注意的是 pos 的值的递进。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def widthOfBinaryTree(self, root: TreeNode) -> int:
+        if not root: return 0
+        stack, res = [(root, 0, 0)], []
+        while stack:
+            node, depth, pos = stack.pop()
+            if len(res) < depth + 1:
+                res.append([])
+            res[depth].append(pos)
+            if node.left:
+                stack.append((node.left, depth + 1, pos * 2))
+            if node.right:
+                stack.append((node.right, depth + 1, pos * 2 + 1))
+        return max([max(res[i]) - min(res[i]) for i in range(len(res))]) + 1
 ```
 
 [返回目录](#00)
