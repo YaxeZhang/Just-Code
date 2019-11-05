@@ -37,7 +37,7 @@ BST
  - [285	Inorder Successor in BST] **?**
  - [270	Closest Binary Search Tree Value] **?**
  - [272	Closest Binary Search Tree Value II] **?**
- - [99	Recover Binary Search Tree]
+ - [99. Recover Binary Search Tree](#99-recover-binary-search-tree)
 重要程度
  - [156	Binary Tree Upside Down] **?**
  - [114	Flatten Binary Tree to Linked List]
@@ -1782,7 +1782,91 @@ class Codec:
             return node
         vals = iter(data.split(','))
         return doit()
+```
 
+[返回目录](#00)
+
+## 99. Recover Binary Search Tree
+
+Two elements of a binary search tree (BST) are swapped by mistake.
+Recover the tree without changing its structure.
+
+二叉搜索树（BST）的两个元素被错误交换。 恢复树而不更改其结构。
+
+**Example**
+
+```
+Example 1:
+
+Input: [1,3,null,null,2]
+
+   1
+  /
+ 3
+  \
+   2
+
+Output: [3,1,null,null,2]
+
+   3
+  /
+ 1
+  \
+   2
+
+Example 2:
+
+Input: [3,1,4,null,null,2]
+
+  3
+ / \
+1   4
+   /
+  2
+
+Output: [2,1,4,null,null,3]
+
+  2
+ / \
+1   4
+   /
+  3
+```
+
+---
+
+### Python Solution
+**分析：**  中序遍历然后找出出问题的两个结点，交换值即可。
+
+
+**迭代法**
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def recoverTree(self, root: TreeNode) -> None:
+        cur = root
+        stack, res = [], []
+        while stack or cur:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            node = stack.pop()
+            res.append(node)
+            cur = node.right
+        first, second = None, None
+        for i in range(1, len(res)):
+            if not first and res[i-1].val > res[i].val:
+                first, second = res[i-1], res[i]
+            if first and res[i-1].val > res[i].val:
+                second = res[i]
+        first.val, second.val = second.val, first.val
 ```
 
 [返回目录](#00)
