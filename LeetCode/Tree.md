@@ -18,7 +18,7 @@
  - [104. Maximum Depth of Binary Tree](#104-maximum-depth-of-binary-tree)
  - [559. Maximum Depth of N-ary Tree](#559-maximum-depth-of-n-ary-tree)
  - [110. Balanced Binary Tree](#110-balanced-binary-tree)
- - [124	Binary Tree Maximum Path Sum]
+ - [124. Binary Tree Maximum Path Sum](#124-binary-tree-maximum-path-sum)
  - [250	Count Univalue Subtrees] **?**
  - [366	Find Leaves of Binary Tree] **?**
  - [337	House Robber III]
@@ -1148,6 +1148,69 @@ class Solution(object):
             return max(left, right) + 1
 
         return check(root) != -1
+```
+
+[返回目录](#00)
+
+## 124. Binary Tree Maximum Path Sum
+
+Given a non-empty binary tree, find the maximum path sum.
+
+For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
+
+给定一个非空的二叉树，找到最大路径总和。 对于此问题，路径定义为沿着父子连接从某个起始节点到树中任何节点的任何节点序列。 该路径必须至少包含一个节点，并且不需要经过根节点。
+
+**Example**
+
+```
+Example 1:
+
+Input: [1,2,3]
+
+       1
+      / \
+     2   3
+
+Output: 6
+
+Example 2:
+
+Input: [-10,9,20,null,null,15,7]
+
+   -10
+   / \
+  9  20
+    /  \
+   15   7
+
+Output: 42
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def maxPathSum(self, root: TreeNode) -> int:
+        self.res = float('-inf')
+        def dfs(root):
+            if not root: return 0
+            left = max(0, dfs(root.left))
+            right = max(0, dfs(root.right))
+            val = root.val + left + right
+            self.res = max(self.res, val)
+            return root.val + max(left, right)
+        dfs(root)
+        return self.res
 ```
 
 [返回目录](#00)
