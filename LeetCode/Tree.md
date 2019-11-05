@@ -1869,6 +1869,29 @@ class Solution:
         first.val, second.val = second.val, first.val
 ```
 
+```python
+class Solution:
+    def recoverTree(self, root: TreeNode) -> None:
+        pre = first = second = None
+        stack = []
+        while root or stack:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            if pre and pre.val > root.val:
+                second = root
+                if not first:
+                    first = pre
+                else:
+                    break
+            pre = root
+            root = root.right
+
+        if first and second:
+            first.val, second.val = second.val, first.val
+```
+
 [返回目录](#00)
 
 ## 222. Count Complete Tree Nodes
