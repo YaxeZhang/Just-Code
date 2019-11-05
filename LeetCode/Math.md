@@ -8,7 +8,7 @@
  - [67	Add Binary]
  - [43	Multiply Strings]
  - [29	Divide Two Integers]
- - [69	Sqrt(x)]
+ - [69. Sqrt(x)](#69-sqrt-x-)
  - [50	Pow(x, n)]
  - [367	Valid Perfect Square]
  - [365	Water and Jug Problem]
@@ -130,6 +130,61 @@ class Solution:
             digits[~i] = 0
         digits.insert(0, 1)
         return digits
+```
+
+[返回目录](#00)
+
+## 69. Sqrt(x)
+
+Implement int sqrt(int x).
+
+Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+
+Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+
+实现int sqrt（int x）。 计算并返回x的平方根，其中x保证为非负整数。 由于返回类型是整数，因此十进制数字将被截断，并且仅返回结果的整数部分。
+
+**Example:1**
+
+```
+Example 1:
+
+Input: 4
+Output: 2
+Example 2:
+
+Input: 8
+Output: 2
+Explanation: The square root of 8 is 2.82842..., and since
+             the decimal part is truncated, 2 is returned.
+```
+
+---
+
+### Python Solution
+**分析：** 两种方法，一种是二分法，一种是牛顿迭代法。
+
+```python
+class Solution:
+    def mySqrt(self, x):
+        l, r = 0, x
+        while l <= r:
+            mid = l + (r-l)//2
+            if mid * mid <= x < (mid+1)*(mid+1):
+                return mid
+            elif x < mid * mid:
+                r = mid
+            else:
+                l = mid + 1
+```
+
+```python
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        r = x
+        while r*r > x:
+            r = (r + x//r) // 2
+        return r
 ```
 
 [返回目录](#00)
