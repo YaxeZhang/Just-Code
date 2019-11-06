@@ -31,7 +31,7 @@ BST
  - [236. Lowest Common Ancestor of a Binary Tree](#236-lowest-common-ancestor-of-a-binary-tree)
  - [1123. Lowest Common Ancestor of Deepest Leaves](#1123-lowest-common-ancestor-of-deepest-leaves)
  - [108. Convert Sorted Array to Binary Search Tree](#108-convert-sorted-array-to-binary-search-tree)
- - [109	Convert Sorted List to Binary Search Tree]
+ - [109. Convert Sorted List to Binary Search Tree](#109-convert-sorted-list-to-binary-search-tree)
  - [173. Binary Search Tree Iterator](#173-binary-search-tree-iterator)
  - [230. Kth Smallest Element in a BST](#230-kth-smallest-element-in-a-bst)
  - [297. Serialize and Deserialize Binary Tree](#297-serialize-and-deserialize-binary-tree)
@@ -1747,6 +1747,64 @@ class Solution:
         root = TreeNode(nums[mid])
         root.left = self.sortedArrayToBST(nums[:mid])
         root.right = self.sortedArrayToBST(nums[mid + 1:])
+        return root
+```
+
+[返回目录](#00)
+
+## 109. Convert Sorted List to Binary Search Tree
+
+Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.
+
+For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+
+给定一个单链列表，其中元素按升序排序，请将其转换为高度平衡的BST。 对于此问题，将高度平衡的二叉树定义为二叉树，其中每个节点的两个子树的深度相差不超过1。
+
+**Example**
+
+```
+Given the sorted linked list: [-10,-3,0,5,9],
+
+One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
+
+      0
+     / \
+   -3   9
+   /   /
+ -10  5
+```
+
+---
+
+### Python Solution
+**分析：** 递归的做法，也可以用额外空间的迭代，但是没有意义。细节是把链表分为两端。
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        if not head: return
+        if not head.next: return TreeNode(head.val)
+        slow, fast, pre = head, head, None
+        while fast and fast.next:
+            pre, slow, fast = slow, slow.next, fast.next.next
+        pre.next = None   # cut off the left half
+
+        root = TreeNode(slow.val)
+        root.left = self.sortedListToBST(head)
+        root.right = self.sortedListToBST(slow.next)
         return root
 ```
 
