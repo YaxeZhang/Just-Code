@@ -8,7 +8,7 @@
  - [154	Find Minimum in Rotated Sorted Array II]
  - [162	Find Peak Element]
  - [374. Guess Number Higher or Lower](#374-guess-number-higher-or-lower)
- - [34	Search for a Range]
+ - [34. Find First and Last Position of Element in Sorted Array](#34-find-first-and-last-position-of-element-in-sorted-array)
  - [349	Intersection of Two Arrays]
  - [350	Intersection of Two Arrays II]
  - [315. Count of Smaller Numbers After Self](#315-count-of-smaller-numbers-after-self)
@@ -49,6 +49,49 @@ class Solution(object):
             mid = (lo + hi) / 2
             lo, hi = ((mid, mid), (mid+1, hi), (lo, mid-1))[guess(mid)]
         return lo
+```
+
+[返回目录](#00)
+
+## 34. Find First and Last Position of Element in Sorted Array
+
+Given an array of integers nums sorted in ascending order, find the starting and ending position of a given target value.
+Your algorithm's runtime complexity must be in the order of O(log n).
+If the target is not found in the array, return [-1, -1].
+
+给定一个以升序排列的整数nums数组，请找到给定目标值的开始和结束位置。 算法的运行时复杂度必须为O（log n）的量级。 如果在数组中找不到目标，则返回[-1，-1]。
+
+**Example**
+
+```
+Example 1:
+
+Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3,4]
+Example 2:
+
+Input: nums = [5,7,7,8,8,10], target = 6
+Output: [-1,-1]
+```
+
+---
+
+### Python Solution
+**分析：** O(nlgn) 的时间复杂度，十分巧妙。
+
+```python
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if not nums: return [-1, -1]
+        def search(lo, hi):
+            if nums[lo] == target == nums[hi]:
+                return [lo, hi]
+            if nums[lo] <= target <= nums[hi]:
+                mid = (lo + hi) // 2
+                l, r = search(lo, mid), search(mid+1, hi)
+                return max(l, r) if -1 in l+r else [l[0], r[1]]
+            return [-1, -1]
+        return search(0, len(nums)-1)
 ```
 
 [返回目录](#00)
