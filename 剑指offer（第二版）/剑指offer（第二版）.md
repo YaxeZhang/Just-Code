@@ -53,7 +53,7 @@
    - [53.在排序数组中查找数字]
    - [54.二叉搜索树的第k个结点](#54二叉搜索树的第k个结点)
    - [55.二叉树的深度](#55二叉树的深度)
-   - [56.数组中数字出现的次数]
+   - [56.数字在排序数组中出现的次数](#56数字在排序数组中出现的次数)
    - [57.和为S的两个数](#57和为S的两个数)
    - [58.翻转字符串](#58翻转字符串)
    - [59.队列的最大值](#59队列的最大值)
@@ -1188,6 +1188,30 @@ class Solution:
         depthleft = self.TreeDepth(pRoot.left)
         depthright = self.TreeDepth(pRoot.right)
         return max(depthleft, depthright) + 1
+```
+
+[回到目录](#00)
+
+### 56.数字在排序数组中出现的次数
+#### 题目描述
+统计一个数字在排序数组中出现的次数。如果不存在返回 0。
+例如输入排序数组[1, 2, 3, 3, 3, 3, 4, 5]和数字3，由于3在这个数组中出现了4次，因此输出4。
+#### 解法：
+
+```python
+class Solution(object):
+    def getNumberOfK(self, nums, k):
+        if not nums: return 0
+        def search(lo, hi):
+            if nums[lo] == k == nums[hi]:
+                return [lo, hi]
+            if nums[lo] <= k <= nums[hi]:
+                mid = (lo + hi) // 2
+                l, r = search(lo, mid), search(mid+1, hi)
+                return max(l, r) if -1 in l+r else [l[0], r[1]]
+            return [-1, -1]
+        l, r = search(0, len(nums)-1)
+        return 0 if l == -1 else r - l + 1
 ```
 
 [回到目录](#00)
