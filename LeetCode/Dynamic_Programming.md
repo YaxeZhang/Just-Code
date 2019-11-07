@@ -30,7 +30,7 @@
  - [198. House Robber](#198-house-robber)
  - [213	House Robber II]
  - [276	Paint Fence]
- - [91	Decode Ways]
+ - [91. Decode Ways](#91-decode-ways)
  - [10	Regular Expression Matching]
  - [44	Wildcard Matching]
 
@@ -721,6 +721,55 @@ class Solution:
         for num in nums:
             prev1, prev2 = max(prev2 + num, prev1), prev1
         return prev1
+```
+
+[返回目录](#00)
+
+## 91. Decode Ways
+
+A message containing letters from A-Z is being encoded to numbers using the following mapping:
+'A' -> 1
+'B' -> 2
+...
+'Z' -> 26
+Given a non-empty string containing only digits, determine the total number of ways to decode it.
+
+使用以下映射，将包含AZ字母的消息编码为数字：'A'-> 1'B'-> 2 ...'Z'-> 26给定一个仅包含数字的非空字符串，请确定解码方式的总数。
+
+**Example**
+
+```
+Example 1:
+
+Input: "12"
+Output: 2
+Explanation: It could be decoded as "AB" (1 2) or "L" (12).
+
+Example 2:
+
+Input: "226"
+Output: 3
+Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
+```
+
+---
+
+### Python Solution
+**分析：** 先智商判断一下，把 0 的情况排掉，规避很多不好做的条件。
+
+```python
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        s = s.replace('20', '')
+        s = s.replace('10', '')
+        if '0' in s: return 0
+        l = r = 1
+        for i in range(len(s)-2, -1, -1):
+            if s[i] == '1' or s[i] == '2' and s[i+1] < '7':
+                l, r = l+r, l
+            else:
+                r = l
+        return l
 ```
 
 [返回目录](#00)
