@@ -26,7 +26,7 @@
    - [26.树的子结构]
    - [27.二叉树的镜像](#27二叉树的镜像)
    - [28.对称的二叉树](#28对称的二叉树)
-   - [29.顺时针打印矩阵]
+   - [29.顺时针打印矩阵](#29顺时针打印矩阵)
    - [30.包含min函数的栈](#30包含min函数的栈)
    - [31.栈的压入弹出序列](#31栈的压入弹出序列)
    - [32.从上到下打印二叉树](#32从上到下打印二叉树)
@@ -371,11 +371,7 @@ class Solution(object):
 
 ### 14.剪绳子
 #### 题目描述
-给你一根长度为 n 绳子，请把绳子剪成 m 段（m、n 都是整数，2≤n≤58 并且 m≥2）。
-
-每段的绳子的长度记为k[0]、k[1]、……、k[m]。k[0]k[1] … k[m] 可能的最大乘积是多少？
-
-例如当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到最大的乘积18。
+给你一根长度为 n 绳子，请把绳子剪成 m 段（m、n 都是整数，2≤n≤58 并且 m≥2）。每段的绳子的长度记为k[0]、k[1]、……、k[m]。k[0]k[1] … k[m] 可能的最大乘积是多少？例如当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到最大的乘积18。
 #### 解法：
 
 ```python
@@ -696,6 +692,44 @@ class Solution(object):
             return p is q
 
         return isSym(root.left, root.right)
+```
+
+[回到目录](#00)
+
+### 29.顺时针打印矩阵
+#### 题目描述
+输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。
+#### 解法：
+
+```python
+class Solution(object):
+    def printMatrix(self, matrix):
+        res = []
+        if not matrix: return res
+        x = y = i = 0
+        delta = ((0, 1), (1, 0), (0, -1), (-1, 0))
+        pos = [0, 0, len(matrix[0])-1, len(matrix)-1] # 左、上、右、下。后面懒得判断推出来的。
+        while pos[0] <= pos[2] and pos[1] <= pos[3]:
+            while pos[0] <= y <= pos[2] and pos[1] <= x <= pos[3]:
+                res.append(matrix[x][y])
+                x, y = x+delta[i][0], y+delta[i][1]
+            x, y = x-delta[i][0], y-delta[i][1]
+            i = (i+1) % 4
+            pos[i] += sum(delta[i])
+            x, y = x+delta[i][0], y+delta[i][1]
+        return res
+```
+
+**动用了hin多空间**
+
+```python
+class Solution(object):
+    def printMatrix(self, matrix):
+        res = []
+        while matrix:
+            res += matrix[0]
+            matrix = list(zip(*matrix[1:]))[::-1]
+        return res
 ```
 
 [回到目录](#00)
