@@ -764,12 +764,12 @@ class Solution:
         s = s.replace('10', '')
         if '0' in s: return 0
         l = r = 1
-        for i in range(len(s)-2, -1, -1):
+        for i in range(len(s)-1):
             if s[i] == '1' or s[i] == '2' and s[i+1] < '7':
-                l, r = l+r, l
+                l, r = r, l+r
             else:
-                r = l
-        return l
+                l = r
+        return r
 ```
 
 [返回目录](#00)
