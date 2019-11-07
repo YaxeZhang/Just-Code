@@ -10,7 +10,7 @@
    - [10.斐波那契数列](#10斐波那契数列)
    - [11.旋转数组中的最小数字](#11旋转数组中的最小数字)
    - [12.矩阵中的路径]
-   - [13.机器人的运动范围]
+   - [13.机器人的运动范围](#13机器人的运动范围)
    - [14.剪绳子](#14剪绳子)
    - [15.二进制中 1 的个数](#15二进制中-1-的个数)
    - [16.数值的整数次方]
@@ -339,6 +339,32 @@ class Solution:
             return rotateArray[end]
         else:
             return rotateArray[start]
+```
+
+[回到目录](#00)
+
+### 13.机器人的运动范围
+#### 题目描述
+地上有一个 m 行和 n 列的方格，横纵坐标范围分别是 0∼m−1 和 0∼n−1。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格。但是不能进入行坐标和列坐标的数位之和大于 k 的格子。请问该机器人能够达到多少个格子？
+#### 解法：
+
+```python
+class Solution(object):
+    def movingCount(self, threshold, rows, cols):
+
+        def dfs(x, y):
+            if 0<=x<rows and 0<=y<cols and not dp[x][y]:
+                dp[x][y] = 1
+                if threshold >= sum(map(int, list(str(x)) + list(str(y)))):
+                    self.res += 1
+                    for dx, dy in delta:
+                        dfs(x+dx, y+dy)
+
+        dp = [[0] * cols for _ in range(rows)]
+        self.res = 0
+        delta = ((-1, 0), (0, 1), (1, 0), (0, -1))
+        dfs(0, 0)
+        return self.res
 ```
 
 [回到目录](#00)
