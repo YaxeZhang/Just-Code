@@ -1041,12 +1041,13 @@ class Solution:
 class Solution:
     def getTranslationCount(self, s):
         if not s: return 0
-        left = mid = right = 1
+        l = r = 1
         for i in range(len(s)-2, -1, -1):
             if s[i] == '1' or s[i] == '2' and s[i+1] < '6':
-                left += right
-            mid, right = left, mid
-        return left
+                l, r = l + r, l
+            else:
+                r = l
+        return l
 ```
 
 [回到目录](#00)
