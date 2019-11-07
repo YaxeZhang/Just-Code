@@ -1015,6 +1015,42 @@ class Solution:
 
 [回到目录](#00)
 
+### 46.把数字翻译成字符串
+#### 题目描述
+给定一个数字，我们按照如下规则把它翻译为字符串：
+0翻译成”a”，1翻译成”b”，……，11翻译成”l”，……，25翻译成”z”。
+一个数字可能有多个翻译。例如12258有5种不同的翻译，它们分别是”bccfi”、”bwfi”、”bczi”、”mcfi”和”mzi”。
+请编程实现一个函数用来计算一个数字有多少种不同的翻译方法。
+#### 解法：
+
+```python
+class Solution:
+    def getTranslationCount(self, s):
+        if not s: return 0
+        dp = [1] * len(s)
+        for i in range(len(s)-2, -1, -1):
+            dp[i] = dp[i+1]
+            if s[i] == '1' or s[i] == '2' and s[i+1] < '6':
+                dp[i] += dp[i+2]
+        return dp[0]
+```
+
+**可简化为 O(1) 空间**
+
+```python
+class Solution:
+    def getTranslationCount(self, s):
+        if not s: return 0
+        left = mid = right = 1
+        for i in range(len(s)-2, -1, -1):
+            if s[i] == '1' or s[i] == '2' and s[i+1] < '6':
+                left += right
+            mid, right = left, mid
+        return left
+```
+
+[回到目录](#00)
+
 ### 47.礼物的最大价值
 #### 题目描述
 在一个m×n的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于0）。
