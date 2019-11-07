@@ -47,13 +47,13 @@
    - [47.礼物的最大价值](#47礼物的最大价值)
    - [48.最长不含重复字符的子字符串](#48最长不含重复字符的子字符串)
    - [49.丑数](#49丑数)
-   - [50.第一个只出现一次的字符]
+   - [50.第一个只出现一次的字符](#50第一个只出现一次的字符)
    - [51.数组中的逆序对]
    - [52.两个链表的第一个公共节点](#52两个链表的第一个公共节点)
-   - [53.在排序数组中查找数字]
+   - [53.在排序数组中查找数字](#53在排序数组中查找数字)
    - [54.二叉搜索树的第k个结点](#54二叉搜索树的第k个结点)
    - [55.二叉树的深度](#55二叉树的深度)
-   - [56.数字在排序数组中出现的次数](#56数字在排序数组中出现的次数)
+   - [56.数组中数字出现的次数]
    - [57.和为S的两个数](#57和为S的两个数)
    - [58.翻转字符串](#58翻转字符串)
    - [59.队列的最大值](#59队列的最大值)
@@ -1098,9 +1098,7 @@ class Solution:
 
 ### 49.丑数
 #### 题目描述
-我们把只包含质因子2、3和5的数称作丑数（Ugly Number）。
-例如6、8都是丑数，但14不是，因为它包含质因子7。
-求第n个丑数的值。
+我们把只包含质因子2、3和5的数称作丑数（Ugly Number）。例如6、8都是丑数，但14不是，因为它包含质因子7。求第n个丑数的值。
 #### 解法：
 
 ```python
@@ -1122,6 +1120,25 @@ class Solution:
                   for a in range(32) for b in range(20) for c in range(14))
     def nthUglyNumber(self, n):
         return self.ugly[n-1]
+```
+
+[回到目录](#00)
+
+### 50.第一个只出现一次的字符
+#### 题目描述
+在字符串中找出第一个只出现一次的字符。如输入"abaccdeff"，则输出b。如果字符串中不存在只出现一次的字符，返回#字符。
+#### 解法：
+
+```python
+class Solution:
+    def firstNotRepeatingChar(self, s):
+        if not s: return '#'
+        import collections
+        count = collections.Counter(s)
+        for i in set(s):
+            if count[i] == 1:
+                return i
+        return '#'
 ```
 
 [回到目录](#00)
@@ -1177,6 +1194,30 @@ class Solution:
 
 [回到目录](#00)
 
+### 53.在排序数组中查找数字
+#### 题目描述
+统计一个数字在排序数组中出现的次数。如果不存在返回 0。
+例如输入排序数组[1, 2, 3, 3, 3, 3, 4, 5]和数字3，由于3在这个数组中出现了4次，因此输出4。
+#### 解法：
+
+```python
+class Solution(object):
+    def getNumberOfK(self, nums, k):
+        if not nums: return 0
+        def search(lo, hi):
+            if nums[lo] == k == nums[hi]:
+                return [lo, hi]
+            if nums[lo] <= k <= nums[hi]:
+                mid = (lo + hi) // 2
+                l, r = search(lo, mid), search(mid+1, hi)
+                return max(l, r) if -1 in l+r else [l[0], r[1]]
+            return [-1, -1]
+        l, r = search(0, len(nums)-1)
+        return 0 if l == -1 else r - l + 1
+```
+
+[回到目录](#00)
+
 ### 54.二叉搜索树的第k个结点
 #### 题目描述
 给定一棵二叉搜索树，请找出其中的第k小的结点。
@@ -1225,30 +1266,6 @@ class Solution:
         depthleft = self.TreeDepth(pRoot.left)
         depthright = self.TreeDepth(pRoot.right)
         return max(depthleft, depthright) + 1
-```
-
-[回到目录](#00)
-
-### 56.数字在排序数组中出现的次数
-#### 题目描述
-统计一个数字在排序数组中出现的次数。如果不存在返回 0。
-例如输入排序数组[1, 2, 3, 3, 3, 3, 4, 5]和数字3，由于3在这个数组中出现了4次，因此输出4。
-#### 解法：
-
-```python
-class Solution(object):
-    def getNumberOfK(self, nums, k):
-        if not nums: return 0
-        def search(lo, hi):
-            if nums[lo] == k == nums[hi]:
-                return [lo, hi]
-            if nums[lo] <= k <= nums[hi]:
-                mid = (lo + hi) // 2
-                l, r = search(lo, mid), search(mid+1, hi)
-                return max(l, r) if -1 in l+r else [l[0], r[1]]
-            return [-1, -1]
-        l, r = search(0, len(nums)-1)
-        return 0 if l == -1 else r - l + 1
 ```
 
 [回到目录](#00)
