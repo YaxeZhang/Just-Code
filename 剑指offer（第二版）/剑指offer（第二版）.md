@@ -808,7 +808,7 @@ class Solution:
                 x = sequence.pop()
                 dfs(Max, x)
                 dfs(x, stop)
-        dfs(max(sequence), min(sequence))
+        dfs(float('inf'), float('-inf'))
         return not sequence
 ```
 
