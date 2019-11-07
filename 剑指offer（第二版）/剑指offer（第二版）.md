@@ -30,7 +30,7 @@
    - [30.包含min函数的栈](#30包含min函数的栈)
    - [31.栈的压入弹出序列](#31栈的压入弹出序列)
    - [32.从上到下打印二叉树](#32从上到下打印二叉树)
-   - [33.二叉搜索树的后序遍历序列]
+   - [33.二叉搜索树的后序遍历序列](#33二叉搜索树的后序遍历序列)
    - [34.二叉树中和为某一值的路径](#34二叉树中和为某一值的路径)
    - [35.复杂链表的复制](#35复杂链表的复制)
    - [36.二叉搜索树与双向链表](#36二叉搜索树与双向链表)
@@ -789,6 +789,27 @@ class Solution:
                 res.extend([x.val for x in level])
                 level = [leaf for node in level for leaf in (node.left, node.right) if leaf]
         return res
+```
+
+[回到目录](#00)
+
+### 33.二叉搜索树的后序遍历序列
+#### 题目描述
+输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则返回true，否则返回false.假设输入的数组的任意两个数字都互不相同。
+#### 解法：
+
+```python
+class Solution:
+    def verifySequenceOfBST(self, sequence):
+        if not sequence:
+            return True  # 看 OJ 要求 True or False
+        def dfs(Max, stop):
+            if sequence and Max >= sequence[-1] >= stop:
+                x = sequence.pop()
+                dfs(Max, x)
+                dfs(x, stop)
+        dfs(max(sequence), min(sequence))
+        return not sequence
 ```
 
 [回到目录](#00)
