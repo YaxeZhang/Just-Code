@@ -23,7 +23,7 @@
    - [23.链表中环的入口节点](#23链表中环的入口节点)
    - [24.反转链表](#24反转链表)
    - [25.合并两个排序的链表](#25合并两个排序的链表)
-   - [26.树的子结构]
+   - [26.树的子结构](#26树的子结构)
    - [27.二叉树的镜像](#27二叉树的镜像)
    - [28.对称的二叉树](#28对称的二叉树)
    - [29.顺时针打印矩阵](#29顺时针打印矩阵)
@@ -622,6 +622,39 @@ class Solution:
             tmp = tmp.next
         tmp.next = p1 or p2         # 一开始都为空或者其中一个为空或者经过while循环后其中一个为空的情况都包含了
         return dummy.next
+```
+
+[回到目录](#00)
+
+### 26.树的子结构
+#### 题目描述
+输入两棵二叉树A，B，判断B是不是A的子结构。我们规定空树不是任何树的子结构。
+#### 解法：
+
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def hasSubtree(self, p1, p2):
+        flag = False
+        if p1 and p2:
+            if p1.val == p2.val:
+                flag = self.isPart(p1, p2)
+            if not flag:
+                flag = self.hasSubtree(p1.left, p2) or self.hasSubtree(p1.right, p2)
+        return flag
+
+    def isPart(self, p1, p2):
+        if not p2:
+            return True
+        if not p1 or p1.val != p2.val:
+            return False
+        return self.isPart(p1.left, p2.left) and self.isPart(p1.right, p2.right)
 ```
 
 [回到目录](#00)
