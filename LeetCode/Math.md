@@ -9,7 +9,7 @@
  - [43	Multiply Strings]
  - [29	Divide Two Integers]
  - [69. Sqrt(x)](#69-sqrt-x-)
- - [50	Pow(x, n)]
+ - [50. Pow(x, n)](#50-pow-x--n-)
  - [367	Valid Perfect Square]
  - [365	Water and Jug Problem]
  - [204. Count Primes](204-count-primes)
@@ -185,6 +185,48 @@ class Solution:
         while r*r > x:
             r = (r + x//r) // 2
         return r
+```
+
+[返回目录](#00)
+
+## 50. Pow(x, n)
+
+Implement pow(x, n), which calculates x raised to the power n (xn).
+
+实现pow（x，n），计算x升至幂n（x**n）
+
+**Example:1**
+
+```
+Example 1:
+Input: 2.00000, 10
+Output: 1024.00000
+
+Example 2:
+Input: 2.10000, 3
+Output: 9.26100
+
+Example 3:
+Input: 2.00000, -2
+Output: 0.25000
+Explanation: 2-2 = 1/22 = 1/4 = 0.25
+```
+
+---
+
+### Python Solution
+**分析：** 简单快速幂的求法。
+
+```python
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        p, r = abs(n), 1
+        while p:
+            if p & 1:
+                r *= x
+            x *= x
+            p >>= 1
+        return r if n >= 0 else 1/r
 ```
 
 [返回目录](#00)
