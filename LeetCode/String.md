@@ -17,7 +17,7 @@
  - [49	Group Anagrams]
  - [249	Group Shifted Strings]
  - [87	Scramble String]
- - [179	Largest Number]
+ - [179. Largest Number](#179-largest-number)
  - [6	ZigZag Conversion]
  - [161	One Edit Distance]
  - [38	Count and Say]
@@ -227,6 +227,40 @@ class Solution:
         return collections.Counter(s) == collections.Counter(t)
 
         return sorted(s) == sorted(t)
+```
+
+[返回目录](#00)
+
+## 179. Largest Number
+
+Given a list of non negative integers, arrange them such that they form the largest number.
+
+给定一个非负整数列表，将它们排列为最大的数字。
+
+**Example**
+
+```
+Example 1:
+Input: [10,2]
+Output: "210"
+
+Example 2:
+Input: [3,30,34,5,9]
+Output: "9534330"
+```
+
+---
+
+### Python Solution
+**分析：** 有点冒泡排序的意思，比较 str(a)+str(b) < ? > str(b)+str(a) 那种大，来排序。
+
+```python
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        if set(nums) == {0}: return "0"
+        return "".join(sorted(map(str,nums),key = lambda x: x*3, reverse = True))
+
+# 但这个 '3' 不科学，应该改为 len(str(max(nums))) - len(str(min(nums))) + 1
 ```
 
 [返回目录](#00)

@@ -42,7 +42,7 @@
    - [42.连续子数组的最大和](#42连续子数组的最大和)
    - [43.1~n整数中1出现的次数]
    - [44.数字序列中某一位的数字]
-   - [45.把数组排成最小的数]
+   - [45.把数组排成最小的数](#45把数组排成最小的数)
    - [46.把数字翻译成字符串](#46把数字翻译成字符串)
    - [47.礼物的最大价值](#47礼物的最大价值)
    - [48.最长不含重复字符的子字符串](#48最长不含重复字符的子字符串)
@@ -53,7 +53,7 @@
    - [53.在排序数组中查找数字](#53在排序数组中查找数字)
    - [54.二叉搜索树的第k个结点](#54二叉搜索树的第k个结点)
    - [55.二叉树的深度](#55二叉树的深度)
-   - [56.数组中数字出现的次数]
+   - [56.数组中数字出现的次数](#56数组中数字出现的次数)
    - [57.和为S的两个数](#57和为S的两个数)
    - [58.翻转字符串](#58翻转字符串)
    - [59.队列的最大值](#59队列的最大值)
@@ -641,13 +641,11 @@ class Solution:
 
 class Solution(object):
     def hasSubtree(self, p1, p2):
-        flag = False
-        if p1 and p2:
-            if p1.val == p2.val:
-                flag = self.isPart(p1, p2)
-            if not flag:
-                flag = self.hasSubtree(p1.left, p2) or self.hasSubtree(p1.right, p2)
-        return flag
+        if not p1 or not p2:
+            return False
+        if self.isPart(p1, p2):
+            return True
+        return self.hasSubtree(p1.left, p2) or self.hasSubtree(p1.right, p2)
 
     def isPart(self, p1, p2):
         if not p2:
@@ -1149,6 +1147,22 @@ class Solution:
 
 [回到目录](#00)
 
+### 45.把数组排成最小的数
+#### 题目描述
+输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。例如输入数组[3, 32, 321]，则打印出这3个数字能排成的最小数字321323。
+#### 解法：
+
+```python
+class Solution(object):
+    def printMinNumber(self, nums):
+        if not nums: return ''
+        if set(nums) == {0}: return "0"
+        diff = len(str(max(nums))) - len(str(min(nums))) + 1
+        return "".join(sorted(map(str,nums),key= lambda x: x*diff))
+```
+
+[回到目录](#00)
+
 ### 46.把数字翻译成字符串
 #### 题目描述
 给定一个数字，我们按照如下规则把它翻译为字符串：
@@ -1400,6 +1414,63 @@ class Solution:
         depthleft = self.TreeDepth(pRoot.left)
         depthright = self.TreeDepth(pRoot.right)
         return max(depthleft, depthright) + 1
+```
+
+[回到目录](#00)
+
+### 56.数组中数字出现的次数
+### 56-1.数组中只出现一次的两个数字
+#### 题目描述
+一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。你可以假设这两个数字一定存在。
+#### 解法：
+
+```python
+import functools
+class Solution(object):
+    def findNumsAppearOnce(self, nums):
+        if len(nums) < 2: return []
+        diff = functools.reduce(lambda r, x: r ^ x, nums)
+        idx = len(bin(diff)) - bin(diff).rfind('1') - 1
+        num1 = num2 = 0
+        for num in nums:
+            if (num >> idx) & 1:
+                num1 ^= num
+            else:
+                num2 ^= num
+        return [num1, num2]
+```
+
+[回到目录](#00)
+
+### 56-2.数组中唯一只出现一次的数字
+#### 题目描述
+在一个数组中除了一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。你可以假设满足条件的数字一定存在。
+思考题：
+如果要求只使用 O(n) 的时间和额外 O(1) 的空间，该怎么做呢？
+#### 解法：
+
+```python
+class Solution(object):  # 面试用装x解法
+    def findNumberAppearingOnce(self, nums):
+        a = b = 0
+        for n in nums:
+            a = (a ^ n) & ~b
+            b = (b ^ n) & ~a
+        return a
+```
+
+```python
+class Solution(object):  # 常规解法
+    def findNumberAppearingOnce(self, nums):
+        ans = 0
+        for i in range(32):
+            cnt = 0
+            for n in nums:
+                if (n >> i) & 1:
+                    cnt += 1
+            if cnt % 3:
+                ans |= 1 << i
+        return ans if ans < 2**31 else ans - 2**32
 ```
 
 [回到目录](#00)
