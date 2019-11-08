@@ -8,11 +8,11 @@
  - [67	Add Binary]
  - [43	Multiply Strings]
  - [29	Divide Two Integers]
- - [69. Sqrt(x)](#69-sqrt-x-)
- - [50. Pow(x, n)](#50-pow-x--n-)
+ - [69. Sqrt(x)](#69-sqrtx)
+ - [50. Pow(x, n)](#50-powx-n)
  - [367	Valid Perfect Square]
  - [365	Water and Jug Problem]
- - [204. Count Primes](204-count-primes)
+ - [204. Count Primes](#204-count-primes)
 ## Sum		
  - [1	Two Sum]
  - [167. Two Sum II](#167-two-sum-ii)
