@@ -13,7 +13,7 @@
    - [13.机器人的运动范围](#13机器人的运动范围)
    - [14.剪绳子](#14剪绳子)
    - [15.二进制中 1 的个数](#15二进制中-1-的个数)
-   - [16.数值的整数次方]
+   - [16.数值的整数次方](#16数值的整数次方)
    - [17.打印从1到最大的n位数]
    - [18.删除列表中重复的节点](#18删除列表中重复的节点)
    - [19.正则表达式匹配]
@@ -407,6 +407,26 @@ class Solution:
             count += 1
             n &= (n - 1)
         return count
+```
+
+[回到目录](#00)
+
+### 16.数值的整数次方
+#### 题目描述
+实现函数double Power(double base, int exponent)，求base的 exponent次方。不得使用库函数，同时不需要考虑大数问题。
+#### 解法：
+
+```python
+class Solution(object):  # 简单快速幂解法
+    def Power(self, base, exponent):
+        exp = abs(exponent)
+        r = 1
+        while exp:
+            if exp & 1:
+                r *= base
+            base *= base
+            exp >>= 1
+        return r if exponent >= 0 else 1/r
 ```
 
 [回到目录](#00)
