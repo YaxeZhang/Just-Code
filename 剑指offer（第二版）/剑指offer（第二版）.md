@@ -80,7 +80,7 @@ class Solution:
     def duplicate(self, numbers, duplication):
         if not numbers:
             return False
-        for i, v in enumerate(numbers):
+        for _, v in enumerate(numbers):
             if v >= len(numbers) or v < 0:
                 return False
         for i in range(len(numbers)):
@@ -94,10 +94,10 @@ class Solution:
         return False
 ```
 
-**使用 O(1) 空间的解法**
+**使用 O(1) 空间的解法:** 但条件一定要明确，存在重复数字。思维类似于寻找链表环的入口。
 
 ```python
-class Solution(object):
+class Solution:
     def duplicateInArray(self, nums):
         f = s = 0
         while f == 0 or f != s:
@@ -124,8 +124,7 @@ class Solution:
             return False
         row = len(array)                # 数组的行数
         col = len(array[0])             # 数组的列数
-        i = row - 1
-        j = 0                           # i, j这样规定是从左下开始查找，也可以从右上
+        i， j = row - 1, 0                           # i, j这样规定是从左下开始查找，也可以从右上
         while i >= 0 and j < col:       # 双指针来判断是否在array中
             if array[i][j] == target:
                 return True             # 如果等于输出True
@@ -147,13 +146,13 @@ class Solution:
 class Solution:
     # s 源字符串
     def replaceSpace(self, s):
-        res = ''
-        for i in range(len(s)-1, -1, -1):
-            if s[i] == ' ':
-                res += '02%'
+        res = []
+        for i in s:
+            if i == ' ':
+                res.extend('%', '2', '0')
             else:
-                res += s[i]
-        return res[::-1]
+                res.append(i)
+        return ''.join(res)
 ```
 
 [回到目录](#00)
@@ -171,12 +170,28 @@ class Solution:
 
 class Solution:
     # 返回从尾部到头部的列表值序列，例如[1,2,3]
-    def printListFromTailToHead(self, listNode):
+    def printListFromTailToHead(self, head):
         res = []
-        while listNode:
-            res.append(listNode.val)
-            listNode = listNode.next
+        while head:
+            res.append(head.val)
+            head = head.next
         return res[::-1]
+```
+
+**还可以递归实现：**
+
+```python
+class Solution:
+    def printListReversingly(self, head):
+        self.res = []
+
+        def helper(p):
+            if p:
+                helper(p.next)
+                self.res.append(p.val)
+
+        helper(head)
+        return self.res
 ```
 
 [回到目录](#00)
@@ -207,17 +222,18 @@ class Solution:
 
 ```python
 class Solution:
-    # 返回构造的TreeNode根节点
-    def reConstructBinaryTree(self, pre, tin):
-        def predfs(stop):
-            if pre and tin[0] != stop:
-                root = TreeNode(pre.pop(0))
-                root.left = predfs(root.val)
-                tin.pop(0)
-                root.right = predfs(stop)
+    def buildTree(self, preorder, inorder):
+
+        def dfs(stop):
+            if preorder and inorder[-1] != stop:
+                root = TreeNode(preorder.pop())
+                root.left = dfs(root.val)
+                inorder.pop()
+                root.right = dfs(stop)
                 return root
-        tin, pre = tin[:], pre[:]
-        return predfs(None)
+
+        preorder, inorder = preorder[::-1], inorder[::-1]
+        return dfs(None)
 ```
 
 [回到目录](#00)
@@ -228,28 +244,24 @@ class Solution:
 #### 解法：
 
 ```python
-# class TreeLinkNode:
+# Definition for a binary tree node.
+# class TreeNode(object):
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
-#         self.next = None
+#         self.father = None
 class Solution:
-    def GetNext(self, pNode):  # 这道题情况一定要考虑全
-        if not pNode:
-            return None
-        if pNode.right:        # 如果有右节点，那么此时pNode是根节点，
-                               # 下一个节点是右子树的最左边的节点
-            pNode = pNode.right
-            while pNode.left:
-                pNode = pNode.left
-            return pNode
-        while pNode.next:      # 用来判断当前节点是不是根节点
-            if pNode.next.left == pNode:
-                               # 如果是左节点，那么返回它的父节点
-                return pNode.next
-            pNode = pNode.next # 如果不是，再向上找
-        return pNode.next
+    def inorderSuccessor(self, q):
+        if not q: return None
+        if q.right:
+            q = q.right
+            while q.left:
+                q = q.left
+            return q
+        while q.father and q.father.right == q:
+            q = q.father
+        return q.father
 ```
 
 [回到目录](#00)
@@ -303,10 +315,8 @@ class Solution:
 class Solution:
     def Fibonacci(self, n):
         a, b = 1, 0
-        while n:
-            b = a + b
-            a = b - a
-            n -= 1
+        for _ in range(n):
+            a, b = a+b, a
         return b
 ```
 
@@ -322,23 +332,18 @@ NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
 
 ```python
 class Solution:
-    def minNumberInRotateArray(self, rotateArray):
-        if not rotateArray:
-            return 0
-        start, end = 0, len(rotateArray) - 1
-        while start + 1 < end:
-            mid = int(start + (end - start) / 2)
-            if rotateArray[mid] > rotateArray[end]:
-                start = mid
+    def findMin(self, nums):
+        if not nums: return -1
+        l, r = 0, len(nums) - 1
+        while l < r:
+            mid = (l + r) >> 1
+            if nums[mid] > nums[r]:
+                l = mid + 1
+            elif nums[mid] == nums[r]:
+                r -= 1
             else:
-                if rotateArray[mid] < rotateArray[end]:
-                    end = mid
-                else:
-                    end -= 1
-        if rotateArray[start] > rotateArray[end]:
-            return rotateArray[end]
-        else:
-            return rotateArray[start]
+                r = mid
+        return nums[l]
 ```
 
 [回到目录](#00)
@@ -349,7 +354,7 @@ class Solution:
 #### 解法：
 
 ```python
-class Solution(object):
+class Solution:
     def movingCount(self, threshold, rows, cols):
 
         def dfs(x, y):
@@ -375,7 +380,7 @@ class Solution(object):
 #### 解法：
 
 ```python
-class Solution(object):
+class Solution:
     def maxProductAfterCutting(self,n):
         dp = [0]*(n+1)
         for i in range(2,n+1):
@@ -385,7 +390,7 @@ class Solution(object):
 ```
 
 ```python
-class Solution(object):
+class Solution:
     def maxProductAfterCutting(self,n):
         return n - 1 if n < 4 else 3 ** ((n-2) // 3) * ((n-2) % 3 + 2)
 ```
@@ -417,7 +422,7 @@ class Solution:
 #### 解法：
 
 ```python
-class Solution(object):  # 简单快速幂解法
+class Solution:  # 简单快速幂解法
     def Power(self, base, exponent):
         exp = abs(exponent)
         r = 1
@@ -447,13 +452,12 @@ class Solution:
         tmp.next = pHead
         while pHead and pHead.next:
             if pHead.val == pHead.next.val:
-                while pHead and pHead.next and pHead.val == pHead.next.val:
+                while pHead.next and pHead.val == pHead.next.val:
                     pHead = pHead.next
                 tmp.next = pHead.next
-                pHead = pHead.next
             else:
                 tmp = tmp.next
-                pHead = pHead.next
+            pHead = pHead.next
         return dummy.next
 ```
 
@@ -493,20 +497,16 @@ class Solution:
 #         self.next = None
 
 class Solution:
-    def FindKthToTail(self, head, k):
-        if not head or k <= 0:   # 判断条件head为空或者k<=0都不是常规满足的条件
+    def findKthToTail(self, head, k):
+        if not head or k <= 0:
             return None
-        pre = post = head        # 快慢指针做这道题
-        while k:                 # 快指针先走 k 步
-            if pre:              # 加判断是防止 k 的数值比链表的长度长
-                pre = pre.next
-                k -= 1
-            else:
-                return None
-        while pre:               # 快慢指针一起走，保持 k 个距离
-            pre = pre.next
-            post = post.next
-        return post
+        fast = slow = head
+        for _ in range(k): # 快慢指针来走，之所以先判断是为了防止 k 等于链表长度的情况。
+            if not fast: return None
+            fast = fast.next
+        while fast:
+            fast, slow = fast.next, slow.next
+        return slow
 ```
 
 [回到目录](#00)
@@ -639,7 +639,7 @@ class Solution:
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
+class Solution:
     def hasSubtree(self, p1, p2):
         if not p1 or not p2:
             return False
@@ -733,7 +733,7 @@ class Solution:
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
+class Solution:
     def isSymmetric(self, root):
         if not root: return True
 
@@ -753,7 +753,7 @@ class Solution(object):
 #### 解法：
 
 ```python
-class Solution(object):
+class Solution:
     def printMatrix(self, matrix):
         res = []
         if not matrix: return res
@@ -774,7 +774,7 @@ class Solution(object):
 **动用了hin多空间**
 
 ```python
-class Solution(object):
+class Solution:
     def printMatrix(self, matrix):
         res = []
         while matrix:
@@ -865,7 +865,7 @@ class MinStack:
 #### 解法：
 
 ```python
-class Solution(object):
+class Solution:
     def isPopOrder(self, pushV, popV):
         if len(pushV) != len(popV): return False
         stack, i = [], 0       # 用 stack 来模拟进出栈。
@@ -1033,7 +1033,7 @@ class Solution:
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
+class Solution:
     def convert(self, root):
         if not root: return None
         prev = None
@@ -1153,7 +1153,7 @@ class Solution:
 #### 解法：
 
 ```python
-class Solution(object):
+class Solution:
     def printMinNumber(self, nums):
         if not nums: return ''
         if set(nums) == {0}: return "0"
@@ -1208,7 +1208,7 @@ class Solution:
 #### 解法：
 
 ```python
-class Solution(object):
+class Solution:
     def getMaxValue(self, grid):
         dp = [0] * len(grid[0])
         for i in range(len(grid)):
@@ -1349,7 +1349,7 @@ class Solution:
 #### 解法：
 
 ```python
-class Solution(object):
+class Solution:
     def getNumberOfK(self, nums, k):
         if not nums: return 0
         def search(lo, hi):
@@ -1380,7 +1380,7 @@ class Solution(object):
 #         self.left = None
 #         self.right = None
 
-class Solution(object):
+class Solution:
     def kthNode(self, root, k):
         stack = []
         while stack or root:
@@ -1426,7 +1426,7 @@ class Solution:
 
 ```python
 import functools
-class Solution(object):
+class Solution:
     def findNumsAppearOnce(self, nums):
         if len(nums) < 2: return []
         diff = functools.reduce(lambda r, x: r ^ x, nums)
@@ -1450,7 +1450,7 @@ class Solution(object):
 #### 解法：
 
 ```python
-class Solution(object):  # 面试用装x解法
+class Solution:  # 面试用装x解法
     def findNumberAppearingOnce(self, nums):
         a = b = 0
         for n in nums:
@@ -1460,7 +1460,7 @@ class Solution(object):  # 面试用装x解法
 ```
 
 ```python
-class Solution(object):  # 常规解法
+class Solution:  # 常规解法
     def findNumberAppearingOnce(self, nums):
         ans = 0
         for i in range(32):
@@ -1561,7 +1561,7 @@ class Solution:
 #### 解法：
 
 ```python
-class Solution(object):
+class Solution:
     def isContinuous(self, numbers):
         if not numbers: return False
         nums = [x for x in numbers if x]
