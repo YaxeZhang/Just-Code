@@ -61,7 +61,7 @@
    - [61.扑克牌中的顺子](#61扑克牌中的顺子)
    - [62.圆圈中最后剩下的数字](#62圆圈中最后剩下的数字)
    - [63.股票的最大利润](#63股票的最大利润)
-   - [64.求 1+2+3+...+n]
+   - [64.求 1+2+3+...+n](#64求-123n)
    - [65.不用加减乘除做加法](#65不用加减乘除做加法)
    - [66.构建乘积数组](#66构建乘积数组)
 
@@ -1617,6 +1617,21 @@ class Solution:
             min_p = min(min_p, prices[i])
             max_p = max(max_p, prices[i] - min_p)
         return max_p
+```
+
+[回到目录](#00)
+
+### 64.求 1+2+3+...+n
+#### 题目描述
+求1+2+…+n,要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。
+#### 解法：
+
+```python
+class Solution:
+    def getSum(self, n):  # 递归也可以实现，但是数大了以后会超出递归栈的上限，所以 reduce 很棒。
+        import functools
+        return functools.reduce(lambda x, y: x+y, range(n+1))
+
 ```
 
 [回到目录](#00)
