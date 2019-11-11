@@ -9,7 +9,7 @@
  - [139. Word Break](#139-word-break)
  - [375. Guess Number Higher or Lower II](#375-guess-number-higher-or-lower-ii)
  - [312. Burst Balloons](#312-burst-balloons)
- - [322	Coin Change]
+ - [322. Coin Change](#322-coin-change)
 ## 股票最大利润问题
  - [121. Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)
  - [122. Best Time to Buy and Sell Stock II](#122-best-time-to-buy-and-sell-stock-ii)
@@ -522,6 +522,70 @@ class Solution:
                     if tmp > ans: ans = tmp
                 dp[i][j] = ans
         return dp[0][n - 1]
+```
+
+[返回目录](#00)
+
+## 322. Coin Change
+
+You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+
+系统会为您提供不同面额的硬币和总金额。 编写一个函数来计算组成该数量所需的最少数量的硬币。 如果这笔钱不能用硬币的任何组合来弥补，请返回-1。
+
+**Example**
+
+```
+Example 1:
+
+Input: coins = [1, 2, 5], amount = 11
+Output: 3
+Explanation: 11 = 5 + 5 + 1
+
+Example 2:
+
+Input: coins = [2], amount = 3
+Output: -1
+```
+
+---
+
+### Python Solution
+**分析：** 经典的换零钱问题，需要着重掌握。
+
+```python
+class Solution:
+    def coinChange(self, coins, amt):
+        def do(count, have, i, res):
+            coin = coins[i]
+            if count - (have - amt) // coin >= res:
+                return res
+            need = amt-have
+            if need % coin is 0:
+                x = count + need//coin
+                return x if x < res else res
+            if i is 0:
+                return res
+            for j in range(need // coin, -1, -1):
+                sub = do(count+j, have+coin*j, i-1, res)
+                if sub < res:
+                    res = sub
+            return res
+
+        coins.sort()
+        ret = do(0, 0, len(coins)-1, amt+1)
+        return -1 if ret == amt+1 else ret
+```
+
+```python
+class Solution:
+    def coinChange(self, coins, amount):
+        MAX = float('inf')
+        dp = [0] + [MAX] * amount
+
+        for i in range(1, amount + 1):
+            dp[i] = min([dp[i - c] if i - c >= 0 else MAX for c in coins]) + 1
+
+        return [dp[amount], -1][dp[amount] == MAX]
 ```
 
 [返回目录](#00)
