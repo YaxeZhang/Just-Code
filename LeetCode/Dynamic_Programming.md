@@ -13,7 +13,7 @@
 ## 股票最大利润问题
  - [121. Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)
  - [122. Best Time to Buy and Sell Stock II](#122-best-time-to-buy-and-sell-stock-ii)
- - [123	Best Time to Buy and Sell Stock III]
+ - [123. Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)
  - [188	Best Time to Buy and Sell Stock IV]
  - [309	Best Time to Buy and Sell Stock with Cooldown]
 ## 二维		
@@ -634,6 +634,57 @@ class Solution:
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         return sum(max(b-a,0)for a,b in zip(prices,prices[1:]))
+```
+
+[返回目录](#00)
+
+## 123. Best Time to Buy and Sell Stock III
+
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete at most two transactions.
+
+Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+
+假设您有一个数组，第i个元素是第i天给定股票的价格。 设计算法以找到最大的利润。 您最多可以完成两次交易。 注意：您可能无法同时进行多项交易（即必须先出售股票才能再次购买）。
+
+**Example**
+
+```
+Example 1:
+
+Input: [3,3,5,0,0,3,1,4]
+Output: 6
+Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
+             Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.
+
+Example 2:
+
+Input: [1,2,3,4,5]
+Output: 4
+Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+             Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are
+             engaging multiple transactions at the same time. You must sell before buying again.
+```
+
+---
+
+### Python Solution
+**分析：**
+
+**一维的解法**
+
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        hold1 = hold2 = float('-inf')
+        sold1 = sold2 = 0
+        for v in prices:
+            sold2 = max(sold2, hold2 + v)
+            hold2 = max(hold2, sold1 - v)
+            sold1 = max(sold1, hold1 + v)
+            hold1 = max(hold1, -v)
+        return  sold2
 ```
 
 [返回目录](#00)
