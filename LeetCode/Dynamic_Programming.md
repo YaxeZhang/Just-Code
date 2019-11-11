@@ -12,7 +12,7 @@
  - [322	Coin Change]
 ## 股票最大利润问题
  - [121. Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)
- - [122	Best Time to Buy and Sell Stock II]
+ - [122. Best Time to Buy and Sell Stock II](#122-best-time-to-buy-and-sell-stock-ii)
  - [123	Best Time to Buy and Sell Stock III]
  - [188	Best Time to Buy and Sell Stock IV]
  - [309	Best Time to Buy and Sell Stock with Cooldown]
@@ -571,6 +571,69 @@ class Solution:
             min_p = min(min_p, prices[i])
             max_v = max(max_v, prices[i] - min_p)
         return max_v
+```
+
+[返回目录](#00)
+
+## 122. Best Time to Buy and Sell Stock II
+
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).
+
+Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+
+假设您有一个数组，第i个元素是第i天给定股票的价格。 设计算法以找到最大的利润。 您可以根据需要完成尽可能多的交易（即，买入一份并多次出售一股股票）。 注意：您可能无法同时进行多项交易（即必须先出售股票才能再次购买）。
+
+**Example**
+
+```
+Example 1:
+
+Input: [7,1,5,3,6,4]
+Output: 7
+Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+             Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+
+Example 2:
+
+Input: [1,2,3,4,5]
+Output: 4
+Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+             Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are
+             engaging multiple transactions at the same time. You must sell before buying again.
+```
+
+---
+
+### Python Solution
+**分析：** 两种解法：1. 动态规划的解法。 2. 贪心的解法，因为不限制买卖次数，所以我们只要后一天比前一天价格高，我们就在答案里加上差值，可以看作我们前一天买了今天买了，如果明天的比今天还高也没有关系，今天再买入、明天卖掉的方案和昨天买明天卖的方案是等价的。
+
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        n = len(prices)
+        dp, j = [0] * n, n-1
+        for i in range(n-2, -1, -1):
+            if prices[i] > prices[i+1]:
+                j = i
+            dp[i] = dp[i+1] if i == j else prices[j] - prices[i] + dp[j]
+        return dp[0] if dp else 0
+```
+
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        res = 0
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i-1]:
+                res += prices[i] - prices[i-1]
+        return res
+
+# 可以简化为：
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        return sum(max(b-a,0)for a,b in zip(prices,prices[1:]))
 ```
 
 [返回目录](#00)
