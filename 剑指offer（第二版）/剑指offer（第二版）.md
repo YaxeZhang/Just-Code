@@ -149,7 +149,7 @@ class Solution:
         res = []
         for i in s:
             if i == ' ':
-                res.extend('%', '2', '0')
+                res.extend(['%', '2', '0'])
             else:
                 res.append(i)
         return ''.join(res)
