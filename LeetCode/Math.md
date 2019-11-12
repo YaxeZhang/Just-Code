@@ -26,7 +26,7 @@
  - [326	Power of Three]
  - [342	Power of Four]
  - [372	Super Pow]
- - [233	Number of Digit One]
+ - [233. Number of Digit One](#233-number-of-digit-one)
  - [319	Bulb Switcher]
  - [292	Nim Game]
  - [202. Happy Number](#202-happy-number)
@@ -339,6 +339,38 @@ class Solution:
                 else:
                     a += 1
         return res
+```
+
+[返回目录](#00)
+
+## 233. Number of Digit One
+
+Given an integer n, count the total number of digit 1 appearing in all non-negative integers less than or equal to n.
+
+给定一个整数n，计算出现在所有小于或等于n的所有非负整数中的数字1的总数。
+
+**Example**
+
+```
+Input: 13
+Output: 6
+Explanation: Digit 1 occurred in the following numbers: 1, 10, 11, 12, 13.
+```
+
+---
+
+### Python Solution
+**分析：** 很牛逼的做法，需要理论验证下。
+
+```python
+class Solution:
+    def countDigitOne(self, n: int) -> int:
+        count, i = 0, 1
+        while i <= n:
+            a, b = n // i, n % i
+            count += (a+8) // 10 * i + (a%10 == 1) * (b+1)
+            i *= 10
+        return count
 ```
 
 [返回目录](#00)
