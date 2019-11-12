@@ -9,7 +9,7 @@
    - [09.用两个栈实现队列](#9用两个栈实现队列)
    - [10.斐波那契数列](#10斐波那契数列)
    - [11.旋转数组中的最小数字](#11旋转数组中的最小数字)
-   - [12.矩阵中的路径]
+   - [12.矩阵中的路径](#12矩阵中的路径)
    - [13.机器人的运动范围](#13机器人的运动范围)
    - [14.剪绳子](#14剪绳子)
    - [15.二进制中 1 的个数](#15二进制中-1-的个数)
@@ -344,6 +344,45 @@ class Solution:
             else:
                 r = mid
         return nums[l]
+```
+
+[回到目录](#00)
+
+### 12.矩阵中的路径
+#### 题目描述
+请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则之后不能再次进入这个格子。
+
+注意：
+
+输入的路径不为空；
+所有出现的字符均为大写英文字母；
+#### 解法：
+
+```python
+class Solution(object):
+    def hasPath(self, matrix, string):
+        if not matrix or not matrix[0] or not string:
+            return False
+        m, n = len(matrix), len(matrix[0])
+        state = [[True] * n for _ in range(m)]
+
+        def dfs(i, j, pos):
+            if 0 <= i < m and 0 <= j < n and state[i][j]:
+                state[i][j] = ret = False
+                if matrix[i][j] == string[pos]:
+                    if pos == len(string) - 1:
+                        return True
+                    ret = dfs(i, j-1, pos+1) or dfs(i, j+1, pos+1) or dfs(i-1, j, pos+1) or dfs(i+1, j, pos+1)
+                if not ret:
+                    state[i][j] = True
+                return ret
+
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == string[0]:
+                    if dfs(i, j, 0):
+                        return True
+        return False
 ```
 
 [回到目录](#00)
