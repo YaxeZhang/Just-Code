@@ -20,7 +20,7 @@
  - [256	Paint House] **?**
  - [265	Paint House II] **?**
  - [64. Minimum Path Sum](#64-minimum-path-sum)
- - [72	Edit Distance]
+ - [72. Edit Distance](#72-edit-distance)
  - [97	Interleaving String]
  - [174	Dungeon Game]
  - [221. Maximal Square](#221-maximal-square)
@@ -796,6 +796,87 @@ class Solution:
                     dp[j] = grid[i][j] + min(dp[j], dp[j-1])
                 else:
                     dp[j] = grid[i][j] + dp[j]
+        return dp[-1]
+```
+
+[返回目录](#00)
+
+## 72. Edit Distance
+
+Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2.
+You have the following 3 operations permitted on a word:
+1. Insert a character
+2. Delete a character
+3. Replace a character
+
+给定两个单词word1和word2，找到将word1转换为word2所需的最少操作数。
+您可以对一个单词进行以下3个操作：
+1. 插入一个字符
+2. 删除一个字符
+3. 替换一个字符
+
+**Example**
+
+```
+Example 1:
+
+Input: word1 = "horse", word2 = "ros"
+Output: 3
+Explanation:
+horse -> rorse (replace 'h' with 'r')
+rorse -> rose (remove 'r')
+rose -> ros (remove 'e')
+
+Example 2:
+
+Input: word1 = "intention", word2 = "execution"
+Output: 5
+Explanation:
+intention -> inention (remove 't')
+inention -> enention (replace 'i' with 'e')
+enention -> exention (replace 'n' with 'x')
+exention -> exection (replace 'n' with 'c')
+exection -> execution (insert 'u')
+```
+
+---
+
+### Python Solution
+**分析：** 十分经典的动态规划题目，如何理解要依靠表格来解决。可以发现 二维dp 转移是从左上角向右下角迭代的，之后不再是需求更之前的状态，所以可以简化为 一维dp 来表示。
+
+```python
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        m, n = len(word1), len(word2)
+        dp = [[0] * (n+1) for _ in range(m+1)]
+        for i in range(n+1):
+            dp[0][i] = i
+        for i in range(m+1):
+            dp[i][0] = i
+        for i in range(1, m+1):
+            for j in range(1, n+1):
+                if word1[i-1] == word2[j-1]:
+                    dp[i][j] = dp[i-1][j-1]
+                else:
+                    dp[i][j] = min(dp[i-1][j], dp[i-1][j-1], dp[i][j-1]) + 1
+        return dp[-1][-1]
+```
+
+**一维的解法**
+
+```python
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        m, n = len(word1), len(word2)
+        dp = list(range(n + 1))
+        for i in range(m):
+            new = [i + 1]
+            for j in range(n):
+                if word1[i] == word2[j]:
+                    new.append(dp[j])
+                else:
+                    new.append(1 + min(dp[j+1], dp[j],new[-1]))
+            dp = new
         return dp[-1]
 ```
 
