@@ -30,7 +30,7 @@
  - [319	Bulb Switcher]
  - [292	Nim Game]
  - [202. Happy Number](#202-happy-number)
- - [400	Nth Digit]
+ - [400. Nth Digit](#400-nth-digit)
  - [263. Ugly Number](#263-ugly-number)
  - [264. Ugly Number II](#264-ugly-number-ii)
  - [306	Additive Number]
@@ -408,6 +408,46 @@ class Solution:
             stop.add(n)
             n = sum(int(d)**2 for d in str(n))
         return n == 1
+```
+
+[返回目录](#00)
+
+## 400. Nth Digit
+
+Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...
+
+Note:
+n is positive and will fit within the range of a 32-bit signed integer (n < 2**31).
+
+查找无限整数序列的第n个数字1、2、3、4、5、6、7、8、9、10、11，...。注：n为正数，将适合32位范围内 有符号整数（n <2**31）。
+
+**Example**
+
+```
+Input:
+11
+
+Output:
+0
+
+Explanation:
+The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... is a 0, which is part of the number 10.
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+class Solution:
+    def findNthDigit(self, n):
+        n -= 1
+        for digits in range(1, 11):
+            first = 10**(digits - 1)
+            if n < 9 * first * digits:
+                return int(str(first + n//digits)[n%digits])
+            n -= 9 * first * digits
 ```
 
 [返回目录](#00)
