@@ -34,7 +34,7 @@
  - [248	Strobogrammatic Number III]
 ## 提高		
  - [68	Text Justification]
- - [65	Valid Number]
+ - [65. Valid Number](#65-valid-number)
  - [157	Read N Characters Given Read4]
  - [158	Read N Characters Given Read4 II - Call multiple times]
 ## Substring		
@@ -458,6 +458,91 @@ class Solution:
         X = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
         I = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"]
         return M[num//1000] + C[(num%1000)//100] + X[(num%100)//10] + I[num%10]
+```
+
+[返回目录](#00)
+
+## 65. Valid Number
+
+Validate if a given string can be interpreted as a decimal number.
+
+验证给定的字符串是否可以解释为十进制数字。
+
+**Example**
+
+```
+Some examples:
+"0" => true
+" 0.1 " => true
+"abc" => false
+"1 a" => false
+"2e10" => true
+" -90e3   " => true
+" 1e" => false
+"e3" => false
+" 6e-1" => true
+" 99e2.5 " => false
+"53.5e93" => true
+" --6 " => false
+"-+3" => false
+"95a54e53" => false
+```
+
+---
+
+### Python Solution
+**两种写法**： 第一种是一次遍历所有条件判断，第二种就好理解很多。
+
+```python
+class Solution(object):
+    def isNumber(self, s):
+        s = s.strip()
+        met_dot = met_e = met_digit = False
+        for i, char in enumerate(s):
+            if char in '+-':
+                if i > 0 and s[i-1] not in 'eE':
+                    return False
+            elif char == '.':
+                if met_dot or met_e: return False
+                met_dot = True
+            elif char == 'e' or char == 'E':
+                if met_e or not met_digit:
+                    return False
+                met_e, met_digit = True, False
+            elif char.isdigit():
+                met_digit = True
+            else:
+                return False
+        return met_digit
+```
+
+```python
+class Solution:
+    def isNumber(self, s: str) -> bool:
+        s = s.strip()
+        validList = set(['+', '-', '.', 'e', 'E'])
+        isFirst = True
+
+        for c in s:
+            if c.isdigit():
+                isFirst = False
+                continue
+            if c not in validList:
+                return False
+            if c == 'e' or c == 'E':
+                if isFirst:
+                    return False
+                isFirst = True
+                validList = set(['+', '-'])
+            if c == '.':
+                validList = set(['e', 'E'])
+            if c == '+' or c == '-':
+                if not isFirst:
+                    return False
+                validList.remove('+')
+                validList.remove('-')
+
+        return True and not isFirst
 ```
 
 [返回目录](#00)

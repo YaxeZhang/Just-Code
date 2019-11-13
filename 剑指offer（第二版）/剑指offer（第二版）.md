@@ -17,7 +17,7 @@
    - [17.打印从1到最大的n位数]
    - [18.删除列表中重复的节点](#18删除列表中重复的节点)
    - [19.正则表达式匹配]
-   - [20.表示数值的字符串]
+   - [20.表示数值的字符串](#20表示数值的字符串)
    - [21.调整数组顺序使奇数位于偶数前面](#21调整数组顺序使奇数位于偶数前面)
    - [22.链表中倒数第 k 个节点](#22链表中倒数第-k-个节点)
    - [23.链表中环的入口节点](#23链表中环的入口节点)
@@ -498,6 +498,66 @@ class Solution:
                 tmp = tmp.next
             pHead = pHead.next
         return dummy.next
+```
+
+[回到目录](#00)
+
+### 20.表示数值的字符串
+#### 题目描述
+请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串"+100","5e2","-123","3.1416"和"-1E-16"都表示数值。但是"12e","1a3.14","1.2.3","+-5"和"12e+4.3"都不是。
+#### 解法：
+**两种写法**： 第一种是一次遍历所有条件判断，第二种就好理解很多。
+
+```python
+class Solution(object):
+    def isNumber(self, s):
+        s = s.strip()
+        met_dot = met_e = met_digit = False
+        for i, char in enumerate(s):
+            if char in '+-':
+                if i > 0 and s[i-1] not in 'eE':
+                    return False
+            elif char == '.':
+                if met_dot or met_e: return False
+                met_dot = True
+            elif char == 'e' or char == 'E':
+                if met_e or not met_digit:
+                    return False
+                met_e, met_digit = True, False
+            elif char.isdigit():
+                met_digit = True
+            else:
+                return False
+        return met_digit
+```
+
+```python
+class Solution:
+    def isNumber(self, s: str) -> bool:
+        s = s.strip()
+        validList = set(['+', '-', '.', 'e', 'E'])
+        isFirst = True
+
+        for c in s:
+            if c.isdigit():
+                isFirst = False
+                continue
+            if c not in validList:
+                return False
+            if c == 'e' or c == 'E':
+                if isFirst:
+                    return False
+                isFirst = True
+                validList = set(['+', '-'])
+            if c == '.':
+                validList = set(['e', 'E'])
+            if c == '+' or c == '-':
+                if not isFirst:
+                    return False
+                validList.remove('+')
+                validList.remove('-')
+
+        return True and not isFirst
 ```
 
 [回到目录](#00)
