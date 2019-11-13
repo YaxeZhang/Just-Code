@@ -2,7 +2,7 @@
 ## 基础
  - [278	First Bad Version]
  - [35	Search Insert Position]
- - [33	Search in Rotated Sorted Array]
+ - [33. Search in Rotated Sorted Array](#33-search-in-rotated-sorted-array)
  - [81	Search in Rotated Sorted Array II]
  - [153	Find Minimum in Rotated Sorted Array]
  - [154	Find Minimum in Rotated Sorted Array II]
@@ -15,6 +15,50 @@
  - [300	Longest Increasing Subsequence]
  - [354	Russian Doll Envelopes]
 
+
+## 33. Search in Rotated Sorted Array
+
+Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+(i.e., [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2]).
+You are given a target value to search. If found in the array return its index, otherwise return -1.
+You may assume no duplicate exists in the array.
+Your algorithm's runtime complexity must be in the order of O(log n).
+
+假设以升序排序的数组在事先未知的某个轴上旋转。 （即[0,1,2,4,5,6,7]可能会变成[4,5,6,7,0,1,2]）。 将为您提供要搜索的目标值。 如果在数组中找到，则返回其索引，否则返回-1。 您可以假设数组中不存在重复项。 您算法的运行时复杂度必须为O（logn）的顺序。
+
+**Example**
+
+```
+Example 1:
+
+Input: nums = [4,5,6,7,0,1,2], target = 0
+Output: 4
+
+Example 2:
+
+Input: nums = [4,5,6,7,0,1,2], target = 3
+Output: -1
+```
+
+---
+
+### Python Solution
+**分析：** 这里的灵魂是三个异或。
+
+```python
+class Solution:
+    def search(self, nums, target):
+        lo, hi = 0, len(nums) - 1
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if (nums[0] > target) ^ (nums[0] > nums[mid]) ^ (target > nums[mid]):
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo if lo == hi and target == nums[lo] else -1
+```
+
+[返回目录](#00)
 
 ## 374. Guess Number Higher or Lower
 

@@ -31,7 +31,7 @@
  - [213	House Robber II]
  - [276	Paint Fence]
  - [91. Decode Ways](#91-decode-ways)
- - [10	Regular Expression Matching]
+ - [10. Regular Expression Matching](#10-regular-expression-matching)
  - [44	Wildcard Matching]
 
 ## 70. Climbing Stairs
@@ -1029,6 +1029,69 @@ class Solution:
             else:
                 l = r
         return r
+```
+
+[返回目录](#00)
+
+## 10. Regular Expression Matching
+
+Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*'.
+
+'.' Matches any single character.
+'*' Matches zero or more of the preceding element.
+The matching should cover the entire input string (not partial).
+
+给定一个输入字符串（s）和一个模式（p），实现支持'。'的正则表达式匹配。 和“ *”。 '。' 匹配任何单个字符。 '*'匹配零个或多个前一个元素。 匹配项应覆盖整个输入字符串（而非部分）。
+
+**Example**
+
+```
+Example 1:
+
+Input:
+s = "aa"
+p = "a"
+Output: false
+Explanation: "a" does not match the entire string "aa".
+
+Example 2:
+
+Input:
+s = "aa"
+p = "a*"
+Output: true
+Explanation: '*' means zero or more of the preceding element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
+
+Example 3:
+
+Input:
+s = "ab"
+p = ".*"
+Output: true
+Explanation: ".*" means "zero or more (*) of any character (.)".
+```
+
+---
+
+### Python Solution
+**分析：** 一道困难程度的题，判断条件必须要分析好，最好纸上记下推一下，不然很容易乱。
+
+```python
+class Solution(object):
+    def isMatch(self, s, p):
+        dp = [[False] * (len(p) + 1) for _ in range(len(s) + 1)]
+        dp[0][0] = True
+        for j in range(1, len(p) + 1):
+            if p[j - 1] == "*":
+                dp[0][j] = dp[0][j - 2]
+
+        for i in range(1, len(s) + 1):
+            for j in range(1, len(p) + 1):
+                if p[j - 1] != "*":
+                    dp[i][j] = dp[i - 1][j - 1] and (s[i - 1] == p[j - 1] or p[j - 1] == ".")
+                else:
+                    dp[i][j] = dp[i][j - 2] or dp[i - 1][j] and (p[j - 2] == s[i - 1] or p[j - 2] == ".")
+        return dp[-1][-1]
 ```
 
 [返回目录](#00)
