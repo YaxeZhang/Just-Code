@@ -22,9 +22,9 @@ LC #862
  - [重建二叉树](#重建二叉树)<span id = "202"></span>
  - [二叉树的翻转](#二叉树的翻转)<span id = "203"></span>
  - [二叉树的深度](#二叉树的深度)<span id = "204"></span>
- - [平衡二叉树]
- - [二叉树的最大路径和]
- - [二叉树公共祖先]
+ - [平衡二叉树](#平衡二叉树)<span id = "205"></span>
+ - [二叉树的最大路径和](#二叉树的最大路径和)<span id = "206"></span>
+ - [二叉树的最低公共祖先](#二叉树的最低公共祖先)<span id = "207"></span>
 
 ## 动态规划
  - [unique path]
@@ -53,6 +53,7 @@ LC #862
  - [3 Sum]
  - [3 Sum Closest]
  - [搜索二维矩阵]
+ - [装满水的容器LC#11]
 
 ## 设计类
  - [min stack]
@@ -482,5 +483,95 @@ class Solution:
 ```
 
 [返回目录](#204)
+
+---
+
+### 平衡二叉树
+#### 题目描述
+给定一棵二叉树，确定它是否是高度平衡的。对于此问题，将高度平衡的二叉树定义为： 一棵二叉树，其中每个节点的两个子树的深度相差不超过1。
+#### Python Solution：
+**分析：** 上一道题二叉树的深度的延伸，有一个小技巧：不平衡就置为 1 ，之后就不用判断了。
+
+```Python
+class Solution(object):
+    def isBalanced(self, root):
+
+        def check(root):
+            if not root: return 0
+            left = check(root.left)
+            right = check(root.right)
+            if left == -1 or right == -1 or abs(left - right) > 1:
+                return -1
+            return max(left, right) + 1
+
+        return check(root) != -1
+```
+
+[返回目录](#205)
+
+---
+
+### 二叉树的最大路径和
+#### 题目描述
+给定一个非空的二叉树，找到最大路径总和。 对于此问题，路径定义为沿着父子连接从某个起始节点到树中任何节点的任何节点序列。 该路径必须至少包含一个节点，并且不需要经过根节点。
+#### Python Solution：
+**分析：** 比较经典的一道二叉树的题目，其实也是自底而上的递归调用，判断即可，同样有 trick 。
+
+```Python
+class Solution:
+    def maxPathSum(self, root: TreeNode) -> int:
+        self.res = float('-inf')
+
+        def dfs(root):
+            if not root:
+                return 0
+            left = max(0, dfs(root.left))   # left 和 right 与 0 取最大值方便了下面就不用判断了。
+            right = max(0, dfs(root.right))
+            val = root.val + left + right
+            self.res = max(self.res, val)
+            return root.val + max(left, right)
+
+        dfs(root)
+        return self.res
+```
+
+[返回目录](#206)
+
+---
+
+### 二叉树的最低公共祖先
+#### 题目描述
+给定二叉树，找到树中两个给定节点的最低公共祖先（LCA）。
+#### Python Solution：
+**分析：** 二叉树的题目考验递归比较多，这道题也是，迭代法想法还可以但是代码实现比较麻烦，不推荐。
+
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root == None:
+            return None
+        if root == p or root == q:
+            return root
+        m = self.lowestCommonAncestor(root.left,p,q)
+        n = self.lowestCommonAncestor(root.right,p,q)
+        if(m and n):
+            return root
+        elif m:
+            return m
+        else:
+            return n
+```
+
+**可简化为**
+
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root in (None, p, q): return root
+        left, right = (self.lowestCommonAncestor(kid, p, q)
+                       for kid in (root.left, root.right))
+        return root if left and right else left or right
+```
+[返回目录](#207)
 
 ---
