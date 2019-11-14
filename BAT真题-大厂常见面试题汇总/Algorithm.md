@@ -28,6 +28,7 @@ LC #862
 
 ## 动态规划
  - [unique path]
+ - [House Robber]
  - [换硬币]
  - [买卖股票的最佳时机]
  - [矩阵中的路径 jzoffer]
