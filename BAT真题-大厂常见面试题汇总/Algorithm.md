@@ -19,7 +19,7 @@ LC #862
 
 ## 二叉树
  - [二叉树的前序中序后序遍历]
- - [恢复二叉树（前序中序、后序中序）]
+ - [重建二叉树（前序中序、后序中序）]
  - [二叉树翻转]
  - [二叉树的深度]
  - [平衡二叉树]
@@ -319,5 +319,68 @@ class Solution:
 ```
 
 [返回目录](#106)
+
+---
+
+### 二叉树的前序中序后序遍历
+#### 题目：
+给定一个二叉树，给出它的前序、中序、后序遍历，递归和非递归方式。
+#### Python Solution：
+**分析：** 这是二叉树最基本的一道题，也是考察对二叉树的认识和递归的题。后序遍历的非递归有点难度，但是也可以取巧。
+
+```Python
+class Solution: # 前序遍历
+    def preorderTraversal(self, root):
+        return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right) if root else []
+
+class Solution:
+    def preorderTraversal(self, root):
+        stack, res = [root], []
+        while stack:
+            node = stack.pop()
+            if node:
+                res.append(node.val)
+                stack.append(node.right)
+                stack.append(node.left)
+        return res
+```
+
+```Python
+class Solution: # 中序遍历
+    def inorderTraversal(self, root):
+        return self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right) if root else []
+
+class Solution:
+    def inorderTraversal(self, root):
+        stack, res = [], []
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                node = stack.pop()
+                res.append(node.val)
+                root = node.right
+        return res
+```
+
+```Python
+class Solution: # 后序遍历
+    def postorderTraversal(self, root):
+        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val] if root else []
+
+class Solution:
+    def postorderTraversal(self, root):
+        stack, res = [root], []
+        while stack:
+            node = stack.pop()
+            if node:
+                res.append(node.val)
+                stack.append(node.left)
+                stack.append(node.right)
+        return res[::-1]
+```
+
+[返回目录](#105)
 
 ---
