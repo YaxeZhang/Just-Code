@@ -19,9 +19,9 @@ LC #862
 
 ## 二叉树
  - [二叉树的前序中序后序遍历](#二叉树的前序中序后序遍历)<span id = "201"></span>
- - [重建二叉树（前序中序、后序中序）]
- - [二叉树翻转]
- - [二叉树的深度]
+ - [重建二叉树](#重建二叉树)<span id = "202"></span>
+ - [二叉树的翻转](#二叉树的翻转)<span id = "203"></span>
+ - [二叉树的深度](#二叉树的深度)<span id = "204"></span>
  - [平衡二叉树]
  - [二叉树的最大路径和]
  - [二叉树公共祖先]
@@ -382,5 +382,105 @@ class Solution:
 ```
 
 [返回目录](#201)
+
+---
+
+### 重建二叉树
+#### 题目：
+给定一棵树的后序和中序（前序和中序）遍历，构造二叉树。
+注意： 您可以假定树中不存在重复项
+#### Python Solution：
+**分析：** 以后序中序为例进行解析，推荐 dfs 那种，效率更高。两种解法都非常好理解，第一种是找到根节点，然后将 inorder 查分为两半继续寻找，问题在于如何找到 根节点在 inorder 的位置，下面第一种解法有点傻，更高效的是建立一个哈希表，占用 O(n) 的空间、查询时间为O(1)。第二种解法呢则非常聪明，不用找根节点的位置，构建 root.right 时每次都调用的是 postorder 最后一个元素，终点是 root.val 。构建 root.right 的时候终点是 None。
+
+```Python
+class Solution:  # 推荐解法，可以和面试官讲解思路，赞！
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
+        def postdfs(stop):
+            if postorder and inorder[-1] != stop:
+                root = TreeNode(postorder.pop())
+                root.right = postdfs(root.val)
+                inorder.pop()
+                root.left = postdfs(stop)
+                return root
+        return postdfs(None)
+
+class Solution:  # 常规解法，中规中矩但条件判断易出现问题。
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
+        if inorder:
+            ind = inorder.index(postorder.pop())
+            root = TreeNode(inorder[ind])
+            root.right = self.buildTree(inorder[ind+1:], postorder)
+            root.left = self.buildTree(inorder[:ind], postorder)
+            return root
+```
+
+```Python
+class Solution:  # 常规写法差不多不写了，理解下递归左右子节点的顺序。
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def predfs(stop):
+            if preorder and inorder[-1] != stop:
+                root = TreeNode(preorder.pop())
+                root.left = predfs(root.val)
+                inorder.pop()
+                root.right = predfs(stop)
+                return root
+        preorder.reverse()
+        inorder.reverse()
+        return predfs(None)
+```
+
+[返回目录](#202)
+
+---
+
+### 二叉树的翻转
+#### 题目描述
+左右翻转二叉树。
+#### Python Solution：
+**分析：** 分为两个解法，一种是递归的做法，另外一种是迭代的做法。
+
+```python
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root:
+            root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+            return root
+```
+
+**迭代法**
+
+```python
+class Solution:
+    def invertTree(self, root):
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node:
+                node.left, node.right = node.right, node.left
+                stack.extend([node.left, node.right])
+        return root
+```
+
+[返回目录](#203)
+
+---
+
+### 二叉树的深度
+#### 题目描述
+输入一棵二叉树，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。
+#### Python Solution：
+**分析：** 简单题，递归求解即可，写好 base case，不过迭代也可以做，就是一般的 dfs 或者 bfs 。
+
+```Python
+class Solution:
+    def TreeDepth(self, pRoot):
+        if not pRoot:
+            return 0
+        depthleft = self.TreeDepth(pRoot.left)
+        depthright = self.TreeDepth(pRoot.right)
+        return max(depthleft, depthright) + 1
+```
+
+[返回目录](#204)
 
 ---

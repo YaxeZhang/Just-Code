@@ -475,53 +475,6 @@ class Solution:  # 简单快速幂解法
 
 [回到目录](#00)
 
-### 17.打印从1到最大的n位数
-#### 题目描述
-输入数字n，按顺序打印出从1到最大的n位十进制数，比如输入3，则打印1，2，3...，一直到最大的三位数999.
-#### 解法：
-
-```python
-class Solution:  # 没啥意义的题。也没有 OJ 可以做，粘个别人的代码。
-    def Print1ToMaxOfNDigits(n):
-        if n<=0:
-            return -1
-        ListNum = ['0']*n
-        while Increament(ListNum) is False:
-            PrintNumber(ListNum)
-    def Increament(number):
-        # 该函数输入为字符串列表，作用是通过字符串列表模拟数字加一过程
-        # 两个重要的标志：溢出与进位
-        isOverFlow = False
-        isTakeOver = 0
-        Length = len(number)
-        n = Length - 1
-        while n >= 0:
-            # 将当前n位置的字符转成数字，如果满足进位则加上进位
-            nSum = int(number[n]) + isTakeOver
-            # 进行模拟加法
-            if n == Length-1:        # 判断当前n是不是在最低位，也就是个位
-                nSum += 1            # 如果在个位，则自增1
-            if nSum == 10:            # 如果加到10了，则需要处理进位，但是首先要判断是否溢出
-                if n == 0:            # 首先判断是否溢出
-                    isOverFlow = True
-                    return isOverFlow
-                else:                 # 如果不是溢出则表示需要进位
-                    isTakeOver = 1    # 进位标志位置1
-                    number[n] = '0'   # 将当前位置的数字归0
-            else:                     # 还没有累加到10则进行更新，并返回打印
-                number[n] = str(nSum)
-                break                 # 更新完毕， 打断返回
-            n -= 1                    # n向前移动，观察更高位是否也满足进位
-        return isOverFlow
-    def PrintNumber(number):
-        for i in range((len(number)):
-            if number[i] != '0':
-                print(''.join(number[i:])
-                break
-```
-
-[回到目录](#00)
-
 ### 18.删除列表中重复的节点
 #### 题目描述
 在一个排序的链表中，存在重复的节点，请删除该链表中重复的节点，重复的节点不保留，返回链表头指针。 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5

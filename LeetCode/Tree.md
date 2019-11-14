@@ -2247,7 +2247,7 @@ Given preorder and inorder traversal of a tree, construct the binary tree.
 Note:
 You may assume that duplicates do not exist in the tree.
 
-给定一棵树的前序和有序遍历，构造二叉树。
+给定一棵树的前序和中序遍历，构造二叉树。
 
 注意： 您可以假定树中不存在重复项。
 
@@ -2294,7 +2294,7 @@ Given inorder and postorder traversal of a tree, construct the binary tree.
 Note:
 You may assume that duplicates do not exist in the tree.
 
-给定一棵树的有序和后序遍历，构造二叉树。
+给定一棵树的中序和后序遍历，构造二叉树。
 
 注意： 您可以假定树中不存在重复项。
 
