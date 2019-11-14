@@ -10,11 +10,12 @@ LC #862
 区间合并问题
 
 ## 链表
- - [反转链表](#反转链表)<span id = "00"></span>
- - [两个一组反转链表](#两个一组反转链表)<span id = "01"></span>
- - [k个一组反转链表](#k个一组反转链表)<span id = "02"></span>
- - [奇偶次序分离后合并有序链表]
- - [两个链表求和]
+ - [反转链表](#反转链表)<span id = "101"></span>
+ - [反转部分链表](#反转部分链表)<span id = "102"></span>
+ - [两个一组反转链表](#两个一组反转链表)<span id = "103"></span>
+ - [k个一组反转链表](#k个一组反转链表)<span id = "104"></span>
+ - [奇偶次序分离后合并有序链表](#奇偶次序分离后合并有序链表)<span id = "105"></span>
+ - [两个链表求和](#两个链表求和)<span id = "106"></span>
 
 ## 二叉树
  - [二叉树的前序中序后序遍历]
@@ -74,6 +75,7 @@ class Solution:  # 递归法 找到最后两个节点调整顺序，向前递归
         newhead = self.reverseList(head.next)
         head.next.next = head
         head.next = None
+        return newhead
 ```
 
 ```Python
@@ -98,7 +100,32 @@ class Solution:  # 迭代法 头插法，面试时需要配合画图和面试官
         return dummy.next
 ```
 
-[返回目录](#00)
+[返回目录](#101)
+
+---
+
+### 反转部分链表
+#### 题目：
+将链接列表从位置m反向到n。一次性完成。 注意：1≤m≤n≤列表长度。
+#### Python Solution：
+**分析：** 配合上一道题的头插法食用更美味。写起来更简洁，比尾插法好很多。
+
+```Python
+class Solution:
+    def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
+        dummy = post = ListNode(0)
+        post.next = pre = head
+        for _ in range(m-1):
+            post, pre = pre, pre.next
+        for _ in range(n-m):
+            cur = pre.next
+            pre.next = cur.next
+            cur.next = post.next
+            post.next = cur
+        return dummy.next
+```
+
+[返回目录](#102)
 
 ---
 
@@ -122,7 +149,7 @@ class Solution:
         return dummy.next
 ```
 
-[返回目录](#01)
+[返回目录](#103)
 
 ---
 
@@ -132,7 +159,28 @@ class Solution:
 
 k是一个正整数，并且小于或等于链接列表的长度。如果节点数不是k的倍数，那么最后剩下的节点应保持原样。
 #### Python Solution：
-**分析：** 这是一道难度比较大的题，如果剩余反转的链表长度不足 k ，那么保持原样提示我们要对链表计数。用 while True 建立一个循环即可。
+**分析：** 这是一道难度比较大的题，也可以看作是上一题的延伸。可以继续头插法，也可以尾插法，不过尾插法找结点要绕一点，归根结底是一样的 !!! 不过要注意的是循环 头插法 k-1 次，尾插法 k 次。如果剩余反转的链表长度不足 k ，那么保持原样提示我们要对链表计数。用 while True 建立一个循环即可。
+
+```Python
+class Solution:
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        dummy = tmp = ListNode(0)
+        tmp.next = left = right = head
+        while True:
+            count = 0
+            while right and count < k:
+                right = right.next
+                count += 1
+            if count == k:
+                for _ in range(k-1):   # 这个 k-1 很关键。
+                    cur = left.next
+                    left.next = cur.next
+                    cur.next = tmp.next
+                    tmp.next = cur
+                tmp, left = left, right
+            else:
+                return dummy.next
+```
 
 ```Python
 class Solution:
@@ -153,6 +201,123 @@ class Solution:
                 return dummy.next
 ```
 
-[返回目录](#02)
+[返回目录](#104)
+
+---
+
+### 奇偶次序分离后合并有序链表
+#### 题目：
+给定一个链表，次序为奇数的节点按升序排列，次序为偶数的节点按降序排列，请返回排序好的有序链表。
+#### Python Solution：
+**分析：** 这道题比较有意思，乍一看很复杂但是思路十分清晰，分为三步：1. 奇偶次序分离链表 2. 将分离后降序的链表进行反转 3. 合并两个有序链表并返回。
+
+```Python
+class Solution:
+    def reverseUpdate(self, head: ListNode) -> ListNode:
+        if not head:                  # 首先对与链表进行判断
+            return None
+
+        oddhead = odd = head          # 进行第一步：奇偶次序分离
+        evenhead = even = odd.next
+        while even and even.next:
+            odd.next = odd = even.next
+            even.next = even = odd.next
+
+        rev = None                    # 对降序的偶数次链表进行反转
+        while evenhead:
+            rev, rev.next, evenhead = evenhead, rev, evenhead.next
+
+        dummy = tmp = ListNode(0)     # 合并两个有序链表
+        tmp.next = oddhead
+        while rev and oddhead:
+            if rev.val > oddhead.val:
+                tmp.next = oddhead
+                oddhead = oddhead.next
+            else:
+                tmp.next = rev
+                rev = rev.next
+            tmp = tmp.next
+        tmp.next = rev or oddhead
+        return dummy.next
+```
+
+[返回目录](#105)
+
+---
+
+### 两个链表求和
+#### 题目：
+给定一个链表，次序为奇数的节点按升序排列，次序为偶数的节点按降序排列，请返回排序好的有序链表。
+#### Python Solution：
+**分析：** 有两种做法，一种是不用额外空间的做法，在原有的一个链表的基础上加，但是考虑的边界条件等比较多，不推荐，如果面试官没有要求尽量用第二种：计算两个链表代表的数，相加后新创建一个链表。
+
+```Python
+class Solution:
+    def addTwoNumbers(self, l1: 'ListNode', l2: 'ListNode') -> 'ListNode':
+        if not l1 and not l2:
+            return None
+
+        l1_num = 0
+        while l1:
+            l1_num = l1_num * 10 + l1.val
+            l1 = l1.next
+
+        l2_num = 0
+        while l2:
+            l2_num = l2_num * 10 + l2.val
+            l2 = l2.next
+
+        lsum = l1_num + l2_num
+
+        head = ListNode(None)
+        cur = head
+        for istr in str(lsum):
+            cur.next = ListNode(int(istr))
+            cur = cur.next
+
+        return head.next
+```
+
+**麻烦的 O(1) 空间的做法如下，不关心可跳过：**
+
+```Python
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+
+        def countlength(root):
+            cnt = 0
+            while root:
+                root = root.next
+                cnt += 1
+            return cnt
+
+        c1, c2 = l1, l2
+        len1, len2 = countlength(c1), countlength(c2)
+        if len2 > len1:
+            len1, len2, l1, l2 = len2, len1, l2, l1
+        dummy1 = tmp = tmp1 = ListNode(0)
+        tmp.next = l1
+
+        for _ in range(len1 - len2):
+            tmp = tmp.next
+            if tmp.val != 9:
+                tmp1 = tmp
+
+        cur = tmp.next
+        while cur:
+            val = cur.val + l2.val
+            cur.val = val % 10
+            if val < 9:
+                tmp1 = cur
+            elif val > 9:
+                while tmp1 != cur:
+                    tmp1.val = (tmp1.val + 1) % 10
+                    tmp1 = tmp1.next
+            cur, l2 = cur.next, l2.next
+
+        return dummy1 if dummy1.val else dummy1.next
+```
+
+[返回目录](#106)
 
 ---
