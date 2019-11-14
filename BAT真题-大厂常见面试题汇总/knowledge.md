@@ -1,0 +1,11 @@
+讲一讲linux系统的启动过程
+死锁
+tcp
+http
+http、https
+gc
+单例模式
+tcp、udp
+一次完整http请求
+select、epoll
+多态、封装、继承

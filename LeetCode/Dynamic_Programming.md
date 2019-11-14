@@ -28,7 +28,7 @@
  - [363	Max Sum of Rectangle No Larger Than K]
 ## 化简		
  - [198. House Robber](#198-house-robber)
- - [213	House Robber II]
+ - [213. House Robber II](#213-house-robber-ii)
  - [276	Paint Fence]
  - [91. Decode Ways](#91-decode-ways)
  - [10. Regular Expression Matching](#10-regular-expression-matching)
@@ -980,6 +980,48 @@ class Solution:
         for num in nums:
             prev1, prev2 = max(prev2 + num, prev1), prev1
         return prev1
+```
+
+[返回目录](#00)
+
+## 213. House Robber II
+
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+您是计划在街道上抢房屋的专业强盗。 每个房子都藏有一定数量的钱。 这个地方的所有房屋都排成一圈。 这意味着第一所房子是最后一个的邻居。 同时，相邻房屋已连接了安全系统，如果在同一晚闯入两个相邻房屋，它将自动与警方联系。 给定一个表示每个房屋的金额的非负整数列表，请确定您今晚可以盗用的最大金额，而无需通知警察。
+
+**Example**
+
+```
+Example 1:
+Input: [2,3,2]
+Output: 3
+Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2),
+             because they are adjacent houses.
+
+Example 2:
+Input: [1,2,3,1]
+Output: 4
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+             Total amount you can rob = 1 + 3 = 4.
+```
+
+---
+
+### Python Solution
+**分析：** 和上一题的区别就是首尾相连的需要考虑，所以需要考虑这个条件即可。
+
+```python
+class Solution:
+    def rob(self, nums):
+        def rob(nums):
+            now = prev = 0
+            for n in nums:
+                now, prev = max(now, prev + n), now
+            return now
+        return max(rob(nums[len(nums) != 1:]), rob(nums[:-1]))
 ```
 
 [返回目录](#00)

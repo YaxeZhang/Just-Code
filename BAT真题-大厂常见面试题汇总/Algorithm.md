@@ -6,7 +6,7 @@ python 装饰器
 洗牌算法
 出现次数超过一半的数字
 LC #862
-
+8皇后
 区间合并问题
 
 ## 链表
@@ -27,8 +27,8 @@ LC #862
  - [二叉树的最低公共祖先](#二叉树的最低公共祖先)<span id = "207"></span>
 
 ## 动态规划
- - [unique path]
- - [House Robber]
+ - [独特的路径](#独特的路径)<span id = "301"></span>
+ - [House robber](#house-robber)<span id = "302"></span>
  - [换硬币]
  - [买卖股票的最佳时机]
  - [矩阵中的路径 jzoffer]
@@ -574,5 +574,44 @@ class Solution:
         return root if left and right else left or right
 ```
 [返回目录](#207)
+
+---
+
+### 独特的路径
+#### 题目描述
+给定一个 m * n 的矩阵，求从左上角走到右下角有多少种走法。
+#### Python Solution：
+**分析：** 简单的动态规划，可以简化为一维 dp 。
+
+```Python
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp = [1] * n
+        for _ in range(1, m):
+            for i in range(1, n):
+                dp[i] = dp[i-1] + dp[i]
+        return dp[-1]
+```
+
+[返回目录](#301)
+
+---
+
+### House robber
+#### 题目描述
+给一组无序数组，求最大的子序列的和，但是相邻的数不能再一个序列里。
+#### Python Solution：
+**分析：** 其实就是 house robber 问题。简单题，可以从一维简化成常数量的空间复杂度。
+
+```Python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        prev = cur = 0   # 为什么为零就可以了而不是 float('-inf')，因为负数就不考虑了。
+        for i in range(len(nums)):
+            cur, prev = max(prev + nums[i], cur), cur
+        return cur
+```
+
+[返回目录](#302)
 
 ---
