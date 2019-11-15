@@ -32,8 +32,8 @@ LC #862
  - [换硬币](#换硬币)<span id = "303"></span>
  - [买卖股票的最佳时机I](#买卖股票的最佳时机I)<span id = "304"></span>
  - [买卖股票的最佳时机II](#买卖股票的最佳时机II)<span id = "305"></span>
- - [矩阵中的路径 jzoffer]<span id = "306"></span>
- - [正则表达式匹配 jzoffer]<span id = "307"></span>
+ - [矩阵中的路径](#矩阵中的路径)<span id = "306"></span>
+ - [正则表达式匹配](#正则表达式匹配)<span id = "307"></span>
  - [背包问题动态规划]
  - [子数组之和的最大值]
  - [最长不重复子串]
@@ -689,28 +689,65 @@ class Solution:  # 贪心做法，不限制次数那我们就比前一天大就�
 
 ---
 
-### 换硬币
+### 矩阵中的路径
 #### 题目描述
-系统会为您提供不同面额的硬币和总金额。 编写一个函数来计算组成该数量所需的最少数量的硬币。 如果这笔钱不能用硬币的任何组合来弥补，请返回-1。
+请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则之后不能再次进入这个格子。
 #### Python Solution：
-**分析：** 经典动态规划问题，细节可以在大体思维没问题的时候深究提高效率。
+**分析：** 剑指 offer 第 12 题，考察 dfs。
 
 ```Python
+class Solution:
+    def hasPath(self, matrix, string):
 
+        def dfs(i, j, pos):
+            if 0 <= i < m and 0 <= j < n and state[i][j]:
+                state[i][j] = ret = False
+                if matrix[i][j] == string[pos]:
+                    if pos == len(string) - 1:
+                        return True
+                    ret = dfs(i, j+1, pos+1) or dfs(i, j-1, pos+1) or dfs(i+1, j, pos+1) or dfs(i-1, j, pos+1)
+                if not ret:
+                    state[i][j] = True
+                return ret
+
+        if not matrix or not matrix[0]:
+            return False
+        m, n = len(matrix), len(matrix[0])
+        state = [[True] * n for _ in range(m)]
+
+        for x in range(m):
+            for y in range(n):
+                if matrix[x][y] == string[0]:
+                    if dfs(x, y, 0):
+                        return True
+        return False
 ```
 
 [返回目录](#306)
 
 ---
 
-### 换硬币
+### 正则表达式匹配
 #### 题目描述
-系统会为您提供不同面额的硬币和总金额。 编写一个函数来计算组成该数量所需的最少数量的硬币。 如果这笔钱不能用硬币的任何组合来弥补，请返回-1。
+请实现一个函数用来匹配包括'.'和''的正则表达式。模式中的字符'.'表示任意一个字符，而''表示它前面的字符可以出现任意次（含0次）。在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串"aaa"与模式"a.a"和"abaca"匹配，但是与"aa.a"和"ab*a"均不匹配。
 #### Python Solution：
-**分析：** 经典动态规划问题，细节可以在大体思维没问题的时候深究提高效率。
+**分析：** 剑指 offer 第 19 题，关键是如何匹配多个情况。
 
 ```Python
-
+class Solution(object):
+    def isMatch(self, s, p):
+        dp = [[False] * (len(p)+1) for _ in range(len(s)+1)]
+        dp[0][0] = True
+        for j in range(1, len(p)+1):  # 初始化第一排 用来匹配 '' 和 '.*' 或 'a*' 什么的情况。
+            if p[j-1] == '*':
+                dp[0][j] = dp[0][j-2]
+        for i in range(1, len(s)+1):
+            for j in range(1, len(p)+1):
+                if p[j-1] != '*':     # 不存在重复的匹配前项，那只用考虑两者的前一位就好了。
+                    dp[i][j] = dp[i-1][j-1] and p[j-1] in (s[i-1], '.')
+                else:                 # 存在重复的匹配前项，所以需要两方面考虑，前者是忽略掉星和星之前的字符，后者是 s 的当前位还匹配星之前的字符。
+                    dp[i][j] = dp[i][j-2] or dp[i-1][j] and p[j-2] in (s[i-1], '.')
+        return dp[-1][-1]
 ```
 
 [返回目录](#307)
