@@ -29,11 +29,11 @@ LC #862
 ## 动态规划
  - [独特的路径](#独特的路径)<span id = "301"></span>
  - [House robber](#house-robber)<span id = "302"></span>
- - [换硬币]
- - [买卖股票的最佳时机I]
- - [买卖股票的最佳时机II]
- - [矩阵中的路径 jzoffer]
- - [正则表达式匹配 jzoffer]
+ - [换硬币](#换硬币)<span id = "303"></span>
+ - [买卖股票的最佳时机I](#买卖股票的最佳时机I)<span id = "304"></span>
+ - [买卖股票的最佳时机II](#买卖股票的最佳时机II)<span id = "305"></span>
+ - [矩阵中的路径 jzoffer]<span id = "306"></span>
+ - [正则表达式匹配 jzoffer]<span id = "307"></span>
  - [背包问题动态规划]
  - [子数组之和的最大值]
  - [最长不重复子串]
@@ -614,5 +614,105 @@ class Solution:
 ```
 
 [返回目录](#302)
+
+---
+
+### 换硬币
+#### 题目描述
+系统会为您提供不同面额的硬币和总金额。 编写一个函数来计算组成该数量所需的最少数量的硬币。 如果这笔钱不能用硬币的任何组合来弥补，请返回-1。
+#### Python Solution：
+**分析：** 经典动态规划问题，细节可以在大体思维没问题的时候深究提高效率。
+
+```Python
+class Solution:
+    def coinChange(self, coins, amount):
+        MAX = float('inf')
+        dp = [0] + [MAX] * amount
+        for i in range(1, amount + 1):
+            dp[i] = 1 + min(dp[i - c] if i >= c else MAX for c in coins)
+        return -1 if dp[-1] == MAX else dp[-1]
+```
+
+[返回目录](#303)
+
+---
+
+### 买卖股票的最佳时机I
+#### 题目描述
+假设您有一个数组，第i个元素是第i天给定股票的价格。如果只允许您最多完成一笔交易（即买入和卖出一股股票），请设计一种算法以找到最大的利润。
+#### Python Solution：
+**分析：** 简单题。可简化成一维。
+
+```Python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        min_p, max_v = float('inf'), 0
+        for p in prices:
+            min_p = min(min_p, p)
+            max_v = max(max_v, p - min_p)
+        return max_v
+```
+
+[返回目录](#304)
+
+---
+
+### 买卖股票的最佳时机II
+#### 题目描述
+假设您有一个数组，第i个元素是第i天给定股票的价格。 设计算法以找到最大的利润。 您可以根据需要完成尽可能多的交易（即，买入一份并多次出售一股股票）。 注意：您可能无法同时进行多项交易（即必须先出售股票才能再次购买）。
+#### Python Solution：
+**分析：** 两种做法，动态规划和贪心。贪心看起来很白痴的题。
+
+```Python
+class Solution:  # 动态规划解法
+    def maxProfit(self, prices: List[int]) -> int:
+        n = len(prices)
+        dp, j = [0] * n, n-1
+        for i in range(n-2, -1, -1):
+            if prices[i] > prices[i+1]:
+                j = i
+            dp[i] = dp[i+1] if i == j else prices[j] - prices[i] + dp[j]
+        return dp[0] if dp else 0
+```
+
+```Python
+class Solution:  # 贪心做法，不限制次数那我们就比前一天大就把前一天买了金天卖了，明天也这么想就可以了。等价于一直持有。
+    def maxProfit(self, prices: List[int]) -> int:
+        res = 0
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i-1]:
+                res += prices[i] - prices[i-1]
+        return res
+```
+
+[返回目录](#305)
+
+---
+
+### 换硬币
+#### 题目描述
+系统会为您提供不同面额的硬币和总金额。 编写一个函数来计算组成该数量所需的最少数量的硬币。 如果这笔钱不能用硬币的任何组合来弥补，请返回-1。
+#### Python Solution：
+**分析：** 经典动态规划问题，细节可以在大体思维没问题的时候深究提高效率。
+
+```Python
+
+```
+
+[返回目录](#306)
+
+---
+
+### 换硬币
+#### 题目描述
+系统会为您提供不同面额的硬币和总金额。 编写一个函数来计算组成该数量所需的最少数量的硬币。 如果这笔钱不能用硬币的任何组合来弥补，请返回-1。
+#### Python Solution：
+**分析：** 经典动态规划问题，细节可以在大体思维没问题的时候深究提高效率。
+
+```Python
+
+```
+
+[返回目录](#307)
 
 ---
