@@ -34,9 +34,9 @@ LC #862
  - [买卖股票的最佳时机II](#买卖股票的最佳时机II)<span id = "305"></span>
  - [矩阵中的路径](#矩阵中的路径)<span id = "306"></span>
  - [正则表达式匹配](#正则表达式匹配)<span id = "307"></span>
+ - [连续子数组的最大和](#连续子数组的最大和)<span id = "308"></span>
+ - [最长不含重复字符的子字符串](#最长不含重复字符的子字符串)<span id = "309"></span>
  - [背包问题动态规划]
- - [子数组之和的最大值]
- - [最长不重复子串]
  - [矩阵中最长递增子序列  LC #329]
 
 ## 二分查找
@@ -751,5 +751,49 @@ class Solution(object):
 ```
 
 [返回目录](#307)
+
+---
+
+### 连续子数组的最大和
+#### 题目描述
+一个整数数组中的元素有正有负，在该数组中找出一个连续子数组，要求该连续子数组中各元素的和最大，这个连续子数组便被称作最大连续子数组。比如数组{2,4,-7,5,2,-1,2,-4,3}的最大连续子数组为{5,2,-1,2}，最大连续子数组的和为5+2-1+2=8。
+#### Python Solution：
+**分析：** 剑指 offer 第 42 题, 也是挺经典的动态规划，也可以理解为贪心算法。
+
+```Python
+class Solution(object):
+    def maxSubArray(self, nums):
+        better = Max = float('-inf')
+        for num in nums:
+            better = max(num, num + better)
+            Max = max(Max, better)
+        return Max
+```
+
+[返回目录](#308)
+
+---
+
+### 最长不含重复字符的子字符串
+#### 题目描述
+给定一个字符串，找到最长子字符串的长度而不重复字符。
+#### Python Solution：
+**分析：** 滑动窗口解决问题，如果遍历一遍 s，如果遍历到没有出现的元素，窗口右端立马扩张，并计算最大长度。如果遍历到之前出现的元素，则将窗口左端置为上次出现的位置的后一位。只有出现没有遍历过的元素才会计算最大长度。因为一旦是遍历过的元素，只有可能是保持不变或者缩小。
+
+```Python
+class Solution:
+    def longestSubstringWithoutDuplication(self, s):
+        start = maxlength = 0
+        met = {}
+        for i, v in enumerate(s):
+            if v in met and start <= met[v]: # 更新start 的位置。
+                start = met[v] + 1
+            else:       # 只有没有遍历过的才会有更大的长度，所以在 else 里判断就可以了
+                maxlength = max(maxlength, i - start + 1)
+            met[v] = i  # 更新 v 出现的索引
+        return maxlength
+```
+
+[返回目录](#309)
 
 ---
