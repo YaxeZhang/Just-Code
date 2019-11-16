@@ -661,10 +661,9 @@ class Solution:
                 while head and head.next and head.val == head.next.val:
                     head = head.next
                 pre.next = head.next
-                head = head.next
             else:
                 pre = pre.next
-                head = head.next
+            head = head.next
         return dummy.next
 ```
 
