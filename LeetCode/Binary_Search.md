@@ -1,21 +1,114 @@
 <span id = "00"></span>
 ## 基础
- - [278	First Bad Version]
- - [35	Search Insert Position]
+ - [278. First Bad Version](#278-first-bad-version)
+ - [35. Search Insert Position](#35-search-insert-position)
  - [33. Search in Rotated Sorted Array](#33-search-in-rotated-sorted-array)
  - [81	Search in Rotated Sorted Array II]
- - [153	Find Minimum in Rotated Sorted Array]
- - [154	Find Minimum in Rotated Sorted Array II]
- - [162	Find Peak Element]
+ - [153. Find Minimum in Rotated Sorted Array](#153-find-minimum-in-rotated-sorted-array)
+ - [154. Find Minimum in Rotated Sorted Array II](#154-find-minimum-in-rotated-sorted-array-ii)
+ - [162. Find Peak Element](#162-find-peak-element)
  - [374. Guess Number Higher or Lower](#374-guess-number-higher-or-lower)
  - [34. Find First and Last Position of Element in Sorted Array](#34-find-first-and-last-position-of-element-in-sorted-array)
- - [349	Intersection of Two Arrays]
- - [350	Intersection of Two Arrays II]
  - [315. Count of Smaller Numbers After Self](#315-count-of-smaller-numbers-after-self)
  - [300	Longest Increasing Subsequence]
  - [354	Russian Doll Envelopes]
  - [540. Single Element in a Sorted Array](#540-single-element-in-a-sorted-array)
 
+
+## 278. First Bad Version
+
+You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.
+
+Suppose you have n versions [1, 2, ..., n] and you want to find out the first bad one, which causes all the following ones to be bad.
+
+You are given an API bool isBadVersion(version) which will return whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.
+
+您是产品经理，目前正在领导团队开发新产品。 不幸的是，您产品的最新版本未通过质量检查。 由于每个版本都是基于先前版本开发的，因此错误版本之后的所有版本也都是错误的。 假设您有n个版本[1、2，...，n]，并且想要找出第一个不良版本，这将导致随后的所有不良版本。 您将获得一个API bool isBadVersion（version），它将返回版本是否错误。 实现一个功能以查找第一个错误的版本。 您应该减少对API的调用次数。
+
+**Example**
+
+```
+Given n = 5, and version = 4 is the first bad version.
+
+call isBadVersion(3) -> false
+call isBadVersion(5) -> true
+call isBadVersion(4) -> true
+
+Then 4 is the first bad version.
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+# The isBadVersion API is already defined for you.
+# @param version, an integer
+# @return a bool
+# def isBadVersion(version):
+
+class Solution:
+    def firstBadVersion(self, n):
+        lo, hi = 1, n
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if not isBadVersion(mid):
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo
+```
+
+[返回目录](#00)
+
+## 35. Search Insert Position
+
+Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+You may assume no duplicates in the array.
+
+给定排序数组和目标值，如果找到目标，则返回索引。如果不是，则返回按顺序插入索引的位置的索引。 您可以假设阵列中没有重复项。
+
+**Example**
+
+```
+Example 1:
+Input: [1,3,5,6], 5
+Output: 2
+
+Example 2:
+Input: [1,3,5,6], 2
+Output: 1
+
+Example 3:
+Input: [1,3,5,6], 7
+Output: 4
+
+Example 4:
+Input: [1,3,5,6], 0
+Output: 0
+```
+
+---
+
+### Python Solution
+**分析：** 很经典的 cpp 标准库里二分法的写法，推荐研读一下 lower_bound() 和 upper_bound()。这里要注意的点是 high 要设置为 len(nums) 的原因是像第三个例子会超出数组的最大值，所以要让 lo 能到 这个下标。
+
+```python
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:        
+        lo, hi = 0, len(nums)
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if nums[mid] < target:
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo
+```
+
+[返回目录](#00)
 
 ## 33. Search in Rotated Sorted Array
 
@@ -57,6 +150,135 @@ class Solution:
             else:
                 hi = mid
         return lo if lo == hi and target == nums[lo] else -1
+```
+
+[返回目录](#00)
+
+## 153. Find Minimum in Rotated Sorted Array
+
+Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+(i.e.,  [0,1,2,4,5,6,7] might become  [4,5,6,7,0,1,2]).
+Find the minimum element.
+You may assume no duplicate exists in the array.
+
+假设以升序排序的数组在事先未知的某个轴上旋转。 （即[0,1,2,4,5,6,7]可能变为[4,5,6,7,0,1,2]）。 找到最小的元素。 您可以假设数组中不存在重复项。
+
+**Example**
+
+```
+Example 1:
+Input: [3,4,5,1,2]
+Output: 1
+
+Example 2:
+Input: [4,5,6,7,0,1,2]
+Output: 0
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        lo, hi = 0, len(nums)-1
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if nums[mid] > nums[hi]:
+                lo = mid + 1
+            else:
+                hi = mid
+        return nums[lo]
+```
+
+[返回目录](#00)
+
+## 154. Find Minimum in Rotated Sorted Array II
+
+Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+(i.e.,  [0,1,2,4,5,6,7] might become  [4,5,6,7,0,1,2]).
+Find the minimum element.
+The array may contain duplicates.
+
+假设以升序排序的数组在事先未知的某个轴上旋转。 （即[0,1,2,4,5,6,7]可能变为[4,5,6,7,0,1,2]）。 找到最小的元素。 该数组可能包含重复项。
+
+**Example**
+
+```
+Example 1:
+Input: [1,3,5]
+Output: 1
+
+Example 2:
+Input: [2,2,2,0,1]
+Output: 0
+```
+
+---
+
+### Python Solution
+**分析：** 和上一道的区别在于上一题没有重复项，这一道要加个条件来解决重复项的问题，最差程度是 O(n) 。
+
+```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        lo, hi = 0, len(nums)-1
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if nums[mid] > nums[hi]:
+                lo = mid + 1
+            elif nums[mid] == nums[hi]:
+                hi -= 1
+            else:
+                hi = mid
+        return nums[lo]
+```
+
+[返回目录](#00)
+
+## 162. Find Peak Element
+
+A peak element is an element that is greater than its neighbors.
+Given an input array nums, where nums[i] ≠ nums[i+1], find a peak element and return its index.
+The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.
+
+You may imagine that nums[-1] = nums[n] = -∞.
+
+峰值元素是大于其相邻元素的元素。 给定一个输入数组nums，其中nums [i]≠nums [i + 1]，找到一个峰值元素并返回其索引。 该数组可能包含多个峰，在这种情况下，将索引返回到任何一个峰都可以。 您可能会想到nums [-1] = nums [n] =-∞。
+
+**Example**
+
+```
+Example 1:
+Input: nums = [1,2,3,1]
+Output: 2
+Explanation: 3 is a peak element and your function should return the index number 2.
+
+Example 2:
+Input: nums = [1,2,1,3,5,6,4]
+Output: 1 or 5
+Explanation: Your function can return either index number 1 where the peak element is 2,
+             or index number 5 where the peak element is 6.
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        lo, hi = 0, len(nums)-1
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if nums[mid] < nums[mid + 1]:
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo
 ```
 
 [返回目录](#00)

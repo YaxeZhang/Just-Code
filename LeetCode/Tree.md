@@ -22,7 +22,7 @@
  - [124. Binary Tree Maximum Path Sum](#124-binary-tree-maximum-path-sum)
  - [250	Count Univalue Subtrees] **?**
  - [366	Find Leaves of Binary Tree] **?**
- - [337	House Robber III]
+ - [337. House Robber III](#337-house-robber-iii)
  - [617. Merge Two Binary Trees](#617-merge-two-binary-trees)
  - [199. Binary Tree Right Side View](#199-binary-tree-right-side-view)
 BST
@@ -1305,6 +1305,66 @@ class Solution:
             return root.val + max(left, right)
         dfs(root)
         return self.res
+```
+
+[返回目录](#00)
+
+## 337. House Robber III
+
+The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the "root." Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that "all houses in this place forms a binary tree". It will automatically contact the police if two directly-linked houses were broken into on the same night.
+
+Determine the maximum amount of money the thief can rob tonight without alerting the police.
+
+小偷又一次发现了自己的新地方。 该区域只有一个入口，称为“根”。 除树根外，每所房子都有一间，只有一间父母的房子。 游览后，聪明的小偷意识到“这个地方的所有房屋都形成了一棵二叉树”。 如果在同一晚闯入两栋直接相连的房屋，它将自动与警察联系。 确定窃贼今晚可以在不通知警察的情况下抢走的最大金额。
+
+**Example**
+
+```
+Example 1:
+Input: [3,2,3,null,3,null,1]
+
+     3
+    / \
+   2   3
+    \   \
+     3   1
+Output: 7
+Explanation: Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
+
+Example 2:
+Input: [3,4,5,1,3,null,1]
+
+     3
+    / \
+   4   5
+  / \   \
+ 1   3   1
+Output: 9
+Explanation: Maximum amount of money the thief can rob = 4 + 5 = 9.
+```
+
+---
+
+### Python Solution
+**分析：** 有一点动态规划的思维在里面， 想好状态是如何转移的，画图就好了。
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def rob(self, root: TreeNode) -> int:
+
+        def dfs(root):
+            if not root:
+                return 0, 0
+            left = dfs(root.left)
+            right = dfs(root.right)
+            return max(left) + max(right), root.val + left[0] + right[0]
 ```
 
 [返回目录](#00)
