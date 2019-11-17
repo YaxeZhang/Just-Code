@@ -5,7 +5,7 @@
  - [66. Plus One](#66-plus-one)
  - [8	String to Integer (atoi)]
  - [258	Add Digits]
- - [67	Add Binary]
+ - [67. Add Binary](#67-add-binary)
  - [43	Multiply Strings]
  - [29	Divide Two Integers]
  - [69. Sqrt(x)](#69-sqrtx)
@@ -130,6 +130,52 @@ class Solution:
             digits[~i] = 0
         digits.insert(0, 1)
         return digits
+```
+
+[返回目录](#00)
+
+## 67. Add Binary
+
+Given two binary strings, return their sum (also a binary string).
+The input strings are both non-empty and contains only characters 1 or 0.
+
+给定两个二进制字符串，返回它们的总和（也是一个二进制字符串）。 输入字符串均为非空，并且仅包含字符1或0。
+
+**Example:1**
+
+```
+Input: a = "11", b = "1"
+Output: "100"
+```
+
+**Example:2**
+
+```
+Input: a = "1010", b = "1011"
+Output: "10101"
+```
+
+---
+
+### Python Solution
+**分析：** 应该考察的不是内置函数的解法，所以稍微麻烦一点。
+
+```python
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        carry = 0
+        result = []
+        i, j = len(a), len(b)
+        while i or j or carry:
+            if i:
+                carry += int(a[i-1])
+                i -= 1
+            if j:
+                carry += int(b[j-1])
+                j -= 1
+            result.append(str(carry %2))
+            carry //= 2
+        return ''.join(result[::-1])
 ```
 
 [返回目录](#00)

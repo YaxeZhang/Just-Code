@@ -14,11 +14,11 @@
  - [294	Flip Game II]
  - [290. Word Pattern](#290-word-pattern)
  - [242. Valid Anagram](#242-valid-anagram)
- - [49	Group Anagrams]
+ - [49. Group Anagrams](#49-group-anagrams)
  - [249	Group Shifted Strings]
  - [87	Scramble String]
  - [179. Largest Number](#179-largest-number)
- - [6	ZigZag Conversion]
+ - [6. ZigZag Conversion](#6-zigzag-conversion)
  - [161	One Edit Distance]
  - [38	Count and Say]
  - [358	Rearrange String k Distance Apart]
@@ -231,6 +231,40 @@ class Solution:
 
 [返回目录](#00)
 
+## 49. Group Anagrams
+
+Given an array of strings, group anagrams together.
+
+给定一个字符串数组，将字谜分组在一起。
+
+**Example**
+
+```
+Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
+Output:
+[
+  ["ate","eat","tea"],
+  ["nat","tan"],
+  ["bat"]
+]
+```
+
+---
+
+### Python Solution
+**分析：** sorted 返回的是列表不能散列，所以用 tuple 封装一下。
+
+```python
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        ans = collections.defaultdict(list)
+        for s in strs:
+            ans[tuple(sorted(s))].append(s)
+        return ans.values()
+```
+
+[返回目录](#00)
+
 ## 179. Largest Number
 
 Given a list of non negative integers, arrange them such that they form the largest number.
@@ -261,6 +295,59 @@ class Solution:
         return "".join(sorted(map(str,nums),key = lambda x: x*3, reverse = True))
 
 # 但这个 '3' 不科学，应该改为 len(str(max(nums))) - len(str(min(nums))) + 1
+```
+
+[返回目录](#00)
+
+## 6. ZigZag Conversion
+
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+And then read line by line: "PAHNAPLSIIGYIR"
+
+字符串“ PAYPALISHIRING”以Z字形模式写在给定的行数上。
+
+**Example**
+
+```
+Example 1:
+Input: s = "PAYPALISHIRING", numRows = 3
+Output: "PAHNAPLSIIGYIR"
+
+Example 2:
+Input: s = "PAYPALISHIRING", numRows = 4
+Output: "PINALSIGYAHRPI"
+Explanation:
+
+P     I    N
+A   L S  I G
+Y A   H R
+P     I
+```
+
+---
+
+### Python Solution
+**分析：** 用 step 来决定前进方向。
+
+```python
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1 or numRows > len(s):
+            return s
+        zigzag = ["" for i in range(numRows)]
+        row, step = 0, 1
+        for char in s:
+            zigzag[row] += char
+            if row == 0:
+                step = 1
+            elif row == numRows - 1:
+                step = -1
+            row += step
+        return "".join(zigzag)
 ```
 
 [返回目录](#00)
