@@ -37,8 +37,10 @@ LC #862
  - [连续子数组的最大和](#连续子数组的最大和)<span id = "308"></span>
  - [最长不含重复字符的子字符串](#最长不含重复字符的子字符串)<span id = "309"></span>
  - [最长公共子序列](#最长公共子序列)<span id = "310"></span>
+ - [最长递增子序列](#最长递增子序列)<span id = "311"></span>
+ - [矩阵中最长递增路径](#矩阵中最长递增路径)<span id = "312"></span>
  - [背包问题动态规划]
- - [矩阵中最长递增子序列  LC #329]
+
 
 ## 二分查找
  - [数字在数组中的位置 jzoffer]
@@ -822,5 +824,80 @@ class Solution:
 ```
 
 [返回目录](#310)
+
+---
+
+### 最长递增子序列
+#### 题目描述
+给定一个未排序的整数数组，请找到最长递增子序列的长度。
+#### Python Solution：
+**分析：** 非常精彩的题目，常规动态规划解法是 O(n^2) 的时间复杂度，但是用二分搜索可以减少到 O(nlgn)，尤其是迭代更新的部分需要好好品味下。
+
+```python
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        dp = [1] * len(nums)
+        for i in range(1, len(nums)):
+            for j in range(1, i+1):
+                if nums[i] > nums[i-j]:
+                    dp[i] = max(dp[i], dp[i-j]+1)
+        return max(dp) if dp else 0
+```
+
+**O(nlgn)的解法**
+
+```python
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        if len(nums) < 2:
+            return len(nums)
+        dp = [nums[0]]
+        for n in nums[1:]:
+            if n > dp[-1]:
+                dp.append(n)
+            else:
+                left,right = 0, len(dp)
+                while left < right:
+                    mid = left + (right-left)//2
+                    if dp[mid] < n:
+                        left = mid + 1
+                    else:
+                        right = mid
+                dp[left] = n
+        return len(dp)
+```
+
+[返回目录](#311)
+
+---
+
+### 矩阵中最长递增路径
+#### 题目
+给定一个整数矩阵，找到最长的增长路径的长度。 在每个单元格中，您可以向四个方向移动：向左，向右，向上或向下。 您不得对角移动或移动到边界之外（即不允许环绕）。
+#### 解法
+**分析：** 记忆化 DFS ，第一次接触的话想不到，不过接触过就很简单。
+
+```python
+class Solution:
+    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
+
+        def dfs(i, j):
+            if not dp[i][j]:
+                val = matrix[i][j]
+                dp[i][j] = 1 + max(
+                    dfs(i - 1, j) if i and val < matrix[i - 1][j] else 0,
+                    dfs(i + 1, j) if i < m - 1 and val < matrix[i + 1][j] else 0,
+                    dfs(i, j - 1) if j and val < matrix[i][j - 1] else 0,
+                    dfs(i, j + 1) if j < n - 1 and val < matrix[i][j + 1] else 0)
+            return dp[i][j]
+
+        if not matrix or not matrix[0]:
+            return 0
+        m, n = len(matrix), len(matrix[0])
+        dp = [[0] * n for _ in range(m)]
+        return max(dfs(x, y) for x in range(m) for y in range(n))
+```
+
+[返回目录](#312)
 
 ---
