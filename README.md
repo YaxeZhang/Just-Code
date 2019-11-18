@@ -37,7 +37,19 @@
 ### [Leetcode 题解](./LeetCode/README.md)
 
 - 如果要仔细准备面对大厂可能出现的更难的题， Leetcode 上前 400 道也够用了。
-- 我根据题目类型对 LeetCode 前 400 题进行初步分类，再根据题目的相关关系递进地排序，如果你选择仔细刷题，那么点击 [Leetcode 题解](./LeetCode/README.md) 随便选择一个题目类型跟着我排的顺序刷题就可以了。推荐优先完成数组、链表和二叉树等基础数据结构的题目。
+- 我根据题目类型对 LeetCode 前 400 题进行初步分类，再根据题目的相关关系递进地排序，如果你选择仔细刷题，那么随便选择一个题目类型跟着我排的顺序刷题就可以了。推荐优先完成数组、链表和二叉树等基础数据结构的题目。
+- 如果希望根据题号而不是类型查询我的题解，请点击[Leet-Py-Code](https://github.com/YaxeZhang/Leet-Py-Code)跳转到我的题解仓库。
+
+ - [LeetCode 分类总目录](./LeetCode/README.md)
+ - [1. 链表 Linked_List](./LeetCode/Linked_List.md)
+ - [2. 树 Tree](./LeetCode/Tree.md)
+ - [3. 动态规划 Dynamic_Programming](./LeetCode/Dynamic_Programming.md)
+ - [4. 数组 Array](./LeetCode/Array.md)
+ - [5. 广度优先搜索 BFS & 深度优先搜索 DFS](./LeetCode/DFS%26BFS.md)
+ - [6. 二分搜索 Binary_Search](./LeetCode/Binary_Search.md)
+ - [7. 数理 Math](./LeetCode/Math.md)
+ - [9. 字符串 String](./LeetCode/String.md)
+ - [10.位运算 Bit_Manipulation](./LeetCode/Bit_Manipulation.md)
 
 ### [字节跳动面经总结算法题](./BAT/Algorithm.md)
 

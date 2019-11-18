@@ -36,6 +36,7 @@ LC #862
  - [正则表达式匹配](#正则表达式匹配)<span id = "307"></span>
  - [连续子数组的最大和](#连续子数组的最大和)<span id = "308"></span>
  - [最长不含重复字符的子字符串](#最长不含重复字符的子字符串)<span id = "309"></span>
+ - [最长公共子序列](#最长公共子序列)<span id = "310"></span>
  - [背包问题动态规划]
  - [矩阵中最长递增子序列  LC #329]
 
@@ -795,5 +796,31 @@ class Solution:
 ```
 
 [返回目录](#309)
+
+---
+
+### 最长公共子序列
+#### 题目描述
+给定两个字符串，求最长公共子序列的长度。
+#### Python Solution：
+**分析：** 字符串的动态规划问题，比较简单的一种，可以简化到一维。
+
+```Python
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        m, n = len(text1), len(text2)
+        dp = [0] * (n+1)
+        for i in range(m):
+            cur = [0] * (n+1)
+            for j in range(n):
+                if text1[i] == text2[j]:
+                    cur[j+1] = dp[j] + 1
+                else:
+                    cur[j+1] = max(cur[j], dp[j+1])
+            dp = cur
+        return dp[-1]
+```
+
+[返回目录](#310)
 
 ---

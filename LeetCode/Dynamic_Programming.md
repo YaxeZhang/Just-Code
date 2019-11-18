@@ -21,6 +21,7 @@
  - [265	Paint House II] **?**
  - [64. Minimum Path Sum](#64-minimum-path-sum)
  - [72. Edit Distance](#72-edit-distance)
+ - [1143. Longest Common Subsequence](#1143-longest-common-subsequence)
  - [97	Interleaving String]
  - [174	Dungeon Game]
  - [221. Maximal Square](#221-maximal-square)
@@ -877,6 +878,56 @@ class Solution:
                 else:
                     new.append(1 + min(dp[j+1], dp[j],new[-1]))
             dp = new
+        return dp[-1]
+```
+
+[返回目录](#00)
+
+## 1143. Longest Common Subsequence
+
+Given two strings text1 and text2, return the length of their longest common subsequence.
+
+A subsequence of a string is a new string generated from the original string with some characters(can be none) deleted without changing the relative order of the remaining characters. (eg, "ace" is a subsequence of "abcde" while "aec" is not). A common subsequence of two strings is a subsequence that is common to both strings.
+
+给定两个字符串text1和text2，返回它们最长的公共子序列的长度。 字符串的子序列是从原始字符串生成的新字符串，其中删除了一些字符（可以是一个字符），而不会更改其余字符的相对顺序。 （例如，“ ace”是“ abcde”的子序列，而“ aec”则不是）。 两个字符串的共同子序列是两个字符串共同的子序列。
+
+**Example**
+
+```
+Example 1:
+Input: text1 = "abcde", text2 = "ace"
+Output: 3  
+Explanation: The longest common subsequence is "ace" and its length is 3.
+
+Example 2:
+Input: text1 = "abc", text2 = "abc"
+Output: 3
+Explanation: The longest common subsequence is "abc" and its length is 3.
+
+Example 3:
+Input: text1 = "abc", text2 = "def"
+Output: 0
+Explanation: There is no such common subsequence, so the result is 0.
+```
+
+---
+
+### Python Solution
+**分析：** 和上一题差不多，字符串的动态规划解题思路都差不多，无非就是相等递进，替换，删除，插入这样。本题里只涉及相等递进，取两种情况最大值。
+
+```python
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        m, n = len(text1), len(text2)
+        dp = [0] * (n+1)
+        for i in range(m):
+            cur = [0] * (n+1)
+            for j in range(n):
+                if text1[i] == text2[j]:
+                    cur[j+1] = dp[j] + 1
+                else:
+                    cur[j+1] = max(cur[j], dp[j+1])
+            dp = cur
         return dp[-1]
 ```
 
