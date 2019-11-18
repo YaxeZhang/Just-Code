@@ -21,6 +21,7 @@
  - [265	Paint House II] **?**
  - [64. Minimum Path Sum](#64-minimum-path-sum)
  - [72. Edit Distance](#72-edit-distance)
+ - [300. Longest Increasing Subsequence](#300-longest-increasing-subsequence)
  - [1143. Longest Common Subsequence](#1143-longest-common-subsequence)
  - [97	Interleaving String]
  - [174	Dungeon Game]
@@ -879,6 +880,61 @@ class Solution:
                     new.append(1 + min(dp[j+1], dp[j],new[-1]))
             dp = new
         return dp[-1]
+```
+
+[返回目录](#00)
+
+## 300. Longest Increasing Subsequence
+
+Given an unsorted array of integers, find the length of longest increasing subsequence.
+
+给定一个未排序的整数数组，请找到最长递增子序列的长度。
+
+**Example**
+
+```
+Input: [10,9,2,5,3,7,101,18]
+Output: 4
+Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+```
+
+---
+
+### Python Solution
+**分析：** 非常精彩的题目，常规动态规划解法是 O(n^2) 的时间复杂度，但是用二分搜索可以减少到 O(nlgn)，尤其是迭代更新的部分需要好好品味下。
+
+```python
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        dp = [1] * len(nums)
+        for i in range(1, len(nums)):
+            for j in range(1, i+1):
+                if nums[i] > nums[i-j]:
+                    dp[i] = max(dp[i], dp[i-j]+1)
+        return max(dp) if dp else 0
+```
+
+**O(nlgn)的解法**
+
+```python
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        if len(nums) < 2:
+            return len(nums)
+        dp = [nums[0]]
+        for n in nums[1:]:
+            if n > dp[-1]:
+                dp.append(n)
+            else:
+                left,right = 0, len(dp)
+                while left < right:
+                    mid = left + (right-left)//2
+                    if dp[mid] < n:
+                        left = mid + 1
+                    else:
+                        right = mid
+                dp[left] = n
+        return len(dp)
 ```
 
 [返回目录](#00)
