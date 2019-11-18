@@ -856,15 +856,19 @@ class Solution:
             if n > dp[-1]:
                 dp.append(n)
             else:
-                left,right = 0, len(dp)
-                while left < right:
-                    mid = left + (right-left)//2
-                    if dp[mid] < n:
-                        left = mid + 1
-                    else:
-                        right = mid
-                dp[left] = n
+                pos = self.binarysearch(dp, n)
+                dp[pos] = n
         return len(dp)
+
+    def binarysearch(self, dp, n): # 二分搜索法比较好的写法，可以参考下。
+        lo, hi = 0, len(dp) - 1
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if dp[mid] < n:
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo
 ```
 
 [返回目录](#311)
