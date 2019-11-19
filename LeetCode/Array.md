@@ -50,7 +50,7 @@
  - [325	Maximum Size Subarray Sum Equals k]
  - [209. Minimum Size Subarray Sum](#209-minimum-size-subarray-sum)
  - [238	Product of Array Except Self]
- - [152	Maximum Product Subarray]
+ - [152. Maximum Product Subarray](#152-maximum-product-subarray)
  - [228	Summary Ranges]
  - [163	Missing Ranges]
 ## Sort		
@@ -671,6 +671,43 @@ class Solution:
             while sum >= s:
                 i, sum, res = i + 1, sum - nums[i], min(res, j - i + 1)
         return 0 if res == float('inf') else res
+```
+
+[返回目录](#00)
+
+## 152. Maximum Product Subarray
+
+Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.
+
+给定一个整数数组nums，查找具有最大乘积的数组（至少包含一个数字）中的连续子数组。
+
+**Example**
+
+```
+Example 1:
+Input: [2,3,-2,4]
+Output: 6
+Explanation: [2,3] has the largest product 6.
+
+Example 2:
+Input: [-2,0,-1]
+Output: 0
+Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
+```
+
+---
+
+### Python Solution
+**分析：** A 是前缀乘积，B 是后缀乘积。找到最大的那个就可以了。很巧妙的解法。
+
+```python
+class Solution:
+    def maxProduct(self, A):
+        B = A[::-1]
+        for i in range(1, len(A)):
+            A[i] *= A[i - 1] or 1
+            B[i] *= B[i - 1] or 1
+        return max(A + B)
 ```
 
 [返回目录](#00)
