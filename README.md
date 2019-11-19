@@ -1,5 +1,7 @@
 ## Just-Code
 
+---
+
 ### What's new ?!
  - 新增了Leetcode收费的字节跳动题目列表，下滑可以查看。
  - 字节跳动面试题完成 80% 。
@@ -15,6 +17,7 @@
  - [剑指 Offer 题解](#剑指-Offer-题解)
  - [Leetcode 题解](#leetcode-题解)
  - [字节跳动面经总结算法题](#字节跳动面经总结算法题)
+ - [LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
 
 ---
 
@@ -30,6 +33,9 @@
  - 它的缺点是：
 1.只有66题，刷着容易过拟合
 2.动态规划的题比较少，因此需要在Leetcode上专项训练。
+
+- [剑指 Offer 题解](./%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89.md)
+如果您有更好或者不同的解法，请提 issue 一起进步，靴靴！
 
 **推荐的刷题网站：**
 1. [牛客网](https://www.nowcoder.com/ta/coding-interviews)
@@ -62,6 +68,7 @@
  - 因为字节跳动的题目分类必须买 LeetCode 会员才可以看，所以我把题目都添加了一个 list ，然后点击 [字节跳动分类](https://leetcode.com/list/x7kpxvli) 就可以查看我分享的题目 list 了。
 
  **分类如下：**
+ - [总目录](./BAT/Algorithm.md)
  - [链表](./BAT/Algorithm.md/#链表)
  - [二叉树](./BAT/Algorithm.md/#二叉树)
  - [动态规划](./BAT/Algorithm.md/#动态规划)
