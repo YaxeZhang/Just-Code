@@ -364,18 +364,17 @@ class Solution:
     def trap(self, height: List[int]) -> int:
         if not height:
             return 0
-        res = 0
-        i, j = 0, len(height)-1
+        res, i, j = 0, 0, len(height)-1
         l_max, r_max = height[i], height[j]
         while i < j:
-            l_max = max(l_max, height[i])
-            r_max = max(r_max, height[j])
             if l_max > r_max:
-                res += r_max - height[j]
                 j -= 1
+                r_max = max(r_max, height[j])
+                res += max(0, r_max - height[j])
             else:
-                res += l_max - height[i]
                 i += 1
+                l_max = max(l_max, height[i])
+                res += max(0, l_max - height[i])
         return res
 ```
 
