@@ -60,7 +60,7 @@ LC #862
  - [3 Sum Closest]<span id = "603"></span>
  - [搜索二维矩阵]<span id = "604"></span>
  - [装满水的容器LC#11]<span id = "605"></span>
- - [接雨水]<span id = "606"></span>
+ - [接雨水](#接雨水)<span id = "606"></span>
  - [交换之后的最大值]<span id = "607"></span>
 
 ## 设计类
@@ -983,5 +983,35 @@ class Solution:
 ```
 
 [返回目录](#601)
+
+---
+
+### 接雨水
+#### 题目
+给定一个数组，包括n个代表海拔图的非负整数，其中每个条的宽度为1，计算下雨后它能捕获多少水。
+#### 解法
+**分析：** 双指针做法，左右贪心。
+
+```python
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        if not height:
+            return 0
+        res = 0
+        i, j = 0, len(height)-1
+        l_max, r_max = height[i], height[j]
+        while i < j:
+            l_max = max(l_max, height[i])
+            r_max = max(r_max, height[j])
+            if l_max > r_max:
+                res += r_max - height[j]
+                j -= 1
+            else:
+                res += l_max - height[i]
+                i += 1
+        return res
+```
+
+[返回目录](#606)
 
 ---

@@ -23,7 +23,7 @@
  - [55	Jump Game]
  - [45	Jump Game II]
  - [11	Container With Most Water]
- - [42	Trapping Rain Water]
+ - [42. Trapping Rain Water](#42-trapping-rain-water)
  - [334	Increasing Triplet Subsequence]
  - [128	Longest Consecutive Sequence]
  - [164	Maximum Gap	Bucket]
@@ -337,6 +337,46 @@ class Solution:
                 if i + j >= len(nums): break
                 if abs(nums[i] - nums[i + j]) <= t: return True
         return False
+```
+
+[返回目录](#00)
+
+## 42. Trapping Rain Water
+
+Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.
+
+给定n个代表海拔图的非负整数，其中每个条的宽度为1，计算下雨后它能捕获多少水。
+
+**Example:1**
+
+```
+Input: [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+```
+
+---
+
+### Python Solution
+**分析：** 双指针做法，左右贪心。
+
+```python
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        if not height:
+            return 0
+        res = 0
+        i, j = 0, len(height)-1
+        l_max, r_max = height[i], height[j]
+        while i < j:
+            l_max = max(l_max, height[i])
+            r_max = max(r_max, height[j])
+            if l_max > r_max:
+                res += r_max - height[j]
+                j -= 1
+            else:
+                res += l_max - height[i]
+                i += 1
+        return res
 ```
 
 [返回目录](#00)

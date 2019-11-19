@@ -770,10 +770,7 @@ class Solution:
                 p1.val += 1
                 flag = 0
 
-        if flag:
-            while p1.next:
-                p1 = p1.next
-            p1.next = ListNode(1)
+        p1.next = ListNode(1) if flag else p1.next
 
         return dummy.next
 ```
