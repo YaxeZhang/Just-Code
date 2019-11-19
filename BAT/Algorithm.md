@@ -1,5 +1,5 @@
 
-
+## TODO
 简化路径 #71
 python 装饰器
 
@@ -15,7 +15,8 @@ LC #862
  - [两个一组反转链表](#两个一组反转链表)<span id = "103"></span>
  - [k个一组反转链表](#k个一组反转链表)<span id = "104"></span>
  - [奇偶次序分离后合并有序链表](#奇偶次序分离后合并有序链表)<span id = "105"></span>
- - [两个链表求和](#两个链表求和)<span id = "106"></span>
+ - [两个链表求和 I](#两个链表求和-i)<span id = "106"></span>
+ - [两个链表求和 II](#两个链表求和-ii)<span id = "107"></span>
 
 ## 二叉树
  - [二叉树的前序中序后序遍历](#二叉树的前序中序后序遍历)<span id = "201"></span>
@@ -54,16 +55,20 @@ LC #862
  - [桶排序]
 
 ## 双指针
- - [Two Sum]
- - [3 Sum]
- - [3 Sum Closest]
- - [搜索二维矩阵]
- - [装满水的容器LC#11]
+ - [两数之和 Two Sum](#两数之和)<span id = "601"></span>
+ - [3 Sum]<span id = "602"></span>
+ - [3 Sum Closest]<span id = "603"></span>
+ - [搜索二维矩阵]<span id = "604"></span>
+ - [装满水的容器LC#11]<span id = "605"></span>
+ - [接雨水]<span id = "606"></span>
+ - [交换之后的最大值]<span id = "607"></span>
 
 ## 设计类
  - [min stack]
  - [LRU cache 的实现]
  - [tinyurl]
+
+## 其他
 
 ---
 
@@ -251,9 +256,47 @@ class Solution:
 
 ---
 
-### 两个链表求和
+### 两个链表求和 I
 #### 题目：
-给定一个链表，次序为奇数的节点按升序排列，次序为偶数的节点按降序排列，请返回排序好的有序链表。
+您将获得两个非空链表，表示两个非负整数。数字以相反的顺序存储，每个节点包含一个数字。添加两个数字并将其作为链接列表返回。
+#### Python Solution：
+**分析：** 自我感觉十分优美的 O(1) 空间的解法，随便选一个链表作为主线，将相同长度的部分加上来，然后把剩余的部分拼接过来，如果有进位则顺理成章转化为 369，Plus One 问题。这里链表已经倒序，操作更加简便。
+
+```Python
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        flag = 0
+        dummy = p1 = ListNode(0); p2 = ListNode(0)
+        p1.next , p2.next = l1, l2
+
+        while p1.next and p2.next:
+            p1, p2 = p1.next, p2.next
+            sumval = p1.val + p2.val + flag
+            p1.val = sumval % 10
+            flag = sumval >= 10
+
+        p1.next = p1.next or p2.next
+
+        while flag and p1.next:
+            p1 = p1.next
+            if p1.val == 9:
+                p1.val = 0
+            else:
+                p1.val += 1
+                flag = 0
+
+        p1.next = ListNode(1) if flag else p1.next
+
+        return dummy.next
+```
+
+[返回目录](#106)
+
+### 两个链表求和 II
+#### 题目：
+您将获得两个非空链表，它们代表两个非负整数。 最重要的数字在前，并且它们的每个节点都包含一个数字。 将两个数字相加，并将其作为链表返回。 您可能会假设两个数字除了数字0本身以外都不包含任何前导零。
+
+跟进：如果无法修改输入列表怎么办？ 换句话说，不允许反转列表。
 #### Python Solution：
 **分析：** 有两种做法，一种是不用额外空间的做法，在原有的一个链表的基础上加，但是考虑的边界条件等比较多，不推荐，如果面试官没有要求尽量用第二种：计算两个链表代表的数，相加后新创建一个链表。
 
@@ -324,7 +367,7 @@ class Solution:
         return dummy1 if dummy1.val else dummy1.next
 ```
 
-[返回目录](#106)
+[返回目录](#107)
 
 ---
 
@@ -903,5 +946,42 @@ class Solution:
 ```
 
 [返回目录](#312)
+
+---
+
+### 两数之和
+#### 题目
+给定一个整数数组，返回两个数字的索引，以便它们加起来成为一个特定的目标。您可以假定每个输入都只有一个解决方案，并且您可能不会两次使用同一元素。
+#### 解法
+**分析：** 两种办法，一种是建立哈希表，一种是排序之后运用双指针做。
+
+```python
+class Solution:  # 哈希表做法
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        used = {}
+        for i, v in enumerate(nums):
+            if v in used:
+                return i, used[v]
+            used[target - v] = i
+```
+
+**排序后双指针：** 需要注意的是：我们需要它们排序之前的索引，所以我们需要将索引与值绑定，而 enumerate() 刚好可以完成这项任务。  
+
+```python
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        nums = list(enumerate(nums))              # 索引与值绑定
+        nums = sorted(nums, key = lambda x: x[1]) # 排序
+        i, j = 0, len(nums) - 1
+        while i < j:           # 双指针两边夹逼目标值。
+            if nums[i][1] + nums[j][1] < target:
+                i += 1
+            elif nums[i][1] + nums[j][1] > target:
+                j -= 1
+            else:              # 返回目的索引。
+                return nums[i][0], nums[j][0]
+```
+
+[返回目录](#601)
 
 ---
