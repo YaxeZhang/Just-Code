@@ -14,10 +14,10 @@
  - [365	Water and Jug Problem]
  - [204. Count Primes](#204-count-primes)
 ## Sum		
- - [1	Two Sum]
+ - [1. Two Sum](#1-two-sum)
  - [167. Two Sum II](#167-two-sum-ii)
- - [15	3Sum]
- - [16	3Sum Closest]
+ - [15. 3Sum](#15-3sum)
+ - [16. 3Sum Closest](#16-3sum-closest)
  - [259	3Sum Smaller]
  - [18	4Sum]
  - [611. Valid Triangle Number](#611-valid-triangle-number)
@@ -384,6 +384,57 @@ class Solution:
 
 [返回目录](#00)
 
+## 1. Two Sum
+
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+给定一个整数数组，返回两个数字的索引，以便它们加起来成为一个特定的目标。 您可以假定每个输入都只有一个解决方案，并且您可能不会两次使用同一元素。
+
+**Example**
+
+```
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+```
+
+---
+
+### Python Solution
+**分析：** 两种办法，一种是建立哈希表，一种是排序之后运用双指针做。
+
+```python
+class Solution:  # 哈希表做法
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        used = {}
+        for i, v in enumerate(nums):
+            if v in used:
+                return i, used[v]
+            used[target - v] = i
+```
+
+**排序后双指针：** 需要注意的是：我们需要它们排序之前的索引，所以我们需要将索引与值绑定，而 enumerate() 刚好可以完成这项任务。  
+
+```python
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        nums = list(enumerate(nums))              # 索引与值绑定
+        nums = sorted(nums, key = lambda x: x[1]) # 排序
+        i, j = 0, len(nums) - 1
+        while i < j:           # 双指针两边夹逼目标值。
+            if nums[i][1] + nums[j][1] < target:
+                i += 1
+            elif nums[i][1] + nums[j][1] > target:
+                j -= 1
+            else:              # 返回目的索引。
+                return nums[i][0], nums[j][0]
+```
+
+[返回目录](#00)
+
 ## 167. Two Sum II
 
 Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.
@@ -417,6 +468,97 @@ class Solution:
                 j -= 1
             else:
                 return i + 1, j + 1
+```
+
+[返回目录](#00)
+
+## 15. 3Sum
+
+Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+
+给定一个由n个整数组成的数组，是否存在以a + b + c = 0的元素a，b，c？ 在给出零和的数组中查找所有唯一的三元组。
+
+**Example**
+
+```
+Given array nums = [-1, 0, 1, 2, -1, -4],
+
+A solution set is:
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]
+```
+
+---
+
+### Python Solution
+**分析：** 先排序，然后遍历之后转化成 Two Sum 问题。时间复杂度 O(n^2) 。
+
+```python
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums.sort()
+        for i in range(len(nums)-2):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            l, r = i+1, len(nums)-1
+            while l < r:
+                s = nums[i] + nums[l] + nums[r]
+                if s < 0:
+                    l +=1
+                elif s > 0:
+                    r -= 1
+                else:
+                    res.append((nums[i], nums[l], nums[r]))
+                    while l < r and nums[l] == nums[l+1]:
+                        l += 1
+                    while l < r and nums[r] == nums[r-1]:
+                        r -= 1
+                    l += 1; r -= 1
+        return res
+```
+
+[返回目录](#00)
+
+## 16. 3Sum Closest
+
+Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+
+给定一个由n个整数组成的数组num和一个整数目标，请找到以nums为单位的三个整数，以使总和最接近目标。 返回三个整数的和。 您可以假设每个输入都只有一个解决方案。
+
+**Example**
+
+```
+Given array nums = [-1, 2, 1, -4], and target = 1.
+
+The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+```
+
+---
+
+### Python Solution
+**分析：** 和上一题很像，先排序，然后遍历之后转化成 Two Sum 问题找到最近的 closest。时间复杂度 O(n^2) 。
+
+```python
+class Solution:
+    def threeSumClosest(self, nums, target):
+        nums.sort()
+        res = sum(nums[:3])
+        for i in range(len(nums)):
+            l, r = i+1, len(nums)-1
+            while l < r:
+                s = sum((nums[i], nums[l], nums[r]))
+                if abs(s-target) < abs(res-target):
+                    res = s
+                if s < target:
+                    l += 1
+                elif s > target:
+                    r -= 1
+                else:
+                    return res
+        return res
 ```
 
 [返回目录](#00)

@@ -62,7 +62,7 @@ LC #862
 ## 双指针
  - [两数之和 Two Sum](#两数之和)<span id = "601"></span>
  - [三数之和 3 Sum](#三数之和-3-sum)<span id = "602"></span>
- - [3 Sum Closest]<span id = "603"></span>
+ - [3 Sum Closest](#3-sum-closest)<span id = "603"></span>
  - [搜索二维矩阵]<span id = "604"></span>
  - [装满水的容器LC#11]<span id = "605"></span>
  - [接雨水](#接雨水)<span id = "606"></span>
@@ -1459,6 +1459,36 @@ class Solution:
 ```
 
 [返回目录](#602)
+
+---
+
+### 3 Sum Closest
+#### 题目
+给定一个由n个整数组成的数组num和一个整数目标，请找到以nums为单位的三个整数，以使总和最接近目标。 返回三个整数的和。 您可以假设每个输入都只有一个解决方案。
+#### 解法
+**分析：** 和上一题很像，先排序，然后遍历之后转化成 Two Sum 问题找到最近的 closest。时间复杂度 O(n^2) 。
+
+```python
+class Solution:
+    def threeSumClosest(self, nums, target):
+        nums.sort()
+        res = sum(nums[:3])
+        for i in range(len(nums)):
+            l, r = i+1, len(nums)-1
+            while l < r:
+                s = sum((nums[i], nums[l], nums[r]))
+                if abs(s-target) < abs(res-target):
+                    res = s
+                if s < target:
+                    l += 1
+                elif s > target:
+                    r -= 1
+                else:
+                    return res
+        return res
+```
+
+[返回目录](#603)
 
 ---
 
