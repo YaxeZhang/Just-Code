@@ -66,7 +66,8 @@ LC #862
  - [搜索二维矩阵]<span id = "604"></span>
  - [装满水的容器LC#11]<span id = "605"></span>
  - [接雨水](#接雨水)<span id = "606"></span>
- - [交换之后的最大值]<span id = "607"></span>
+ - [交换之后的最大值](#交换之后的最大值)<span id = "607"></span>
+ - [总和≥s的连续子数组的最小长度](#总和s的连续子数组的最小长度)<span id = "608"></span>
 
 ## 设计类
  - [min stack]
@@ -1452,5 +1453,52 @@ class Solution:
 ```
 
 [返回目录](#606)
+
+---
+
+### 交换之后的最大值
+#### 题目
+给定一个非负整数，您最多可以交换两个数字一次以获得最大值。返回您可以获得的最大值。
+#### 解法
+**分析：** 双指针做法，时刻更新最大值，如果遇到比最大值小的值才更新交换序列。
+
+```python
+class Solution:
+    def maximumSwap(self, num: int) -> int:
+        num = list(str(num))
+        max_idx = len(num) - 1
+        xi = yi = 0
+        for i in range(len(num) - 1, -1, -1):
+            if num[i] > num[max_idx]:
+                max_idx = i
+            elif num[i] < num[max_idx]:
+                xi = i
+                yi = max_idx
+        num[xi], num[yi] = num[yi], num[xi]
+        return int("".join(num))
+```
+
+[返回目录](#607)
+
+---
+
+### 总和≥s的连续子数组的最小长度
+#### 题目
+给定一个由n个正整数和一个正整数s组成的数组，请找到总和≥s的连续子数组的最小长度。如果没有，则返回0。
+#### 解法
+**分析：** O(n) 的写法：先吃一位，如果多了就慢慢吐。每次计算满足的长度。取最小值。
+
+```python
+class Solution:
+    def minSubArrayLen(self, s: int, nums: List[int]) -> int:
+        i, sum, res = 0, 0, float('inf')
+        for j in range(len(nums)):
+            sum += nums[j]
+            while sum >= s:
+                i, sum, res = i + 1, sum - nums[i], min(res, j - i + 1)
+        return 0 if res == float('inf') else res
+```
+
+[返回目录](#608)
 
 ---
