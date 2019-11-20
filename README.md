@@ -17,7 +17,7 @@
  - [剑指 Offer 题解](#剑指-Offer-题解)
  - [Leetcode 题解](#leetcode-题解)
  - [字节跳动面经总结算法题](#字节跳动面经总结算法题)
- - [LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
+ - [LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli) 因为是英文版LeetCode所以第一次打开可能重定向跳转到中国力扣官网，关闭重新打开即可。
 
 ---
 
@@ -65,7 +65,7 @@
 ### [字节跳动面经总结算法题](./BAT/Algorithm.md)
 
  - 从看准网和牛客笔经面经区扒取了最近两年内的字节跳动后端部分的所有面试算法题，分类整理，并附我的解法，希望对你有所帮助。
- - 因为字节跳动的题目分类必须买 LeetCode 会员才可以看，所以我把题目都添加了一个 list ，然后点击 [字节跳动分类](https://leetcode.com/list/x7kpxvli) 就可以查看我分享的题目 list 了。
+ - 因为字节跳动的题目分类必须买 LeetCode 会员才可以看，所以我把题目都添加了一个 list ，然后点击 [字节跳动分类](https://leetcode.com/list/x7kpxvli) 就可以查看我分享的题目 list 了。因为是英文版LeetCode所以第一次打开可能重定向跳转到中国力扣官网，关闭重新打开即可。
 
  **分类如下：**
  - [总目录](./BAT/Algorithm.md)
