@@ -61,7 +61,7 @@ LC #862
 
 ## 双指针
  - [两数之和 Two Sum](#两数之和)<span id = "601"></span>
- - [3 Sum]<span id = "602"></span>
+ - [三数之和 3 Sum](#三数之和-3-sum)<span id = "602"></span>
  - [3 Sum Closest]<span id = "603"></span>
  - [搜索二维矩阵]<span id = "604"></span>
  - [装满水的容器LC#11]<span id = "605"></span>
@@ -1424,6 +1424,41 @@ class Solution:
 ```
 
 [返回目录](#601)
+
+---
+
+### 三数之和 3 Sum
+#### 题目
+给定一个由n个整数组成的数组，是否存在以a + b + c = 0的元素a，b，c？在给出零和的数组中查找所有唯一的三元组。
+#### 解法
+**分析：** 先排序，然后遍历之后转化成 Two Sum 问题。时间复杂度 O(n^2) 。
+
+```python
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums.sort()
+        for i in range(len(nums)-2):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            l, r = i+1, len(nums)-1
+            while l < r:
+                s = nums[i] + nums[l] + nums[r]
+                if s < 0:
+                    l +=1
+                elif s > 0:
+                    r -= 1
+                else:
+                    res.append((nums[i], nums[l], nums[r]))
+                    while l < r and nums[l] == nums[l+1]:
+                        l += 1
+                    while l < r and nums[r] == nums[r-1]:
+                        r -= 1
+                    l += 1; r -= 1
+        return res
+```
+
+[返回目录](#602)
 
 ---
 
