@@ -4,7 +4,7 @@
  - [165	Compare Version Numbers]
  - [66. Plus One](#66-plus-one)
  - [8. String to Integer (atoi)](#8-string-to-integer-atoi)
- - [258	Add Digits]
+ - [258. Add Digits](#258-add-digits)
  - [67. Add Binary](#67-add-binary)
  - [43	Multiply Strings]
  - [29	Divide Two Integers]
@@ -203,6 +203,34 @@ class Solution:
             ret = ret*10 + ord(s[i]) - ord('0')
             i += 1
         return max(-2**31, min(sign * ret,2**31-1))
+```
+
+[返回目录](#00)
+
+## 258. Add Digits
+
+Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
+
+给定一个非负整数num，请重复加所有数字，直到结果只有一位。
+
+**Example:1**
+
+```
+Input: 38
+Output: 2
+Explanation: The process is like: 3 + 8 = 11, 1 + 1 = 2.
+             Since 2 has only one digit, return it.
+```
+
+---
+
+### Python Solution
+**分析：** 找规律
+
+```python
+class Solution:
+    def addDigits(self, num: int) -> int:
+        return 1 + (num - 1) % 9 if num else 0
 ```
 
 [返回目录](#00)
