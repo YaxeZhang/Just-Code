@@ -55,7 +55,7 @@
  - [132	Palindrome Partitioning II]
  - [267	Palindrome Permutation II]
 ## Parentheses		
- - [20	Valid Parentheses]
+ - [20. Valid Parentheses](#20-valid-parentheses)
  - [22. Generate Parentheses](#22-generate-parentheses)
  - [32	Longest Valid Parentheses]
  - [241	Different Ways to Add Parentheses]
@@ -783,6 +783,65 @@ class Solution:
             i += 1
             j -= 1
         return True
+```
+
+[返回目录](#00)
+
+## 20. Valid Parentheses
+
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+
+给定仅包含字符'（'，'）'，'{'，'}'，'['和']'的字符串，请确定输入字符串是否有效。 在以下情况下，输入字符串有效：•开括号必须用相同类型的括号闭合。 开括号必须以正确的顺序关闭。
+
+**Example**
+
+```
+Example 1:
+Input: "()"
+Output: true
+
+Example 2:
+Input: "()[]{}"
+Output: true
+
+Example 3:
+Input: "(]"
+Output: false
+
+Example 4:
+Input: "([)]"
+Output: false
+
+Example 5:
+Input: "{[]}"
+Output: true
+```
+
+---
+
+### Python Solution
+**分析：** 简单题，栈的简单应用
+
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        dic = {')': '(', '}': '{', ']': '['}
+        for i in s:
+            if i in ')]}':
+                if not stack: return False
+                if stack[-1] != dic[i]:
+                    return False
+                stack.pop()
+            else:
+                stack.append(i)
+        return not stack
+
 ```
 
 [返回目录](#00)
