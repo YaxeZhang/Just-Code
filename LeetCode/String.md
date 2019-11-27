@@ -57,7 +57,7 @@
 ## Parentheses		
  - [20. Valid Parentheses](#20-valid-parentheses)
  - [22. Generate Parentheses](#22-generate-parentheses)
- - [32	Longest Valid Parentheses]
+ - [32. Longest Valid Parentheses](#32-longest-valid-parentheses)
  - [241	Different Ways to Add Parentheses]
  - [301	Remove Invalid Parentheses]
 ## Subsequence		
@@ -895,6 +895,51 @@ class Solution(object):
                 for right in self.generateParenthesis(N-1-c):
                     ans.append('({}){}'.format(left, right))
         return ans
+```
+
+[返回目录](#00)
+
+## 32. Longest Valid Parentheses
+
+Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
+
+给定仅包含字符'（'和'）'的字符串，请找到最长的有效（格式正确）括号子字符串的长度。
+
+**Example**
+
+```
+Example 1:
+Input: "(()"
+Output: 2
+Explanation: The longest valid parentheses substring is "()"
+
+Example 2:
+Input: ")()())"
+Output: 4
+Explanation: The longest valid parentheses substring is "()()"
+```
+
+---
+
+### Python Solution
+**分析：** 算法是可以一步一步进步的，从暴力法到动态规划或者做括号题常用的栈，再到 O(1) 空间的做法。
+
+```python
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        def check(s, sign):
+            res = l = r = 0
+            for i in s:
+                if i == sign:
+                    l += 1
+                else:
+                    r += 1
+                if l == r:
+                    res = max(res, 2 * r)
+                elif r > l:
+                    l = r = 0
+            return res
+        return max(check(s, '('), check(s[::-1], ')'))
 ```
 
 [返回目录](#00)
