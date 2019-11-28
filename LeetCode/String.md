@@ -61,7 +61,7 @@
  - [241	Different Ways to Add Parentheses]
  - [301	Remove Invalid Parentheses]
 ## Subsequence		
- - [392	Is Subsequence]
+ - [392. Is Subsequence](#392-is-subsequence)
  - [115	Distinct Subsequences]
  - [187	Repeated DNA Sequences]
 
@@ -210,6 +210,12 @@ class Solution:
                 if not d[c] == t[i]:
                     return False
         return True
+```
+
+```python
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return len(set(s)) == len(set(zip(s, t))) == len(set(t))
 ```
 
 [返回目录](#00)
@@ -988,6 +994,47 @@ class Solution:
                     l = r = 0
             return res
         return max(check(s, '('), check(s[::-1], ')'))
+```
+
+[返回目录](#00)
+
+## 392. Is Subsequence
+
+Given a string s and a string t, check if s is subsequence of t.
+
+You may assume that there is only lower case English letters in both s and t. t is potentially a very long (length ~= 500,000) string, and s is a short string (<=100).
+
+A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ace" is a subsequence of "abcde" while "aec" is not).
+
+给定字符串s和字符串t，请检查s是否为t的子序列。 您可以假设s和t都只有小写英文字母。 t可能是一个很长的字符串（长度== 500,000），而s是一个短字符串（<= 100）。 字符串的子序列是一个新字符串，它是通过删除某些字符（可以是无字符）而不会干扰其余字符的相对位置而从原始字符串形成的。 （即，“ ace”是“ abcde”的子序列，而“ aec”则不是）。
+
+**Example**
+
+```
+Example 1:
+s = "abc", t = "ahbgdc"
+Return true.
+
+Example 2:
+s = "axc", t = "ahbgdc"
+Return false.
+```
+
+---
+
+### Python Solution
+**分析：** 这道题思路不难，难的是优化和拓展的思路。
+
+```python
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        for c in s:
+            i = t.find(c)
+            if i == -1:
+                return False
+            else:
+                t = t[i+1:]
+        return True
 ```
 
 [返回目录](#00)
