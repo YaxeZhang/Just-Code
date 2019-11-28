@@ -9,7 +9,7 @@
  - [151	Reverse Words in a String]
  - [186	Reverse Words in a String II]
  - [345	Reverse Vowels of a String]
- - [205	Isomorphic Strings]
+ - [205. Isomorphic Strings](#205-isomorphic-strings)
  - [293	Flip Game]
  - [294	Flip Game II]
  - [290. Word Pattern](#290-word-pattern)
@@ -162,6 +162,54 @@ class Solution:
 class Solution:
     def canConstruct(self, ransomNote, magazine):
         return not collections.Counter(ransomNote) - collections.Counter(magazine)
+```
+
+[返回目录](#00)
+
+## 205. Isomorphic Strings
+
+Given two strings s and t, determine if they are isomorphic.
+
+Two strings are isomorphic if the characters in s can be replaced to get t.
+
+All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.
+
+给定两个字符串s和t，确定它们是否同构。 如果可以替换s中的字符以获得t，则两个字符串是同构的。 在保留字符顺序的同时，必须将所有出现的字符替换为另一个字符。 没有两个字符可以映射到同一字符，但是一个字符可以映射到自身。
+
+**Example**
+
+```
+Example 1:
+Input: s = "egg", t = "add"
+Output: true
+
+Example 2:
+Input: s = "foo", t = "bar"
+Output: false
+
+Example 3:
+Input: s = "paper", t = "title"
+Output: true
+```
+
+---
+
+### Python Solution
+**分析：** 简单题，主要考察 map 的映射关系。
+
+```python
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        d = {}
+        for i, c in enumerate(s):
+            if not c in d:
+                if t[i] in d.values():
+                    return False
+                d[c] = t[i]
+            else:
+                if not d[c] == t[i]:
+                    return False
+        return True
 ```
 
 [返回目录](#00)
