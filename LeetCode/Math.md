@@ -34,7 +34,7 @@
  - [263. Ugly Number](#263-ugly-number)
  - [264. Ugly Number II](#264-ugly-number-ii)
  - [306	Additive Number]
- - [172	Factorial Trailing Zeroes]
+ - [172. Factorial Trailing Zeroes](#172-factorial-trailing-zeroes)
  - [343. Integer Break](#343-integer-break)
  - [396	Rotate Function]
  - [390	Elimination Game]
@@ -826,6 +826,39 @@ class Solution:
                   for a in range(32) for b in range(20) for c in range(14))
     def nthUglyNumber(self, n):
         return self.ugly[n-1]
+```
+
+[返回目录](#00)
+
+## 172. Factorial Trailing Zeroes
+
+Given an integer n, return the number of trailing zeroes in n!.
+
+给定整数n，返回n！中的尾随零。
+
+**Example**
+
+```
+Example 1:
+Input: 3
+Output: 0
+Explanation: 3! = 6, no trailing zero.
+
+Example 2:
+Input: 5
+Output: 1
+Explanation: 5! = 120, one trailing zero.
+```
+
+---
+
+### Python Solution
+**分析：** 纯属找规律，有零就是 5 的个数么？不完全。
+
+```python
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        return 0 if n == 0 else n // 5 + self.trailingZeroes(n // 5)
 ```
 
 [返回目录](#00)
