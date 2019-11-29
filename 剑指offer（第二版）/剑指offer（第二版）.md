@@ -38,7 +38,7 @@
    - [38.字符串的排列](#38字符串的排列)
    - [39.数组中出现次数超过一半的数字](#39数组中出现次数超过一半的数字)
    - [40.最大的k个数](#40最大的k个数)
-   - [41.数据流的中位数]
+   - [41.数据流的中位数](#41数据流的中位数)
    - [42.连续子数组的最大和](#42连续子数组的最大和)
    - [43.1~n整数中1出现的次数](#431n整数中1出现的次数)
    - [44.数字序列中某一位的数字](#44数字序列中某一位的数字)
@@ -1279,6 +1279,33 @@ class Solution:
 
 ```python
 
+```
+
+[回到目录](#00)
+
+### 41.数据流的中位数
+#### 题目描述
+如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。
+#### 解法：
+
+```python
+from heapq import *
+class Solution:
+
+    def __init__(self):
+        self.heaps = [], []
+
+    def insert(self, num):
+        small, large = self.heaps
+        heappush(small, -heappushpop(large, num))
+        if len(large) < len(small):
+            heappush(large, -heappop(small))
+
+    def getMedian(self):
+        small, large = self.heaps
+        if len(large) > len(small):
+            return float(large[0])
+        return (large[0] - small[0]) / 2.0
 ```
 
 [回到目录](#00)

@@ -46,7 +46,7 @@
  - [352	Data Stream as Disjoint Intervals]
 ## Counter		
  - [239. Sliding Window Maximum](#239-sliding-window-maximum)
- - [295	Find Median from Data Stream]
+ - [295. Find Median from Data Stream](#295-find-median-from-data-stream)
  - [325	Maximum Size Subarray Sum Equals k]
  - [209. Minimum Size Subarray Sum](#209-minimum-size-subarray-sum)
  - [238. Product of Array Except Self](#238-product-of-array-except-self)
@@ -707,6 +707,50 @@ class Solution:
             if i >= k - 1:
                 res += nums[dq[0]],
         return res
+```
+
+[返回目录](#00)
+
+## 295. Find Median from Data Stream
+
+Median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value. So the median is the mean of the two middle value.
+
+中位数是有序整数列表中的中间值。 如果列表的大小是偶数，则没有中间值。 因此，中位数是两个中间值的平均值。
+
+**Example**
+
+```
+addNum(1)
+addNum(2)
+findMedian() -> 1.5
+addNum(3)
+findMedian() -> 2
+```
+
+---
+
+### Python Solution
+**分析：** 维护一个最大堆、一个最小堆，所以插入的时间是 O(lgn), 找到中位数的时间是 O(1)。
+
+```python
+from heapq import *
+
+class MedianFinder:
+
+    def __init__(self):
+        self.heaps = [], []
+
+    def addNum(self, num):
+        small, large = self.heaps
+        heappush(small, -heappushpop(large, num))
+        if len(large) < len(small):
+            heappush(large, -heappop(small))
+
+    def findMedian(self):
+        small, large = self.heaps
+        if len(large) > len(small):
+            return float(large[0])
+        return (large[0] - small[0]) / 2.0
 ```
 
 [返回目录](#00)
