@@ -42,7 +42,7 @@
  - [30	Substring with Concatenation of All Words]()
  - [3. Longest Substring Without Repeating Characters](#3-longest-substring-without-repeating-characters)
  - [340	Longest Substring with At Most K Distinct Characters]
- - [395	Longest Substring with At Least K Repeating Characters]
+ - [395. Longest Substring with At Least K Repeating Characters](#395-longest-substring-with-at-least-k-repeating-characters)
  - [159	Longest Substring with At Most Two Distinct Characters]
 ## Palindrome		
  - [125. Valid Palindrome](#125-valid-palindrome)
@@ -728,7 +728,7 @@ class Solution:
 
 [返回目录](#00)
 
-## 3 Longest Substring Without Repeating Characters
+## 3. Longest Substring Without Repeating Characters
 
 Given a string, find the length of the longest substring without repeating characters.
 
@@ -775,6 +775,52 @@ class Solution:
                 maxLength = max(maxLength, i - start + 1)
             used[c] = i
         return maxLength
+```
+
+[返回目录](#00)
+
+## 395. Longest Substring with At Least K Repeating Characters
+
+Find the length of the longest substring T of a given string (consists of lowercase letters only) such that every character in T appears no less than k times.
+
+找到给定字符串的最长子字符串T的长度（仅由小写字母组成），以使T中的每个字符出现不少于k次。
+
+**Example:1**
+
+```
+Input:
+s = "aaabb", k = 3
+
+Output:
+3
+
+The longest substring is "aaa", as 'a' is repeated 3 times.
+```
+
+**Example:2**
+
+```
+Input:
+s = "ababbc", k = 2
+
+Output:
+5
+
+The longest substring is "ababb", as 'a' is repeated 2 times and 'b' is repeated 3 times.
+```
+
+---
+
+### Python Solution
+**分析：** 递归归并解决问题。
+
+```python
+class Solution:
+    def longestSubstring(self, s: str, k: int) -> int:
+        for c in set(s):
+            if s.count(c) < k:
+                return max([self.longestSubstring(i, k) for i in s.split(c)])
+        return len(s)
 ```
 
 [返回目录](#00)

@@ -49,7 +49,7 @@
  - [295	Find Median from Data Stream]
  - [325	Maximum Size Subarray Sum Equals k]
  - [209. Minimum Size Subarray Sum](#209-minimum-size-subarray-sum)
- - [238	Product of Array Except Self]
+ - [238. Product of Array Except Self](#238-product-of-array-except-self)
  - [152. Maximum Product Subarray](#152-maximum-product-subarray)
  - [228	Summary Ranges]
  - [163	Missing Ranges]
@@ -671,6 +671,43 @@ class Solution:
             while sum >= s:
                 i, sum, res = i + 1, sum - nums[i], min(res, j - i + 1)
         return 0 if res == float('inf') else res
+```
+
+[返回目录](#00)
+
+## 238. Product of Array Except Self
+
+Given an array nums of n integers where n > 1,  return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
+
+给定一个由n个整数组成的数组num，其中n> 1，则返回一个数组输出，使得output [i]等于除nums [i]之外所有nums元素的乘积。
+
+**Example**
+
+```
+Input:  [1,2,3,4]
+Output: [24,12,8,6]
+```
+
+**Note:**
+
+注意：请不用除法并在O（n）中求解。 跟进：您能以恒定的空间复杂度解决它吗？ （出于空间复杂度分析的目的，输出数组不算作额外的空间。）
+
+---
+
+### Python Solution
+**分析：** 剑指 offer 里一样的题目，重点在于分解步骤，左边乘积乘以 1 乘以右边乘积。
+
+```python
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        res = [1] * len(nums)
+        for i in range(1, len(nums)):
+            res[i] = nums[i-1] * res[i-1]
+        tmp = 1
+        for j in range(len(nums)-2, -1, -1):
+            tmp *= nums[j+1]
+            res[j] *= tmp
+        return res
 ```
 
 [返回目录](#00)
