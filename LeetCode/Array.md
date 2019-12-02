@@ -49,6 +49,7 @@
  - [295. Find Median from Data Stream](#295-find-median-from-data-stream)
  - [325	Maximum Size Subarray Sum Equals k]
  - [209. Minimum Size Subarray Sum](#209-minimum-size-subarray-sum)
+ - [795. Number of Subarrays with Bounded Maximum](#795-number-of-subarrays-with-bounded-maximum)
  - [238. Product of Array Except Self](#238-product-of-array-except-self)
  - [152. Maximum Product Subarray](#152-maximum-product-subarray)
  - [228	Summary Ranges]
@@ -783,6 +784,48 @@ class Solution:
             while sum >= s:
                 i, sum, res = i + 1, sum - nums[i], min(res, j - i + 1)
         return 0 if res == float('inf') else res
+```
+
+[返回目录](#00)
+
+## 795. Number of Subarrays with Bounded Maximum
+
+We are given an array A of positive integers, and two positive integers L and R (L <= R).
+
+Return the number of (contiguous, non-empty) subarrays such that the value of the maximum array element in that subarray is at least L and at most R.
+
+给定一个正整数数组A，以及两个正整数L和R（L <= R）。 返回（连续的，非空的）子数组的数量，以使该子数组中最大数组元素的值至少为L，最多为R。
+
+**Example**
+
+```
+Example :
+Input:
+A = [2, 1, 4, 3]
+L = 2
+R = 3
+Output: 3
+Explanation: There are three subarrays that meet the requirements: [2], [2, 1], [3].
+```
+
+---
+
+### Python Solution
+**分析：** 这道题不在前 400 道里，但我觉得比较经典，可以研究一下。利用 dp 来标记状态，利用 prev 来标记左边界，当碰到第一个满足条件的数的时候，dp = i-prev 即为向左扩张，后面的每次加的 dp 其实就是向右扩张右边界，想通了以后十分顺畅。
+
+```python
+class Solution:
+    def numSubarrayBoundedMax(self, A: List[int], L: int, R: int) -> int:
+        res = dp = 0
+        prev = -1
+        for i, v in enumerate(A):
+            if v > R:
+                dp = 0
+                prev = i
+            elif L <= v <= R:
+                dp = i - prev
+            res += dp
+        return res
 ```
 
 [返回目录](#00)
