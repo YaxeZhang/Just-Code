@@ -1,6 +1,6 @@
 <span id = "00"></span>
 ## 基础		
- - [28	Implement strStr()]
+ - [28. Implement strStr()](#28-implement-strstr)
  - [14. Longest Common Prefix](14-longest-common-prefix)
  - [58	Length of Last Word]
  - [387	First Unique Character in a String]
@@ -65,6 +65,46 @@
  - [115	Distinct Subsequences]
  - [187	Repeated DNA Sequences]
 
+
+## 28. Implement strStr()
+
+Implement strStr().
+
+Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+实现strStr（）。 返回大海捞针中第一次出现的针的索引，如果不属于大海捞针，则返回-1。
+
+**Example**
+
+```
+Example 1:
+Input: haystack = "hello", needle = "ll"
+Output: 2
+
+Example 2:
+Input: haystack = "aaaaa", needle = "bba"
+Output: -1
+```
+
+---
+
+### Python Solution
+**分析：** 两种方法，一种是普通的方法但是已经优化，一种是马拉车算法。
+
+```python
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        for i in range(len(haystack) - len(needle)+1):
+            if haystack[i:i+len(needle)] == needle:
+                return i
+        return -1
+```
+
+```python
+# TODO: 
+```
+
+[返回目录](#00)
 
 ## 14. Longest Common Prefix
 
