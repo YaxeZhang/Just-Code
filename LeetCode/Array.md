@@ -25,7 +25,7 @@
  - [11	Container With Most Water]
  - [42. Trapping Rain Water](#42-trapping-rain-water)
  - [334	Increasing Triplet Subsequence]
- - [128	Longest Consecutive Sequence]
+ - [128. Longest Consecutive Sequence](#128-longest-consecutive-sequence)
  - [164	Maximum Gap	Bucket]
  - [287	Find the Duplicate Number]
  - [135	Candy]
@@ -444,6 +444,49 @@ class Solution:
                 l_max = max(l_max, height[i])
                 res += max(0, l_max - height[i])
         return res
+```
+
+[返回目录](#00)
+
+## 128. Longest Consecutive Sequence
+
+Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
+
+Your algorithm should run in O(n) complexity.
+
+给定一个未排序的整数数组，请找出最长的连续元素序列的长度。 您的算法应以O（n）复杂度运行。
+
+**Example:1**
+
+```
+Input: [100, 4, 200, 1, 3, 2]
+Output: 4
+Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+```
+
+---
+
+### Python Solution
+**分析：** 利用 hashset 来排除重复元素，然后在里面一个一个找，当然 for 循环里第一个条件就是优化重复计算的。
+
+```python
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        longest_streak = 0
+        num_set = set(nums)
+
+        for num in num_set:
+            if num - 1 not in num_set:
+                current_num = num
+                current_streak = 1
+
+                while current_num + 1 in num_set:
+                    current_num += 1
+                    current_streak += 1
+
+                longest_streak = max(longest_streak, current_streak)
+
+        return longest_streak
 ```
 
 [返回目录](#00)
