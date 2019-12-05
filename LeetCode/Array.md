@@ -20,7 +20,7 @@
  - [217. Contains Duplicate](#217-contains-duplicate)
  - [219. Contains Duplicate II](#219-contains-duplicate-ii)
  - [220. Contains Duplicate III](#220-contains-duplicate-iii)
- - [55	Jump Game]
+ - [55. Jump Game](#55-jump-game)
  - [45	Jump Game II]
  - [11	Container With Most Water]
  - [42. Trapping Rain Water](#42-trapping-rain-water)
@@ -405,6 +405,61 @@ class Solution:
                 if i + j >= len(nums): break
                 if abs(nums[i] - nums[i + j]) <= t: return True
         return False
+```
+
+[返回目录](#00)
+
+## 55. Jump Game
+
+Given an array of non-negative integers, you are initially positioned at the first index of the array.
+
+Each element in the array represents your maximum jump length at that position.
+
+Determine if you are able to reach the last index.
+
+给定一个非负整数数组，您最初位于该数组的第一个索引处。 数组中的每个元素代表您在该位置的最大跳转长度。 确定您是否能够达到最后一个索引。
+
+**Example:1**
+
+```
+Input: [2,3,1,1,4]
+Output: true
+Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+```
+
+**Example:2**
+
+```
+Input: [3,2,1,0,4]
+Output: false
+Explanation: You will always arrive at index 3 no matter what. Its maximum
+             jump length is 0, which makes it impossible to reach the last index.
+```
+
+---
+
+### Python Solution
+**分析：** 从后往前或者从前往后。从前往后，看当前位置能不能到达，并更新最远位置。
+
+```python
+class Solution: # 从后往前,不能优化。
+    def canJump(self, nums: List[int]) -> bool:
+        lastpos = len(nums)-1
+        for i in range(len(nums)-1, -1, -1):
+            if i + nums[i] >= lastpos:
+                lastpos = i
+        return lastpos == 0
+```
+
+```python
+class Solution: # 从前往后，看当前位置能不能到达，并更新最远位置。
+    def canJump(self, nums: List[int]) -> bool:
+        farest = 0
+        for i, v in enumerate(nums):
+            if i > farest:
+                return False
+            farest = max(farest, i + v)
+        return True
 ```
 
 [返回目录](#00)
