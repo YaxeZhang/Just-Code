@@ -21,7 +21,7 @@
  - [219. Contains Duplicate II](#219-contains-duplicate-ii)
  - [220. Contains Duplicate III](#220-contains-duplicate-iii)
  - [55. Jump Game](#55-jump-game)
- - [45	Jump Game II]
+ - [45. Jump Game II](#45-jump-game-ii)
  - [11	Container With Most Water]
  - [42. Trapping Rain Water](#42-trapping-rain-water)
  - [334	Increasing Triplet Subsequence]
@@ -460,6 +460,41 @@ class Solution: # 从前往后，看当前位置能不能到达，并更新最�
                 return False
             farest = max(farest, i + v)
         return True
+```
+
+[返回目录](#00)
+
+## 45. Jump Game II
+
+Given an array of non-negative integers, you are initially positioned at the first index of the array.
+Each element in the array represents your maximum jump length at that position.
+Your goal is to reach the last index in the minimum number of jumps.
+
+给定一个非负整数数组，您最初位于该数组的第一个索引处。 数组中的每个元素代表您在该位置的最大跳转长度。 您的目标是在最少的跳数中达到最后的索引。
+
+**Example:1**
+
+```
+Input: [2,3,1,1,4]
+Output: 2
+Explanation: The minimum number of jumps to reach the last index is 2.
+    Jump 1 step from index 0 to 1, then 3 steps to the last index.
+```
+
+---
+
+### Python Solution
+**分析：** 虽然难度是 hard 但其实很简单。而且题目里说保证可以到达，约束条件就更少了。
+
+```python
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        tmp = [i + v for i, v in enumerate(nums)]
+        left = right = res = 0
+        while right < len(nums)-1:
+            left, right = right, max(tmp[left:right+1])
+            res += 1
+        return res
 ```
 
 [返回目录](#00)
