@@ -12,8 +12,8 @@
  - [119. Pascal's Triangle II](#119-pascals-triangle-ii)
  - [169	Majority Element]
  - [229	Majority Element II]
- - [274	H-Index]
- - [275	H-Index II	Binary Search]
+ - [274. H-Index](#274-hindex)
+ - [275. H-Index II](#275-hindex-ii)
  - [243	Shortest Word Distance]
  - [244	Shortest Word Distance II]
  - [245	Shortest Word Distance III]
@@ -293,6 +293,118 @@ class Solution:
             for j in range(i-1, 0, -1):
                 res[j] += res[j-1]
         return res
+```
+
+[返回目录](#00)
+
+## 274. H-Index
+
+Given an array of citations (each citation is a non-negative integer) of a researcher, write a function to compute the researcher's h-index.
+
+According to the definition of h-index on Wikipedia: "A scientist has index h if h of his/her N papers have at least h citations each, and the other N − h papers have no more than h citations each."
+
+给定研究人员的一系列引文（每个引文是一个非负整数），编写一个函数来计算研究人员的h指数。 根据Wikipedia上h-index的定义：“如果科学家的N篇论文中的h篇每篇至少被h引用，而其他N － h篇每篇不超过h篇引用，则科学家对h索引进行索引。”
+
+**Example:1**
+
+```
+Input: citations = [3,0,6,1,5]
+Output: 3
+Explanation: [3,0,6,1,5] means the researcher has 5 papers in total and each of them had
+             received 3, 0, 6, 1, 5 citations respectively.
+             Since the researcher has 3 papers with at least 3 citations each and the remaining
+             two with no more than 3 citations each, her h-index is 3.
+```
+
+---
+
+### Python Solution
+**分析：** 如果用排序的话，题目还是很简单的。不用快速排序的话有点类似于桶排序的思想。
+
+```python
+class Solution:
+    def hIndex(self, citations: List[int]) -> int:
+        c = sorted(citations, reverse=True)
+        for i, v in enumerate(c):
+            if v <= i:
+                return i
+        return len(c)
+```
+
+**用二分法优化** 注意 hi 的取值，这样可以在所有都大于的情况取到正确的值。
+
+```python
+class Solution:
+    def hIndex(self, citations: List[int]) -> int:
+        c = sorted(citations, reverse=True)
+        lo, hi = 0, len(c)
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if c[mid] > mid:
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo
+```
+
+**O(n)时间和空间**
+
+```python
+class Solution:
+    def hIndex(self, citations: List[int]) -> int:
+        n = len(citations)
+        citeCount = [0] * (n+1)
+        for c in citations:
+            if c >= n:
+                citeCount[n] += 1
+            else:
+                citeCount[c] += 1
+
+        i = n-1
+        while i >= 0:
+            citeCount[i] += citeCount[i+1]
+            if citeCount[i+1] >= i+1:
+                return i+1
+            i -= 1
+        return 0
+```
+[返回目录](#00)
+
+## 275. H-Index II
+
+Given an array of citations sorted in ascending order (each citation is a non-negative integer) of a researcher, write a function to compute the researcher's h-index.
+
+According to the definition of h-index on Wikipedia: "A scientist has index h if h of his/her N papers have at least h citations each, and the other N − h papers have no more than h citations each."
+
+给定一组以研究者的升序排列的引用（每个引用是一个非负整数），编写一个函数来计算研究者的h指数。 根据Wikipedia上h-index的定义：“如果h他/她的N篇论文中至少有h篇引用，则科学家对h进行索引，而其他n-h篇论文中的h篇引用均不超过h篇。”
+
+**Example:1**
+
+```
+Input: citations = [0,1,3,5,6]
+Output: 3
+Explanation: [0,1,3,5,6] means the researcher has 5 papers in total and each of them had
+             received 0, 1, 3, 5, 6 citations respectively.
+             Since the researcher has 3 papers with at least 3 citations each and the remaining
+             two with no more than 3 citations each, her h-index is 3.
+```
+
+---
+
+### Python Solution
+**分析：** 延续上一道题，如果已经排好序，直接用二分法就可以了。
+
+```python
+class Solution:
+    def hIndex(self, citations: List[int]) -> int:
+        lo, hi = 0, len(citations)
+        while lo < hi:
+            mid = (lo + hi) // 2
+            if citations[~mid] > mid:
+                lo = mid + 1
+            else:
+                hi = mid
+        return lo
 ```
 
 [返回目录](#00)
