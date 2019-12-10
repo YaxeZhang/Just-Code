@@ -1433,6 +1433,60 @@ class Solution:
 
 [返回目录](#00)
 
+## 147	 Insertion Sort List
+
+Algorithm of Insertion Sort:
+
+1. Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list.
+2. At each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there.
+3. It repeats until no input elements remain.
+
+插入排序算法：
+
+1. 迭代插入排序，每次重复消耗一个输入元素，并增加已排序的输出列表。
+2. 在每次迭代时，插入排序都会从输入数据中删除一个元素，在排序列表中找到它所属的位置，然后将其插入。
+3. 重复直到没有输入元素剩余为止。
+
+**Example**
+
+```
+Example 1:
+Input: 4->2->1->3
+Output: 1->2->3->4
+
+Example 2:
+Input: -1->5->3->4->0
+Output: -1->0->3->4->5
+```
+
+---
+
+### Python Solution
+**分析：** 有点类似于链表翻转，其实插入排序确实可以理解成翻转的形式。重点在于第一步的优化，让找值不用每次从开始找
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def insertionSortList(self, head: ListNode) -> ListNode:
+        dummy = cur = ListNode(0)
+        while head:
+            if cur and cur.val > head.val:
+                cur = dummy
+            # 找到插入的位置
+            while cur.next and cur.next.val < head.val:
+                cur = cur.next
+            # 局部链表翻转
+            cur.next, cur.next.next, head = head, cur.next, head.next
+        return dummy.next
+```
+
+[返回目录](#00)
+
 ## 138  Copy List with Random Pointer
 
 A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
