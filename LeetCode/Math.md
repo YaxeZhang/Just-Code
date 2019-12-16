@@ -19,7 +19,7 @@
  - [15. 3Sum](#15-3sum)
  - [16. 3Sum Closest](#16-3sum-closest)
  - [259	3Sum Smaller]
- - [18	4Sum]
+ - [18. 4Sum](#18-4sum)
  - [611. Valid Triangle Number](#611-valid-triangle-number)
 ## 很少考		
  - [231	Power of Two]
@@ -587,6 +587,64 @@ class Solution:
                 else:
                     return res
         return res
+```
+
+[返回目录](#00)
+
+## 18. 4Sum
+
+Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
+
+Note: The solution set must not contain duplicate quadruplets.
+
+给定一个由n个整数组成的数组num和一个整数目标，是否存在以nums为单位的元素a，b，c和d，使得a + b + c + d = target？ 在给出目标总和的数组中找到所有唯一的四元组。
+注意：解决方案集不得包含重复的四元组。
+
+**Example**
+
+```
+Given array nums = [1, 0, -1, 0, -2, 2], and target = 0.
+
+A solution set is:
+[
+  [-1,  0, 0, 1],
+  [-2, -1, 1, 2],
+  [-2,  0, 0, 2]
+]
+```
+
+---
+
+### Python Solution
+**分析：**
+
+```python
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        def findNsum(l, r, target, N, result, results):
+            if r-l+1 < N or N < 2 or target < nums[l]*N or target > nums[r]*N:  # early termination
+                return
+            if N == 2: # two pointers solve sorted 2-sum problem
+                while l < r:
+                    s = nums[l] + nums[r]
+                    if s == target:
+                        results.append(result + [nums[l], nums[r]])
+                        l += 1
+                        while l < r and nums[l] == nums[l-1]:
+                            l += 1
+                    elif s < target:
+                        l += 1
+                    else:
+                        r -= 1
+            else: # recursively reduce N
+                for i in range(l, r+1):
+                    if i == l or (i > l and nums[i-1] != nums[i]):
+                        findNsum(i+1, r, target-nums[i], N-1, result+[nums[i]], results)
+
+        nums.sort()
+        results = []
+        findNsum(0, len(nums)-1, target, 4, [], results)
+        return results
 ```
 
 [返回目录](#00)

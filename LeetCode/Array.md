@@ -60,7 +60,7 @@
  - [283. Move Zeroes](#283-move-zeroes)
  - [376	Wiggle Subsequence]
  - [280	Wiggle Sort]
- - [324	Wiggle Sort II]
+ - [324. Wiggle Sort II](#324-wiggle-sort-ii)
 
 ## 189. Rotate Array
 
@@ -1319,6 +1319,40 @@ class Solution:
                 if i != k:
                     nums[i], nums[k] = nums[k], nums[i]
                 k += 1
+```
+
+[返回目录](#00)
+
+## 324. Wiggle Sort II
+
+Given an unsorted array nums, reorder it such that nums[0] < nums[1] > nums[2] < nums[3]....
+
+给定一个未排序的数组nums，对其重新排序，以使nums [0] <nums [1]> nums [2] <nums [3] ....
+
+**Example**
+
+```
+Example 1:
+Input: nums = [1, 5, 1, 1, 6, 4]
+Output: One possible answer is [1, 4, 1, 5, 1, 6].
+
+
+Example 2:
+Input: nums = [1, 3, 2, 2, 3, 1]
+Output: One possible answer is [2, 3, 1, 3, 1, 2].
+```
+
+---
+
+### Python Solution
+**分析：** 第一种方法实际上不满足题目要求的 O(n) 的时间和 O(1) 的空间，但是理解思路和 python 列表的操作方面，可以加深理解。第二种方法就是比较正规的。
+
+```python
+class Solution:
+    def wiggleSort(self, nums: List[int]) -> None:
+        nums.sort()
+        half = len(nums[::2])
+        nums[::2], nums[1::2] = nums[:half][::-1], nums[half:][::-1]
 ```
 
 [返回目录](#00)

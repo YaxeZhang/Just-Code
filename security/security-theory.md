@@ -17,6 +17,7 @@ https建立过程
 OWASP TOP 10
 
 讲一讲同源策略/SSRF/CSRF/XSS
+SSRF很重要
 CSRF
 XSS注入了解、SQL注入
 XSS和CSRF的区别
