@@ -23,7 +23,7 @@
  - [72. Edit Distance](#72-edit-distance)
  - [300. Longest Increasing Subsequence](#300-longest-increasing-subsequence)
  - [1143. Longest Common Subsequence](#1143-longest-common-subsequence)
- - [97	Interleaving String]
+ - [97. Interleaving String](#97-interleaving-string)
  - [174	Dungeon Game]
  - [221. Maximal Square](#221-maximal-square)
  - [85	Maximal Rectangle]
@@ -984,6 +984,65 @@ class Solution:
                 else:
                     cur[j+1] = max(cur[j], dp[j+1])
             dp = cur
+        return dp[-1]
+```
+
+[返回目录](#00)
+
+## 97. Interleaving String
+
+Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.
+
+给定s1，s2，s3，找出s3是否由s1和s2的交错形成。
+
+**Example**
+
+```
+Example 1:
+Input: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"
+Output: true
+
+Example 2:
+Input: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbbaccc"
+Output: false
+```
+
+---
+
+### Python Solution
+**分析：** 动态规划？第一种解法是带备忘录的递归，第二章一维动态规划。
+
+```python
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        memo = {}
+        def check(p1, p2, p3):
+            if (p1, p2) in memo:
+                return memo[(p1, p2)]
+            if p3 == len(s3):
+                return p1 == len(s1) and p2 == len(s2)
+            memo[(p1, p2)] = False
+            if p1 < len(s1) and s1[p1]==s3[p3]:
+                memo[(p1, p2)] |= check(p1+1, p2, p3+1)
+            if p2 < len(s2) and s2[p2]==s3[p3]:
+                memo[(p1, p2)] |= check(p1, p2+1, p3+1)
+            return memo[(p1, p2)]
+        return check(0, 0, 0)
+```
+
+```python
+class Solution: # 动态规划解法
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        r, c, l= len(s1), len(s2), len(s3)
+        if r+c != l:
+            return False
+        dp = [True for _ in range(c+1)]
+        for j in range(1, c+1):
+            dp[j] = dp[j-1] and s2[j-1] == s3[j-1]
+        for i in range(1, r+1):
+            dp[0] = (dp[0] and s1[i-1] == s3[i-1])
+            for j in range(1, c+1):
+                dp[j] = (dp[j] and s1[i-1] == s3[i-1+j]) or (dp[j-1] and s2[j-1] == s3[i-1+j])
         return dp[-1]
 ```
 
