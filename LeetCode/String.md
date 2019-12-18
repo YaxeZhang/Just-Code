@@ -101,7 +101,7 @@ class Solution:
 ```
 
 ```python
-# TODO: 
+# TODO:
 ```
 
 [返回目录](#00)
@@ -973,7 +973,7 @@ class Solution:
         stack = []
         dic = {')': '(', '}': '{', ']': '['}
         for i in s:
-            if i in ')]}':
+            if i in dic:
                 if not stack: return False
                 if stack[-1] != dic[i]:
                     return False
