@@ -3,17 +3,14 @@
 ---
 
 ### What's new ?!
- - I'm back!
  - 510 题达成！！！继续努力。
- - 新增了Leetcode收费的字节跳动题目列表，下滑可以查看。
- - 新增了Leetcode收费的腾讯题目列表，下滑可以查看。
+ - 新增了Leetcode收费的字节跳动题目列表，[LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
+ - 新增了Leetcode收费的腾讯题目列表，[LeetCode腾讯分类](https://leetcode.com/list/xl3e1xkj)
  - 字节跳动面试题完成 90% 。
- - 部分题目在 BAT 文件夹里，稍后排版进字节跳动目录。
  - 剑指offer完成。
 
 ### Repo 简介
  - 逐步收录常见面试算法题。
- - 大厂面试算法题是必考的，但是算法题那么多如何快速高效地刷题来提升自己的算法能力。
  - 国内算法题大致都是从 **剑指offer** 和 **LeetCode** 上直接拿来的比较经典的题。
  - 面试算法题难度大概就是 **剑指offer难度** 和 **LeetCode上easy、medium左右难度** 的题目。
  - 持续更新，如果对您有帮助，小手一点， Star 走一走，靴靴！
@@ -22,8 +19,6 @@
  - [Leetcode 题解](#leetcode-题解)
  - [字节跳动面经总结算法题](#字节跳动面经总结算法题)
  **分类** 因为是英文版LeetCode所以第一次打开可能重定向跳转到中国力扣官网，关闭重新打开即可。
- - [LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
- - [LeetCode腾讯分类](https://leetcode.com/list/xl3e1xkj)
 
 ---
 
