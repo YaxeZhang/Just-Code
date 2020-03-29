@@ -24,6 +24,9 @@
 
 ### 剑指 Offer 题解
 
+ - [剑指 Offer 题解](./%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89.md)
+如果您有更好或者不同的解法，请提 issue 一起进步，靴靴！
+
  - 《剑指offer》剖析了80个典型的编程面试题，系统整理基础知识、代码质量、解题思路、优化效率和综合能力这5个面试要点。但是我刷题只有牛客网上的66题。
 
  - 如果是单纯的面试需求，剑指offer的优先级肯定是在Leetcode之前，总的说它有三个优点：
@@ -35,8 +38,6 @@
 1.只有66题，刷着容易过拟合
 2.动态规划的题比较少，因此需要在Leetcode上专项训练。
 
-- [剑指 Offer 题解](./%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89.md)
-如果您有更好或者不同的解法，请提 issue 一起进步，靴靴！
 
 **推荐的刷题网站：**
 1. [牛客网](https://www.nowcoder.com/ta/coding-interviews)
