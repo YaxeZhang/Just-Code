@@ -3,17 +3,17 @@
  - [389. Find the Difference](#389-find-the-difference)
  - [136. Single Number](#136-single-number)
  - [137. Single Number II](#137-single-number-ii)
- - [318	Maximum Product of Word Lengths]
-## 很少考			
- - [393	UTF-8 Validation]
+ - [318    Maximum Product of Word Lengths]
+## 很少考            
+ - [393    UTF-8 Validation]
  - [201. Bitwise AND of Numbers Range](#201-bitwise-and-of-numbers-range)
  - [371. Sum of Two Integers](#371-sum-of-two-integers)
  - [338. Counting Bits](#338-counting-bits)
- - [89	Gray Code]
- - [268	Missing Number]
- - [191	Number of 1 Bits]
- - [190	Reverse Bits]
- - [260	Single Number III]
+ - [89    Gray Code]
+ - [268    Missing Number]
+ - [191    Number of 1 Bits]
+ - [190    Reverse Bits]
+ - [260    Single Number III]
 
 
 ## 389. Find the Difference
@@ -77,7 +77,7 @@ Output: 4
 ---
 
 ### Python Solution
-**分析：** 很经典的一个位运算异或的题目。
+**分析：** 很经典的一个位运算异或的题目。利用异或的性质，可以将重复2次的数字去除，所以遍历一遍后剩下的就是单次出现的数字。
 
 ```python
 class Solution:
@@ -119,7 +119,7 @@ Output: 99
 ---
 
 ### Python Solution
-**分析：** 炫酷！！！
+**分析：** 两种做法：1. 比较容易想到。遍历位数，如果所有数字在这位上的总和不是3的倍数，那么单次出现的数字在这一位一定有值，逐位拼凑出来这个数字 2. 这个解法比较炫酷，需要对位运算比较了解，面试不易想出。如果你想写这种解法，请确定你一定可以每一步都和面试官沟通清楚。
 
 ```python
 class Solution:
