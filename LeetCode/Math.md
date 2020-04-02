@@ -757,6 +757,25 @@ class Solution:
         return n == 1
 ```
 
+```python
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        def nextn(n):
+            res = 0
+            while n:
+                res += (n % 10) ** 2
+                n //= 10
+            return res
+
+        slow, fast = nextn(n), nextn(nextn(n))
+
+        while fast != slow:
+            fast = nextn(nextn(fast))
+            slow = nextn(slow)
+
+        return fast == 1
+```
+
 [返回目录](#00)
 
 ## 400. Nth Digit
