@@ -22,7 +22,7 @@
  - [220. Contains Duplicate III](#220-contains-duplicate-iii)
  - [55. Jump Game](#55-jump-game)
  - [45. Jump Game II](#45-jump-game-ii)
- - [11	Container With Most Water]
+ - [11. Container With Most Water](#11-container-with-most-water)
  - [42. Trapping Rain Water](#42-trapping-rain-water)
  - [334	Increasing Triplet Subsequence]
  - [128. Longest Consecutive Sequence](#128-longest-consecutive-sequence)
@@ -606,6 +606,37 @@ class Solution:
         while right < len(nums)-1:
             left, right = right, max(tmp[left:right+1])
             res += 1
+        return res
+```
+
+[返回目录](#00)
+
+## 11. Container With Most Water
+
+Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+
+给定n个非负整数a1，a2，...，an，其中每个代表坐标（i，ai）上的点。 绘制n条垂直线，使线i的两个端点位于（i，ai）和（i，0）。 找到两条线，它们与x轴一起形成一个容器，以便该容器包含最多的水。
+
+**Example:1**
+
+```
+Input: [1,8,6,2,5,4,8,3,7]
+Output: 49
+```
+
+---
+
+### Python Solution
+**分析：** 简化版的42题
+
+```python
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        res, i, j = 0, 0, len(height) - 1
+        while i < j:
+            res = max(res, min(height[i], height[j]) * (j - i))
+            if height[i] > height[j]: j -= 1
+            else: i += 1
         return res
 ```
 
