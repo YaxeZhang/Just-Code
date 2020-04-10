@@ -6,7 +6,7 @@
  - [387	First Unique Character in a String]
  - [383. Ransom Note](#383-ransom-note)
  - [344	Reverse String]
- - [151	Reverse Words in a String]
+ - [151. Reverse Words in a String](#151-reverse-words-in-a-string)
  - [186	Reverse Words in a String II]
  - [345	Reverse Vowels of a String]
  - [205. Isomorphic Strings](#205-isomorphic-strings)
@@ -202,6 +202,53 @@ class Solution:
 class Solution:
     def canConstruct(self, ransomNote, magazine):
         return not collections.Counter(ransomNote) - collections.Counter(magazine)
+```
+
+[返回目录](#00)
+
+## 151. Reverse Words in a String
+
+Given an input string, reverse the string word by word.
+
+给定输入字符串，逐个单词地反转字符串。
+
+**Example**
+
+```
+Example 1:
+
+Input: "the sky is blue"
+Output: "blue is sky the"
+Example 2:
+
+Input: "  hello world!  "
+Output: "world! hello"
+Explanation: Your reversed string should not contain leading or trailing spaces.
+Example 3:
+
+Input: "a good   example"
+Output: "example good a"
+Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.
+```
+
+**Note:**
+
+```
+A word is defined as a sequence of non-space characters.
+Input string may contain leading or trailing spaces.
+However, your reversed string should not contain leading or trailing spaces.
+You need to reduce multiple spaces between two words to a single space in the reversed string.
+```
+
+---
+
+### Python Solution
+**分析：** 
+
+```python
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        return ' '.join(s.split()[::-1])
 ```
 
 [返回目录](#00)
