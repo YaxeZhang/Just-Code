@@ -103,16 +103,15 @@ It doesn't matter what values are set beyond the returned length.
 ### Python Solution
 **分析：** 很基础的题，但是思想非常重要，是很多难的题目解法的一部分。重点在于交换元素到正确位置的规则
 
-```cpp
-class Solution {
-public:
-    int removeElement(vector<int>& nums, int val) {
-        int pos = 0;
-        for (auto num : nums)
-            if (num != val) swap(num, nums[pos++]);
-        return pos;
-    }
-};
+```python
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        pos = 0
+        for i in range(len(nums)):
+            if nums[i] != val:
+                nums[pos] = nums[i]
+                pos += 1
+        return pos
 ```
 
 [返回目录](#00)
