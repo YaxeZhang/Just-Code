@@ -1,7 +1,7 @@
 <span id = "00"></span>
 ## 基础		
  - [27. Remove Element](#27-remove-element)
- - [26	Remove Duplicates from Sorted Array]
+ - [26. Remove Duplicates from Sorted Array](#26-remove-duplicates-from-sorted-array)
  - [80	Remove Duplicates from Sorted Array II]
  - [277	Find the Celebrity]
  - [189. Rotate Array](#189-rotate-array)
@@ -112,6 +112,55 @@ class Solution:
                 nums[pos] = nums[i]
                 pos += 1
         return pos
+```
+
+[返回目录](#00)
+
+## 26. Remove Duplicates from Sorted Array
+
+Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
+
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+给定一个已排序的数组nums，就地删除重复项，以使每个元素仅出现一次并返回新的长度。 
+
+不要为另一个数组分配额外的空间，必须通过使用O（1）额外的内存就地修改输入数组来做到这一点。
+
+**Example:1**
+
+```
+Given nums = [1,1,2],
+
+Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
+
+It doesn't matter what you leave beyond the returned length.
+```
+
+**Example:2**
+
+```
+Given nums = [0,0,1,1,1,2,2,3,3,4],
+
+Your function should return length = 5, with the first five elements of nums being modified to 0, 1, 2, 3, and 4 respectively.
+
+It doesn't matter what values are set beyond the returned length.
+```
+
+---
+
+### Python Solution
+**分析：** 和上一题近乎一样 这里用prev记录前一个的值是为了提高性能
+
+```python
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        length = 0
+        if len(nums) == 0: return length
+        for i in range(1,len(nums)):
+            if nums[length] < nums[i]:
+                length += 1
+                nums[length] = nums[i]
+        return length+1
 ```
 
 [返回目录](#00)
