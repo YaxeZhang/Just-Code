@@ -85,10 +85,10 @@
 <p align="center"><img width="300" src="https://raw.githubusercontent.com/ZhaoxiZhang/LeetCodeCrawler/master/pictures/site-logo.png"></p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/372/1264-Solved/Total-blue.svg" alt="">
-    <img src="https://img.shields.io/badge/Easy-174-green.svg" alt="">
-    <img src="https://img.shields.io/badge/Medium-171-orange.svg" alt="">
-    <img src="https://img.shields.io/badge/Hard-27-red.svg" alt="">
+    <img src="https://img.shields.io/badge/514/1264-Solved/Total-blue.svg" alt="">
+    <img src="https://img.shields.io/badge/Easy-194-green.svg" alt="">
+    <img src="https://img.shields.io/badge/Medium-203-orange.svg" alt="">
+    <img src="https://img.shields.io/badge/Hard-47-red.svg" alt="">
 </p>
 
 
