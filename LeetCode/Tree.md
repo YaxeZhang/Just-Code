@@ -2327,7 +2327,7 @@ Return the following binary tree:
 ---
 
 ### Python Solution
-**分析：** 和下面一题的思路一样，复杂写法不再赘述，看下一题的分析即可。
+**分析：** 和下面一题的思路一样，复杂写法不再赘述，看下一题的分析即可。更新的第二种是更优的解法
 
 ```python
 class Solution:
@@ -2342,6 +2342,24 @@ class Solution:
         preorder.reverse()
         inorder.reverse()
         return predfs(None)
+```
+
+```python
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        self.prepos = self.inpos = 0
+
+        def dfs(stop):
+            if self.prepos  == len(preorder) or inorder[self.inpos] == stop:
+                return None
+            root = TreeNode(preorder[self.prepos])
+            self.prepos += 1
+            root.left = dfs(root.val)
+            self.inpos += 1
+            root.right = dfs(stop)
+            return root
+        
+        return dfs(None)
 ```
 
 [返回目录](#00)
@@ -2406,6 +2424,26 @@ class Solution:
                 root.left = postdfs(stop)
                 return root
         return postdfs(None)
+```
+
+**更优解**
+
+```python
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
+        self.inpos = self.postpos = len(inorder) - 1
+
+        def dfs(stop):
+            if self.postpos < 0 or inorder[self.inpos] == stop:
+                return None
+            root = TreeNode(postorder[self.postpos])
+            self.postpos -= 1
+            root.right = dfs(root.val)
+            self.inpos -= 1
+            root.left = dfs(stop)
+            return root
+
+        return dfs(None)
 ```
 
 [返回目录](#00)
