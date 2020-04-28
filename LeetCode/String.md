@@ -3,7 +3,7 @@
  - [28. Implement strStr()](#28-implement-strstr)
  - [14. Longest Common Prefix](14-longest-common-prefix)
  - [58	Length of Last Word]
- - [387	First Unique Character in a String]
+ - [387. First Unique Character in a String](#387-first-unique-character-in-a-string)
  - [383. Ransom Note](#383-ransom-note)
  - [344	Reverse String]
  - [151. Reverse Words in a String](#151-reverse-words-in-a-string)
@@ -164,6 +164,48 @@ class Solution(object):
 class Solution:
     def longestCommonPrefix(self, strs):
         return os.path.commonprefix(strs)
+```
+
+[返回目录](#00)
+
+## 387. First Unique Character in a String
+
+Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+
+给定一个字符串，找到其中的第一个非重复字符并返回其索引。 如果不存在，则返回-1。
+
+**Example**
+
+```
+s = "leetcode"
+return 0.
+
+s = "loveleetcode",
+return 2.
+```
+
+---
+
+### Python Solution
+**分析：** 一种用Counter记录，一种用列表，但效率很低。
+
+```python
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        cnt = collections.Counter(s)
+        for i in range(len(s)):
+            if cnt[s[i]] == 1: return i
+        return -1
+```
+
+```python
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        cnt = [0] * 26
+        for c in s: cnt[ord(c) - 97] += 1
+        for i in range(len(s)):
+            if cnt[ord(s[i]) - 97] == 1: return i
+        return -1
 ```
 
 [返回目录](#00)
