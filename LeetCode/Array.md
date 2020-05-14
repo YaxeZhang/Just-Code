@@ -10,7 +10,7 @@
  - [134. Gas Station](#134-gas-station)
  - [118. Pascal's Triangle](#118-pascals-triangle)
  - [119. Pascal's Triangle II](#119-pascals-triangle-ii)
- - [169	Majority Element]
+ - [169. Majority Element](#169-majority-element)
  - [229	Majority Element II]
  - [274. H-Index](#274-hindex)
  - [275. H-Index II](#275-hindex-ii)
@@ -396,6 +396,46 @@ class Solution:
             for j in range(i-1, 0, -1):
                 res[j] += res[j-1]
         return res
+```
+
+[返回目录](#00)
+
+## 169. Majority Element
+
+Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+
+You may assume that the array is non-empty and the majority element always exist in the array.
+
+给定大小为n的数组，找到多数元素。 多数元素是出现超过n / 2倍的元素。 您可以假定数组为非空，并且多数元素始终存在于数组中。
+
+**Example**
+
+```
+Example 1:
+Input: [3,2,3]
+Output: 3
+
+Example 2:
+Input: [2,2,1,1,1,2,2]
+Output: 2
+```
+
+---
+
+### Python Solution
+**分析：** 摩尔投票法
+
+```python
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        mor, cnt = nums[0], 1
+        for v in nums[1:]:
+            if v == mor: cnt += 1
+            else:
+                cnt -= 1
+                if not cnt:
+                    mor, cnt = v, 1
+        return mor
 ```
 
 [返回目录](#00)

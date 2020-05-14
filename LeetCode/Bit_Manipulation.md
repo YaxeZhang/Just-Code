@@ -10,7 +10,7 @@
  - [371. Sum of Two Integers](#371-sum-of-two-integers)
  - [338. Counting Bits](#338-counting-bits)
  - [89    Gray Code]
- - [268    Missing Number]
+ - [268. Missing Number](#268-missing-number)
  - [191    Number of 1 Bits]
  - [190    Reverse Bits]
  - [260    Single Number III]
@@ -248,6 +248,51 @@ class Solution:
         for i in range(1,num+1):
             ans[i] = ans[i & (i-1)] + 1
         return ans
+```
+
+[返回目录](#00)
+
+## 268. Missing Number
+
+Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
+
+给定一个数组，该数组包含从0、1、2，...，n中获取的n个不同的数字，请找到该数组中缺少的一个。
+
+**Example**
+
+```
+Example 1:
+
+Input: [3,0,1]
+Output: 2
+
+Example 2:
+
+Input: [9,6,4,2,3,5,7,0,1]
+Output: 8
+```
+
+---
+
+### Python Solution
+**分析：** 第一种解法为异或的用法。第二种解法十分简单：数列求和。
+
+```python
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        res = len(nums)
+        for i, v in enumerate(nums):
+            res ^= i ^ v
+        return res
+```
+
+```python
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        res = len(nums)
+        for i, v in enumerate(nums):
+            res += i - v
+        return res
 ```
 
 [返回目录](#00)
