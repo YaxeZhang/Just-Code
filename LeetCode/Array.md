@@ -27,7 +27,7 @@
  - [334	Increasing Triplet Subsequence]
  - [128. Longest Consecutive Sequence](#128-longest-consecutive-sequence)
  - [164	Maximum Gap	Bucket]
- - [287	Find the Duplicate Number]
+ - [287. Find the Duplicate Number](#287-find-the-duplicate-number)
  - [135	Candy]
  - [330	Patching Array]
  - [78. Subsets](#78-subsets)
@@ -857,6 +857,45 @@ class Solution:
                     y += 1
                 best = max(best, y - x)
         return best
+```
+
+[返回目录](#00)
+
+## 287. Find the Duplicate Number
+
+Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive), prove that at least one duplicate number must exist. Assume that there is only one duplicate number, find the duplicate one.
+
+给定一个包含n + 1个整数的数组，其中每个整数在1到n（包括1和n）之间，请证明必须存在至少一个重复的数字。 假定只有一个重复的数字，找到重复的一个。
+
+**Example**
+
+```
+Example 1:
+Input: [1,3,4,2,2]
+Output: 2
+
+Example 2:
+Input: [3,1,3,4,2]
+Output: 3
+```
+
+---
+
+### Python Solution
+**分析：** 弗洛伊德判断环的方法
+
+```python
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        f = s = 0
+        while not f or f != s:
+            f = nums[nums[f]]
+            s = nums[s]
+        f = 0
+        while f != s:
+            f = nums[f]
+            s = nums[s]
+        return s
 ```
 
 [返回目录](#00)
