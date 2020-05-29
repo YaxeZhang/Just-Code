@@ -11,7 +11,7 @@
  - [338. Counting Bits](#338-counting-bits)
  - [89    Gray Code]
  - [268. Missing Number](#268-missing-number)
- - [191    Number of 1 Bits]
+ - [191. Number of 1 Bits](#191-number-of-1-bits)
  - [190    Reverse Bits]
  - [260    Single Number III]
 
@@ -293,6 +293,51 @@ class Solution:
         for i, v in enumerate(nums):
             res += i - v
         return res
+```
+
+[返回目录](#00)
+
+## 191. Number of 1 Bits
+
+Write a function that takes an unsigned integer and return the number of '1' bits it has (also known as the Hamming weight).
+
+编写一个函数，该函数采用无符号整数并返回其具有的'1'位的数量（也称为汉明权重）。
+
+**Example**
+
+```
+Example 1:
+
+Input: 11111111111111111111111111111101
+Output: 31
+Explanation: The input binary string 11111111111111111111111111111101 has a total of thirty one '1' bits.
+
+Example 2:
+
+Input: 00000000000000000000000010000000
+Output: 1
+Explanation: The input binary string 00000000000000000000000010000000 has a total of one '1' bit.
+```
+
+---
+
+### Python Solution
+**分析：** 第一种解法为位运算，难点在于怎么快速取到最后一位为1。第二种解法用的库函数
+
+```python
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        res = 0
+        while n:
+            res += 1
+            n &= (n - 1)
+        return res
+```
+
+```python
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        return bin(n).count("1")
 ```
 
 [返回目录](#00)
