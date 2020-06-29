@@ -183,15 +183,15 @@ class Solution:
 ```python
 class Solution:
     def printListReversingly(self, head):
-        self.res = []
+        res = []
 
         def helper(p):
             if p:
                 helper(p.next)
-                self.res.append(p.val)
+                res.append(p.val)
 
         helper(head)
-        return self.res
+        return res
 ```
 
 [回到目录](#00)
