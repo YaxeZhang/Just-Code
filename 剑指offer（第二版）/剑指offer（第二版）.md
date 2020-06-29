@@ -695,11 +695,11 @@ class Solution:
     def ReverseList(self, pHead):
         if not pHead or not pHead.next:
             return pHead
-        else:
-            newHead = self.ReverseList(pHead.next)
-            pHead.next.next = pHead
-            pHead.next = None
-            return newHead
+
+        newHead = self.ReverseList(pHead.next)
+        pHead.next.next = pHead
+        pHead.next = None
+        return newHead
 ```
 
 ```python
