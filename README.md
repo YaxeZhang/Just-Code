@@ -10,9 +10,9 @@
  - 剑指offer完成。
 
 ### 题解快速入口
- - [剑指 Offer 题解](./%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89.md)
- - [LeetCode 分类总目录](./LeetCode/README.md)
- - [字节跳动趴的题解](./BAT/Algorithm.md)
+ - [剑指 Offer 题解入口](./%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89.md)
+ - [LeetCode 题解入口](./LeetCode/README.md)
+ - [字节跳动趴的题解入口](./BAT/Algorithm.md)
 
 ### Repo 简介
  - 逐步收录常见面试算法题。
