@@ -4,7 +4,7 @@
 
 ### What's new ?!
  - 530 题达成！！！继续努力。
- - [字节跳动各岗位算法题频次收集](./bytedance.md)
+ - [字节跳动各岗位算法题频次收集](./BAT/bytedance.md)
  - 新增了Leetcode收费的字节跳动题目列表，[LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
  - 新增了Leetcode收费的腾讯题目列表，[LeetCode腾讯分类](https://leetcode.com/list/xl3e1xkj)
  - 字节跳动面试题完成 90% 。
