@@ -1,4 +1,4 @@
-<span id = "00">手机 Openhub 用户无法实现 Markdown 页内跳转，请点击右上角选择外部浏览器打开（已提交 Openhub issue...）</span>
+<span id = "00"></span>
 # 剑指offer Python题解
    - [03.数组中重复的数字](#3数组中重复的数字)
    - [04.二维数组中的查找](#4二维数组中的查找)
@@ -183,15 +183,15 @@ class Solution:
 ```python
 class Solution:
     def printListReversingly(self, head):
-        self.res = []
+        res = []
 
         def helper(p):
             if p:
                 helper(p.next)
-                self.res.append(p.val)
+                res.append(p.val)
 
         helper(head)
-        return self.res
+        return res
 ```
 
 [回到目录](#00)
@@ -695,11 +695,11 @@ class Solution:
     def ReverseList(self, pHead):
         if not pHead or not pHead.next:
             return pHead
-        else:
-            newHead = self.ReverseList(pHead.next)
-            pHead.next.next = pHead
-            pHead.next = None
-            return newHead
+
+        newHead = self.ReverseList(pHead.next)
+        pHead.next.next = pHead
+        pHead.next = None
+        return newHead
 ```
 
 ```python
