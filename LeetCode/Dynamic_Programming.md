@@ -15,7 +15,7 @@
  - [122. Best Time to Buy and Sell Stock II](#122-best-time-to-buy-and-sell-stock-ii)
  - [123. Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)
  - [188	Best Time to Buy and Sell Stock IV]
- - [309	Best Time to Buy and Sell Stock with Cooldown]
+ - [309. Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldown)
 ## 二维		
  - [256	Paint House] **?**
  - [265	Paint House II] **?**
@@ -751,6 +751,64 @@ class Solution:
             sold1 = max(sold1, hold1 + v)
             hold1 = max(hold1, -v)
         return  sold2
+```
+
+[返回目录](#00)
+
+## 309. Best Time to Buy and Sell Stock with Cooldown
+
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times) with the following restrictions:
+
+ - You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+ - After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)
+
+假设您有一个数组，第i个元素是第i天给定股票的价格。 
+
+设计算法以找到最大的利润。 您可以根据需要完成任意数量的交易（即多次购买一股股票并卖出一股股票），但有以下限制：
+ - 您不能同时进行多笔交易（即必须先卖出股票才能进行交易） 再次购买）。
+ - 出售股票后，您将无法在第二天购买股票。 （即冷却1天）
+
+**Example**
+
+```
+Example 1:
+
+Input: [1,2,3,0,2]
+Output: 3 
+Explanation: transactions = [buy, sell, cooldown, buy, sell]
+```
+
+---
+
+### Python Solution
+**分析：** 两种解法：1. 动态规划的解法。dp里每个元素第一位为没有股票的时候，第二位为持有股票的时候。 2. 简化的动态规划解法，其实转移的状态只有3种状态，所以可以优化
+
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        n = len(prices)
+        if n < 2: return 0
+
+        dp = [[0] * 2 for _ in range(n)]
+        dp[0][1] = -prices[0];
+        dp[1][0] = max(0, prices[1] - prices[0])
+        dp[1][1] = -min(prices[0], prices[1])
+
+        for i in range(2, n):
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+            dp[i][1] = max(dp[i - 1][1], dp[i - 2][0] - prices[i])
+        return dp[-1][0]
+```
+
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        sold, rest, hold = 0, 0, float('-inf')
+        for p in prices:
+            sold, hold, rest = max(sold, hold + p), max(hold, rest - p), max(rest, sold)
+        return max(sold, rest)
 ```
 
 [返回目录](#00)
