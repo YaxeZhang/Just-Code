@@ -305,7 +305,7 @@ The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
 ---
 
 ### Python Solution
-**分析：** 从低向上找到更小的值合并到最开始的一个元素。
+**分析：** 自底向上找到更小的值合并到最开始的一个元素。也可以自顶而下，不过需要预处理数据
 
 ```python
 class Solution(object):
