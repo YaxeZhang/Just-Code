@@ -12,7 +12,7 @@
  - [89    Gray Code]
  - [268. Missing Number](#268-missing-number)
  - [191. Number of 1 Bits](#191-number-of-1-bits)
- - [190    Reverse Bits]
+ - [190. Reverse Bits](#190-reverse-bits)
  - [260    Single Number III]
 
 
@@ -338,6 +338,45 @@ class Solution:
 class Solution:
     def hammingWeight(self, n: int) -> int:
         return bin(n).count("1")
+```
+
+[返回目录](#00)
+
+## 190. Reverse Bits
+
+Reverse bits of a given 32 bits unsigned integer.
+
+给定的32位无符号整数的反向位。
+
+**Example**
+
+```
+Example 1:
+
+Input: 00000010100101000001111010011100
+Output: 00111001011110000010100101000000
+Explanation: The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596, so return 964176192 which its binary representation is 00111001011110000010100101000000.
+
+Example 2:
+
+Input: 11111111111111111111111111111101
+Output: 10111111111111111111111111111111
+Explanation: The input binary string 11111111111111111111111111111101 represents the unsigned integer 4294967293, so return 3221225471 which its binary representation is 10111111111111111111111111111111.
+```
+
+---
+
+### Python Solution
+**分析：** 位运算
+
+```python
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        res = 0
+        for _ in range(32):
+            res = (res << 1) | (n & 1)
+            n >>= 1
+        return res
 ```
 
 [返回目录](#00)
