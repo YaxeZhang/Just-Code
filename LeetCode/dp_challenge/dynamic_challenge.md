@@ -5,11 +5,11 @@
 |32|[Longest Valid Parentheses](#32-longest-valid-parentheses)<span id = 32></span>|28.2%|Hard|||
 |44|[Wildcard Matching](#44-wildcard-matching)<span id = 44></span>|24.6%|Hard|||
 |53|[Maximum Subarray](#53-maximum-subarray)<span id = 53></span>|46.4%|Easy|||
-|62|[Unique Paths](#62-unique-paths)<span id = 62></span>|53.8%|Medium|||
-|63|[Unique Paths II](#63-unique-paths-ii)<span id = 63></span>|34.4%|Medium|||
-|64|[Minimum Path Sum](#64-minimum-path-sum)<span id = 64></span>|54.1%|Medium|||
-|70|[Climbing Stairs](#70-climbing-stairs)<span id = 70></span>|47.1%|Easy|||
-|72|[Edit Distance](#72-edit-distance)<span id = 72></span>|44.4%|Hard|||
+|62|[Unique Paths](#62-unique-paths)<span id = 62></span>|53.8%|Medium|2020.07.15||
+|63|[Unique Paths II](#63-unique-paths-ii)<span id = 63></span>|34.4%|Medium|2020.07.15||
+|64|[Minimum Path Sum](#64-minimum-path-sum)<span id = 64></span>|54.1%|Medium|2020.07.15||
+|70|[Climbing Stairs](#70-climbing-stairs)<span id = 70></span>|47.1%|Easy|2020.07.15||
+|72|[Edit Distance](#72-edit-distance)<span id = 72></span>|44.4%|Hard|2020.07.15||
 |85|[Maximal Rectangle](#85-maximal-rectangle)<span id = 85></span>|37.4%|Hard|||
 |87|[Scramble String](#87-scramble-string)<span id = 87></span>|33.6%|Hard|||
 |91|[Decode Ways](#91-decode-ways)<span id = 91></span>|24.5%|Medium|||
@@ -345,19 +345,53 @@
 
 ## 62. Unique Paths
 
+A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+How many possible unique paths are there?
+
+机器人位于m x n网格的左上角（在下图中标记为“开始”）。
+
+机器人只能在任何时间点上下移动。 机器人试图到达网格的右下角（在下图中标记为“完成”）。
+
+有多少种可能的独特路径？
+
 **Example**
 
 ```
+Example 1:
+Input: m = 3, n = 2
+Output: 3
+Explanation:
+From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -> Right -> Down
+2. Right -> Down -> Right
+3. Down -> Right -> Right
 
+Example 2:
+Input: m = 7, n = 3
+Output: 28
 ```
 
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 比较简单的动态规划问题，每个格只与上方和左方的状态有关，所以可以状态压缩到一维。
 
 ```cpp
-
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        vector<int> dp(n, 1);
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[j] += dp[j-1];
+            }
+        }
+        return dp[n-1];
+    }
+};
 ```
 
 ### C Solution
@@ -371,19 +405,64 @@
 
 ## 63. Unique Paths II
 
+A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+Now consider if some obstacles are added to the grids. How many unique paths would there be?
+
+An obstacle and empty space is marked as 1 and 0 respectively in the grid.
+
+Note: m and n will be at most 100.
+
+机器人位于m x n网格的左上角（在下图中标记为“开始”）。
+
+机器人只能在任何时间点上下移动。 机器人试图到达网格的右下角（在下图中标记为“完成”）。
+
+现在考虑是否在网格中添加了一些障碍。 会有多少条独特的路径？
+
+网格中的障碍物和空白区域分别标记为1和0。
+
+注意：m和n最多为100。
+
 **Example**
 
 ```
-
+Input:
+[
+  [0,0,0],
+  [0,1,0],
+  [0,0,0]
+]
+Output: 2
+Explanation:
+There is one obstacle in the middle of the 3x3 grid above.
+There are two ways to reach the bottom-right corner:
+1. Right -> Right -> Down -> Down
+2. Down -> Down -> Right -> Right
 ```
 
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 作为上一题的followup，这道题也比较简单，只需要考虑到有障碍的情况就可以了。唯一需要注意题目返回值如果不为int，那么vector也需要跟着变。
 
 ```cpp
-
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& oG) {
+        int m = oG.size(), n = oG[0].size();
+        vector<int> dp(n);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int left = j ? dp[j-1] : 0;
+                int up = i ? dp[j] : (j ? 0 : 1);
+                dp[j] = oG[i][j] == 0 ? left + up : 0;
+            }
+        }
+        return dp[n-1];
+    }
+};
 ```
 
 ### C Solution
@@ -397,19 +476,48 @@
 
 ## 64. Minimum Path Sum
 
+Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+
+Note: You can only move either down or right at any point in time.
+
+给定一个m×n的网格，其中填充了非负数，请找到一条从左上到右下的路径，该路径将沿其路径的所有数字的总和最小化。 
+
+注意：您只能在任何时间点向下或向右移动。
+
 **Example**
 
 ```
-
+Input:
+[
+  [1,3,1],
+  [1,5,1],
+  [4,2,1]
+]
+Output: 7
+Explanation: Because the path 1→3→1→1→1 minimizes the sum.
 ```
 
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 同样是上一题的followup，注意的点是数据溢出和边界条件处理。
 
 ```cpp
-
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        vector<int> dp(n, 0);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int left = j ? dp[j-1] : INT_MAX;
+                int up = i ? dp[j] : (j ? 0 : INT_MAX);
+                dp[j] = grid[i][j] + min(left, up);
+            }
+        }
+        return dp[n-1];
+    }
+};
 ```
 
 ### C Solution
@@ -423,19 +531,42 @@
 
 ## 70. Climbing Stairs
 
+You are climbing a stair case. It takes n steps to reach to the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+您正在爬楼梯。 它需要n步才能到达顶部。
+
+每次您可以爬1或2步。 您可以通过几种不同的方式登顶？
+
 **Example**
 
 ```
-
+Input: 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
 ```
 
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 斐波那契数列问题，经典简单动态规划
 
 ```cpp
-
+class Solution {
+public:
+    int climbStairs(int n) {
+        int a = 0, b = 1;
+        for (int i = 0; i < n; i++) {
+            a += b;
+            swap(a, b);
+        }
+        return b;
+    }
+};
 ```
 
 ### C Solution
@@ -449,19 +580,68 @@
 
 ## 72. Edit Distance
 
+Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2.
+
+You have the following 3 operations permitted on a word:
+
+1. Insert a character
+2. Delete a character
+3. Replace a character
+
+给定两个单词word1和word2，找到将word1转换为word2所需的最少操作数。
+
+您可以对一个单词进行以下3个操作
+
+1. 插入一个字符
+2. 删除一个字符
+3. 替换一个字符
+
 **Example**
 
 ```
-
+Input: word1 = "intention", word2 = "execution"
+Output: 5
+Explanation: 
+intention -> inention (remove 't')
+inention -> enention (replace 'i' with 'e')
+enention -> exention (replace 'n' with 'x')
+exention -> exection (replace 'n' with 'c')
+exection -> execution (insert 'u')
 ```
 
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 也是很经典的一道动态规划hard的题目，可以状态压缩到一维。
 
 ```cpp
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        int m = word1.length(), n = word2.length();
 
+        vector<int> dp(n+1, 0);
+        for (int i = 0; i < n + 1; i++) dp[i] = i;
+
+        int prev, cur;
+        for (int i = 0; i < m; i++) {
+            prev = dp[0]++;
+
+            for (int j = 0; j < n; j++) {
+                cur = dp[j+1];
+
+                if (word1[i] == word2[j]) {
+                    dp[j+1] = prev;
+                } else {
+                    dp[j+1] = 1 + min(prev, min(dp[j], dp[j+1]));
+                }
+
+                prev = cur;
+            }
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
