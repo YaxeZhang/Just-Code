@@ -14,7 +14,7 @@
 |87|[Scramble String](#87-scramble-string)<span id = 87></span>|33.6%|Hard|||
 |91|[Decode Ways](#91-decode-ways)<span id = 91></span>|24.5%|Medium|||
 |95|[Unique Binary Search Trees II](#95-unique-binary-search-trees-ii)<span id = 95></span>|40.3%|Medium|||
-|96|[Unique Binary Search Trees](#96-unique-binary-search-trees)<span id = 96></span>|52.5%|Medium|||
+|96|[Unique Binary Search Trees](#96-unique-binary-search-trees)<span id = 96></span>|52.5%|Medium|2020.07.15||
 |97|[Interleaving String](#97-interleaving-string)<span id = 97></span>|31.3%|Hard|||
 |115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|||
 |120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium|||
@@ -759,10 +759,23 @@ public:
 
 ## 96. Unique Binary Search Trees
 
+Given n, how many structurally unique BST's (binary search trees) that store values 1 ... n?
+
+给定n，多少个结构唯一的BST（二进制搜索树）存储值1 ... n？
+
 **Example**
 
 ```
+Input: 3
+Output: 5
+Explanation:
+Given n = 3, there are a total of 5 unique BST's:
 
+   1         3     3      2      1
+    \       /     /      / \      \
+     3     2     1      1   3      2
+    /     /       \                 \
+   2     1         2                 3
 ```
 
 ---
@@ -771,7 +784,20 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int numTrees(int n) {
+        vector<int> dp(n + 1, 0);
+        dp[0] = 1;
 
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                dp[i] += dp[j] * dp[i-j-1];
+            }
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
