@@ -17,7 +17,7 @@
 |96|[Unique Binary Search Trees](#96-unique-binary-search-trees)<span id = 96></span>|52.5%|Medium|2020.07.15||
 |97|[Interleaving String](#97-interleaving-string)<span id = 97></span>|31.3%|Hard|||
 |115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|||
-|120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium|||
+|120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium||2020.07.16|
 |121|[Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)<span id = 121></span>|50.3%|Easy|||
 |123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|||
 |132|[Palindrome Partitioning II](#132-palindrome-partitioning-ii)<span id = 132></span>|30.1%|Hard|||
@@ -863,10 +863,23 @@ public:
 
 ## 120. Triangle
 
+给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
+
+相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点。
+
+Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
+
 **Example**
 
 ```
+[
+     [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+]
 
+The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
 ```
 
 ---
@@ -882,7 +895,31 @@ public:
 **分析：**
 
 ```c
+int minimumTotal(int **triangle, int triangleSize, int *triangleColSize) {
+    int min_path[triangleSize];
 
+    int x, y;
+    min_path[0] = triangle[0][0];
+    for (int i = 1; i < triangleSize; ++i) {
+        // 填最右边
+        min_path[i] = triangle[i][i] + min_path[i - 1];
+
+        // 中间
+        for (int j = i - 1; j > 0; --j) {
+            x = min_path[j - 1];
+            y = min_path[j];
+            min_path[j] = triangle[i][j] + (x < y ? x : y);
+        }
+        // 填最左边
+        min_path[0] += triangle[i][0];
+    }
+
+    int res = INT32_MAX;
+    for (int i = 0; i < triangleSize; ++i) {
+        res = res < min_path[i] ? res : min_path[i];
+    }
+    return res;
+}
 ```
 
 [返回目录](#120)
