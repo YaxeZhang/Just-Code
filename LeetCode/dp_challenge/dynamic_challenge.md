@@ -154,7 +154,7 @@
 |1246|[Palindrome Removal](#1246-palindrome-removal)<span id = 1246></span>|46.0%|Hard|||
 |1259|[Handshakes That Don't Cross](#1259-handshakes-that-don't-cross)<span id = 1259></span>|53.3%|Hard|||
 |1125|[Smallest Sufficient Team](#1125-smallest-sufficient-team)<span id = 1125></span>|46.4%|Hard|||
-|1289|[Minimum Falling Path Sum II](#1289-minimum-falling-path-sum-ii)<span id = 1289></span>|60.7%|Hard|||
+|1289|[Minimum Falling Path Sum II](#1289-minimum-falling-path-sum-ii)<span id = 1289></span>|60.7%|Hard|2020.07.16||
 |1130|[Minimum Cost Tree From Leaf Values](#1130-minimum-cost-tree-from-leaf-values)<span id = 1130></span>|65.9%|Medium|||
 |1301|[Number of Paths with Max Score](#1301-number-of-paths-with-max-score)<span id = 1301></span>|37.1%|Hard|||
 |1139|[Largest 1-Bordered Square](#1139-largest-1-bordered-square)<span id = 1139></span>|47.2%|Medium|||
@@ -4509,11 +4509,31 @@ public:
 
 ## 1289. Minimum Falling Path Sum II
 
+Given a square grid of integers arr, a falling path with non-zero shifts is a choice of exactly one element from each row of arr, such that no two elements chosen in adjacent rows are in the same column.
+
+Return the minimum sum of a falling path with non-zero shifts.
+
+给定一个整数的正方形网格，具有非零位移的下降路径可以选择arr每行中的一个元素，这样在相邻列中没有两个元素被选择在同一列中。
+
+返回非零位移的下降路径的最小和。
+
 **Example**
 
 ```
-
+Input: arr = [[1,2,3],[4,5,6],[7,8,9]]
+Output: 13
+Explanation:
+The possible falling paths are:
+[1,5,9], [1,5,7], [1,6,7], [1,6,8],
+[2,4,8], [2,4,9], [2,6,7], [2,6,8],
+[3,4,8], [3,4,9], [3,5,7], [3,5,9]
+The falling path with the smallest sum is [1,5,7], so the answer is 13.
 ```
+
+**Constraints:**
+
+ - 1 <= arr.length == arr[i].length <= 200
+ - -99 <= arr[i][j] <= 99
 
 ---
 
@@ -4521,7 +4541,43 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    vector<int> find_1st_and_2nd_min(vector<int> &v)
+    {
+        vector<int> res = {-1, -1};
+        int fmin = INT_MAX, smin = INT_MAX;
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (fmin > v[i])
+            {
+                smin = fmin;
+                res[1] = res[0];
+                fmin = v[i];
+                res[0] = i;
+            }
+            else if (smin > v[i])
+            {
+                smin = v[i];
+                res[1] = i;
+            }
+        }
+        return res;
 
+    }
+    int minFallingPathSum(vector<vector<int>>& v) {
+        int n = v.size();
+        for (int i = n - 2; i >= 0; i--)
+        {
+            vector<int> res = find_1st_and_2nd_min(v[i+1]);
+            for (int j = 0; j < n; j++)
+            {
+                v[i][j] += v[i+1][res[0] != j ? res[0] : res[1]];
+            }
+        }
+        return *min_element(v[0].begin(), v[0].end());
+    }
+};
 ```
 
 ### C Solution
