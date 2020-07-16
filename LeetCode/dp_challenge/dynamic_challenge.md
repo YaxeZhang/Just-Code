@@ -17,7 +17,7 @@
 |96|[Unique Binary Search Trees](#96-unique-binary-search-trees)<span id = 96></span>|52.5%|Medium|2020.07.15||
 |97|[Interleaving String](#97-interleaving-string)<span id = 97></span>|31.3%|Hard|||
 |115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|||
-|120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium||2020.07.16|
+|120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium|2020.07.16|2020.07.16|
 |121|[Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)<span id = 121></span>|50.3%|Easy|||
 |123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|||
 |132|[Palindrome Partitioning II](#132-palindrome-partitioning-ii)<span id = 132></span>|30.1%|Hard|||
@@ -888,7 +888,20 @@ The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        int n = triangle.size();
+        vector<int> dp(triangle[n-1]);
 
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                dp[j] = triangle[i][j] + min(dp[j], dp[j+1]);
+            }
+        }
+        return dp[0];
+    }
+};
 ```
 
 ### C Solution
