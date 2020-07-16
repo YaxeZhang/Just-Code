@@ -3578,9 +3578,9 @@ public:
 
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                B[i][j] += min({!j ? INT_MAX : B[i-1][j-1],
+                B[i][j] += min({B[i-1][max(0, j-1)],
                                 B[i-1][j],
-                                j == n - 1 ? INT_MAX : B[i-1][j+1]});
+                                B[i-1][min(n-1, j+1)]});
             }
         }
         return *min_element(B[n-1].begin(), B[n-1].end());
