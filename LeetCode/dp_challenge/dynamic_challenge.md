@@ -939,10 +939,21 @@ int minimumTotal(int **triangle, int triangleSize, int *triangleColSize) {
 
 ## 121. Best Time to Buy and Sell Stock
 
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit.
+
+假设您有一个数组，第i个元素是第i天给定股票的价格。
+
+如果只允许您最多完成一笔交易（即买入和卖出一股股票），请设计一种算法以找到最大的利润。
+
 **Example**
 
 ```
-
+Input: [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+             Not 7-1 = 6, as selling price needs to be larger than buying price.
 ```
 
 ---
@@ -951,7 +962,17 @@ int minimumTotal(int **triangle, int triangleSize, int *triangleColSize) {
 **分析：**
 
 ```cpp
-
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int min_p = INT_MAX, res = 0;
+        for (auto& p: prices) {
+            min_p = min(min_p, p);
+            res = max(res, p - min_p);
+        }
+        return res;
+    }
+};
 ```
 
 ### C Solution
