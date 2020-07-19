@@ -521,10 +521,23 @@ public:
 ```
 
 ### C Solution
-**分析：**
+**分析：**重用矩阵, 边界问题先处理掉
 
 ```c
+int minPathSum(int** grid, int gridSize, int* gridColSize){
+    for (int i = 1; i < gridSize; ++i)
+        grid[i][0] += grid[i-1][0];
+    for (int k = 1; k < gridColSize[0]; ++k)
+        grid[0][k] += grid[0][k-1];
 
+    for (int i = 1; i < gridSize; ++i) {
+        for (int j = 1; j < gridColSize[i]; ++j) {
+            grid[i][j] += (grid[i-1][j] < grid[i][j-1] ? grid[i-1][j] : grid[i][j-1]);
+        }
+    }
+
+    return grid[gridSize-1][(*gridColSize)-1];
+}
 ```
 
 [返回目录](#64)
