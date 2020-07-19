@@ -14,7 +14,7 @@
 |87|[Scramble String](#87-scramble-string)<span id = 87></span>|33.6%|Hard|||
 |91|[Decode Ways](#91-decode-ways)<span id = 91></span>|24.5%|Medium|||
 |95|[Unique Binary Search Trees II](#95-unique-binary-search-trees-ii)<span id = 95></span>|40.3%|Medium|||
-|96|[Unique Binary Search Trees](#96-unique-binary-search-trees)<span id = 96></span>|52.5%|Medium|2020.07.15||
+|96|[Unique Binary Search Trees](#96-unique-binary-search-trees)<span id = 96></span>|52.5%|Medium|2020.07.15|2020.07.19|
 |97|[Interleaving String](#97-interleaving-string)<span id = 97></span>|31.3%|Hard|||
 |115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|||
 |120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium|2020.07.16|2020.07.16|
@@ -804,7 +804,18 @@ public:
 **分析：**
 
 ```c
+int numTrees(int n) {
+    int dp[n + 1];
+    memset(dp, 0, sizeof(dp));
+    dp[0] = dp[1] = 1;
 
+    for (int i = 2; i <= n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            dp[i] += dp[j] * dp[i-j-1];
+        }
+    }
+    return dp[n];
+}
 ```
 
 [返回目录](#96)
