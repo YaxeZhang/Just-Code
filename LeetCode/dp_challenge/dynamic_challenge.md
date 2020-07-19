@@ -5,9 +5,9 @@
 |32|[Longest Valid Parentheses](#32-longest-valid-parentheses)<span id = 32></span>|28.2%|Hard|||
 |44|[Wildcard Matching](#44-wildcard-matching)<span id = 44></span>|24.6%|Hard|||
 |53|[Maximum Subarray](#53-maximum-subarray)<span id = 53></span>|46.4%|Easy|||
-|62|[Unique Paths](#62-unique-paths)<span id = 62></span>|53.8%|Medium|2020.07.15|2020.7.19|
-|63|[Unique Paths II](#63-unique-paths-ii)<span id = 63></span>|34.4%|Medium|2020.07.15||
-|64|[Minimum Path Sum](#64-minimum-path-sum)<span id = 64></span>|54.1%|Medium|2020.07.15|2020.7.19|
+|62|[Unique Paths](#62-unique-paths)<span id = 62></span>|53.8%|Medium|2020.07.15|2020.07.19|
+|63|[Unique Paths II](#63-unique-paths-ii)<span id = 63></span>|34.4%|Medium|2020.07.15|2020.07.19|
+|64|[Minimum Path Sum](#64-minimum-path-sum)<span id = 64></span>|54.1%|Medium|2020.07.15|2020.07.19|
 |70|[Climbing Stairs](#70-climbing-stairs)<span id = 70></span>|47.1%|Easy|2020.07.15||
 |72|[Edit Distance](#72-edit-distance)<span id = 72></span>|44.4%|Hard|2020.07.15||
 |85|[Maximal Rectangle](#85-maximal-rectangle)<span id = 85></span>|37.4%|Hard|||
