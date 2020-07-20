@@ -8,7 +8,7 @@
 |62|[Unique Paths](#62-unique-paths)<span id = 62></span>|53.8%|Medium|2020.07.15|2020.07.19|
 |63|[Unique Paths II](#63-unique-paths-ii)<span id = 63></span>|34.4%|Medium|2020.07.15|2020.07.19|
 |64|[Minimum Path Sum](#64-minimum-path-sum)<span id = 64></span>|54.1%|Medium|2020.07.15|2020.07.19|
-|70|[Climbing Stairs](#70-climbing-stairs)<span id = 70></span>|47.1%|Easy|2020.07.15||
+|70|[Climbing Stairs](#70-climbing-stairs)<span id = 70></span>|47.1%|Easy|2020.07.15|2020.07.20|
 |72|[Edit Distance](#72-edit-distance)<span id = 72></span>|44.4%|Hard|2020.07.15||
 |85|[Maximal Rectangle](#85-maximal-rectangle)<span id = 85></span>|37.4%|Hard|||
 |87|[Scramble String](#87-scramble-string)<span id = 87></span>|33.6%|Hard|||
@@ -615,7 +615,14 @@ public:
 **分析：**
 
 ```c
+int climbStairs(int n){
+    int dp[n+1];
+    dp[0] = dp[1] = 1;
+    for (int i = 2; i <= n; ++i)
+        dp[i] = dp[i-1] + dp[i-2];
 
+    return dp[n];
+}
 ```
 
 [返回目录](#70)
