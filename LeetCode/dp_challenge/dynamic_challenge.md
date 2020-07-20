@@ -5,16 +5,16 @@
 |32|[Longest Valid Parentheses](#32-longest-valid-parentheses)<span id = 32></span>|28.2%|Hard|||
 |44|[Wildcard Matching](#44-wildcard-matching)<span id = 44></span>|24.6%|Hard|||
 |53|[Maximum Subarray](#53-maximum-subarray)<span id = 53></span>|46.4%|Easy|||
-|62|[Unique Paths](#62-unique-paths)<span id = 62></span>|53.8%|Medium|2020.07.15||
-|63|[Unique Paths II](#63-unique-paths-ii)<span id = 63></span>|34.4%|Medium|2020.07.15||
-|64|[Minimum Path Sum](#64-minimum-path-sum)<span id = 64></span>|54.1%|Medium|2020.07.15||
-|70|[Climbing Stairs](#70-climbing-stairs)<span id = 70></span>|47.1%|Easy|2020.07.15||
+|62|[Unique Paths](#62-unique-paths)<span id = 62></span>|53.8%|Medium|2020.07.15|2020.07.19|
+|63|[Unique Paths II](#63-unique-paths-ii)<span id = 63></span>|34.4%|Medium|2020.07.15|2020.07.19|
+|64|[Minimum Path Sum](#64-minimum-path-sum)<span id = 64></span>|54.1%|Medium|2020.07.15|2020.07.19|
+|70|[Climbing Stairs](#70-climbing-stairs)<span id = 70></span>|47.1%|Easy|2020.07.15|2020.07.20|
 |72|[Edit Distance](#72-edit-distance)<span id = 72></span>|44.4%|Hard|2020.07.15||
 |85|[Maximal Rectangle](#85-maximal-rectangle)<span id = 85></span>|37.4%|Hard|||
 |87|[Scramble String](#87-scramble-string)<span id = 87></span>|33.6%|Hard|||
 |91|[Decode Ways](#91-decode-ways)<span id = 91></span>|24.5%|Medium|||
 |95|[Unique Binary Search Trees II](#95-unique-binary-search-trees-ii)<span id = 95></span>|40.3%|Medium|||
-|96|[Unique Binary Search Trees](#96-unique-binary-search-trees)<span id = 96></span>|52.5%|Medium|2020.07.15||
+|96|[Unique Binary Search Trees](#96-unique-binary-search-trees)<span id = 96></span>|52.5%|Medium|2020.07.15|2020.07.19|
 |97|[Interleaving String](#97-interleaving-string)<span id = 97></span>|31.3%|Hard|||
 |115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|||
 |120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium|2020.07.16|2020.07.16|
@@ -395,10 +395,24 @@ public:
 ```
 
 ### C Solution
-**分析：**
+**分析：**二维的dp (手动捂脸)
 
 ```c
+int
+uniquePaths(int m, int n) {
+    int dp[m][n];
+    for (int i = 0; i < m; ++i)
+        dp[i][0] = 1;
+    for (int j = 0; j < n; ++j)
+        dp[0][j] = 1;
 
+    for (int i = 1; i < m; ++i) {
+        for (int j = 1; j < n; ++j) {
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+        }
+    }
+    return dp[m-1][n-1];
+}
 ```
 
 [返回目录](#62)
@@ -469,7 +483,22 @@ public:
 **分析：**
 
 ```c
+int uniquePathsWithObstacles(int **obstacleGrid, int obstacleGridSize, int *obstacleGridColSize) {
+    if (obstacleGrid[0][0]) return 0;
+    unsigned int dp[obstacleGridSize][obstacleGridColSize[0]];
+    dp[0][0] = 1;
+    for (int i = 1; i < obstacleGridSize; ++i)
+        dp[i][0] = obstacleGrid[i][0] ? 0 : dp[i - 1][0];
 
+    for (int i = 1; i < obstacleGridColSize[0]; ++i)
+        dp[0][i] = obstacleGrid[0][i] ? 0 : dp[0][i - 1];
+
+    for (int i = 1; i < obstacleGridSize; ++i)
+        for (int j = 1; j < obstacleGridColSize[0]; ++j)
+            dp[i][j] = obstacleGrid[i][j] ? 0 : dp[i - 1][j] + dp[i][j - 1];
+
+    return dp[obstacleGridSize - 1][obstacleGridColSize[0] - 1];
+}
 ```
 
 [返回目录](#63)
@@ -521,10 +550,23 @@ public:
 ```
 
 ### C Solution
-**分析：**
+**分析：**重用矩阵, 边界问题先处理掉
 
 ```c
+int minPathSum(int** grid, int gridSize, int* gridColSize){
+    for (int i = 1; i < gridSize; ++i)
+        grid[i][0] += grid[i-1][0];
+    for (int k = 1; k < gridColSize[0]; ++k)
+        grid[0][k] += grid[0][k-1];
 
+    for (int i = 1; i < gridSize; ++i) {
+        for (int j = 1; j < gridColSize[i]; ++j) {
+            grid[i][j] += (grid[i-1][j] < grid[i][j-1] ? grid[i-1][j] : grid[i][j-1]);
+        }
+    }
+
+    return grid[gridSize-1][(*gridColSize)-1];
+}
 ```
 
 [返回目录](#64)
@@ -573,7 +615,14 @@ public:
 **分析：**
 
 ```c
+int climbStairs(int n){
+    int dp[n+1];
+    dp[0] = dp[1] = 1;
+    for (int i = 2; i <= n; ++i)
+        dp[i] = dp[i-1] + dp[i-2];
 
+    return dp[n];
+}
 ```
 
 [返回目录](#70)
@@ -804,7 +853,18 @@ public:
 **分析：**
 
 ```c
+int numTrees(int n) {
+    int dp[n + 1];
+    memset(dp, 0, sizeof(dp));
+    dp[0] = dp[1] = 1;
 
+    for (int i = 2; i <= n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            dp[i] += dp[j] * dp[i-j-1];
+        }
+    }
+    return dp[n];
+}
 ```
 
 [返回目录](#96)
