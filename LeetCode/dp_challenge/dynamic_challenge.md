@@ -4,7 +4,7 @@
 |10|[Regular Expression Matching](#10-regular-expression-matching)<span id = 10></span>|26.7%|Hard|||
 |32|[Longest Valid Parentheses](#32-longest-valid-parentheses)<span id = 32></span>|28.2%|Hard|||
 |44|[Wildcard Matching](#44-wildcard-matching)<span id = 44></span>|24.6%|Hard|||
-|53|[Maximum Subarray](#53-maximum-subarray)<span id = 53></span>|46.4%|Easy|||
+|53|[Maximum Subarray](#53-maximum-subarray)<span id = 53></span>|46.4%|Easy|2020.07.20||
 |62|[Unique Paths](#62-unique-paths)<span id = 62></span>|53.8%|Medium|2020.07.15|2020.07.19|
 |63|[Unique Paths II](#63-unique-paths-ii)<span id = 63></span>|34.4%|Medium|2020.07.15|2020.07.19|
 |64|[Minimum Path Sum](#64-minimum-path-sum)<span id = 64></span>|54.1%|Medium|2020.07.15|2020.07.19|
@@ -26,11 +26,11 @@
 |152|[Maximum Product Subarray](#152-maximum-product-subarray)<span id = 152></span>|31.5%|Medium|||
 |174|[Dungeon Game](#174-dungeon-game)<span id = 174></span>|32.1%|Hard|||
 |188|[Best Time to Buy and Sell Stock IV](#188-best-time-to-buy-and-sell-stock-iv)<span id = 188></span>|27.9%|Hard|||
-|198|[House Robber](#198-house-robber)<span id = 198></span>|41.9%|Easy|||
-|213|[House Robber II](#213-house-robber-ii)<span id = 213></span>|36.4%|Medium|||
-|221|[Maximal Square](#221-maximal-square)<span id = 221></span>|37.6%|Medium|||
+|198|[House Robber](#198-house-robber)<span id = 198></span>|41.9%|Easy|2020.07.20||
+|213|[House Robber II](#213-house-robber-ii)<span id = 213></span>|36.4%|Medium|2020.07.20||
+|221|[Maximal Square](#221-maximal-square)<span id = 221></span>|37.6%|Medium|2020.07.20||
 |256|[Paint House](#256-paint-house)<span id = 256></span>|52.0%|Easy|||
-|264|[Ugly Number II](#264-ugly-number-ii)<span id = 264></span>|41.9%|Medium|||
+|264|[Ugly Number II](#264-ugly-number-ii)<span id = 264></span>|41.9%|Medium|2020.07.20||
 |265|[Paint House II](#265-paint-house-ii)<span id = 265></span>|44.5%|Hard|||
 |276|[Paint Fence](#276-paint-fence)<span id = 276></span>|38.1%|Easy|||
 |279|[Perfect Squares](#279-perfect-squares)<span id = 279></span>|47.1%|Medium|||
@@ -41,7 +41,7 @@
 |312|[Burst Balloons](#312-burst-balloons)<span id = 312></span>|51.4%|Hard|||
 |321|[Create Maximum Number](#321-create-maximum-number)<span id = 321></span>|26.9%|Hard|||
 |322|[Coin Change](#322-coin-change)<span id = 322></span>|35.1%|Medium|||
-|338|[Counting Bits](#338-counting-bits)<span id = 338></span>|69.3%|Medium|||
+|338|[Counting Bits](#338-counting-bits)<span id = 338></span>|69.3%|Medium|2020.07.20||
 |343|[Integer Break](#343-integer-break)<span id = 343></span>|50.1%|Medium|||
 |351|[Android Unlock Patterns](#351-android-unlock-patterns)<span id = 351></span>|48.2%|Medium|||
 |354|[Russian Doll Envelopes](#354-russian-doll-envelopes)<span id = 354></span>|35.5%|Hard|||
@@ -52,7 +52,7 @@
 |375|[Guess Number Higher or Lower II](#375-guess-number-higher-or-lower-ii)<span id = 375></span>|40.2%|Medium|||
 |376|[Wiggle Subsequence](#376-wiggle-subsequence)<span id = 376></span>|39.5%|Medium|||
 |377|[Combination Sum IV](#377-combination-sum-iv)<span id = 377></span>|45.2%|Medium|||
-|392|[Is Subsequence](#392-is-subsequence)<span id = 392></span>|49.1%|Easy|||
+|392|[Is Subsequence](#392-is-subsequence)<span id = 392></span>|49.1%|Easy|2020.07.20||
 |403|[Frog Jump](#403-frog-jump)<span id = 403></span>|39.5%|Hard|||
 |410|[Split Array Largest Sum](#410-split-array-largest-sum)<span id = 410></span>|44.4%|Hard|||
 |413|[Arithmetic Slices](#413-arithmetic-slices)<span id = 413></span>|57.8%|Medium|||
@@ -97,7 +97,7 @@
 |730|[Count Different Palindromic Subsequences](#730-count-different-palindromic-subsequences)<span id = 730></span>|41.6%|Hard|||
 |740|[Delete and Earn](#740-delete-and-earn)<span id = 740></span>|48.5%|Medium|||
 |741|[Cherry Pickup](#741-cherry-pickup)<span id = 741></span>|33.9%|Hard|||
-|746|[Min Cost Climbing Stairs](#746-min-cost-climbing-stairs)<span id = 746></span>|50.2%|Easy|||
+|746|[Min Cost Climbing Stairs](#746-min-cost-climbing-stairs)<span id = 746></span>|50.2%|Easy|2020.07.20||
 |750|[Number Of Corner Rectangles](#750-number-of-corner-rectangles)<span id = 750></span>|66.4%|Medium|||
 |764|[Largest Plus Sign](#764-largest-plus-sign)<span id = 764></span>|46.0%|Medium|||
 |787|[Cheapest Flights Within K Stops](#787-cheapest-flights-within-k-stops)<span id = 787></span>|39.3%|Medium|||
@@ -111,7 +111,7 @@
 |847|[Shortest Path Visiting All Nodes](#847-shortest-path-visiting-all-nodes)<span id = 847></span>|51.7%|Hard|||
 |871|[Minimum Number of Refueling Stops](#871-minimum-number-of-refueling-stops)<span id = 871></span>|31.2%|Hard|||
 |873|[Length of Longest Fibonacci Subsequence](#873-length-of-longest-fibonacci-subsequence)<span id = 873></span>|47.6%|Medium|||
-|877|[Stone Game](#877-stone-game)<span id = 877></span>|64.5%|Medium|||
+|877|[Stone Game](#877-stone-game)<span id = 877></span>|64.5%|Medium|2020.07.20||
 |879|[Profitable Schemes](#879-profitable-schemes)<span id = 879></span>|39.6%|Hard|||
 |887|[Super Egg Drop](#887-super-egg-drop)<span id = 887></span>|27.1%|Hard|||
 |898|[Bitwise ORs of Subarrays](#898-bitwise-ors-of-subarrays)<span id = 898></span>|35.0%|Medium|||
@@ -178,7 +178,7 @@
 |1227|[Airplane Seat Assignment Probability](#1227-airplane-seat-assignment-probability)<span id = 1227></span>|60.5%|Medium|||
 |1262|[Greatest Sum Divisible by Three](#1262-greatest-sum-divisible-by-three)<span id = 1262></span>|47.4%|Medium|||
 |1269|[Number of Ways to Stay in the Same Place After Some Steps](#1269-number-of-ways-to-stay-in-the-same-place-after-some-steps)<span id = 1269></span>|43.0%|Hard|||
-|1277|[Count Square Submatrices with All Ones](#1277-count-square-submatrices-with-all-ones)<span id = 1277></span>|72.9%|Medium|||
+|1277|[Count Square Submatrices with All Ones](#1277-count-square-submatrices-with-all-ones)<span id = 1277></span>|72.9%|Medium|2020.07.20||
 |1278|[Palindrome Partitioning III](#1278-palindrome-partitioning-iii)<span id = 1278></span>|59.7%|Hard|||
 |1312|[Minimum Insertion Steps to Make a String Palindrome](#1312-minimum-insertion-steps-to-make-a-string-palindrome)<span id = 1312></span>|57.7%|Hard|||
 |1320|[Minimum Distance to Type a Word Using Two Fingers](#1320-minimum-distance-to-type-a-word-using-two-fingers)<span id = 1320></span>|62.1%|Hard|||
