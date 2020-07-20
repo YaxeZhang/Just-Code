@@ -331,7 +331,17 @@
 **分析：**
 
 ```cpp
-
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int best = INT_MIN, prev = 0;
+        for (auto& num: nums) {
+            prev = max(num, prev + num);
+            best = max(best, prev);
+        }
+        return best;
+    }
+};
 ```
 
 ### C Solution
@@ -1268,10 +1278,20 @@ public:
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 当前房间偷不偷取决于上上间加当前房间的价值和上一间的值哪个大。状态方程在下面。当然 如果看穿了以后就可以简化。处理 base case 更干净简单。
 
 ```cpp
-
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int prev = 0, cur = 0;
+        for (auto& num: nums) {
+            prev = max(cur, prev + num);
+            swap(cur, prev);
+        }
+        return max(prev, cur);
+    }
+};
 ```
 
 ### C Solution
@@ -1297,7 +1317,23 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+private:
+    int helper(vector<int>& nums, int st, int ed) {
+        int prev = 0, res = 0;
+        for (int i = st; i < ed; i++) {
+            prev = max(prev + nums[i], res);
+            swap(prev, res);
+        }
+        return res;
+    }
 
+public:
+    int rob(vector<int>& nums) {
+        int len = nums.size();
+        return max(helper(nums, len != 1, len), helper(nums, 0, len-1));
+    }
+};
 ```
 
 ### C Solution
@@ -1320,10 +1356,37 @@ public:
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** dp来累计状态，同样可以状态压缩。
 
 ```cpp
+class Solution {
+public:
+    int maximalSquare(vector<vector<char>>& matrix) {
+        if (matrix.empty()) return 0;
+        int m = matrix.size(), n = matrix[0].size();
 
+        vector<int> dp(n);
+        for (int j = 0; j < n; j++) dp[j] = matrix[0][j] == '1';
+
+        int prev, cur, res = *max_element(dp.begin(), dp.end());
+
+        for (int i = 1; i < m; i++) {
+            prev = dp[0];
+            dp[0] = matrix[i][0] == '1';
+            for (int j = 1; j < n; j++) {
+                cur = dp[j];
+                if (matrix[i][j] == '1') {
+                    dp[j] = min({prev, dp[j-1], dp[j]}) + 1;
+                } else {
+                    dp[j] = 0;
+                }
+                prev = cur;
+            }
+            res = max(res, *max_element(dp.begin(), dp.end()));
+        }
+        return res * res;
+    }
+};
 ```
 
 ### C Solution
@@ -1375,7 +1438,23 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        int j = 0, k = 0, l = 0;
 
+        vector<int> dp(n);
+        dp[0] = 1;
+
+        for (int i = 1; i < n; i++) {
+            while (dp[j] * 2 <= dp[i-1]) j++;
+            while (dp[k] * 3 <= dp[i-1]) k++;
+            while (dp[l] * 5 <= dp[i-1]) l++;
+            dp[i] = min({dp[j] * 2, dp[k] * 3, dp[l] * 5});
+        }
+        return dp[n-1];
+    }
+};
 ```
 
 ### C Solution
@@ -1658,10 +1737,37 @@ public:
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 第一种解法有点类似于找规律但是可以将大数分解为小的部分进行求解。第二种解法就是根据数的二进制表示了。
 
 ```cpp
+class Solution {
+public:
+    vector<int> countBits(int num) {
+        vector<int> dp(num+1);
+        int cur = 0, last = 1;
 
+        for (int i = 1; i <= num; i++) {
+            dp[i] = dp[cur++] + 1;
+            if (cur == last) {
+                cur = 0;
+                last = i + 1;
+            }
+        }
+        return dp;
+    }
+};
+```
+
+```cpp
+class Solution {
+public:
+    vector<int> countBits(int num) {
+        vector<int> ret(num+1, 0);
+        for (int i = 1; i <= num; ++i)
+            ret[i] = ret[i&(i-1)] + 1;
+        return ret;
+    }
+};
 ```
 
 ### C Solution
@@ -1947,7 +2053,16 @@ public:
 **分析：**
 
 ```cpp
-
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int pos = 0;
+        for (int i = 0; i < t.length(); i++) {
+            if (s[pos] == t[i]) pos++;
+        }
+        return pos == s.length() - 1;
+    }
+};
 ```
 
 ### C Solution
@@ -3114,10 +3229,20 @@ public:
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 打家劫舍的问题，但是由于限制了数据范围，不用错误判断，更简单了。
 
 ```cpp
-
+class Solution {
+public:
+    int minCostClimbingStairs(vector<int>& cost) {
+        int prev = cost[0], cur = cost[1];
+        for (int i = 2; i < cost.size(); i++) {
+            prev = cost[i] + min(prev, cur);
+            swap(prev, cur);
+        }
+        return min(prev, cur);
+    }
+};
 ```
 
 ### C Solution
@@ -3478,10 +3603,15 @@ public:
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 智商题，实际上动态规划也可以做，但没必要。计算奇数位和、偶数位和，根据大的那个对应地拿就能赢。所以一定能赢
 
 ```cpp
-
+class Solution {
+public:
+    bool stoneGame(vector<int>& piles) {
+        return true;
+    }
+};
 ```
 
 ### C Solution
@@ -5313,7 +5443,32 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int countSquares(vector<vector<int>>& matrix) {
+        if (matrix.empty()) return 0;
+        int m = matrix.size(), n = matrix[0].size();
 
+        vector<int> dp(matrix[0]);
+        int res = accumulate(dp.begin(), dp.end(), 0), prev, cur;
+
+        for (int i = 1; i < m; i++) {
+            prev = dp[0];
+            dp[0] = matrix[i][0];
+            for (int j = 1; j < n; j++) {
+                cur = dp[j];
+                if (matrix[i][j]) {
+                    dp[j] = min({prev, dp[j-1], dp[j]}) + 1;
+                } else {
+                    dp[j] = 0;
+                }
+                prev = cur;
+            }
+            res += accumulate(dp.begin(), dp.end(), 0);
+        }
+        return res;
+    }
+};
 ```
 
 ### C Solution
