@@ -18,7 +18,7 @@
 |97|[Interleaving String](#97-interleaving-string)<span id = 97></span>|31.3%|Hard|||
 |115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|||
 |120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium|2020.07.16|2020.07.16|
-|121|[Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)<span id = 121></span>|50.3%|Easy|2020.07.16||
+|121|[Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)<span id = 121></span>|50.3%|Easy|2020.07.16|2020.07.20|
 |123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|||
 |132|[Palindrome Partitioning II](#132-palindrome-partitioning-ii)<span id = 132></span>|30.1%|Hard|||
 |139|[Word Break](#139-word-break)<span id = 139></span>|39.7%|Medium|||
@@ -118,7 +118,7 @@
 |902|[Numbers At Most N Given Digit Set](#902-numbers-at-most-n-given-digit-set)<span id = 902></span>|31.4%|Hard|||
 |903|[Valid Permutations for DI Sequence](#903-valid-permutations-for-di-sequence)<span id = 903></span>|49.5%|Hard|||
 |920|[Number of Music Playlists](#920-number-of-music-playlists)<span id = 920></span>|46.4%|Hard|||
-|931|[Minimum Falling Path Sum](#931-minimum-falling-path-sum)<span id = 931></span>|62.2%|Medium|2020.07.16||
+|931|[Minimum Falling Path Sum](#931-minimum-falling-path-sum)<span id = 931></span>|62.2%|Medium|2020.07.16|2020.07.20|
 |935|[Knight Dialer](#935-knight-dialer)<span id = 935></span>|44.9%|Medium|||
 |940|[Distinct Subsequences II](#940-distinct-subsequences-ii)<span id = 940></span>|41.5%|Hard|||
 |943|[Find the Shortest Superstring](#943-find-the-shortest-superstring)<span id = 943></span>|42.7%|Hard|||
@@ -1080,7 +1080,17 @@ public:
 **分析：**
 
 ```c
+int maxProfit(int* prices, int pricesSize){
+    int benefit = 0;
+    int buy_prices = INT32_MAX;
+    int tmp;
+    for (int i = 0; i < pricesSize; ++i) {
+        benefit = benefit > (tmp = prices[i] - buy_prices) ? benefit : tmp;
+        buy_prices = prices[i] < buy_prices ? prices[i] : buy_prices;
+    }
 
+    return benefit;
+}
 ```
 
 [返回目录](#121)
@@ -3834,7 +3844,39 @@ public:
 **分析：**
 
 ```c
+int min2(int x, int y) {
+    return x < y ? x : y;
+}
 
+int min3(int x, int y, int z) {
+    return min2(min2(x, y), z);
+}
+
+int minFallingPathSum(int** A, int ASize, int* AColSize){
+    int col_size = *AColSize;
+    int dp[ASize][col_size];
+    for (int i = 0; i < col_size; ++i) {
+        dp[0][i] = A[0][i];
+    }
+
+    for (int i = 1; i < ASize; ++i) {
+        for (int j = 0; j < col_size; ++j) {
+            if (!j) {
+                dp[i][j] = A[i][j] + min2(dp[i-1][j], dp[i-1][j+1]);
+            } else if (j == col_size-1) {
+                dp[i][j] = A[i][j] + min2(dp[i-1][j], dp[i-1][j-1]);
+            } else {
+                dp[i][j] = A[i][j] + min3(dp[i-1][j-1], dp[i-1][j], dp[i-1][j+1]);
+            }
+        }
+    }
+
+    int res = dp[ASize-1][0];
+    for (int k = 1; k < col_size; ++k) {
+        res = min2(res, dp[ASize-1][k]);
+    }
+    return res;
+}
 ```
 
 [返回目录](#931)
