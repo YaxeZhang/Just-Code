@@ -9,7 +9,7 @@
 |63|[Unique Paths II](#63-unique-paths-ii)<span id = 63></span>|34.4%|Medium|2020.07.15|2020.07.19|
 |64|[Minimum Path Sum](#64-minimum-path-sum)<span id = 64></span>|54.1%|Medium|2020.07.15|2020.07.19|
 |70|[Climbing Stairs](#70-climbing-stairs)<span id = 70></span>|47.1%|Easy|2020.07.15|2020.07.20|
-|72|[Edit Distance](#72-edit-distance)<span id = 72></span>|44.4%|Hard|2020.07.15||
+|72|[Edit Distance](#72-edit-distance)<span id = 72></span>|44.4%|Hard|2020.07.15|2020.07.20|
 |85|[Maximal Rectangle](#85-maximal-rectangle)<span id = 85></span>|37.4%|Hard|||
 |87|[Scramble String](#87-scramble-string)<span id = 87></span>|33.6%|Hard|||
 |91|[Decode Ways](#91-decode-ways)<span id = 91></span>|24.5%|Medium|||
@@ -697,7 +697,38 @@ public:
 **分析：**
 
 ```c
+int min(int a, int b, int c) {
+    int res = a;
+    res = res < b ? res : b;
+    res = res < c ? res : c;
 
+    return res;
+}
+
+int minDistance(char *word1, char *word2) {
+    size_t word1_len = strlen(word1);
+    size_t word2_len = strlen(word2);
+
+    int dp[word1_len+1][word2_len+1];
+
+    for (int i = 0; i <= word1_len; ++i) {
+        dp[i][0] = i;
+    }
+    for (int j = 0; j <= word2_len; ++j) {
+        dp[0][j] = j;
+    }
+
+    for (int i = 1; i <= word1_len; ++i) {
+        for (int j = 1; j <= word2_len; ++j) {
+            if (word1[i-1] == word2[j-1]) {
+                dp[i][j] = dp[i-1][j-1];
+            } else {
+                dp[i][j] = min(dp[i-1][j], dp[i-1][j-1], dp[i][j-1]) + 1;
+            }
+        }
+    }
+    return dp[word1_len][word2_len];
+}
 ```
 
 [返回目录](#72)
