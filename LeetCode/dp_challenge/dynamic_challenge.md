@@ -4,7 +4,7 @@
 |10|[Regular Expression Matching](#10-regular-expression-matching)<span id = 10></span>|26.7%|Hard|||
 |32|[Longest Valid Parentheses](#32-longest-valid-parentheses)<span id = 32></span>|28.2%|Hard|||
 |44|[Wildcard Matching](#44-wildcard-matching)<span id = 44></span>|24.6%|Hard|||
-|53|[Maximum Subarray](#53-maximum-subarray)<span id = 53></span>|46.4%|Easy|2020.07.20||
+|53|[Maximum Subarray](#53-maximum-subarray)<span id = 53></span>|46.4%|Easy|2020.07.20|2020.07.20|
 |62|[Unique Paths](#62-unique-paths)<span id = 62></span>|53.8%|Medium|2020.07.15|2020.07.19|
 |63|[Unique Paths II](#63-unique-paths-ii)<span id = 63></span>|34.4%|Medium|2020.07.15|2020.07.19|
 |64|[Minimum Path Sum](#64-minimum-path-sum)<span id = 64></span>|54.1%|Medium|2020.07.15|2020.07.19|
@@ -26,11 +26,11 @@
 |152|[Maximum Product Subarray](#152-maximum-product-subarray)<span id = 152></span>|31.5%|Medium|||
 |174|[Dungeon Game](#174-dungeon-game)<span id = 174></span>|32.1%|Hard|||
 |188|[Best Time to Buy and Sell Stock IV](#188-best-time-to-buy-and-sell-stock-iv)<span id = 188></span>|27.9%|Hard|||
-|198|[House Robber](#198-house-robber)<span id = 198></span>|41.9%|Easy|2020.07.20||
-|213|[House Robber II](#213-house-robber-ii)<span id = 213></span>|36.4%|Medium|2020.07.20||
-|221|[Maximal Square](#221-maximal-square)<span id = 221></span>|37.6%|Medium|2020.07.20||
+|198|[House Robber](#198-house-robber)<span id = 198></span>|41.9%|Easy|2020.07.20|2020.07.20|
+|213|[House Robber II](#213-house-robber-ii)<span id = 213></span>|36.4%|Medium|2020.07.20|2020.07.20|
+|221|[Maximal Square](#221-maximal-square)<span id = 221></span>|37.6%|Medium|2020.07.20|2020.07.20|
 |256|[Paint House](#256-paint-house)<span id = 256></span>|52.0%|Easy|||
-|264|[Ugly Number II](#264-ugly-number-ii)<span id = 264></span>|41.9%|Medium|2020.07.20||
+|264|[Ugly Number II](#264-ugly-number-ii)<span id = 264></span>|41.9%|Medium|2020.07.20|2020.07.20|
 |265|[Paint House II](#265-paint-house-ii)<span id = 265></span>|44.5%|Hard|||
 |276|[Paint Fence](#276-paint-fence)<span id = 276></span>|38.1%|Easy|||
 |279|[Perfect Squares](#279-perfect-squares)<span id = 279></span>|47.1%|Medium|||
@@ -41,7 +41,7 @@
 |312|[Burst Balloons](#312-burst-balloons)<span id = 312></span>|51.4%|Hard|||
 |321|[Create Maximum Number](#321-create-maximum-number)<span id = 321></span>|26.9%|Hard|||
 |322|[Coin Change](#322-coin-change)<span id = 322></span>|35.1%|Medium|||
-|338|[Counting Bits](#338-counting-bits)<span id = 338></span>|69.3%|Medium|2020.07.20||
+|338|[Counting Bits](#338-counting-bits)<span id = 338></span>|69.3%|Medium|2020.07.20|2020.07.20|
 |343|[Integer Break](#343-integer-break)<span id = 343></span>|50.1%|Medium|||
 |351|[Android Unlock Patterns](#351-android-unlock-patterns)<span id = 351></span>|48.2%|Medium|||
 |354|[Russian Doll Envelopes](#354-russian-doll-envelopes)<span id = 354></span>|35.5%|Hard|||
@@ -319,10 +319,16 @@
 
 ## 53. Maximum Subarray
 
+Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+
+给定一个整数数组 `nums` ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+
 **Example**
 
 ```
-
+Input: [-2,1,-3,4,-1,2,1,-5,4],
+Output: 6
+Explanation: [4,-1,2,1] has the largest sum = 6.
 ```
 
 ---
@@ -348,7 +354,16 @@ public:
 **分析：**
 
 ```c
-
+int maxSubArray(int* nums, int numsSize){
+    int res = *nums;
+    int cur_max = *nums;
+    for (int i = 1; i < numsSize; ++i) {
+        res += nums[i];
+        if (res < nums[i]) res = nums[i];
+        cur_max = cur_max > res ? cur_max : res;
+    }
+    return cur_max;
+}
 ```
 
 [返回目录](#53)
@@ -1279,10 +1294,18 @@ int maxProfit(int* prices, int pricesSize){
 
 ## 198. House Robber
 
+The maximum value of non-adjacent elements in an array
+
+数组中不相邻元素的最大值
+
 **Example**
 
 ```
+Input: nums = [1,2,3,1]
+Output: 4
 
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+             Total amount you can rob = 1 + 3 = 4.
 ```
 
 ---
@@ -1308,17 +1331,42 @@ public:
 **分析：**
 
 ```c
-
+int rob(int *nums, int numsSize) {
+    if (!numsSize) return 0;
+    int prev = 0;
+    int cur = *nums;
+    
+    int temp;
+    for (int i = 1; i < numsSize; ++i) {
+        temp = prev + nums[i];
+        prev = cur;
+        cur = temp > cur ? temp : cur;
+    }
+    return  cur;
+}
 ```
 
 [返回目录](#198)
 
 ## 213. House Robber II
 
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+
+
+你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都围成一圈，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+
+给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。
+
 **Example**
 
 ```
-
+Input: [2,3,2]
+Output: 3
+Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2),
+             because they are adjacent houses.
 ```
 
 ---
@@ -1347,20 +1395,47 @@ public:
 ```
 
 ### C Solution
-**分析：**
+**分析：** 把一个环, 分成两个就可以了, 代码更清楚
 
 ```c
+int my_rob(int *nums, int numsSize) {
+    int pre = 0;
+    int cur = nums[0];
+    for (int i = 1; i < numsSize; ++i) {
+        int temp = pre + nums[i] > cur ? pre + nums[i] : cur;
+        pre = cur;
+        cur = temp;
+    }
+    return cur;
+}
 
+int rob(int *nums, int numsSize) {
+    if (!numsSize) return 0;
+    if (numsSize == 1) return nums[0];
+    int res1, res2;
+    return (res1 = my_rob(nums, numsSize - 1)) > (res2 = my_rob(++nums, numsSize - 1)) ? res1 : res2;
+}
 ```
 
 [返回目录](#213)
 
 ## 221. Maximal Square
 
+Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+
+在一个由 0 和 1 组成的二维矩阵内，找到只包含 1 的最大正方形，并返回其面积。
+
 **Example**
 
 ```
+Input: 
 
+1 0 1 0 0
+1 0 1 1 1
+1 1 1 1 1
+1 0 0 1 0
+
+Output: 4
 ```
 
 ---
@@ -1403,7 +1478,39 @@ public:
 **分析：**
 
 ```c
+int maximalSquare(char **matrix, int matrixSize, int *matrixColSize) {
+    int max_side = 0;
+    if (!matrixSize) return max_side;
+    int dp[matrixSize][*matrixColSize];
 
+    for (int i = 0; i < matrixSize; ++i) {
+        dp[i][0] = matrix[i][0] == '1' ? 1 : 0;
+        max_side |= dp[i][0];
+    }
+
+    for (int j = 0; j < *matrixColSize; ++j) {
+        dp[0][j] = matrix[0][j] == '1' ? 1 : 0;
+        max_side |= dp[0][j];
+    }
+
+    int min3(int, int, int);
+    for (int i = 1; i < matrixSize; ++i) {
+        for (int j = 1; j < *matrixColSize; ++j) {
+            if (matrix[i][j] == '0') dp[i][j] = 0;
+            else {
+                dp[i][j] = min3(dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]) + 1;
+                max_side = max_side > dp[i][j] ? max_side : dp[i][j];
+            }
+        }
+    }
+    return max_side * max_side;
+}
+
+int min3(int a, int b, int c) {
+    a = a < b ? a : b;
+    a = a < c ? a : c;
+    return a;
+}
 ```
 
 [返回目录](#221)
@@ -1471,7 +1578,27 @@ public:
 **分析：**
 
 ```c
+int nthUglyNumber(int n) {
+    int dp[n];
+    dp[0] = 1;
+    int p2, p3, p5;
+    p2 = p3 = p5 = 0;
 
+    int min3(int, int, int);
+    for (int i = 1; i < n; ++i) {
+        dp[i] = min3(dp[p2] * 2, dp[p3] * 3, dp[p5] * 5);
+        if (dp[i] == (dp[p2] * 2)) p2++;
+        if (dp[i] == (dp[p3] * 3)) p3++;
+        if (dp[i] == (dp[p5] * 5)) p5++;
+    }
+    return dp[n-1];
+}
+
+int min3(int x, int y, int z) {
+    x = x < y ? x : y;
+    x = x < z ? x : z;
+    return x;
+}
 ```
 
 [返回目录](#264)
@@ -1738,10 +1865,20 @@ public:
 
 ## 338. Counting Bits
 
+Given a non negative integer number num. For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1's in their binary representation and return them as an array.
+
+给定一个非负整数 **num**。对于 **0 ≤ i ≤ num** 范围中的每个数字 **i** ，计算其二进制数中的 1 的数目并将它们作为数组返回。
+
 **Example**
 
 ```
+Example 1:
+Input: 2
+Output: [0,1,1]
 
+Example 2:
+Input: 5
+Output: [0,1,1,2,1,2]
 ```
 
 ---
@@ -1784,7 +1921,19 @@ public:
 **分析：**
 
 ```c
+int *countBits(int num, int *returnSize) {
+    int *dp = (int *) malloc(sizeof(int) * (num + 1));
+    *dp = 0;
 
+    for (int i = 1; i <= num; ++i) {
+        if (!(i % 2))
+            dp[i] = dp[i/2];
+        else
+            dp[i] = dp[i-1] + 1;
+    }
+    *returnSize = num+1;
+    return dp;
+}
 ```
 
 [返回目录](#338)
