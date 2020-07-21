@@ -1,6 +1,6 @@
 |题号|题目名称|通关率|难度|zc打卡|jdq打卡|
 |---|---|---|---|---|---|
-|5|[Longest Palindromic Substring](#5-longest-palindromic-substring)<span id = 5></span>|29.3%|Medium|||
+|5|[Longest Palindromic Substring](#5-longest-palindromic-substring)<span id = 5></span>|29.3%|Medium||2020.07.22|
 |10|[Regular Expression Matching](#10-regular-expression-matching)<span id = 10></span>|26.7%|Hard|||
 |32|[Longest Valid Parentheses](#32-longest-valid-parentheses)<span id = 32></span>|28.2%|Hard|||
 |44|[Wildcard Matching](#44-wildcard-matching)<span id = 44></span>|24.6%|Hard|||
@@ -21,7 +21,7 @@
 |121|[Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)<span id = 121></span>|50.3%|Easy|2020.07.16|2020.07.20|
 |123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|2020.07.21||
 |132|[Palindrome Partitioning II](#132-palindrome-partitioning-ii)<span id = 132></span>|30.1%|Hard|||
-|139|[Word Break](#139-word-break)<span id = 139></span>|39.7%|Medium|2020.07.21||
+|139|[Word Break](#139-word-break)<span id = 139></span>|39.7%|Medium|2020.07.21|2020.07.21|
 |140|[Word Break II](#140-word-break-ii)<span id = 140></span>|31.5%|Hard|||
 |152|[Maximum Product Subarray](#152-maximum-product-subarray)<span id = 152></span>|31.5%|Medium|||
 |174|[Dungeon Game](#174-dungeon-game)<span id = 174></span>|32.1%|Hard|||
@@ -33,19 +33,19 @@
 |264|[Ugly Number II](#264-ugly-number-ii)<span id = 264></span>|41.9%|Medium|2020.07.20|2020.07.20|
 |265|[Paint House II](#265-paint-house-ii)<span id = 265></span>|44.5%|Hard|||
 |276|[Paint Fence](#276-paint-fence)<span id = 276></span>|38.1%|Easy|||
-|279|[Perfect Squares](#279-perfect-squares)<span id = 279></span>|47.1%|Medium|||
-|300|[Longest Increasing Subsequence](#300-longest-increasing-subsequence)<span id = 300></span>|42.5%|Medium|||
-|303|[Range Sum Query - Immutable](#303-range-sum-query---immutable)<span id = 303></span>|44.2%|Easy|||
+|279|[Perfect Squares](#279-perfect-squares)<span id = 279></span>|47.1%|Medium||2020.07.22|
+|300|[Longest Increasing Subsequence](#300-longest-increasing-subsequence)<span id = 300></span>|42.5%|Medium||2020.07.22|
+|303|[Range Sum Query - Immutable](#303-range-sum-query---immutable)<span id = 303></span>|44.2%|Easy||2020.07.22|
 |304|[Range Sum Query 2D - Immutable](#304-range-sum-query-2d---immutable)<span id = 304></span>|38.1%|Medium|||
 |309|[Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldown)<span id = 309></span>|46.3%|Medium|2020.07.21||
 |312|[Burst Balloons](#312-burst-balloons)<span id = 312></span>|51.4%|Hard|||
 |321|[Create Maximum Number](#321-create-maximum-number)<span id = 321></span>|26.9%|Hard|||
-|322|[Coin Change](#322-coin-change)<span id = 322></span>|35.1%|Medium|||
+|322|[Coin Change](#322-coin-change)<span id = 322></span>|35.1%|Medium||2020.07.22|
 |338|[Counting Bits](#338-counting-bits)<span id = 338></span>|69.3%|Medium|2020.07.20|2020.07.20|
 |343|[Integer Break](#343-integer-break)<span id = 343></span>|50.1%|Medium|||
 |351|[Android Unlock Patterns](#351-android-unlock-patterns)<span id = 351></span>|48.2%|Medium|||
 |354|[Russian Doll Envelopes](#354-russian-doll-envelopes)<span id = 354></span>|35.5%|Hard|||
-|357|[Count Numbers with Unique Digits](#357-count-numbers-with-unique-digits)<span id = 357></span>|48.2%|Medium|||
+|357|[Count Numbers with Unique Digits](#357-count-numbers-with-unique-digits)<span id = 357></span>|48.2%|Medium||2020.07.22|
 |361|[Bomb Enemy](#361-bomb-enemy)<span id = 361></span>|45.9%|Medium|||
 |363|[Max Sum of Rectangle No Larger Than K](#363-max-sum-of-rectangle-no-larger-than-k)<span id = 363></span>|37.2%|Hard|||
 |368|[Largest Divisible Subset](#368-largest-divisible-subset)<span id = 368></span>|38.1%|Medium|||
@@ -111,7 +111,7 @@
 |847|[Shortest Path Visiting All Nodes](#847-shortest-path-visiting-all-nodes)<span id = 847></span>|51.7%|Hard|||
 |871|[Minimum Number of Refueling Stops](#871-minimum-number-of-refueling-stops)<span id = 871></span>|31.2%|Hard|||
 |873|[Length of Longest Fibonacci Subsequence](#873-length-of-longest-fibonacci-subsequence)<span id = 873></span>|47.6%|Medium|||
-|877|[Stone Game](#877-stone-game)<span id = 877></span>|64.5%|Medium|2020.07.20||
+|877|[Stone Game](#877-stone-game)<span id = 877></span>|64.5%|Medium|2020.07.20|2020.07.22|
 |879|[Profitable Schemes](#879-profitable-schemes)<span id = 879></span>|39.6%|Hard|||
 |887|[Super Egg Drop](#887-super-egg-drop)<span id = 887></span>|27.1%|Hard|||
 |898|[Bitwise ORs of Subarrays](#898-bitwise-ors-of-subarrays)<span id = 898></span>|35.0%|Medium|||
@@ -178,7 +178,7 @@
 |1227|[Airplane Seat Assignment Probability](#1227-airplane-seat-assignment-probability)<span id = 1227></span>|60.5%|Medium|||
 |1262|[Greatest Sum Divisible by Three](#1262-greatest-sum-divisible-by-three)<span id = 1262></span>|47.4%|Medium|||
 |1269|[Number of Ways to Stay in the Same Place After Some Steps](#1269-number-of-ways-to-stay-in-the-same-place-after-some-steps)<span id = 1269></span>|43.0%|Hard|||
-|1277|[Count Square Submatrices with All Ones](#1277-count-square-submatrices-with-all-ones)<span id = 1277></span>|72.9%|Medium|2020.07.20||
+|1277|[Count Square Submatrices with All Ones](#1277-count-square-submatrices-with-all-ones)<span id = 1277></span>|72.9%|Medium|2020.07.20|2020.07.22|
 |1278|[Palindrome Partitioning III](#1278-palindrome-partitioning-iii)<span id = 1278></span>|59.7%|Hard|||
 |1312|[Minimum Insertion Steps to Make a String Palindrome](#1312-minimum-insertion-steps-to-make-a-string-palindrome)<span id = 1312></span>|57.7%|Hard|||
 |1320|[Minimum Distance to Type a Word Using Two Fingers](#1320-minimum-distance-to-type-a-word-using-two-fingers)<span id = 1320></span>|62.1%|Hard|||
@@ -231,10 +231,38 @@
 ```
 
 ### C Solution
-**分析：**
+**分析：** 遍历一遍字符串, 由中间向两边做回文判断, 注意奇数回文和偶数回文的不同
 
 ```c
+int expandFromCenter(char *s, int left, int right, int N){
+    while(left>=0&&right<N&&s[left]==s[right]){
+            left--;
+            right++;
+        }
+    return right-left-1;
+}
 
+char *longestPalindrome(char *s) {
+    int N = strlen(s);
+    if (!N) return "";
+    int start_p = 0;
+    int end_p = 0;
+
+    for (int i = 0; i < N; i++) {
+        int odd_len = expandFromCenter(s, i, i, N);
+        int even_len = expandFromCenter(s, i, i + 1, N);
+        if (odd_len > end_p - start_p) {
+            start_p = i - odd_len / 2;
+            end_p = i + odd_len / 2;
+        }
+        if (even_len > end_p - start_p) {
+            start_p = i - even_len / 2 + 1;
+            end_p = i + even_len / 2;
+        }
+    }
+    *(s + end_p + 1) = '\0';
+    return s + start_p;
+}
 ```
 
 [返回目录](#5)
@@ -1216,7 +1244,37 @@ public:
 **分析：**
 
 ```c
+bool wordBreak(char *s, char **wordDict, int wordDictSize) {
+    size_t s_len = strlen(s);
+    bool dp[s_len + 1];
+    dp[0] = 1;
+    for (int i = 1; i <= s_len; ++i) {
+        dp[i] = 0;
+    }
 
+    bool in(const char *, int from, int to, char **, int size);
+    for (int i = 0; i < s_len; ++i) {
+        for (int j = i + 1; j < s_len + 1; ++j) {
+            if (dp[i] && in(s, i, j, wordDict, wordDictSize)) dp[j] = 1;
+        }
+    }
+    return dp[s_len];
+}
+
+bool in(const char *s, int from, int to, char **word_dict, int size) {
+    char *cur_word;
+    for (int i = 0; i < size; ++i) {
+        cur_word = word_dict[i];
+
+        int tmp = 0;
+        int j;
+        for (j = from; j < to; ++j) {
+            if (s[j] != cur_word[tmp++]) break;
+        }
+        if (j == to && cur_word[tmp] == '\0') return true;
+    }
+    return false;
+}
 ```
 
 [返回目录](#139)
@@ -1734,7 +1792,17 @@ int min3(int x, int y, int z) {
 **分析：**
 
 ```c
+int numSquares(int n) {
+    int dp[n + 1];
 
+    for (int i = 0; i < n + 1; i++) {
+        dp[i] = i;                                  // 最坏情况下的个数，全部由1组成
+        for (int j = 1; i - j * j >= 0; j++) {
+            dp[i] = dp[i] < dp[i - j * j] + 1 ? dp[i] : dp[i - j * j] + 1;
+        }
+    }
+    return dp[n];
+}
 ```
 
 [返回目录](#279)
@@ -1760,7 +1828,22 @@ int min3(int x, int y, int z) {
 **分析：**
 
 ```c
+int lengthOfLIS(int *nums, int numsSize) {
+    if (numsSize == 0) return 0;
+    int dp[numsSize];               // 至目前元素, 最长的子序列长度
+    for (int i = 0; i < numsSize; i++)
+        dp[i] = 1;
 
+    int longest = 0;
+    for (int i = 0; i < numsSize; i++) {
+        for (int j = 0; j < i; j++)
+            if (nums[j] < nums[i])
+                dp[i] = dp[i] > dp[j] + 1 ? dp[i] : dp[j] + 1;
+
+        longest = longest > dp[i] ? longest : dp[i];
+    }
+    return longest;
+}
 ```
 
 [返回目录](#300)
@@ -1786,6 +1869,30 @@ int min3(int x, int y, int z) {
 **分析：**
 
 ```c
+typedef struct {
+    int prefix_sum;
+} NumArray;
+
+
+NumArray* numArrayCreate(int* nums, int numsSize) {
+    if (!numsSize) return NULL;
+    NumArray *obj = (NumArray *) malloc(sizeof(NumArray) * numsSize);
+    obj->prefix_sum = *nums;
+
+    for (int i = 1; i < numsSize; ++i) {
+        obj[i].prefix_sum = obj[i-1].prefix_sum + nums[i];
+    }
+    return obj;
+}
+
+int numArraySumRange(NumArray* obj, int i, int j) {  // 包前包后
+    if (!i) return obj[j].prefix_sum;
+    return obj[j].prefix_sum - obj[i-1].prefix_sum;
+}
+
+void numArrayFree(NumArray* obj) {
+    free(obj);
+}
 
 ```
 
@@ -1928,7 +2035,23 @@ public:
 **分析：**
 
 ```c
+int coinChange(int* coins, int coinsSize, int amount){
+    int dp[amount + 1];
+    int max = amount + 1;
+    dp[0] = 0;
+    for (int k = 1; k <= amount; ++k) {
+        dp[k] = max;
+    }
 
+    for (int i = 1; i <= amount; ++i) {
+        for (int j = 0; j < coinsSize; ++j) {
+            if (coins[j] <= i) {
+                dp[i] = dp[i-coins[j]]+1 < dp[i] ? dp[i-coins[j]]+1 : dp[i];
+            }
+        }
+    }
+    return dp[amount] > amount ? -1 : dp[amount];
+}
 ```
 
 [返回目录](#322)
@@ -2107,7 +2230,21 @@ int *countBits(int num, int *returnSize) {
 **分析：**
 
 ```c
+int countNumbersWithUniqueDigits(int n){
+    if (n > 10) return 0;
+    int dp[n+1];
+    dp[0] = 1;
+    dp[1] = 10;
 
+    for (int i = 2; i <= n; ++i) {
+        dp[i] = 9;
+        for (int j = 0; j < i-1; ++j) {
+            dp[i] *= (9-j);
+        }
+        dp[i] += dp[i-1];
+    }
+    return dp[n];
+}
 ```
 
 [返回目录](#357)
@@ -3934,7 +4071,9 @@ public:
 **分析：**
 
 ```c
-
+bool stoneGame(int* piles, int pilesSize){
+    return true;
+}
 ```
 
 [返回目录](#877)
@@ -5824,6 +5963,22 @@ public:
 
 ```c
 
+int min3(int x,int y, int z) {
+    x = x < y ? x : y;
+    x = x < z ? x : z;
+    return x;
+}
+int countSquares(int** matrix, int matrixSize, int* matrixColSize){
+    int res = 0;
+
+    for (int i = 0; i < matrixSize; ++i) {
+        for (int j = 0; j < *matrixColSize; res += matrix[i][j++]) {
+            if (matrix[i][j] && i && j)
+                matrix[i][j] += min3(matrix[i-1][j-1], matrix[i-1][j], matrix[i][j-1]);
+        }
+    }
+    return res;
+}
 ```
 
 [返回目录](#1277)
