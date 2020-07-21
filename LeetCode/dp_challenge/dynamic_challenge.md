@@ -37,7 +37,7 @@
 |300|[Longest Increasing Subsequence](#300-longest-increasing-subsequence)<span id = 300></span>|42.5%|Medium|||
 |303|[Range Sum Query - Immutable](#303-range-sum-query---immutable)<span id = 303></span>|44.2%|Easy|||
 |304|[Range Sum Query 2D - Immutable](#304-range-sum-query-2d---immutable)<span id = 304></span>|38.1%|Medium|||
-|309|[Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldown)<span id = 309></span>|46.3%|Medium|||
+|309|[Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldown)<span id = 309></span>|46.3%|Medium|2020-07-21||
 |312|[Burst Balloons](#312-burst-balloons)<span id = 312></span>|51.4%|Hard|||
 |321|[Create Maximum Number](#321-create-maximum-number)<span id = 321></span>|26.9%|Hard|||
 |322|[Coin Change](#322-coin-change)<span id = 322></span>|35.1%|Medium|||
@@ -1812,7 +1812,19 @@ int min3(int x, int y, int z) {
 **分析：**
 
 ```cpp
-
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int pre = 0, hld = INT_MIN, sld = 0, tmp;
+        for (auto& p: prices) {
+            tmp = sld;
+            sld = max(sld, hld + p);
+            hld = max(hld, pre - p);
+            pre = tmp;
+        }
+        return sld;
+    }
+};
 ```
 
 ### C Solution
