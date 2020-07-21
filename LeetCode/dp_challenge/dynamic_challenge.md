@@ -52,7 +52,7 @@
 |375|[Guess Number Higher or Lower II](#375-guess-number-higher-or-lower-ii)<span id = 375></span>|40.2%|Medium|||
 |376|[Wiggle Subsequence](#376-wiggle-subsequence)<span id = 376></span>|39.5%|Medium|||
 |377|[Combination Sum IV](#377-combination-sum-iv)<span id = 377></span>|45.2%|Medium|||
-|392|[Is Subsequence](#392-is-subsequence)<span id = 392></span>|49.1%|Easy|2020.07.20||
+|392|[Is Subsequence](#392-is-subsequence)<span id = 392></span>|49.1%|Easy|2020.07.20|2020.07.21|
 |403|[Frog Jump](#403-frog-jump)<span id = 403></span>|39.5%|Hard|||
 |410|[Split Array Largest Sum](#410-split-array-largest-sum)<span id = 410></span>|44.4%|Hard|||
 |413|[Arithmetic Slices](#413-arithmetic-slices)<span id = 413></span>|57.8%|Medium|||
@@ -2270,10 +2270,26 @@ int *countBits(int num, int *returnSize) {
 
 ## 392. Is Subsequence
 
+Given a string s and a string t, check if s is subsequence of t.
+
+A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ace" is a subsequence of "abcde" while "aec" is not).
+
+给定字符串 s 和 t ，判断 s 是否为 t 的子序列。
+
+你可以认为 s 和 t 中仅包含英文小写字母。字符串 t 可能会很长（长度 ~= 500,000），而 s 是个短字符串（长度 <=100）。
+
+字符串的一个子序列是原始字符串删除一些（也可以不删除）字符而不改变剩余字符相对位置形成的新字符串。（例如，"ace"是"abcde"的一个子序列，而"aec"不是）。
+
 **Example**
 
 ```
+Example 1:
+Input: s = "abc", t = "ahbgdc"
+Output: true
 
+Example 2:
+Input: s = "axc", t = "ahbgdc"
+Output: false
 ```
 
 ---
@@ -2298,7 +2314,18 @@ public:
 **分析：**
 
 ```c
+bool isSubsequence(char *s, char *t) {
+    while (*t != '\0') {
+        if (*s == '\0') return true;
+        if (*t == *s) {
+            s++;
+        }
+        t++;
+    }
 
+    if (*s == '\0') return true;
+    return false;
+}
 ```
 
 [返回目录](#392)
