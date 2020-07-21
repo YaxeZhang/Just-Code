@@ -91,7 +91,7 @@
 |691|[Stickers to Spell Word](#691-stickers-to-spell-word)<span id = 691></span>|42.6%|Hard|||
 |698|[Partition to K Equal Sum Subsets](#698-partition-to-k-equal-sum-subsets)<span id = 698></span>|45.0%|Medium|||
 |712|[Minimum ASCII Delete Sum for Two Strings](#712-minimum-ascii-delete-sum-for-two-strings)<span id = 712></span>|58.4%|Medium|2020.07.21||
-|714|[Best Time to Buy and Sell Stock with Transaction Fee](#714-best-time-to-buy-and-sell-stock-with-transaction-fee)<span id = 714></span>|54.3%|Medium|||
+|714|[Best Time to Buy and Sell Stock with Transaction Fee](#714-best-time-to-buy-and-sell-stock-with-transaction-fee)<span id = 714></span>|54.3%|Medium|2020.07.21||
 |718|[Maximum Length of Repeated Subarray](#718-maximum-length-of-repeated-subarray)<span id = 718></span>|49.3%|Medium|||
 |727|[Minimum Window Subsequence](#727-minimum-window-subsequence)<span id = 727></span>|41.5%|Hard|||
 |730|[Count Different Palindromic Subsequences](#730-count-different-palindromic-subsequences)<span id = 730></span>|41.6%|Hard|||
@@ -3334,7 +3334,19 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int maxProfit(vector<int>& prices, int fee) {
+        int hld = INT_MIN / 2, sld = 0, tmp;
 
+        for (auto& p: prices) {
+            tmp = sld;
+            sld = max(sld, hld + p - fee);
+            hld = max(hld, tmp - p);
+        }
+        return sld;
+    }
+};
 ```
 
 ### C Solution
