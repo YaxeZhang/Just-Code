@@ -1809,7 +1809,7 @@ int min3(int x, int y, int z) {
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 分析清楚一共有 3 个状态，即持有、卖出、和冷却。对应状态对应操作即可。
 
 ```cpp
 class Solution {
