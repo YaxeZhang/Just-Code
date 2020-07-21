@@ -21,7 +21,7 @@
 |121|[Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)<span id = 121></span>|50.3%|Easy|2020.07.16|2020.07.20|
 |123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|2020.07.21||
 |132|[Palindrome Partitioning II](#132-palindrome-partitioning-ii)<span id = 132></span>|30.1%|Hard|||
-|139|[Word Break](#139-word-break)<span id = 139></span>|39.7%|Medium|||
+|139|[Word Break](#139-word-break)<span id = 139></span>|39.7%|Medium|2020.07.21||
 |140|[Word Break II](#140-word-break-ii)<span id = 140></span>|31.5%|Hard|||
 |152|[Maximum Product Subarray](#152-maximum-product-subarray)<span id = 152></span>|31.5%|Medium|||
 |174|[Dungeon Game](#174-dungeon-game)<span id = 174></span>|32.1%|Hard|||
@@ -1190,7 +1190,26 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        set<string> word_set(wordDict.begin(), wordDict.end());
 
+        int len = s.size();
+        vector<bool> dp(len + 1, false);
+        dp[0] = true;
+
+        for (int i = 1; i <= len; ++i) {
+            for (int j = i - 1; j >= 0; --j) {
+                if (dp[j] && word_set.find(s.substr(j, i - j)) != word_set.end()) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[len];
+    }
+};
 ```
 
 ### C Solution
