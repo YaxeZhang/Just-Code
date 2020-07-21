@@ -37,7 +37,7 @@
 |300|[Longest Increasing Subsequence](#300-longest-increasing-subsequence)<span id = 300></span>|42.5%|Medium|||
 |303|[Range Sum Query - Immutable](#303-range-sum-query---immutable)<span id = 303></span>|44.2%|Easy|||
 |304|[Range Sum Query 2D - Immutable](#304-range-sum-query-2d---immutable)<span id = 304></span>|38.1%|Medium|||
-|309|[Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldown)<span id = 309></span>|46.3%|Medium|2020-07-21||
+|309|[Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldown)<span id = 309></span>|46.3%|Medium|2020.07.21||
 |312|[Burst Balloons](#312-burst-balloons)<span id = 312></span>|51.4%|Hard|||
 |321|[Create Maximum Number](#321-create-maximum-number)<span id = 321></span>|26.9%|Hard|||
 |322|[Coin Change](#322-coin-change)<span id = 322></span>|35.1%|Medium|||
@@ -90,7 +90,7 @@
 |689|[Maximum Sum of 3 Non-Overlapping Subarrays](#689-maximum-sum-of-3-non-overlapping-subarrays)<span id = 689></span>|46.0%|Hard|||
 |691|[Stickers to Spell Word](#691-stickers-to-spell-word)<span id = 691></span>|42.6%|Hard|||
 |698|[Partition to K Equal Sum Subsets](#698-partition-to-k-equal-sum-subsets)<span id = 698></span>|45.0%|Medium|||
-|712|[Minimum ASCII Delete Sum for Two Strings](#712-minimum-ascii-delete-sum-for-two-strings)<span id = 712></span>|58.4%|Medium|2020-07-21||
+|712|[Minimum ASCII Delete Sum for Two Strings](#712-minimum-ascii-delete-sum-for-two-strings)<span id = 712></span>|58.4%|Medium|2020.07.21||
 |714|[Best Time to Buy and Sell Stock with Transaction Fee](#714-best-time-to-buy-and-sell-stock-with-transaction-fee)<span id = 714></span>|54.3%|Medium|||
 |718|[Maximum Length of Repeated Subarray](#718-maximum-length-of-repeated-subarray)<span id = 718></span>|49.3%|Medium|||
 |727|[Minimum Window Subsequence](#727-minimum-window-subsequence)<span id = 727></span>|41.5%|Hard|||
