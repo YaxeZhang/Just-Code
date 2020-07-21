@@ -19,7 +19,7 @@
 |115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|||
 |120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium|2020.07.16|2020.07.16|
 |121|[Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)<span id = 121></span>|50.3%|Easy|2020.07.16|2020.07.20|
-|123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|||
+|123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|2020.07.21||
 |132|[Palindrome Partitioning II](#132-palindrome-partitioning-ii)<span id = 132></span>|30.1%|Hard|||
 |139|[Word Break](#139-word-break)<span id = 139></span>|39.7%|Medium|||
 |140|[Word Break II](#140-word-break-ii)<span id = 140></span>|31.5%|Hard|||
@@ -1124,7 +1124,21 @@ int maxProfit(int* prices, int pricesSize){
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int has1 = INT_MIN, has2 = INT_MIN;
+        int sld1 = 0, sld2 = 0;
 
+        for (auto& p: prices) {
+            sld2 = max(sld2, has2 + p);
+            has2 = max(has2, sld1 - p);
+            sld1 = max(sld1, has1 + p);
+            has1 = max(has1, -p);
+        }
+        return sld2;
+    }
+};
 ```
 
 ### C Solution
