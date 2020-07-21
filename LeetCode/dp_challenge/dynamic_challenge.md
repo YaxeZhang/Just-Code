@@ -25,7 +25,7 @@
 |140|[Word Break II](#140-word-break-ii)<span id = 140></span>|31.5%|Hard|||
 |152|[Maximum Product Subarray](#152-maximum-product-subarray)<span id = 152></span>|31.5%|Medium|||
 |174|[Dungeon Game](#174-dungeon-game)<span id = 174></span>|32.1%|Hard|||
-|188|[Best Time to Buy and Sell Stock IV](#188-best-time-to-buy-and-sell-stock-iv)<span id = 188></span>|27.9%|Hard|||
+|188|[Best Time to Buy and Sell Stock IV](#188-best-time-to-buy-and-sell-stock-iv)<span id = 188></span>|27.9%|Hard|2020.07.21||
 |198|[House Robber](#198-house-robber)<span id = 198></span>|41.9%|Easy|2020.07.20|2020.07.20|
 |213|[House Robber II](#213-house-robber-ii)<span id = 213></span>|36.4%|Medium|2020.07.20|2020.07.20|
 |221|[Maximal Square](#221-maximal-square)<span id = 221></span>|37.6%|Medium|2020.07.20|2020.07.20|
