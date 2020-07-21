@@ -1291,10 +1291,35 @@ public:
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 题目比较简单，但是边界条件比较恶心。需要注意 k 特别大的时候的判断，可能申请空间不够。
 
 ```cpp
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        int len = prices.size();
+        if (!k || !len) return 0;
 
+        if (k > len / 2) { // simple case
+            int ans = 0;
+            for (int i=1; i<len; i++){
+                ans += max(prices[i] - prices[i-1], 0);
+            }
+            return ans;
+        }
+
+        vector<int> has(k+1, INT_MIN);
+        vector<int> sld(k+1, 0);
+
+        for (auto& p: prices) {
+            for (int i = k; i > 0; i--) {
+                sld[i] = max(sld[i], has[i] + p);
+                has[i] = max(has[i], sld[i-1] - p);
+            }
+        }
+        return sld[k];
+    }
+};
 ```
 
 ### C Solution
