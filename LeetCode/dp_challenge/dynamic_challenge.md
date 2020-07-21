@@ -90,7 +90,7 @@
 |689|[Maximum Sum of 3 Non-Overlapping Subarrays](#689-maximum-sum-of-3-non-overlapping-subarrays)<span id = 689></span>|46.0%|Hard|||
 |691|[Stickers to Spell Word](#691-stickers-to-spell-word)<span id = 691></span>|42.6%|Hard|||
 |698|[Partition to K Equal Sum Subsets](#698-partition-to-k-equal-sum-subsets)<span id = 698></span>|45.0%|Medium|||
-|712|[Minimum ASCII Delete Sum for Two Strings](#712-minimum-ascii-delete-sum-for-two-strings)<span id = 712></span>|58.4%|Medium|||
+|712|[Minimum ASCII Delete Sum for Two Strings](#712-minimum-ascii-delete-sum-for-two-strings)<span id = 712></span>|58.4%|Medium|2020-07-21||
 |714|[Best Time to Buy and Sell Stock with Transaction Fee](#714-best-time-to-buy-and-sell-stock-with-transaction-fee)<span id = 714></span>|54.3%|Medium|||
 |718|[Maximum Length of Repeated Subarray](#718-maximum-length-of-repeated-subarray)<span id = 718></span>|49.3%|Medium|||
 |727|[Minimum Window Subsequence](#727-minimum-window-subsequence)<span id = 727></span>|41.5%|Hard|||
@@ -3048,19 +3048,67 @@ public:
 
 ## 712. Minimum ASCII Delete Sum for Two Strings
 
+Given two strings s1, s2, find the lowest ASCII sum of deleted characters to make two strings equal.
+
+给定两个字符串s1，s2，找到已删除字符的最低ASCII总和，以使两个字符串相等。
+
 **Example**
 
 ```
+Example 1:
+Input: s1 = "sea", s2 = "eat"
+Output: 231
+Explanation: Deleting "s" from "sea" adds the ASCII value of "s" (115) to the sum.
+Deleting "t" from "eat" adds 116 to the sum.
+At the end, both strings are equal, and 115 + 116 = 231 is the minimum sum possible to achieve this.
 
+Example 2:
+Input: s1 = "delete", s2 = "leet"
+Output: 403
+Explanation: Deleting "dee" from "delete" to turn the string into "let",
+adds 100[d]+101[e]+101[e] to the sum.  Deleting "e" from "leet" adds 101[e] to the sum.
+At the end, both strings are equal to "let", and the answer is 100+101+101+101 = 403.
+If instead we turned both strings into "lee" or "eet", we would get answers of 433 or 417, which are higher.
 ```
+
+**Note:**
+
+ - 0 < s1.length, s2.length <= 1000.
+ - All elements of each string will have an ASCII value in [97, 122].
 
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 其实是#72 编辑距离的 followup，一样的做法。还有一种最长上升子序列的做法，留待补充。
+-- TODO
 
 ```cpp
+class Solution {
+public:
+    int minimumDeleteSum(string s1, string s2) {
+        int m = s1.length(), n = s2.length(), prev, cur;
 
+        vector<int> dp(n+1);
+        dp[0] = 0;
+        for (int j = 0; j < n; j++) dp[j+1] = dp[j] + s2[j];
+
+        for (int i = 0; i < m; i++) {
+            prev = dp[0];
+            dp[0] += s1[i];
+
+            for (int j = 0; j < n; j++) {
+                cur = dp[j+1];
+                if (s1[i] == s2[j]) {
+                    dp[j+1] = prev;
+                } else {
+                    dp[j+1] = min(dp[j] + s2[j], dp[j+1] + s1[i]);
+                }
+                prev = cur;
+            }
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
