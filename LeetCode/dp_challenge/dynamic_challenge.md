@@ -42,7 +42,7 @@
 |321|[Create Maximum Number](#321-create-maximum-number)<span id = 321></span>|26.9%|Hard|||
 |322|[Coin Change](#322-coin-change)<span id = 322></span>|35.1%|Medium||2020.07.22|
 |338|[Counting Bits](#338-counting-bits)<span id = 338></span>|69.3%|Medium|2020.07.20|2020.07.20|
-|343|[Integer Break](#343-integer-break)<span id = 343></span>|50.1%|Medium|||
+|343|[Integer Break](#343-integer-break)<span id = 343></span>|50.1%|Medium|2020.07.22||
 |351|[Android Unlock Patterns](#351-android-unlock-patterns)<span id = 351></span>|48.2%|Medium|||
 |354|[Russian Doll Envelopes](#354-russian-doll-envelopes)<span id = 354></span>|35.5%|Hard|||
 |357|[Count Numbers with Unique Digits](#357-count-numbers-with-unique-digits)<span id = 357></span>|48.2%|Medium|2020.07.22|2020.07.22|
@@ -64,7 +64,7 @@
 |467|[Unique Substrings in Wraparound String](#467-unique-substrings-in-wraparound-string)<span id = 467></span>|35.5%|Medium|||
 |471|[Encode String with Shortest Length](#471-encode-string-with-shortest-length)<span id = 471></span>|47.0%|Hard|||
 |472|[Concatenated Words](#472-concatenated-words)<span id = 472></span>|43.3%|Hard|||
-|474|[Ones and Zeroes](#474-ones-and-zeroes)<span id = 474></span>|42.6%|Medium|||
+|474|[Ones and Zeroes](#474-ones-and-zeroes)<span id = 474></span>|42.6%|Medium|2020.07.22||
 |486|[Predict the Winner](#486-predict-the-winner)<span id = 486></span>|47.8%|Medium|||
 |494|[Target Sum](#494-target-sum)<span id = 494></span>|46.4%|Medium|||
 |514|[Freedom Trail](#514-freedom-trail)<span id = 514></span>|42.8%|Hard|||
@@ -104,7 +104,7 @@
 |790|[Domino and Tromino Tiling](#790-domino-and-tromino-tiling)<span id = 790></span>|39.0%|Medium|||
 |801|[Minimum Swaps To Make Sequences Increasing](#801-minimum-swaps-to-make-sequences-increasing)<span id = 801></span>|38.8%|Medium|||
 |808|[Soup Servings](#808-soup-servings)<span id = 808></span>|39.7%|Medium|||
-|813|[Largest Sum of Averages](#813-largest-sum-of-averages)<span id = 813></span>|49.7%|Medium|||
+|813|[Largest Sum of Averages](#813-largest-sum-of-averages)<span id = 813></span>|49.7%|Medium|2020.07.22||
 |818|[Race Car](#818-race-car)<span id = 818></span>|38.7%|Hard|||
 |837|[New 21 Game](#837-new-21-game)<span id = 837></span>|34.5%|Medium|||
 |838|[Push Dominoes](#838-push-dominoes)<span id = 838></span>|48.2%|Medium|||
@@ -2159,10 +2159,39 @@ int *countBits(int num, int *returnSize) {
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 剑指 offer 中的 #14 剪绳子。动态规划或者数学论证。
 
 ```cpp
+class Solution {
+public:
+    int integerBreak(int n) {
+        int dp[n+1];
+        memset(dp, 0, sizeof(dp));
 
+        for (int i = 1; i <= n; i ++) {
+            if (i < 4) {
+                dp[i] = i - 1;
+                continue;
+            }
+
+            for (int j = 1; j <= i / 2; j++) {
+                dp[i] = max(dp[i], max(j, dp[j]) * max(i - j, dp[i-j]));
+            }
+        }
+        return dp[n];
+    }
+};
+```
+
+```cpp
+class Solution {
+public:
+    int integerBreak(int n) {
+        if (n < 4) return n - 1;
+
+        return pow(3, (n-2) / 3) *((n-2) % 3 + 2);
+    }
+};
 ```
 
 ### C Solution
@@ -2799,7 +2828,27 @@ bool isSubsequence(char *s, char *t) {
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        int dp[m+1][n+1];
+        memset(dp, 0, sizeof(dp));
 
+        for (auto& s: strs) {
+            int n0 = 0, n1 = 0;
+            for (char c: s) {
+                c == '0' ? n0++ : n1++;
+            }
+
+            for (int i = m; i >= n0; i--) {
+                for (int j = n; j >= n1; j--) {
+                    dp[i][j] = max(dp[i][j], dp[i-n0][j-n1] + 1);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+};
 ```
 
 ### C Solution
@@ -3921,7 +3970,37 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    double largestSumOfAverages(vector<int>& A, int K) {
+        if (!K || A.empty()) return 0;
 
+        int n = A.size();
+
+        double dp[K+1][n];
+        memset(dp, 0, sizeof(dp));
+
+        int sum[n];
+        for (int i = 0; i < n; i++) {
+            sum[i] = A[i] + (i ? sum[i-1] : 0);
+        }
+
+        for (int k = 1; k <= K; k++) {
+            for (int i = k - 1; i < n; i++) {
+                if (k == 1) {
+                    dp[k][i] = double(sum[i]) / (i + 1);
+                    continue;
+                }
+
+                for (int j = k - 2; j < i; j++) {
+                    dp[k][i] = max(dp[k][i],
+                                   dp[k-1][j] + double(sum[i] - sum[j]) / (i - j));
+                }
+            }
+        }
+        return dp[K][n-1];
+    }
+};
 ```
 
 ### C Solution
