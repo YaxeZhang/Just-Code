@@ -45,7 +45,7 @@
 |343|[Integer Break](#343-integer-break)<span id = 343></span>|50.1%|Medium|||
 |351|[Android Unlock Patterns](#351-android-unlock-patterns)<span id = 351></span>|48.2%|Medium|||
 |354|[Russian Doll Envelopes](#354-russian-doll-envelopes)<span id = 354></span>|35.5%|Hard|||
-|357|[Count Numbers with Unique Digits](#357-count-numbers-with-unique-digits)<span id = 357></span>|48.2%|Medium||2020.07.22|
+|357|[Count Numbers with Unique Digits](#357-count-numbers-with-unique-digits)<span id = 357></span>|48.2%|Medium|2020.07.22|2020.07.22|
 |361|[Bomb Enemy](#361-bomb-enemy)<span id = 361></span>|45.9%|Medium|||
 |363|[Max Sum of Rectangle No Larger Than K](#363-max-sum-of-rectangle-no-larger-than-k)<span id = 363></span>|37.2%|Hard|||
 |368|[Largest Divisible Subset](#368-largest-divisible-subset)<span id = 368></span>|38.1%|Medium|||
@@ -2240,7 +2240,22 @@ int *countBits(int num, int *returnSize) {
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int countNumbersWithUniqueDigits(int n) {
+        vector<int> dp(n+1);
+        dp[0] = 1;
 
+        for (int i = 1; i <= n; i++) {
+            dp[i] = 9;
+            for (int j = 0; j < i - 1; j++) {
+                dp[i] *= 9 - j;
+            }
+            dp[i] += dp[i-1];
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
