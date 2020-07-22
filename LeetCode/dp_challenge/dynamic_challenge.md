@@ -22,7 +22,7 @@
 |123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|2020.07.21||
 |132|[Palindrome Partitioning II](#132-palindrome-partitioning-ii)<span id = 132></span>|30.1%|Hard|||
 |139|[Word Break](#139-word-break)<span id = 139></span>|39.7%|Medium|2020.07.21||
-|140|[Word Break II](#140-word-break-ii)<span id = 140></span>|31.5%|Hard|||
+|140|[Word Break II](#140-word-break-ii)<span id = 140></span>|31.5%|Hard|2020.07.22||
 |152|[Maximum Product Subarray](#152-maximum-product-subarray)<span id = 152></span>|31.5%|Medium|||
 |174|[Dungeon Game](#174-dungeon-game)<span id = 174></span>|32.1%|Hard|||
 |188|[Best Time to Buy and Sell Stock IV](#188-best-time-to-buy-and-sell-stock-iv)<span id = 188></span>|27.9%|Hard|2020.07.21||
@@ -1235,7 +1235,24 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
 
+        unordered_map<int, vector<string>> memo {{s.size(), {""}}};
+
+        function<vector<string>(int)> sentences = [&](int i) {
+            if (!memo.count(i))
+                for (int j=i+1; j<=s.size(); j++)
+                    if (wordSet.count(s.substr(i, j-i)))
+                        for (string tail : sentences(j))
+                            memo[i].push_back(s.substr(i, j-i) + (tail=="" ? "" : ' ' + tail));
+            return memo[i];
+        };
+        return sentences(0);
+    }
+};
 ```
 
 ### C Solution
