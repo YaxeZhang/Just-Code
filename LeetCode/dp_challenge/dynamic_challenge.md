@@ -81,7 +81,7 @@
 |639|[Decode Ways II](#639-decode-ways-ii)<span id = 639></span>|26.4%|Hard|||
 |646|[Maximum Length of Pair Chain](#646-maximum-length-of-pair-chain)<span id = 646></span>|51.6%|Medium|||
 |647|[Palindromic Substrings](#647-palindromic-substrings)<span id = 647></span>|60.4%|Medium|||
-|650|[2 Keys Keyboard](#650-2-keys-keyboard)<span id = 650></span>|48.9%|Medium|||
+|650|[2 Keys Keyboard](#650-2-keys-keyboard)<span id = 650></span>|48.9%|Medium|2020.07.22||
 |651|[4 Keys Keyboard](#651-4-keys-keyboard)<span id = 651></span>|52.4%|Medium|||
 |656|[Coin Path](#656-coin-path)<span id = 656></span>|28.9%|Hard|||
 |664|[Strange Printer](#664-strange-printer)<span id = 664></span>|40.0%|Hard|||
@@ -3241,7 +3241,19 @@ bool isSubsequence(char *s, char *t) {
 **分析：**
 
 ```cpp
-
+class Solution {
+public:
+    int minSteps(int n) {
+        int s = 0;
+        for (int d = 2; d <= n; d++) {
+            while (n % d == 0) {
+                s += d;
+                n /= d;
+            }
+        }
+        return s;
+    }
+};
 ```
 
 ### C Solution
