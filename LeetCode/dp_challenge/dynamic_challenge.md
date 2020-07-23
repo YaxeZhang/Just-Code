@@ -2048,20 +2048,15 @@ public:
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        sort(coins.begin(), coins.end());
+        vector<int> need(amount+1, amount+1);
+        need[0] = 0;
 
-        vector<int> dp(amount+1, amount+1);
-        dp[0] = 0;
-
-        for (int i = 1; i <= amount; i++) {
-            for (int c: coins) {
-                if (i - c < 0) {
-                    break;
-                }
-                dp[i] = min(dp[i], dp[i - c] + 1);
+        for (int c : coins) {
+            for (int a = c; a <= amount; a++) {
+                need[a] = min(need[a], need[a-c] + 1);
             }
         }
-        return dp[amount] > amount ? -1 : dp[amount];
+        return need.back() > amount ? -1 : need.back();
     }
 };
 ```
