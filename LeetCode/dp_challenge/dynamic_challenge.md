@@ -40,7 +40,7 @@
 |309|[Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldown)<span id = 309></span>|46.3%|Medium|2020.07.21||
 |312|[Burst Balloons](#312-burst-balloons)<span id = 312></span>|51.4%|Hard|||
 |321|[Create Maximum Number](#321-create-maximum-number)<span id = 321></span>|26.9%|Hard|||
-|322|[Coin Change](#322-coin-change)<span id = 322></span>|35.1%|Medium||2020.07.22|
+|322|[Coin Change](#322-coin-change)<span id = 322></span>|35.1%|Medium|2020.07.23|2020.07.22|
 |338|[Counting Bits](#338-counting-bits)<span id = 338></span>|69.3%|Medium|2020.07.20|2020.07.20|
 |343|[Integer Break](#343-integer-break)<span id = 343></span>|50.1%|Medium|2020.07.22||
 |351|[Android Unlock Patterns](#351-android-unlock-patterns)<span id = 351></span>|48.2%|Medium|||
@@ -2045,7 +2045,25 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        sort(coins.begin(), coins.end());
 
+        vector<int> dp(amount+1, amount+1);
+        dp[0] = 0;
+
+        for (int i = 1; i <= amount; i++) {
+            for (int c: coins) {
+                if (i - c < 0) {
+                    break;
+                }
+                dp[i] = min(dp[i], dp[i - c] + 1);
+            }
+        }
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+};
 ```
 
 ### C Solution
