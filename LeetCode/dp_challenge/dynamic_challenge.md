@@ -33,8 +33,8 @@
 |264|[Ugly Number II](#264-ugly-number-ii)<span id = 264></span>|41.9%|Medium|2020.07.20|2020.07.20|
 |265|[Paint House II](#265-paint-house-ii)<span id = 265></span>|44.5%|Hard|||
 |276|[Paint Fence](#276-paint-fence)<span id = 276></span>|38.1%|Easy|||
-|279|[Perfect Squares](#279-perfect-squares)<span id = 279></span>|47.1%|Medium||2020.07.22|
-|300|[Longest Increasing Subsequence](#300-longest-increasing-subsequence)<span id = 300></span>|42.5%|Medium||2020.07.22|
+|279|[Perfect Squares](#279-perfect-squares)<span id = 279></span>|47.1%|Medium|2020.07.24|2020.07.22|
+|300|[Longest Increasing Subsequence](#300-longest-increasing-subsequence)<span id = 300></span>|42.5%|Medium|2020.07.24|2020.07.22|
 |303|[Range Sum Query - Immutable](#303-range-sum-query---immutable)<span id = 303></span>|44.2%|Easy|2020.07.24|2020.07.22|
 |304|[Range Sum Query 2D - Immutable](#304-range-sum-query-2d---immutable)<span id = 304></span>|38.1%|Medium|2020.07.24||
 |309|[Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldown)<span id = 309></span>|46.3%|Medium|2020.07.21||
@@ -107,7 +107,7 @@
 |813|[Largest Sum of Averages](#813-largest-sum-of-averages)<span id = 813></span>|49.7%|Medium|2020.07.22||
 |818|[Race Car](#818-race-car)<span id = 818></span>|38.7%|Hard|||
 |837|[New 21 Game](#837-new-21-game)<span id = 837></span>|34.5%|Medium|||
-|838|[Push Dominoes](#838-push-dominoes)<span id = 838></span>|48.2%|Medium|||
+|838|[Push Dominoes](#838-push-dominoes)<span id = 838></span>|48.2%|Medium|2020.07.24||
 |847|[Shortest Path Visiting All Nodes](#847-shortest-path-visiting-all-nodes)<span id = 847></span>|51.7%|Hard|||
 |871|[Minimum Number of Refueling Stops](#871-minimum-number-of-refueling-stops)<span id = 871></span>|31.2%|Hard|||
 |873|[Length of Longest Fibonacci Subsequence](#873-length-of-longest-fibonacci-subsequence)<span id = 873></span>|47.6%|Medium|||
@@ -130,7 +130,7 @@
 |975|[Odd Even Jump](#975-odd-even-jump)<span id = 975></span>|42.5%|Hard|||
 |978|[Longest Turbulent Subarray](#978-longest-turbulent-subarray)<span id = 978></span>|46.5%|Medium|||
 |982|[Triples with Bitwise AND Equal To Zero](#982-triples-with-bitwise-and-equal-to-zero)<span id = 982></span>|55.6%|Hard|||
-|983|[Minimum Cost For Tickets](#983-minimum-cost-for-tickets)<span id = 983></span>|60.1%|Medium|||
+|983|[Minimum Cost For Tickets](#983-minimum-cost-for-tickets)<span id = 983></span>|60.1%|Medium|2020.07.24||
 |1000|[Minimum Cost to Merge Stones](#1000-minimum-cost-to-merge-stones)<span id = 1000></span>|39.5%|Hard|||
 |1055|[Shortest Way to Form String](#1055-shortest-way-to-form-string)<span id = 1055></span>|57.0%|Medium|||
 |1058|[Minimize Rounding Error to Meet Target](#1058-minimize-rounding-error-to-meet-target)<span id = 1058></span>|41.8%|Medium|||
@@ -1878,7 +1878,20 @@ int min3(int x, int y, int z) {
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int numSquares(int n) {
+        int dp[n+1];
 
+        for (int i = 0; i <= n; i++) {
+            dp[i] = i;
+            for (int j = 1; j * j <= i; j++) {
+                dp[i] = min(dp[i], dp[i-j*j] + 1);
+            }
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
@@ -1911,10 +1924,57 @@ int numSquares(int n) {
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 非常精彩的题目，常规动态规划解法是 O(n^2) 的时间复杂度，但是用二分搜索可以减少到 O(nlgn)，尤其是迭代更新的部分需要好好品味下。
 
 ```cpp
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        if (nums.empty()) return 0;
 
+        int n = nums.size();
+        vector<int> dp(n, 1);
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        return *max_element(dp.begin(), dp.end());
+    }
+};
+```
+
+```cpp
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        if (n < 2) return n;
+
+        vector<int> dp({nums[0]});
+        for (int i = 1; i < n; i++) {
+            if (nums[i] > dp.back()) {
+                dp.push_back(nums[i]);
+                continue;
+            }
+
+            int lo = 0, hi = dp.size() - 1, mid;
+            while (lo < hi) {
+                mid = lo + (hi - lo) / 2;
+                if (nums[i] > dp[mid]) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid;
+                }
+            }
+            dp[lo] = nums[i];
+        }
+        return dp.size();
+    }
+};
 ```
 
 ### C Solution
@@ -4265,7 +4325,41 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    string pushDominoes(string dominoes) {
+        int n = dominoes.length();
+        if (!n) return dominoes;
 
+        vector<int> dp(n, 0);
+        for (int i = 0, tmp = 0; i < n; i++) {
+            if (dominoes[i] == 'R') {
+                tmp = n;
+            } else if (dominoes[i] == 'L') {
+                tmp = 0;
+            } else {
+                tmp = max(tmp - 1, 0);
+            }
+            dp[i] += tmp;
+        }
+        for (int i = n - 1, tmp = 0; i >= 0; i--) {
+            if (dominoes[i] == 'L') {
+                tmp = n;
+            } else if (dominoes[i] == 'R') {
+                tmp = 0;
+            } else {
+                tmp = max(tmp - 1, 0);
+            }
+            dp[i] -= tmp;
+        }
+
+        string res = "";
+        for (int i = 0; i < n; i++) {
+            res += !dp[i] ? '.' : (dp[i] > 0 ? 'R' : 'L');
+        }
+        return res;
+    }
+};
 ```
 
 ### C Solution
@@ -4936,7 +5030,22 @@ int minFallingPathSum(int** A, int ASize, int* AColSize){
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        int n = days.size();
+        vector<int> dp(n+1);
 
+        for (int i = 0, w = 0, m = 0; i < n; i++) {
+            while (days[i] - days[w] >= 7) w++;
+            while (days[i] - days[m] >= 30) m++;
+            dp[i+1] = min({dp[i] + costs[0],
+                           dp[w] + costs[1],
+                           dp[m] + costs[2]});
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
