@@ -1,20 +1,5 @@
 # Just-Code
 
----
-
-### What's new ?!
- - 530 题达成！！！继续努力。
- - [字节跳动各岗位算法题频次收集](./BAT/bytedance.md)
- - [LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
- - [LeetCode腾讯分类](https://leetcode.com/list/xl3e1xkj)
- - 剑指offer完成。
-
-### 题解快速入口
- - [剑指 Offer 题解入口](./%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89.md)
- - [LeetCode 题解入口](./LeetCode/README.md)
- - [字节跳动趴的题解入口](./BAT/Algorithm.md)
-
-### Repo 简介
  - 逐步收录常见面试算法题。
  - 国内算法题大致都是从 **剑指offer** 和 **LeetCode** 上直接拿来的比较经典的题。
  - 面试算法题难度大概就是 **剑指offer难度** 和 **LeetCode上easy、medium左右难度** 的题目。
@@ -23,7 +8,18 @@
  - [剑指 Offer 题解简介](#剑指-Offer-题解)
  - [Leetcode 题解简介](#leetcode-题解)
  - [字节跳动面经总结算法题](#字节跳动面经总结算法题)
+ - [字节跳动各岗位算法题频次收集](./BAT/bytedance.md)
+
  **分类** 因为是英文版LeetCode所以第一次打开可能重定向跳转到中国力扣官网，关闭重新打开即可。
+ - [LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
+ - [LeetCode腾讯分类](https://leetcode.com/list/xl3e1xkj)
+
+---
+
+### 题解快速入口
+ - [剑指 Offer 题解入口](./%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89.md)
+ - [LeetCode 题解入口](./LeetCode/README.md)
+ - [字节跳动趴的题解入口](./BAT/Algorithm.md)
 
 ---
 
