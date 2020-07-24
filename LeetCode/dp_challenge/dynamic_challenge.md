@@ -23,7 +23,7 @@
 |132|[Palindrome Partitioning II](#132-palindrome-partitioning-ii)<span id = 132></span>|30.1%|Hard|||
 |139|[Word Break](#139-word-break)<span id = 139></span>|39.7%|Medium|2020.07.21|2020.07.21|
 |140|[Word Break II](#140-word-break-ii)<span id = 140></span>|31.5%|Hard|2020.07.22||
-|152|[Maximum Product Subarray](#152-maximum-product-subarray)<span id = 152></span>|31.5%|Medium|||
+|152|[Maximum Product Subarray](#152-maximum-product-subarray)<span id = 152></span>|31.5%|Medium|2020.07.23||
 |174|[Dungeon Game](#174-dungeon-game)<span id = 174></span>|32.1%|Hard|||
 |188|[Best Time to Buy and Sell Stock IV](#188-best-time-to-buy-and-sell-stock-iv)<span id = 188></span>|27.9%|Hard|2020.07.21||
 |198|[House Robber](#198-house-robber)<span id = 198></span>|41.9%|Easy|2020.07.20|2020.07.20|
@@ -79,7 +79,7 @@
 |629|[K Inverse Pairs Array](#629-k-inverse-pairs-array)<span id = 629></span>|31.0%|Hard|||
 |638|[Shopping Offers](#638-shopping-offers)<span id = 638></span>|51.3%|Medium|||
 |639|[Decode Ways II](#639-decode-ways-ii)<span id = 639></span>|26.4%|Hard|||
-|646|[Maximum Length of Pair Chain](#646-maximum-length-of-pair-chain)<span id = 646></span>|51.6%|Medium|||
+|646|[Maximum Length of Pair Chain](#646-maximum-length-of-pair-chain)<span id = 646></span>|51.6%|Medium|2020.07.23||
 |647|[Palindromic Substrings](#647-palindromic-substrings)<span id = 647></span>|60.4%|Medium|||
 |650|[2 Keys Keyboard](#650-2-keys-keyboard)<span id = 650></span>|48.9%|Medium|2020.07.22||
 |651|[4 Keys Keyboard](#651-4-keys-keyboard)<span id = 651></span>|52.4%|Medium|||
@@ -1336,7 +1336,22 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        if (nums.empty()) return 0;
 
+        int res = nums[0], min_n = nums[0], max_n = nums[0];
+
+        for (int i = 1; i < nums.size(); i++) {
+            int min_tmp = min_n;
+            min_n = min({nums[i], nums[i] * min_n, nums[i] * max_n});
+            max_n = max({nums[i], nums[i] * min_tmp, nums[i] * max_n});
+            res = max({res, max_n});
+        }
+        return res;
+    }
+};
 ```
 
 ### C Solution
@@ -3248,10 +3263,48 @@ public:
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 第一种动态规划 时间复杂度为 O(N^2)，第二种贪心算法, 时间复杂度为 O(NlogN)
 
 ```cpp
+class Solution { // Dynamic Programming
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(), pairs.end());
 
+        int n = pairs.size();
+        vector<int> dp(n, 1);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (pairs[i][0] > pairs[j][1]) {
+                    dp[i] = max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        return *max_element(dp.begin(), dp.end());
+    }
+};
+```
+
+```cpp
+class Solution { // Greedy
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(), pairs.end(),
+            [](auto& a, auto& b) {
+                return a[1] < b[1];
+            });
+
+        int cur = INT_MIN, res = 0;
+        for (auto& p: pairs) {
+            if (cur < p[0]) {
+                cur = p[1];
+                res++;
+            }
+        }
+        return res;
+    }
+};
 ```
 
 ### C Solution
