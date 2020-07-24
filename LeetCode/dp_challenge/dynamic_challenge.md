@@ -23,7 +23,7 @@
 |132|[Palindrome Partitioning II](#132-palindrome-partitioning-ii)<span id = 132></span>|30.1%|Hard|||
 |139|[Word Break](#139-word-break)<span id = 139></span>|39.7%|Medium|2020.07.21|2020.07.21|
 |140|[Word Break II](#140-word-break-ii)<span id = 140></span>|31.5%|Hard|2020.07.22||
-|152|[Maximum Product Subarray](#152-maximum-product-subarray)<span id = 152></span>|31.5%|Medium|||
+|152|[Maximum Product Subarray](#152-maximum-product-subarray)<span id = 152></span>|31.5%|Medium|2020.07.23||
 |174|[Dungeon Game](#174-dungeon-game)<span id = 174></span>|32.1%|Hard|||
 |188|[Best Time to Buy and Sell Stock IV](#188-best-time-to-buy-and-sell-stock-iv)<span id = 188></span>|27.9%|Hard|2020.07.21||
 |198|[House Robber](#198-house-robber)<span id = 198></span>|41.9%|Easy|2020.07.20|2020.07.20|
@@ -35,8 +35,8 @@
 |276|[Paint Fence](#276-paint-fence)<span id = 276></span>|38.1%|Easy|||
 |279|[Perfect Squares](#279-perfect-squares)<span id = 279></span>|47.1%|Medium||2020.07.22|
 |300|[Longest Increasing Subsequence](#300-longest-increasing-subsequence)<span id = 300></span>|42.5%|Medium||2020.07.22|
-|303|[Range Sum Query - Immutable](#303-range-sum-query---immutable)<span id = 303></span>|44.2%|Easy||2020.07.22|
-|304|[Range Sum Query 2D - Immutable](#304-range-sum-query-2d---immutable)<span id = 304></span>|38.1%|Medium|||
+|303|[Range Sum Query - Immutable](#303-range-sum-query---immutable)<span id = 303></span>|44.2%|Easy|2020.07.24|2020.07.22|
+|304|[Range Sum Query 2D - Immutable](#304-range-sum-query-2d---immutable)<span id = 304></span>|38.1%|Medium|2020.07.24||
 |309|[Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldown)<span id = 309></span>|46.3%|Medium|2020.07.21||
 |312|[Burst Balloons](#312-burst-balloons)<span id = 312></span>|51.4%|Hard|||
 |321|[Create Maximum Number](#321-create-maximum-number)<span id = 321></span>|26.9%|Hard|||
@@ -79,7 +79,7 @@
 |629|[K Inverse Pairs Array](#629-k-inverse-pairs-array)<span id = 629></span>|31.0%|Hard|||
 |638|[Shopping Offers](#638-shopping-offers)<span id = 638></span>|51.3%|Medium|||
 |639|[Decode Ways II](#639-decode-ways-ii)<span id = 639></span>|26.4%|Hard|||
-|646|[Maximum Length of Pair Chain](#646-maximum-length-of-pair-chain)<span id = 646></span>|51.6%|Medium|||
+|646|[Maximum Length of Pair Chain](#646-maximum-length-of-pair-chain)<span id = 646></span>|51.6%|Medium|2020.07.23||
 |647|[Palindromic Substrings](#647-palindromic-substrings)<span id = 647></span>|60.4%|Medium|||
 |650|[2 Keys Keyboard](#650-2-keys-keyboard)<span id = 650></span>|48.9%|Medium|2020.07.22||
 |651|[4 Keys Keyboard](#651-4-keys-keyboard)<span id = 651></span>|52.4%|Medium|||
@@ -138,7 +138,7 @@
 |1066|[Campus Bikes II](#1066-campus-bikes-ii)<span id = 1066></span>|54.3%|Medium|||
 |1067|[Digit Count in Range](#1067-digit-count-in-range)<span id = 1067></span>|39.8%|Hard|||
 |1024|[Video Stitching](#1024-video-stitching)<span id = 1024></span>|49.1%|Medium|||
-|1025|[Divisor Game](#1025-divisor-game)<span id = 1025></span>|66.2%|Easy|||
+|1025|[Divisor Game](#1025-divisor-game)<span id = 1025></span>|66.2%|Easy|2020.07.24||
 |1027|[Longest Arithmetic Sequence](#1027-longest-arithmetic-sequence)<span id = 1027></span>|53.5%|Medium|||
 |1136|[Parallel Courses](#1136-parallel-courses)<span id = 1136></span>|61.0%|Hard|||
 |1039|[Minimum Score Triangulation of Polygon](#1039-minimum-score-triangulation-of-polygon)<span id = 1039></span>|48.7%|Medium|||
@@ -1397,7 +1397,22 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        if (nums.empty()) return 0;
 
+        int res = nums[0], min_n = nums[0], max_n = nums[0];
+
+        for (int i = 1; i < nums.size(); i++) {
+            int min_tmp = min_n;
+            min_n = min({nums[i], nums[i] * min_n, nums[i] * max_n});
+            max_n = max({nums[i], nums[i] * min_tmp, nums[i] * max_n});
+            res = max({res, max_n});
+        }
+        return res;
+    }
+};
 ```
 
 ### C Solution
@@ -1937,10 +1952,22 @@ int lengthOfLIS(int *nums, int numsSize) {
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 前缀和，可以学习下partial_sum的使用方法
 
 ```cpp
+class NumArray {
+public:
+    NumArray(vector<int> &nums) : psum(nums.size()+1, 0) {
+        partial_sum( nums.begin(), nums.end(), psum.begin()+1);
+    }
 
+    int sumRange(int i, int j) {
+        return psum[j+1] - psum[i];
+    }
+
+private:
+    vector<int> psum;    
+};
 ```
 
 ### C Solution
@@ -1987,10 +2014,29 @@ void numArrayFree(NumArray* obj) {
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 上一题二维的情况，只需要分清边界条件
 
 ```cpp
+class NumMatrix {
+public:
+    NumMatrix(vector<vector<int>>& matrix) {
+        if (matrix.empty()) return;
 
+        psum = vector<vector<int>>(matrix.size()+1, vector<int>(matrix[0].size()+1, 0));
+        for (int i = 0; i < matrix.size(); i++) {
+            for (int j = 0; j < matrix[0].size(); j++) {
+                psum[i+1][j+1] = psum[i][j+1] + psum[i+1][j] - psum[i][j] + matrix[i][j];
+            }
+        }
+    }
+
+    int sumRegion(int row1, int col1, int row2, int col2) {
+        return psum[row2+1][col2+1] - psum[row2+1][col1] - psum[row1][col2+1] + psum[row1][col1];
+    }
+
+private:
+    vector<vector<int>> psum;
+};
 ```
 
 ### C Solution
@@ -3338,10 +3384,48 @@ public:
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 第一种动态规划 时间复杂度为 O(N^2)，第二种贪心算法, 时间复杂度为 O(NlogN)
 
 ```cpp
+class Solution { // Dynamic Programming
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(), pairs.end());
 
+        int n = pairs.size();
+        vector<int> dp(n, 1);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (pairs[i][0] > pairs[j][1]) {
+                    dp[i] = max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        return *max_element(dp.begin(), dp.end());
+    }
+};
+```
+
+```cpp
+class Solution { // Greedy
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(), pairs.end(),
+            [](auto& a, auto& b) {
+                return a[1] < b[1];
+            });
+
+        int cur = INT_MIN, res = 0;
+        for (auto& p: pairs) {
+            if (cur < p[0]) {
+                cur = p[1];
+                res++;
+            }
+        }
+        return res;
+    }
+};
 ```
 
 ### C Solution
@@ -5057,10 +5141,34 @@ int minFallingPathSum(int** A, int ASize, int* AColSize){
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 动态规划或者数学题
 
 ```cpp
+class Solution {
+public:
+    bool divisorGame(int N) {
+        int dp[N+1];
+        memset(dp, 0, sizeof(dp));
 
+        for (int i = 2; i <= N; i++) {
+            for (int j = 1; j < i; j++) {
+                if (i % j == 0 && !dp[i-j]) {
+                    dp[i] = 1;
+                }
+            }
+        }
+        return dp[N];
+    }
+};
+```
+
+```cpp
+class Solution {
+public:
+    bool divisorGame(int N) {
+        return N % 2 == 0;
+    }
+};
 ```
 
 ### C Solution

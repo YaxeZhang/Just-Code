@@ -1,29 +1,26 @@
 # Just-Code
 
----
+![](https://img.shields.io/badge/Author-Yaxe.Zhang-blue) ![](https://img.shields.io/badge/LeetCode-540%2F1522-brightgreen) ![](https://img.shields.io/badge/%E5%89%91%E6%8C%87offer-66%2F66-green) ![](https://img.shields.io/badge/Lisense-MIT-yellow)
 
-### What's new ?!
- - 530 题达成！！！继续努力。
- - [字节跳动各岗位算法题频次收集](./BAT/bytedance.md)
- - [LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
- - [LeetCode腾讯分类](https://leetcode.com/list/xl3e1xkj)
- - 剑指offer完成。
+ - 逐步收录常见面试算法题，包括 **剑指offer** 和 **LeetCode** 。
+ - 持续更新，如果对您有帮助，小手一点， Star 走一走，靴靴！
+
+ - **题解简介**
+     - [剑指 Offer 题解简介](#剑指-Offer-题解)
+     - [Leetcode 题解简介](#leetcode-题解)
+     - [字节跳动面经题解简介](#字节跳动面经总结算法题)
+
+ - **题目分类收集**
+     - [字节跳动各岗位算法题频次收集](./BAT/bytedance.md)
+     - [LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
+     - [LeetCode腾讯分类](https://leetcode.com/list/xl3e1xkj)
+
+---
 
 ### 题解快速入口
  - [剑指 Offer 题解入口](./%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E5%89%91%E6%8C%87offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89.md)
  - [LeetCode 题解入口](./LeetCode/README.md)
  - [字节跳动趴的题解入口](./BAT/Algorithm.md)
-
-### Repo 简介
- - 逐步收录常见面试算法题。
- - 国内算法题大致都是从 **剑指offer** 和 **LeetCode** 上直接拿来的比较经典的题。
- - 面试算法题难度大概就是 **剑指offer难度** 和 **LeetCode上easy、medium左右难度** 的题目。
- - 持续更新，如果对您有帮助，小手一点， Star 走一走，靴靴！
-
- - [剑指 Offer 题解简介](#剑指-Offer-题解)
- - [Leetcode 题解简介](#leetcode-题解)
- - [字节跳动面经总结算法题](#字节跳动面经总结算法题)
- **分类** 因为是英文版LeetCode所以第一次打开可能重定向跳转到中国力扣官网，关闭重新打开即可。
 
 ---
 
@@ -90,10 +87,10 @@
 <p align="center"><img width="300" src="https://raw.githubusercontent.com/ZhaoxiZhang/LeetCodeCrawler/master/pictures/site-logo.png"></p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/514/1264-Solved/Total-blue.svg" alt="">
-    <img src="https://img.shields.io/badge/Easy-194-green.svg" alt="">
-    <img src="https://img.shields.io/badge/Medium-203-orange.svg" alt="">
-    <img src="https://img.shields.io/badge/Hard-47-red.svg" alt="">
+    <img src="https://img.shields.io/badge/540/1522-Solved/Total-blue.svg" alt="">
+    <img src="https://img.shields.io/badge/Easy-234-green.svg" alt="">
+    <img src="https://img.shields.io/badge/Medium-223-orange.svg" alt="">
+    <img src="https://img.shields.io/badge/Hard-83-red.svg" alt="">
 </p>
 
 
