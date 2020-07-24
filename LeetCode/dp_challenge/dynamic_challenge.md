@@ -19,7 +19,7 @@
 |115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|||
 |120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium|2020.07.16|2020.07.16|
 |121|[Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)<span id = 121></span>|50.3%|Easy|2020.07.16|2020.07.20|
-|123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|2020.07.21||
+|123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|2020.07.21|2020.07.24|
 |132|[Palindrome Partitioning II](#132-palindrome-partitioning-ii)<span id = 132></span>|30.1%|Hard|||
 |139|[Word Break](#139-word-break)<span id = 139></span>|39.7%|Medium|2020.07.21|2020.07.21|
 |140|[Word Break II](#140-word-break-ii)<span id = 140></span>|31.5%|Hard|2020.07.22||
@@ -1140,10 +1140,38 @@ int maxProfit(int* prices, int pricesSize){
 
 ## 123. Best Time to Buy and Sell Stock III
 
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete at most two transactions.
+
+Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+
+给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。
+
+设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。
+
+注意: 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+
 **Example**
 
 ```
-
+Example 1:
+Input: [3,3,5,0,0,3,1,4]
+Output: 6
+Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
+             Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.
+             
+Example 2:
+Input: [1,2,3,4,5]
+Output: 4
+Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+             Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are
+             engaging multiple transactions at the same time. You must sell before buying again.
+             
+Example 3:
+Input: [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transaction is done, i.e. max profit = 0.
 ```
 
 ---
@@ -1173,7 +1201,40 @@ public:
 **分析：**
 
 ```c
+int maxProfit(int *prices, int pricesSize) {
+    if (!(pricesSize) || pricesSize == 1) return 0;
 
+    int cur_min = *prices;
+    int most_benefit1 = 0;
+    int max1[pricesSize];
+
+    for (int i = 0; i < pricesSize; ++i) {
+        if (prices[i] > cur_min)
+            most_benefit1 = most_benefit1 > prices[i] - cur_min ? most_benefit1 : prices[i] - cur_min;
+        else
+            cur_min = prices[i];
+
+        max1[i] = most_benefit1;
+    }
+
+    int cur_max = prices[pricesSize - 1];
+    int most_benefit2 = 0;
+    int max2[pricesSize];
+
+    for (int i = pricesSize - 1; i >= 0; --i) {
+        if (prices[i] < cur_max)
+            most_benefit2 = most_benefit2 > cur_max - prices[i] ? most_benefit2 : cur_max - prices[i];
+        else
+            cur_max = prices[i];
+      
+        max2[i] = most_benefit2;
+    }
+
+    int res = INT32_MIN;
+    for (int i = 0; i < pricesSize; ++i)
+        res = res > (max1[i] + max2[i]) ? res : (max1[i] + max2[i]);
+    return res;
+}
 ```
 
 [返回目录](#123)
