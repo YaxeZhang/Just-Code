@@ -42,7 +42,7 @@
 |321|[Create Maximum Number](#321-create-maximum-number)<span id = 321></span>|26.9%|Hard|||
 |322|[Coin Change](#322-coin-change)<span id = 322></span>|35.1%|Medium|2020.07.23|2020.07.22|
 |338|[Counting Bits](#338-counting-bits)<span id = 338></span>|69.3%|Medium|2020.07.20|2020.07.20|
-|343|[Integer Break](#343-integer-break)<span id = 343></span>|50.1%|Medium|2020.07.22||
+|343|[Integer Break](#343-integer-break)<span id = 343></span>|50.1%|Medium|2020.07.22|2020.07.24|
 |351|[Android Unlock Patterns](#351-android-unlock-patterns)<span id = 351></span>|48.2%|Medium|||
 |354|[Russian Doll Envelopes](#354-russian-doll-envelopes)<span id = 354></span>|35.5%|Hard|||
 |357|[Count Numbers with Unique Digits](#357-count-numbers-with-unique-digits)<span id = 357></span>|48.2%|Medium|2020.07.22|2020.07.22|
@@ -2224,10 +2224,22 @@ int *countBits(int num, int *returnSize) {
 
 ## 343. Integer Break
 
+Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those integers. Return the maximum product you can get.
+
+给定一个正整数 *n*，将其拆分为**至少**两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。
+
 **Example**
 
 ```
+Example 1:
+Input: 2
+Output: 1
+Explanation: 2 = 1 + 1, 1 × 1 = 1.
 
+Example 2:
+Input: 10
+Output: 36
+Explanation: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36.
 ```
 
 ---
@@ -2272,7 +2284,24 @@ public:
 **分析：**
 
 ```c
+int integerBreak(int n){
+    if (n < 2) return n;
 
+    int dp[n+1];
+    memset(dp, 0, sizeof(dp));
+    dp[0] = 0;
+    dp[1] = 1;
+
+    int tmp;
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j < i; ++j) {
+            tmp = dp[j] > j ? dp[j] : j;
+            dp[i] = dp[i] > tmp * (i-j) ? dp[i] : tmp * (i-j);
+        }
+    }
+
+    return dp[n];
+}
 ```
 
 [返回目录](#343)
