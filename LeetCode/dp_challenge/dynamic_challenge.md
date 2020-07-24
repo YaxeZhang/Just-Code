@@ -35,8 +35,8 @@
 |276|[Paint Fence](#276-paint-fence)<span id = 276></span>|38.1%|Easy|||
 |279|[Perfect Squares](#279-perfect-squares)<span id = 279></span>|47.1%|Medium||2020.07.22|
 |300|[Longest Increasing Subsequence](#300-longest-increasing-subsequence)<span id = 300></span>|42.5%|Medium||2020.07.22|
-|303|[Range Sum Query - Immutable](#303-range-sum-query---immutable)<span id = 303></span>|44.2%|Easy||2020.07.22|
-|304|[Range Sum Query 2D - Immutable](#304-range-sum-query-2d---immutable)<span id = 304></span>|38.1%|Medium|||
+|303|[Range Sum Query - Immutable](#303-range-sum-query---immutable)<span id = 303></span>|44.2%|Easy|2020.07.24|2020.07.22|
+|304|[Range Sum Query 2D - Immutable](#304-range-sum-query-2d---immutable)<span id = 304></span>|38.1%|Medium|2020.07.24||
 |309|[Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldown)<span id = 309></span>|46.3%|Medium|2020.07.21||
 |312|[Burst Balloons](#312-burst-balloons)<span id = 312></span>|51.4%|Hard|||
 |321|[Create Maximum Number](#321-create-maximum-number)<span id = 321></span>|26.9%|Hard|||
@@ -1952,10 +1952,22 @@ int lengthOfLIS(int *nums, int numsSize) {
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 前缀和，可以学习下partial_sum的使用方法
 
 ```cpp
+class NumArray {
+public:
+    NumArray(vector<int> &nums) : psum(nums.size()+1, 0) {
+        partial_sum( nums.begin(), nums.end(), psum.begin()+1);
+    }
 
+    int sumRange(int i, int j) {
+        return psum[j+1] - psum[i];
+    }
+
+private:
+    vector<int> psum;    
+};
 ```
 
 ### C Solution
@@ -2002,10 +2014,29 @@ void numArrayFree(NumArray* obj) {
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 上一题二维的情况，只需要分清边界条件
 
 ```cpp
+class NumMatrix {
+public:
+    NumMatrix(vector<vector<int>>& matrix) {
+        if (matrix.empty()) return;
 
+        psum = vector<vector<int>>(matrix.size()+1, vector<int>(matrix[0].size()+1, 0));
+        for (int i = 0; i < matrix.size(); i++) {
+            for (int j = 0; j < matrix[0].size(); j++) {
+                psum[i+1][j+1] = psum[i][j+1] + psum[i+1][j] - psum[i][j] + matrix[i][j];
+            }
+        }
+    }
+
+    int sumRegion(int row1, int col1, int row2, int col2) {
+        return psum[row2+1][col2+1] - psum[row2+1][col1] - psum[row1][col2+1] + psum[row1][col1];
+    }
+
+private:
+    vector<vector<int>> psum;
+};
 ```
 
 ### C Solution
