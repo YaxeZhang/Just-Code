@@ -1,18 +1,19 @@
 # Just-Code
 
-![](https://img.shields.io/badge/Author-Yaxe.Zhang-blue) ![](https://img.shields.io/badge/Lisense-MIT-brightgreen)
+![](https://img.shields.io/badge/Author-Yaxe.Zhang-blue) ![](https://img.shields.io/badge/LeetCode-540%2F1522-brightgreen) ![](https://img.shields.io/badge/%E5%89%91%E6%8C%87offer-66%2F66-green) ![](https://img.shields.io/badge/Lisense-MIT-yellow)
 
  - 逐步收录常见面试算法题，包括 **剑指offer** 和 **LeetCode** 。
  - 持续更新，如果对您有帮助，小手一点， Star 走一走，靴靴！
 
- - [剑指 Offer 题解简介](#剑指-Offer-题解)
- - [Leetcode 题解简介](#leetcode-题解)
- - [字节跳动面经总结算法题](#字节跳动面经总结算法题)
- - [字节跳动各岗位算法题频次收集](./BAT/bytedance.md)
+ - **题解简介**
+     - [剑指 Offer 题解简介](#剑指-Offer-题解)
+     - [Leetcode 题解简介](#leetcode-题解)
+     - [字节跳动面经题解简介](#字节跳动面经总结算法题)
 
- **分类** 因为是英文版LeetCode所以第一次打开可能重定向跳转到中国力扣官网，关闭重新打开即可。
- - [LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
- - [LeetCode腾讯分类](https://leetcode.com/list/xl3e1xkj)
+ - **题目分类收集**
+     - [字节跳动各岗位算法题频次收集](./BAT/bytedance.md)
+     - [LeetCode字节跳动分类](https://leetcode.com/list/x7kpxvli)
+     - [LeetCode腾讯分类](https://leetcode.com/list/xl3e1xkj)
 
 ---
 
