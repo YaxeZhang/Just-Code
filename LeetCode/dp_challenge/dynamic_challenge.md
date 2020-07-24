@@ -138,7 +138,7 @@
 |1066|[Campus Bikes II](#1066-campus-bikes-ii)<span id = 1066></span>|54.3%|Medium|||
 |1067|[Digit Count in Range](#1067-digit-count-in-range)<span id = 1067></span>|39.8%|Hard|||
 |1024|[Video Stitching](#1024-video-stitching)<span id = 1024></span>|49.1%|Medium|||
-|1025|[Divisor Game](#1025-divisor-game)<span id = 1025></span>|66.2%|Easy|||
+|1025|[Divisor Game](#1025-divisor-game)<span id = 1025></span>|66.2%|Easy|2020.07.24||
 |1027|[Longest Arithmetic Sequence](#1027-longest-arithmetic-sequence)<span id = 1027></span>|53.5%|Medium|||
 |1136|[Parallel Courses](#1136-parallel-courses)<span id = 1136></span>|61.0%|Hard|||
 |1039|[Minimum Score Triangulation of Polygon](#1039-minimum-score-triangulation-of-polygon)<span id = 1039></span>|48.7%|Medium|||
@@ -5081,10 +5081,34 @@ int minFallingPathSum(int** A, int ASize, int* AColSize){
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 动态规划或者数学题
 
 ```cpp
+class Solution {
+public:
+    bool divisorGame(int N) {
+        int dp[N+1];
+        memset(dp, 0, sizeof(dp));
 
+        for (int i = 2; i <= N; i++) {
+            for (int j = 1; j < i; j++) {
+                if (i % j == 0 && !dp[i-j]) {
+                    dp[i] = 1;
+                }
+            }
+        }
+        return dp[N];
+    }
+};
+```
+
+```cpp
+class Solution {
+public:
+    bool divisorGame(int N) {
+        return N % 2 == 0;
+    }
+};
 ```
 
 ### C Solution
