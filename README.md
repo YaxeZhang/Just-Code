@@ -1,8 +1,8 @@
 # Just-Code
 
- - 逐步收录常见面试算法题。
- - 国内算法题大致都是从 **剑指offer** 和 **LeetCode** 上直接拿来的比较经典的题。
- - 面试算法题难度大概就是 **剑指offer难度** 和 **LeetCode上easy、medium左右难度** 的题目。
+![](https://img.shields.io/badge/Author-Yaxe.Zhang-blue) ![](https://img.shields.io/badge/Lisense-MIT-brightgreen)
+
+ - 逐步收录常见面试算法题，包括 **剑指offer** 和 **LeetCode** 。
  - 持续更新，如果对您有帮助，小手一点， Star 走一走，靴靴！
 
  - [剑指 Offer 题解简介](#剑指-Offer-题解)
@@ -86,10 +86,10 @@
 <p align="center"><img width="300" src="https://raw.githubusercontent.com/ZhaoxiZhang/LeetCodeCrawler/master/pictures/site-logo.png"></p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/514/1264-Solved/Total-blue.svg" alt="">
-    <img src="https://img.shields.io/badge/Easy-194-green.svg" alt="">
-    <img src="https://img.shields.io/badge/Medium-203-orange.svg" alt="">
-    <img src="https://img.shields.io/badge/Hard-47-red.svg" alt="">
+    <img src="https://img.shields.io/badge/540/1522-Solved/Total-blue.svg" alt="">
+    <img src="https://img.shields.io/badge/Easy-234-green.svg" alt="">
+    <img src="https://img.shields.io/badge/Medium-223-orange.svg" alt="">
+    <img src="https://img.shields.io/badge/Hard-83-red.svg" alt="">
 </p>
 
 
