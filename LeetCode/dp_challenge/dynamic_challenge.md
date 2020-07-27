@@ -144,14 +144,14 @@
 |1066|[Campus Bikes II](#1066-campus-bikes-ii)<span id = 1066></span>|54.3%|Medium|||
 |1067|[Digit Count in Range](#1067-digit-count-in-range)<span id = 1067></span>|39.8%|Hard|||
 |1074|[Number of Submatrices That Sum to Target](#1074-number-of-submatrices-that-sum-to-target)<span id = 1074></span>|59.0%|Hard|||
-|1092|[Shortest Common Supersequence](#1092-shortest-common-supersequence)<span id = 1092></span>|51.1%|Hard|||
+|1092|[Shortest Common Supersequence](#1092-shortest-common-supersequence)<span id = 1092></span>|51.1%|Hard|2020.07.27||
 |1105|[Filling Bookcase Shelves](#1105-filling-bookcase-shelves)<span id = 1105></span>|58.2%|Medium|||
 |1125|[Smallest Sufficient Team](#1125-smallest-sufficient-team)<span id = 1125></span>|46.4%|Hard|||
 |1130|[Minimum Cost Tree From Leaf Values](#1130-minimum-cost-tree-from-leaf-values)<span id = 1130></span>|65.9%|Medium|||
 |1136|[Parallel Courses](#1136-parallel-courses)<span id = 1136></span>|61.0%|Hard|||
 |1139|[Largest 1-Bordered Square](#1139-largest-1-bordered-square)<span id = 1139></span>|47.2%|Medium|||
 |1140|[Stone Game II](#1140-stone-game-ii)<span id = 1140></span>|62.8%|Medium|||
-|1143|[Longest Common Subsequence](#1143-longest-common-subsequence)<span id = 1143></span>|58.4%|Medium|||
+|1143|[Longest Common Subsequence](#1143-longest-common-subsequence)<span id = 1143></span>|58.4%|Medium|2020.07.27||
 |1147|[Longest Chunked Palindrome Decomposition](#1147-longest-chunked-palindrome-decomposition)<span id = 1147></span>|58.5%|Hard|||
 |1155|[Number of Dice Rolls With Target Sum](#1155-number-of-dice-rolls-with-target-sum)<span id = 1155></span>|49.2%|Medium|||
 |1186|[Maximum Subarray Sum with One Deletion](#1186-maximum-subarray-sum-with-one-deletion)<span id = 1186></span>|37.2%|Medium|||
@@ -5527,10 +5527,98 @@ public:
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 第一种做法是延续 LCS 的做法，也是比较容易想到的做法，但是时间很慢可以优化。优化的点在于字符串的拼接，可以参考第二种做法拼凑出 LCS 。
 
 ```cpp
+class Solution {
+public:
+    string shortestCommonSupersequence(string str1, string str2) {
+        int i = 0, j = 0;
 
+        string res = "", lcs = longestCommonSubsequence(str1, str2);
+        for (char c: lcs) {
+            while (str1[i] != c) {
+                res += str1[i++];
+            }
+            while (str2[j] != c) {
+                res += str2[j++];
+            }
+            res += c, i++, j++;
+        }
+        return res + str1.substr(i) + str2.substr(j);
+    }
+
+private:
+    string longestCommonSubsequence(string& str1, string& str2) {
+        int m = str1.length(), n = str2.length();
+        vector<string> dp(n+1, "");
+
+        string pre, cur;
+        for (int i = 0; i < m; i++) {
+            pre = dp[0];
+            for (int j = 0; j < n; j++) {
+                cur = dp[j+1];
+                if (str1[i] == str2[j]) {
+                    dp[j+1] = pre + str1[i];
+                } else {
+                    dp[j+1] = dp[j].length() > dp[j+1].length() ? dp[j] : dp[j+1];
+                }
+                pre = cur;
+            }
+        }
+        return dp[n];
+    }
+};
+```
+
+```cpp
+class Solution {
+public:
+    string shortestCommonSupersequence(string str1, string str2) {
+        int i = 0, j = 0;
+
+        string res = "", lcs = longestCommonSubsequence(str1, str2);
+        for (char c: lcs) {
+            while (str1[i] != c) {
+                res += str1[i++];
+            }
+            while (str2[j] != c) {
+                res += str2[j++];
+            }
+            res += c, i++, j++;
+        }
+        return res + str1.substr(i) + str2.substr(j);
+    }
+
+private:
+    string longestCommonSubsequence(string& str1, string& str2) {
+        int m = str1.length(), n = str2.length(), dp[m+1][n+1];
+        memset(dp, 0, sizeof(dp));
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (str1[i] == str2[j]) {
+                    dp[i+1][j+1] = dp[i][j] + 1;
+                } else {
+                    dp[i+1][j+1] = max(dp[i+1][j], dp[i][j+1]);
+                }
+            }
+        }
+
+        string lcs_res = "";
+        int i = m, j = n;
+        while(i > 0 && j > 0) {
+            if (str1[i-1] == str2[j-1]) {
+                lcs_res.push_back(str1[i-1]);
+                i--, j--;
+            } else {
+                dp[i-1][j] > dp[i][j-1]) ? i-- : j--;
+            }
+        }
+        reverse(lcs_res.begin(), lcs_res.end());
+        return lcs_res;
+    }
+};
 ```
 
 ### C Solution
@@ -5924,7 +6012,29 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2) {
+        int m = text1.length(), n = text2.length();
 
+        int dp[n+1], pre, cur;
+        memset(dp, 0, sizeof(dp));
+
+        for (int i = 0; i < m; i++) {
+            pre = dp[0];
+            for (int j = 0; j < n; j++) {
+                cur = dp[j+1];
+                if (text1[i] == text2[j]) {
+                    dp[j+1] = pre + 1;
+                } else {
+                    dp[j+1] = max(dp[j], dp[j+1]);
+                }
+                pre = cur;
+            }
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
