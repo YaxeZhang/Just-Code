@@ -68,7 +68,7 @@
 |486|[Predict the Winner](#486-predict-the-winner)<span id = 486></span>|47.8%|Medium|||
 |494|[Target Sum](#494-target-sum)<span id = 494></span>|46.4%|Medium|||
 |514|[Freedom Trail](#514-freedom-trail)<span id = 514></span>|42.8%|Hard|||
-|516|[Longest Palindromic Subsequence](#516-longest-palindromic-subsequence)<span id = 516></span>|52.8%|Medium|||
+|516|[Longest Palindromic Subsequence](#516-longest-palindromic-subsequence)<span id = 516></span>|52.8%|Medium|2020.07.27||
 |517|[Super Washing Machines](#517-super-washing-machines)<span id = 517></span>|38.2%|Hard|||
 |523|[Continuous Subarray Sum](#523-continuous-subarray-sum)<span id = 523></span>|24.6%|Medium|||
 |546|[Remove Boxes](#546-remove-boxes)<span id = 546></span>|42.3%|Hard|||
@@ -132,84 +132,83 @@
 |982|[Triples with Bitwise AND Equal To Zero](#982-triples-with-bitwise-and-equal-to-zero)<span id = 982></span>|55.6%|Hard|||
 |983|[Minimum Cost For Tickets](#983-minimum-cost-for-tickets)<span id = 983></span>|60.1%|Medium|2020.07.24||
 |1000|[Minimum Cost to Merge Stones](#1000-minimum-cost-to-merge-stones)<span id = 1000></span>|39.5%|Hard|||
-|1055|[Shortest Way to Form String](#1055-shortest-way-to-form-string)<span id = 1055></span>|57.0%|Medium|||
-|1058|[Minimize Rounding Error to Meet Target](#1058-minimize-rounding-error-to-meet-target)<span id = 1058></span>|41.8%|Medium|||
 |1012|[Numbers With Repeated Digits](#1012-numbers-with-repeated-digits)<span id = 1012></span>|37.4%|Hard|||
-|1066|[Campus Bikes II](#1066-campus-bikes-ii)<span id = 1066></span>|54.3%|Medium|||
-|1067|[Digit Count in Range](#1067-digit-count-in-range)<span id = 1067></span>|39.8%|Hard|||
 |1024|[Video Stitching](#1024-video-stitching)<span id = 1024></span>|49.1%|Medium|||
 |1025|[Divisor Game](#1025-divisor-game)<span id = 1025></span>|66.2%|Easy|2020.07.24||
 |1027|[Longest Arithmetic Sequence](#1027-longest-arithmetic-sequence)<span id = 1027></span>|53.5%|Medium|||
-|1136|[Parallel Courses](#1136-parallel-courses)<span id = 1136></span>|61.0%|Hard|||
 |1039|[Minimum Score Triangulation of Polygon](#1039-minimum-score-triangulation-of-polygon)<span id = 1039></span>|48.7%|Medium|||
 |1048|[Longest String Chain](#1048-longest-string-chain)<span id = 1048></span>|54.5%|Medium|||
 |1049|[Last Stone Weight II](#1049-last-stone-weight-ii)<span id = 1049></span>|44.0%|Medium|||
+|1055|[Shortest Way to Form String](#1055-shortest-way-to-form-string)<span id = 1055></span>|57.0%|Medium|||
+|1058|[Minimize Rounding Error to Meet Target](#1058-minimize-rounding-error-to-meet-target)<span id = 1058></span>|41.8%|Medium|||
+|1066|[Campus Bikes II](#1066-campus-bikes-ii)<span id = 1066></span>|54.3%|Medium|||
+|1067|[Digit Count in Range](#1067-digit-count-in-range)<span id = 1067></span>|39.8%|Hard|||
 |1074|[Number of Submatrices That Sum to Target](#1074-number-of-submatrices-that-sum-to-target)<span id = 1074></span>|59.0%|Hard|||
-|1230|[Toss Strange Coins](#1230-toss-strange-coins)<span id = 1230></span>|48.3%|Medium|||
-|1199|[Minimum Time to Build Blocks](#1199-minimum-time-to-build-blocks)<span id = 1199></span>|37.1%|Hard|||
 |1092|[Shortest Common Supersequence](#1092-shortest-common-supersequence)<span id = 1092></span>|51.1%|Hard|||
-|1216|[Valid Palindrome III](#1216-valid-palindrome-iii)<span id = 1216></span>|47.7%|Hard|||
 |1105|[Filling Bookcase Shelves](#1105-filling-bookcase-shelves)<span id = 1105></span>|58.2%|Medium|||
-|1273|[Delete Tree Nodes](#1273-delete-tree-nodes)<span id = 1273></span>|63.4%|Medium|||
-|1246|[Palindrome Removal](#1246-palindrome-removal)<span id = 1246></span>|46.0%|Hard|||
-|1259|[Handshakes That Don't Cross](#1259-handshakes-that-don't-cross)<span id = 1259></span>|53.3%|Hard|||
 |1125|[Smallest Sufficient Team](#1125-smallest-sufficient-team)<span id = 1125></span>|46.4%|Hard|||
-|1289|[Minimum Falling Path Sum II](#1289-minimum-falling-path-sum-ii)<span id = 1289></span>|60.7%|Hard|2020.07.16||
 |1130|[Minimum Cost Tree From Leaf Values](#1130-minimum-cost-tree-from-leaf-values)<span id = 1130></span>|65.9%|Medium|||
-|1301|[Number of Paths with Max Score](#1301-number-of-paths-with-max-score)<span id = 1301></span>|37.1%|Hard|||
+|1136|[Parallel Courses](#1136-parallel-courses)<span id = 1136></span>|61.0%|Hard|||
 |1139|[Largest 1-Bordered Square](#1139-largest-1-bordered-square)<span id = 1139></span>|47.2%|Medium|||
 |1140|[Stone Game II](#1140-stone-game-ii)<span id = 1140></span>|62.8%|Medium|||
-|1314|[Matrix Block Sum](#1314-matrix-block-sum)<span id = 1314></span>|73.8%|Medium|||
 |1143|[Longest Common Subsequence](#1143-longest-common-subsequence)<span id = 1143></span>|58.4%|Medium|||
 |1147|[Longest Chunked Palindrome Decomposition](#1147-longest-chunked-palindrome-decomposition)<span id = 1147></span>|58.5%|Hard|||
 |1155|[Number of Dice Rolls With Target Sum](#1155-number-of-dice-rolls-with-target-sum)<span id = 1155></span>|49.2%|Medium|||
-|1363|[Largest Multiple of Three](#1363-largest-multiple-of-three)<span id = 1363></span>|33.4%|Hard|||
-|1425|[Constrained Subsequence Sum](#1425-constrained-subsequence-sum)<span id = 1425></span>|43.9%|Hard|||
 |1186|[Maximum Subarray Sum with One Deletion](#1186-maximum-subarray-sum-with-one-deletion)<span id = 1186></span>|37.2%|Medium|||
 |1187|[Make Array Strictly Increasing](#1187-make-array-strictly-increasing)<span id = 1187></span>|41.6%|Hard|||
-|1483|[Kth Ancestor of a Tree Node](#1483-kth-ancestor-of-a-tree-node)<span id = 1483></span>|26.9%|Hard|||
 |1191|[K-Concatenation Maximum Sum](#1191-k-concatenation-maximum-sum)<span id = 1191></span>|25.9%|Medium|||
-|1405|[Longest Happy String](#1405-longest-happy-string)<span id = 1405></span>|48.0%|Medium|||
+|1199|[Minimum Time to Build Blocks](#1199-minimum-time-to-build-blocks)<span id = 1199></span>|37.1%|Hard|||
+|1216|[Valid Palindrome III](#1216-valid-palindrome-iii)<span id = 1216></span>|47.7%|Hard|||
 |1218|[Longest Arithmetic Subsequence of Given Difference](#1218-longest-arithmetic-subsequence-of-given-difference)<span id = 1218></span>|44.0%|Medium|||
 |1220|[Count Vowels Permutation](#1220-count-vowels-permutation)<span id = 1220></span>|53.6%|Hard|||
 |1223|[Dice Roll Simulation](#1223-dice-roll-simulation)<span id = 1223></span>|45.5%|Medium|||
+|1227|[Airplane Seat Assignment Probability](#1227-airplane-seat-assignment-probability)<span id = 1227></span>|60.5%|Medium|||
+|1230|[Toss Strange Coins](#1230-toss-strange-coins)<span id = 1230></span>|48.3%|Medium|||
 |1235|[Maximum Profit in Job Scheduling](#1235-maximum-profit-in-job-scheduling)<span id = 1235></span>|44.3%|Hard|||
 |1240|[Tiling a Rectangle with the Fewest Squares](#1240-tiling-a-rectangle-with-the-fewest-squares)<span id = 1240></span>|49.4%|Hard|||
-|1227|[Airplane Seat Assignment Probability](#1227-airplane-seat-assignment-probability)<span id = 1227></span>|60.5%|Medium|||
+|1246|[Palindrome Removal](#1246-palindrome-removal)<span id = 1246></span>|46.0%|Hard|||
+|1259|[Handshakes That Don't Cross](#1259-handshakes-that-don't-cross)<span id = 1259></span>|53.3%|Hard|||
 |1262|[Greatest Sum Divisible by Three](#1262-greatest-sum-divisible-by-three)<span id = 1262></span>|47.4%|Medium|||
 |1269|[Number of Ways to Stay in the Same Place After Some Steps](#1269-number-of-ways-to-stay-in-the-same-place-after-some-steps)<span id = 1269></span>|43.0%|Hard|||
+|1273|[Delete Tree Nodes](#1273-delete-tree-nodes)<span id = 1273></span>|63.4%|Medium|||
 |1277|[Count Square Submatrices with All Ones](#1277-count-square-submatrices-with-all-ones)<span id = 1277></span>|72.9%|Medium|2020.07.20|2020.07.22|
 |1278|[Palindrome Partitioning III](#1278-palindrome-partitioning-iii)<span id = 1278></span>|59.7%|Hard|||
+|1289|[Minimum Falling Path Sum II](#1289-minimum-falling-path-sum-ii)<span id = 1289></span>|60.7%|Hard|2020.07.16||
+|1301|[Number of Paths with Max Score](#1301-number-of-paths-with-max-score)<span id = 1301></span>|37.1%|Hard|||
 |1312|[Minimum Insertion Steps to Make a String Palindrome](#1312-minimum-insertion-steps-to-make-a-string-palindrome)<span id = 1312></span>|57.7%|Hard|||
+|1314|[Matrix Block Sum](#1314-matrix-block-sum)<span id = 1314></span>|73.8%|Medium|||
 |1320|[Minimum Distance to Type a Word Using Two Fingers](#1320-minimum-distance-to-type-a-word-using-two-fingers)<span id = 1320></span>|62.1%|Hard|||
 |1326|[Minimum Number of Taps to Open to Water a Garden](#1326-minimum-number-of-taps-to-open-to-water-a-garden)<span id = 1326></span>|43.0%|Hard|||
 |1335|[Minimum Difficulty of a Job Schedule](#1335-minimum-difficulty-of-a-job-schedule)<span id = 1335></span>|57.1%|Hard|||
-|1359|[Count All Valid Pickup and Delivery Options](#1359-count-all-valid-pickup-and-delivery-options)<span id = 1359></span>|57.6%|Hard|||
 |1339|[Maximum Product of Splitted Binary Tree](#1339-maximum-product-of-splitted-binary-tree)<span id = 1339></span>|37.1%|Medium|||
 |1340|[Jump Game V](#1340-jump-game-v)<span id = 1340></span>|57.3%|Hard|||
 |1349|[Maximum Students Taking Exam](#1349-maximum-students-taking-exam)<span id = 1349></span>|40.9%|Hard|||
+|1359|[Count All Valid Pickup and Delivery Options](#1359-count-all-valid-pickup-and-delivery-options)<span id = 1359></span>|57.6%|Hard|||
+|1363|[Largest Multiple of Three](#1363-largest-multiple-of-three)<span id = 1363></span>|33.4%|Hard|||
+|1367|[Linked List in Binary Tree](#1367-linked-list-in-binary-tree)<span id = 1367></span>|39.5%|Medium|||
 |1372|[Longest ZigZag Path in a Binary Tree](#1372-longest-zigzag-path-in-a-binary-tree)<span id = 1372></span>|53.6%|Medium|||
 |1373|[Maximum Sum BST in Binary Tree](#1373-maximum-sum-bst-in-binary-tree)<span id = 1373></span>|41.0%|Hard|||
-|1367|[Linked List in Binary Tree](#1367-linked-list-in-binary-tree)<span id = 1367></span>|39.5%|Medium|||
 |1388|[Pizza With 3n Slices](#1388-pizza-with-3n-slices)<span id = 1388></span>|44.3%|Hard|||
-|1402|[Reducing Dishes](#1402-reducing-dishes)<span id = 1402></span>|72.9%|Hard|||
 |1397|[Find All Good Strings](#1397-find-all-good-strings)<span id = 1397></span>|37.1%|Hard|||
-|1416|[Restore The Array](#1416-restore-the-array)<span id = 1416></span>|36.3%|Hard|||
+|1402|[Reducing Dishes](#1402-reducing-dishes)<span id = 1402></span>|72.9%|Hard|||
+|1405|[Longest Happy String](#1405-longest-happy-string)<span id = 1405></span>|48.0%|Medium|||
 |1406|[Stone Game III](#1406-stone-game-iii)<span id = 1406></span>|55.8%|Hard|||
 |1411|[Number of Ways to Paint N × 3 Grid](#1411-number-of-ways-to-paint-n-×-3-grid)<span id = 1411></span>|61.4%|Hard|||
-|1434|[Number of Ways to Wear Different Hats to Each Other](#1434-number-of-ways-to-wear-different-hats-to-each-other)<span id = 1434></span>|37.8%|Hard|||
+|1416|[Restore The Array](#1416-restore-the-array)<span id = 1416></span>|36.3%|Hard|||
 |1420|[Build Array Where You Can Find The Maximum Exactly K Comparisons](#1420-build-array-where-you-can-find-the-maximum-exactly-k-comparisons)<span id = 1420></span>|65.4%|Hard|||
 |1423|[Maximum Points You Can Obtain from Cards](#1423-maximum-points-you-can-obtain-from-cards)<span id = 1423></span>|41.4%|Medium|||
-|1449|[Form Largest Integer With Digits That Add up to Target](#1449-form-largest-integer-with-digits-that-add-up-to-target)<span id = 1449></span>|41.2%|Hard|||
+|1425|[Constrained Subsequence Sum](#1425-constrained-subsequence-sum)<span id = 1425></span>|43.9%|Hard|||
+|1434|[Number of Ways to Wear Different Hats to Each Other](#1434-number-of-ways-to-wear-different-hats-to-each-other)<span id = 1434></span>|37.8%|Hard|||
 |1444|[Number of Ways of Cutting a Pizza](#1444-number-of-ways-of-cutting-a-pizza)<span id = 1444></span>|52.4%|Hard|||
-|1463|[Cherry Pickup II](#1463-cherry-pickup-ii)<span id = 1463></span>|64.6%|Hard|||
+|1449|[Form Largest Integer With Digits That Add up to Target](#1449-form-largest-integer-with-digits-that-add-up-to-target)<span id = 1449></span>|41.2%|Hard|||
 |1458|[Max Dot Product of Two Subsequences](#1458-max-dot-product-of-two-subsequences)<span id = 1458></span>|41.5%|Hard|||
-|1478|[Allocate Mailboxes](#1478-allocate-mailboxes)<span id = 1478></span>|54.4%|Hard|||
-|1477|[Find Two Non-overlapping Sub-arrays Each With Target Sum](#1477-find-two-non-overlapping-sub-arrays-each-with-target-sum)<span id = 1477></span>|28.3%|Medium|||
+|1463|[Cherry Pickup II](#1463-cherry-pickup-ii)<span id = 1463></span>|64.6%|Hard|||
 |1473|[Paint House III](#1473-paint-house-iii)<span id = 1473></span>|47.7%|Hard|||
+|1477|[Find Two Non-overlapping Sub-arrays Each With Target Sum](#1477-find-two-non-overlapping-sub-arrays-each-with-target-sum)<span id = 1477></span>|28.3%|Medium|||
+|1478|[Allocate Mailboxes](#1478-allocate-mailboxes)<span id = 1478></span>|54.4%|Hard|||
+|1483|[Kth Ancestor of a Tree Node](#1483-kth-ancestor-of-a-tree-node)<span id = 1483></span>|26.9%|Hard|||
+|1504|[Count Submatrices With All Ones](#1504-count-submatrices-with-all-ones)<span id = 1504></span>|60.9%|Medium|2020.07.27||
 |1510|[Stone Game IV](#1510-stone-game-iv)<span id = 1510></span>|47.5%|Hard|||
-|1504|[Count Submatrices With All Ones](#1504-count-submatrices-with-all-ones)<span id = 1504></span>|60.9%|Medium|||
-
 
 
 
@@ -3158,10 +3157,30 @@ public:
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 实际为编辑距离的变形题 简单
 
 ```cpp
+class Solution {
+public:
+    int longestPalindromeSubseq(string s) {
+        int n = s.length(), pre, cur, dp[n+1];
+        for (int j = 0; j <= n; j++) dp[j] = j;
 
+        for (int i = 0; i < n; i++) {
+            pre = dp[0]++;
+            for (int j = 0; j < n; j++) {
+                cur = dp[j+1];
+                if (s[i] == s[n-j-1]) {
+                    dp[j+1] = pre;
+                } else {
+                    dp[j+1] = 1 + min(dp[j], dp[j+1]);
+                }
+                pre = cur;
+            }
+        }
+        return n - dp[n] / 2;
+    }
+};
 ```
 
 ### C Solution
@@ -7191,10 +7210,40 @@ int countSquares(int** matrix, int matrixSize, int* matrixColSize){
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 首先想到的就是暴力解法，遍历每一个为 1 的点，然后开始展开，计数全为 1 的矩阵。
 
 ```cpp
+class Solution {
+public:
+    int numSubmat(vector<vector<int>>& mat) {
+        int m = mat.size(), n = mat[0].size(), res = 0;
 
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j]) {
+                    res += helper(mat, i, j, m, n);
+                }
+            }
+        }
+        return res;
+    }
+
+private:
+    int helper(vector<vector<int>>& mat, int x, int y, int m, int n) {
+        int  st = x, bound = n, cnt = 0;
+
+        for (int i = x; i < m; i++) {
+            for (int j = y; j < bound; j++) {
+                if (mat[i][j]) {
+                    cnt++;
+                } else {
+                    bound = j;
+                }
+            }
+        }
+        return cnt;
+    }
+};
 ```
 
 ### C Solution
