@@ -16,7 +16,7 @@
 |95|[Unique Binary Search Trees II](#95-unique-binary-search-trees-ii)<span id = 95></span>|40.3%|Medium|||
 |96|[Unique Binary Search Trees](#96-unique-binary-search-trees)<span id = 96></span>|52.5%|Medium|2020.07.15|2020.07.19|
 |97|[Interleaving String](#97-interleaving-string)<span id = 97></span>|31.3%|Hard|2020.07.28||
-|115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|||
+|115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|2020.07.28||
 |120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium|2020.07.16|2020.07.16|
 |121|[Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)<span id = 121></span>|50.3%|Easy|2020.07.16|2020.07.20|
 |123|[Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)<span id = 123></span>|37.2%|Hard|2020.07.21|2020.07.24|
@@ -1014,10 +1014,33 @@ public:
 
 ## 115. Distinct Subsequences
 
+Given a string S and a string T, count the number of distinct subsequences of S which equals T.
+
+A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
+
+It's guaranteed the answer fits on a 32-bit signed integer.
+
+在给定字符串S和字符串T的情况下，计算S等于T的不同子序列的数量。
+
+字符串的子序列是一个新字符串，它是通过删除一些字符（可以是无字符）而不受干扰的，由原始字符串形成的 其余字符的相对位置。 （即，“ ACE”是“ ABCDE”的子序列，而“ AEC”不是）。
+
+可以保证答案适合32位有符号整数。（它在放屁= =）
+
 **Example**
 
 ```
+Input: S = "rabbbit", T = "rabbit"
+Output: 3
+Explanation:
+As shown below, there are 3 ways you can generate "rabbit" from S.
+(The caret symbol ^ means the chosen letters)
 
+rabbbit
+^^^^ ^^
+rabbbit
+^^ ^^^^
+rabbbit
+^^^ ^^^
 ```
 
 ---
@@ -1026,7 +1049,24 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int numDistinct(string s, string t) {
+        int m = s.length(), n = t.length();
+        long dp[n+1];
+        memset(dp, 0, sizeof(dp));
+        dp[0] = 1;
 
+        for (int i = 0; i < m; i++) {
+            for (int j = n; j > 0; j--) {
+                if (s[i] == t[j-1]) {
+                    dp[j] += dp[j-1];
+                }
+            }
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
