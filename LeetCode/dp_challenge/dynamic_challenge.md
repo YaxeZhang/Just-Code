@@ -15,7 +15,7 @@
 |91|[Decode Ways](#91-decode-ways)<span id = 91></span>|24.5%|Medium|||
 |95|[Unique Binary Search Trees II](#95-unique-binary-search-trees-ii)<span id = 95></span>|40.3%|Medium|||
 |96|[Unique Binary Search Trees](#96-unique-binary-search-trees)<span id = 96></span>|52.5%|Medium|2020.07.15|2020.07.19|
-|97|[Interleaving String](#97-interleaving-string)<span id = 97></span>|31.3%|Hard|||
+|97|[Interleaving String](#97-interleaving-string)<span id = 97></span>|31.3%|Hard|2020.07.28||
 |115|[Distinct Subsequences](#115-distinct-subsequences)<span id = 115></span>|38.0%|Hard|||
 |120|[Triangle](#120-triangle)<span id = 120></span>|43.8%|Medium|2020.07.16|2020.07.16|
 |121|[Best Time to Buy and Sell Stock](#121-best-time-to-buy-and-sell-stock)<span id = 121></span>|50.3%|Easy|2020.07.16|2020.07.20|
@@ -954,10 +954,20 @@ int numTrees(int n) {
 
 ## 97. Interleaving String
 
+Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.
+
+给定s1，s2，s3，找出s3是否由s1和s2的交错形成。
+
 **Example**
 
 ```
+Example 1:
+Input: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"
+Output: true
 
+Example 2:
+Input: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbbaccc"
+Output: false
 ```
 
 ---
@@ -966,7 +976,31 @@ int numTrees(int n) {
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        int m = s1.length(), n = s2.length();
+        if (m + n != s3.length()) return false;
 
+        bool dp[n+1];
+
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (i == 0 && j == 0) {
+                    dp[j] = true;
+                } else if (i == 0) {
+                    dp[j] = dp[j-1] && s2[j-1] == s3[j-1];
+                } else if (j == 0) {
+                    dp[j] = dp[j] && s1[i-1] == s3[i-1];
+                } else {
+                    dp[j] = dp[j-1] && s2[j-1] == s3[i+j-1] \
+                         || dp[j] && s1[i-1] == s3[i+j-1];
+                }
+            }
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
