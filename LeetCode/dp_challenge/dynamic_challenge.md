@@ -270,23 +270,25 @@ char *longestPalindrome(char *s) {
 
 Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*'.
 
-'.' Matches any single character.
-'*' Matches zero or more of the preceding element.
-The matching should cover the entire input string (not partial).
+> '.' Matches any single character.
+>
+> '*' Matches zero or more of the preceding element.
+>
+> The matching should cover the entire input string (not partial).
 
 **Note:**
-
  - s could be empty and contains only lowercase letters a-z.
  - p could be empty and contains only lowercase letters a-z, and characters like . or *.
 
 给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
 
-'.' 匹配任意单个字符
-'*' 匹配零个或多个前面的那一个元素
-所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。
+> '.' 匹配任意单个字符
+>
+> '*' 匹配零个或多个前面的那一个元素
+>
+> 所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。
 
 **说明:**
-
  - s 可能为空，且只包含从 a-z 的小写字母。
  - p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。
 
@@ -381,10 +383,52 @@ public:
 
 ## 44. Wildcard Matching
 
+给定一个字符串 (s) 和一个字符模式 (p) ，实现一个支持 '?' 和 '*' 的通配符匹配。
+
+> '?' 可以匹配任何单个字符。
+>
+> '*' 可以匹配任意字符串（包括空字符串）。
+>
+> 两个字符串完全匹配才算匹配成功。
+
+**说明:**
+ - s 可能为空，且只包含从 a-z 的小写字母。
+ - p 可能为空，且只包含从 a-z 的小写字母，以及字符 ? 和 *。
+
+Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*'.
+
+> '?' Matches any single character.
+>
+> '*' Matches any sequence of characters (including the empty sequence).
+>
+> The matching should cover the entire input string (not partial).
+
+**Note:**
+ - s could be empty and contains only lowercase letters a-z.
+ - p could be empty and contains only lowercase letters a-z, and characters like ? or *.
+
 **Example**
 
 ```
+Example 1:
+Input:
+s = "cb"
+p = "?a"
+Output: false
+Explanation: '?' matches 'c', but the second letter is 'a', which does not match 'b'.
 
+Example 2:
+Input:
+s = "adceb"
+p = "*a*b"
+Output: true
+Explanation: The first '*' matches the empty sequence, while the second '*' matches the substring "dce".
+
+Example 3:
+Input:
+s = "acdcb"
+p = "a*c?b"
+Output: false
 ```
 
 ---
@@ -393,7 +437,33 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int m = s.length(), n = p.length();
 
+        bool dp[n+1], pre, cur;
+        dp[0] = true;
+        for (int j = 0; j < n; j++) {
+            dp[j+1] = p[j] == '*' ? dp[j] : false;
+        }
+
+        for (int i = 0; i < m; i++) {
+            pre = dp[0];
+            dp[0] = false;
+            for (int j = 0; j < n; j++) {
+                cur = dp[j+1];
+                if (p[j] == '*') {
+                    dp[j+1] = dp[j] || dp[j+1];
+                } else {
+                    dp[j+1] = pre && (p[j] == s[i] || p[j] == '?');
+                }
+                pre = cur;
+            }
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
