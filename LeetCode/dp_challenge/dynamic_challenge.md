@@ -48,7 +48,7 @@
 |357|[Count Numbers with Unique Digits](#357-count-numbers-with-unique-digits)<span id = 357></span>|48.2%|Medium|2020.07.22|2020.07.22|
 |361|[Bomb Enemy](#361-bomb-enemy)<span id = 361></span>|45.9%|Medium|||
 |363|[Max Sum of Rectangle No Larger Than K](#363-max-sum-of-rectangle-no-larger-than-k)<span id = 363></span>|37.2%|Hard|||
-|368|[Largest Divisible Subset](#368-largest-divisible-subset)<span id = 368></span>|38.1%|Medium|||
+|368|[Largest Divisible Subset](#368-largest-divisible-subset)<span id = 368></span>|38.1%|Medium|2020.07.29||
 |375|[Guess Number Higher or Lower II](#375-guess-number-higher-or-lower-ii)<span id = 375></span>|40.2%|Medium|||
 |376|[Wiggle Subsequence](#376-wiggle-subsequence)<span id = 376></span>|39.5%|Medium|||
 |377|[Combination Sum IV](#377-combination-sum-iv)<span id = 377></span>|45.2%|Medium|||
@@ -2777,10 +2777,26 @@ int countNumbersWithUniqueDigits(int n){
 
 ## 368. Largest Divisible Subset
 
+Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies:
+
+Si % Sj = 0 or Sj % Si = 0.
+
+If there are multiple solutions, return any subset is fine.
+
+给出一个由无重复的正整数组成的集合，找出其中最大的整除子集，子集中任意一对 (Si，Sj) 都要满足：Si % Sj = 0 或 Sj % Si = 0。
+
+如果有多个目标子集，返回其中任何一个均可。
+
 **Example**
 
 ```
+Example 1:
+Input: [1,2,3]
+Output: [1,2] (of course, [1,3] will also be ok)
 
+Example 2:
+Input: [1,2,4,8]
+Output: [1,2,4,8]
 ```
 
 ---
@@ -2789,7 +2805,24 @@ int countNumbersWithUniqueDigits(int n){
 **分析：**
 
 ```cpp
-
+class Solution {
+public:
+    vector<int> largestDivisibleSubset(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> result(nums.size());
+        vector<int> ret;
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] % nums[j] == 0 && result[j].size() > result[i].size()) {
+                    result[i] = result[j];
+                }
+            }
+            result[i].push_back(nums[i]);
+            if (ret.size() < result[i].size()) ret = result[i];
+        }
+        return ret;
+    }
+};
 ```
 
 ### C Solution
