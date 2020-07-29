@@ -1,7 +1,7 @@
 |题号|题目名称|通关率|难度|zc打卡|jdq打卡|
 |---|---|---|---|---|---|
 |5|[Longest Palindromic Substring](#5-longest-palindromic-substring)<span id = 5></span>|29.3%|Medium||2020.07.22|
-|10|[Regular Expression Matching](#10-regular-expression-matching)<span id = 10></span>|26.7%|Hard|||
+|10|[Regular Expression Matching](#10-regular-expression-matching)<span id = 10></span>|26.7%|Hard|2020.07.29||
 |32|[Longest Valid Parentheses](#32-longest-valid-parentheses)<span id = 32></span>|28.2%|Hard|||
 |44|[Wildcard Matching](#44-wildcard-matching)<span id = 44></span>|24.6%|Hard|||
 |53|[Maximum Subarray](#53-maximum-subarray)<span id = 53></span>|46.4%|Easy|2020.07.20|2020.07.20|
@@ -268,10 +268,44 @@ char *longestPalindrome(char *s) {
 
 ## 10. Regular Expression Matching
 
+Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*'.
+
+'.' Matches any single character.
+'*' Matches zero or more of the preceding element.
+The matching should cover the entire input string (not partial).
+
+**Note:**
+
+ - s could be empty and contains only lowercase letters a-z.
+ - p could be empty and contains only lowercase letters a-z, and characters like . or *.
+
+给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
+
+'.' 匹配任意单个字符
+'*' 匹配零个或多个前面的那一个元素
+所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。
+
+**说明:**
+
+ - s 可能为空，且只包含从 a-z 的小写字母。
+ - p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。
+
+
 **Example**
 
 ```
+Example 1:
+Input:
+s = "aab"
+p = "c*a*b"
+Output: true
+Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore, it matches "aab".
 
+Example 2:
+Input:
+s = "mississippi"
+p = "mis*is*p*."
+Output: false
 ```
 
 ---
@@ -280,7 +314,34 @@ char *longestPalindrome(char *s) {
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int m = s.length(), n = p.length();
 
+        bool dp[n+1], pre, cur;
+        dp[0] = true;
+        for (int j = 0; j < n; j++) {
+            dp[j+1] = p[j] == '*' ? dp[j-1] : false;
+        }
+
+        for (int i = 0; i < m; i++) {
+            pre = dp[0];
+            dp[0] = false;
+            for (int j = 0; j < n; j++) {
+                cur = dp[j+1];
+                if (p[j] == '*') {
+                    dp[j+1] = dp[j-1]
+                           || dp[j+1] && (p[j-1] == s[i] || p[j-1] == '.');
+                } else {
+                    dp[j+1] = pre && (p[j] == s[i] || p[j] == '.');
+                }
+                pre = cur;
+            }
+        }
+        return dp[n];
+    }
+};
 ```
 
 ### C Solution
