@@ -70,7 +70,7 @@
 |514|[Freedom Trail](#514-freedom-trail)<span id = 514></span>|42.8%|Hard|||
 |516|[Longest Palindromic Subsequence](#516-longest-palindromic-subsequence)<span id = 516></span>|52.8%|Medium|2020.07.27||
 |517|[Super Washing Machines](#517-super-washing-machines)<span id = 517></span>|38.2%|Hard|||
-|523|[Continuous Subarray Sum](#523-continuous-subarray-sum)<span id = 523></span>|24.6%|Medium|||
+|523|[Continuous Subarray Sum](#523-continuous-subarray-sum)<span id = 523></span>|24.6%|Medium|2020.07.29||
 |546|[Remove Boxes](#546-remove-boxes)<span id = 546></span>|42.3%|Hard|||
 |552|[Student Attendance Record II](#552-student-attendance-record-ii)<span id = 552></span>|36.5%|Hard|||
 |568|[Maximum Vacation Days](#568-maximum-vacation-days)<span id = 568></span>|40.7%|Hard|||
@@ -92,7 +92,7 @@
 |698|[Partition to K Equal Sum Subsets](#698-partition-to-k-equal-sum-subsets)<span id = 698></span>|45.0%|Medium|||
 |712|[Minimum ASCII Delete Sum for Two Strings](#712-minimum-ascii-delete-sum-for-two-strings)<span id = 712></span>|58.4%|Medium|2020.07.21||
 |714|[Best Time to Buy and Sell Stock with Transaction Fee](#714-best-time-to-buy-and-sell-stock-with-transaction-fee)<span id = 714></span>|54.3%|Medium|2020.07.21||
-|718|[Maximum Length of Repeated Subarray](#718-maximum-length-of-repeated-subarray)<span id = 718></span>|49.3%|Medium|||
+|718|[Maximum Length of Repeated Subarray](#718-maximum-length-of-repeated-subarray)<span id = 718></span>|49.3%|Medium|2020.07.29||
 |727|[Minimum Window Subsequence](#727-minimum-window-subsequence)<span id = 727></span>|41.5%|Hard|||
 |730|[Count Different Palindromic Subsequences](#730-count-different-palindromic-subsequences)<span id = 730></span>|41.6%|Hard|||
 |740|[Delete and Earn](#740-delete-and-earn)<span id = 740></span>|48.5%|Medium|||
@@ -3470,7 +3470,35 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    bool checkSubarraySum(vector<int>& nums, int k) {
+        int n = nums.size();
+        if (n == 1) return false;
+        if (k == 1) return true;
 
+        if (k == 0) {
+            for (int i = 0 ; i < n - 1 ; i++) {
+                if(nums[i] == 0 && nums[i+1] == 0) return true;
+            }
+			return false;
+        }
+
+        vector<int> sum_map(n+1,0);
+        unordered_map<int,int> history;
+        for (int i = 0 ; i < n ;i++) sum_map[i+1] = (sum_map[i] + nums[i]) % k;
+        history[sum_map[0]] = 1;
+        history[sum_map[1]] = (sum_map[1] != sum_map[0]) + 1;
+
+        for (int i = 2 ; i <= n ;i++) { 
+            if (history[sum_map[i]] == 0)
+                history[sum_map[i]] = i + 1;
+            else if (i - history[sum_map[i]] > 0)
+                return true;
+        }
+        return false;
+    }
+};
 ```
 
 ### C Solution
@@ -4140,10 +4168,19 @@ public:
 
 ## 718. Maximum Length of Repeated Subarray
 
+Given two integer arrays A and B, return the maximum length of an subarray that appears in both arrays.
+
+给定两个整数数组A和B，返回出现在两个数组中的子数组的最大长度。
+
 **Example**
 
 ```
-
+Input:
+A: [1,2,3,2,1]
+B: [3,2,1,4,7]
+Output: 3
+Explanation: 
+The repeated subarray with maximum length is [3, 2, 1].
 ```
 
 ---
@@ -4152,7 +4189,27 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int findLength(vector<int>& a, vector<int>& b) {
+        int m = a.size(), n = b.size();
+        if (!m || !n) return 0;
 
+        int dp[n+1], res = 0;
+        memset(dp, 0, sizeof(dp));
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = 0; j < n; j++) {
+                if (a[i] == b[j]) {
+                    dp[j] = dp[j + 1] + 1;
+                    res = max(res, dp[j]);
+                } else {
+                    dp[j] = 0;
+                }
+            }
+        }
+        return res;
+    }
+};
 ```
 
 ### C Solution
