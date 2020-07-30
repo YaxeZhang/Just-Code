@@ -154,7 +154,7 @@
 |1143|[Longest Common Subsequence](#1143-longest-common-subsequence)<span id = 1143></span>|58.4%|Medium|2020.07.27||
 |1147|[Longest Chunked Palindrome Decomposition](#1147-longest-chunked-palindrome-decomposition)<span id = 1147></span>|58.5%|Hard|||
 |1155|[Number of Dice Rolls With Target Sum](#1155-number-of-dice-rolls-with-target-sum)<span id = 1155></span>|49.2%|Medium|||
-|1186|[Maximum Subarray Sum with One Deletion](#1186-maximum-subarray-sum-with-one-deletion)<span id = 1186></span>|37.2%|Medium|||
+|1186|[Maximum Subarray Sum with One Deletion](#1186-maximum-subarray-sum-with-one-deletion)<span id = 1186></span>|37.2%|Medium|2020.07.30||
 |1187|[Make Array Strictly Increasing](#1187-make-array-strictly-increasing)<span id = 1187></span>|41.6%|Hard|||
 |1191|[K-Concatenation Maximum Sum](#1191-k-concatenation-maximum-sum)<span id = 1191></span>|25.9%|Medium|||
 |1199|[Minimum Time to Build Blocks](#1199-minimum-time-to-build-blocks)<span id = 1199></span>|37.1%|Hard|||
@@ -6447,19 +6447,51 @@ public:
 
 ## 1186. Maximum Subarray Sum with One Deletion
 
+Given an array of integers, return the maximum sum for a non-empty subarray (contiguous elements) with at most one element deletion. In other words, you want to choose a subarray and optionally delete one element from it so that there is still at least one element left and the sum of the remaining elements is maximum possible.
+
+Note that the subarray needs to be non-empty after deleting one element.
+
+给定一个整数数组，返回最多删除一个元素的非空子数组（连续元素）的最大和。 换句话说，您想选择一个子数组并有选择地从中删除一个元素，以便仍然剩余至少一个元素，并且剩余元素的总和最大。
+
+请注意，删除一个元素后，子数组必须为非空。
+
 **Example**
 
 ```
+Example 1:
+Input: arr = [1,-2,0,3]
+Output: 4
+Explanation: Because we can choose [1, -2, 0, 3] and drop -2, thus the subarray [1, 0, 3] becomes the maximum value.
 
+Example 2:
+Input: arr = [1,-2,-2,3]
+Output: 3
+Explanation: We just choose [3] and it's the maximum sum.
+
+Example 3:
+Input: arr = [-1,-1,-1,-1]
+Output: -1
+Explanation: The final subarray needs to be non-empty. You can't choose [-1] and delete -1 from it, then get an empty subarray to make the sum equals to 0.
 ```
 
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 还是分析每一位的状态
 
 ```cpp
-
+class Solution {
+public:
+    int maximumSum(vector<int>& arr) {
+        int pre = -1e7, best = -1e7, cur = -1e7;
+        for (int a: arr) {
+            pre = max(cur, pre + a);
+            cur = max(a + cur, a);
+            best = max({best, cur, pre});
+        }
+        return best;
+    }
+};
 ```
 
 ### C Solution
