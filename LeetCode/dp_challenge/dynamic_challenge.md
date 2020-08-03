@@ -4325,7 +4325,7 @@ public:
         int pre = 0, cur = 0, idx = -1;
         for (int i = 0; i < numset.size(); i++) {
             if (i && numset[i] != numset[i-1] + 1) {
-                pre = cur = max(pre, cur);
+                pre = max(pre, cur);
             }
             pre = max(cur, pre + freq[numset[i]]);
             swap(pre, cur);
