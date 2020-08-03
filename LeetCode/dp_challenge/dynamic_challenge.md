@@ -186,7 +186,7 @@
 |1359|[Count All Valid Pickup and Delivery Options](#1359-count-all-valid-pickup-and-delivery-options)<span id = 1359></span>|57.6%|Hard|||
 |1363|[Largest Multiple of Three](#1363-largest-multiple-of-three)<span id = 1363></span>|33.4%|Hard|||
 |1367|[Linked List in Binary Tree](#1367-linked-list-in-binary-tree)<span id = 1367></span>|39.5%|Medium|||
-|1372|[Longest ZigZag Path in a Binary Tree](#1372-longest-zigzag-path-in-a-binary-tree)<span id = 1372></span>|53.6%|Medium|||
+|1372|[Longest ZigZag Path in a Binary Tree](#1372-longest-zigzag-path-in-a-binary-tree)<span id = 1372></span>|53.6%|Medium|2020.08.03||
 |1373|[Maximum Sum BST in Binary Tree](#1373-maximum-sum-bst-in-binary-tree)<span id = 1373></span>|41.0%|Hard|||
 |1388|[Pizza With 3n Slices](#1388-pizza-with-3n-slices)<span id = 1388></span>|44.3%|Hard|||
 |1397|[Find All Good Strings](#1397-find-all-good-strings)<span id = 1397></span>|37.1%|Hard|||
@@ -7239,11 +7239,32 @@ int countSquares(int** matrix, int matrixSize, int* matrixColSize){
 
 ## 1372. Longest ZigZag Path in a Binary Tree
 
+
+Given a binary tree root, a ZigZag path for a binary tree is defined as follow:
+
+ - Choose any node in the binary tree and a direction (right or left).
+ - If the current direction is right then move to the right child of the current node otherwise move to the left child.
+ - Change the direction from right to left or right to left.
+ - Repeat the second and third step until you can't move in the tree.
+
+Zigzag length is defined as the number of nodes visited - 1. (A single node has a length of 0).
+
+Return the longest ZigZag path contained in that tree.
+
+给你一棵以 root 为根的二叉树，二叉树中的交错路径定义如下：
+
+ - 选择二叉树中 任意 节点和一个方向（左或者右）。
+ - 如果前进方向为右，那么移动到当前节点的的右子节点，否则移动到它的左子节点。
+ - 改变前进方向：左变右或者右变左。
+ - 重复第二步和第三步，直到你在树中无法继续移动。
+
+交错路径的长度定义为：访问过的节点数目 - 1（单个节点的路径长度为 0 ）。
+
+请你返回给定树中最长 交错路径 的长度。
+
 **Example**
 
-```
-
-```
+[二叉树例子难顶，点链接](https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/)
 
 ---
 
@@ -7251,7 +7272,26 @@ int countSquares(int** matrix, int matrixSize, int* matrixColSize){
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int longestZigZag(TreeNode* root) {
+        dfs(root, 0);
+        return res;
+    }
 
+private:
+    int res = 0;
+    int dfs(TreeNode* root, int pos) {
+        if (!root) return -1;
+
+        int left = 1 + dfs(root->left, 0);
+        int right = 1 + dfs(root->right, 1);
+
+        res = max({res, left, right});
+
+        return pos ? left : right;
+    }
+};
 ```
 
 ### C Solution
