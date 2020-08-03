@@ -185,7 +185,7 @@
 |1349|[Maximum Students Taking Exam](#1349-maximum-students-taking-exam)<span id = 1349></span>|40.9%|Hard|||
 |1359|[Count All Valid Pickup and Delivery Options](#1359-count-all-valid-pickup-and-delivery-options)<span id = 1359></span>|57.6%|Hard|||
 |1363|[Largest Multiple of Three](#1363-largest-multiple-of-three)<span id = 1363></span>|33.4%|Hard|||
-|1367|[Linked List in Binary Tree](#1367-linked-list-in-binary-tree)<span id = 1367></span>|39.5%|Medium|||
+|1367|[Linked List in Binary Tree](#1367-linked-list-in-binary-tree)<span id = 1367></span>|39.5%|Medium|2020.08.03||
 |1372|[Longest ZigZag Path in a Binary Tree](#1372-longest-zigzag-path-in-a-binary-tree)<span id = 1372></span>|53.6%|Medium|2020.08.03||
 |1373|[Maximum Sum BST in Binary Tree](#1373-maximum-sum-bst-in-binary-tree)<span id = 1373></span>|41.0%|Hard|||
 |1388|[Pizza With 3n Slices](#1388-pizza-with-3n-slices)<span id = 1388></span>|44.3%|Hard|||
@@ -7331,11 +7331,21 @@ private:
 
 ## 1367. Linked List in Binary Tree
 
+Given a binary tree root and a linked list with head as the first node. 
+
+Return True if all the elements in the linked list starting from the head correspond to some downward path connected in the binary tree otherwise return False.
+
+In this context downward path means a path that starts at some node and goes downwards.
+
+给你一棵以 root 为根的二叉树和一个 head 为第一个节点的链表。
+
+如果在二叉树中，存在一条一直向下的路径，且每个点的数值恰好一一对应以 head 为首的链表中每个节点的值，那么请你返回 True ，否则返回 False 。
+
+一直向下的路径的意思是：从树中某个节点开始，一直连续向下的路径。
+
 **Example**
 
-```
-
-```
+[二叉树例子难顶，点链接](https://leetcode.com/problems/linked-list-in-binary-tree/)
 
 ---
 
@@ -7343,7 +7353,27 @@ private:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    bool isSubPath(ListNode* head, TreeNode* root) {
+        if (!head) return true;
+        if (!root) return false;
 
+        return head->val == root->val && helper(head, root)
+            || isSubPath(head, root->left)
+            || isSubPath(head, root->right);
+    }
+
+private:
+    bool helper(ListNode* head, TreeNode* root) {
+        if (!head) return true;
+        if (!root) return false;
+
+        return head->val == root->val
+            && (helper(head->next, root->left)
+            || helper(head->next, root->right));
+    }
+};
 ```
 
 ### C Solution
