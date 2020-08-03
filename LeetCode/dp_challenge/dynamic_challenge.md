@@ -95,7 +95,7 @@
 |718|[Maximum Length of Repeated Subarray](#718-maximum-length-of-repeated-subarray)<span id = 718></span>|49.3%|Medium|2020.07.29||
 |727|[Minimum Window Subsequence](#727-minimum-window-subsequence)<span id = 727></span>|41.5%|Hard|||
 |730|[Count Different Palindromic Subsequences](#730-count-different-palindromic-subsequences)<span id = 730></span>|41.6%|Hard|||
-|740|[Delete and Earn](#740-delete-and-earn)<span id = 740></span>|48.5%|Medium|||
+|740|[Delete and Earn](#740-delete-and-earn)<span id = 740></span>|48.5%|Medium|2020.08.03||
 |741|[Cherry Pickup](#741-cherry-pickup)<span id = 741></span>|33.9%|Hard|||
 |746|[Min Cost Climbing Stairs](#746-min-cost-climbing-stairs)<span id = 746></span>|50.2%|Easy|2020.07.20||
 |750|[Number Of Corner Rectangles](#750-number-of-corner-rectangles)<span id = 750></span>|66.4%|Medium|||
@@ -4275,19 +4275,64 @@ public:
 
 ## 740. Delete and Earn
 
+Given an array nums of integers, you can perform operations on the array.
+
+In each operation, you pick any nums[i] and delete it to earn nums[i] points. After, you must delete every element equal to nums[i] - 1 or nums[i] + 1.
+
+You start with 0 points. Return the maximum number of points you can earn by applying such operations.
+
+给定一个整数数组 nums ，你可以对它进行一些操作。
+
+每次操作中，选择任意一个 nums[i] ，删除它并获得 nums[i] 的点数。之后，你必须删除每个等于 nums[i] - 1 或 nums[i] + 1 的元素。
+
+开始你拥有 0 个点数。返回你能通过这些操作获得的最大点数。
+
 **Example**
 
 ```
-
+Example 1:
+Input: nums = [3, 4, 2]
+Output: 6
+Explanation: 
+Delete 4 to earn 4 points, consequently 3 is also deleted.
+Then, delete 2 to earn 2 points. 6 total points are earned.
+ 
+Example 2:
+Input: nums = [2, 2, 3, 3, 3, 4]
+Output: 9
+Explanation: 
+Delete 3 to earn 3 points, deleting both 2's and the 4.
+Then, delete 3 again to earn 3 points, and 3 again to earn 3 points.
+9 total points are earned.
 ```
 
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** house robber 问题的 follow up。
 
 ```cpp
+class Solution {
+public:
+    int deleteAndEarn(vector<int>& nums) {
+        unordered_map<int, int> freq;
+        for (int num: nums) freq[num] += num;
 
+        vector<int> numset;
+        for (auto& f: freq) numset.push_back(f.first);
+        sort(numset.begin(), numset.end());
+
+        int pre = 0, cur = 0, idx = -1;
+        for (int i = 0; i < numset.size(); i++) {
+            if (i && numset[i] != numset[i-1] + 1) {
+                pre = cur = max(pre, cur);
+            }
+            pre = max(cur, pre + freq[numset[i]]);
+            swap(pre, cur);
+        }
+        return max(pre, cur);
+    }
+};
 ```
 
 ### C Solution
