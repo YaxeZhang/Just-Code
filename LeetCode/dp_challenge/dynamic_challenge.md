@@ -168,7 +168,7 @@
 |1240|[Tiling a Rectangle with the Fewest Squares](#1240-tiling-a-rectangle-with-the-fewest-squares)<span id = 1240></span>|49.4%|Hard|||
 |1246|[Palindrome Removal](#1246-palindrome-removal)<span id = 1246></span>|46.0%|Hard|||
 |1259|[Handshakes That Don't Cross](#1259-handshakes-that-don't-cross)<span id = 1259></span>|53.3%|Hard|||
-|1262|[Greatest Sum Divisible by Three](#1262-greatest-sum-divisible-by-three)<span id = 1262></span>|47.4%|Medium|||
+|1262|[Greatest Sum Divisible by Three](#1262-greatest-sum-divisible-by-three)<span id = 1262></span>|47.4%|Medium|2020。07.31||
 |1269|[Number of Ways to Stay in the Same Place After Some Steps](#1269-number-of-ways-to-stay-in-the-same-place-after-some-steps)<span id = 1269></span>|43.0%|Hard|||
 |1273|[Delete Tree Nodes](#1273-delete-tree-nodes)<span id = 1273></span>|63.4%|Medium|||
 |1277|[Count Square Submatrices with All Ones](#1277-count-square-submatrices-with-all-ones)<span id = 1277></span>|72.9%|Medium|2020.07.20|2020.07.22|
@@ -176,7 +176,7 @@
 |1289|[Minimum Falling Path Sum II](#1289-minimum-falling-path-sum-ii)<span id = 1289></span>|60.7%|Hard|2020.07.16||
 |1301|[Number of Paths with Max Score](#1301-number-of-paths-with-max-score)<span id = 1301></span>|37.1%|Hard|||
 |1312|[Minimum Insertion Steps to Make a String Palindrome](#1312-minimum-insertion-steps-to-make-a-string-palindrome)<span id = 1312></span>|57.7%|Hard|||
-|1314|[Matrix Block Sum](#1314-matrix-block-sum)<span id = 1314></span>|73.8%|Medium|||
+|1314|[Matrix Block Sum](#1314-matrix-block-sum)<span id = 1314></span>|73.8%|Medium|2020.07.30||
 |1320|[Minimum Distance to Type a Word Using Two Fingers](#1320-minimum-distance-to-type-a-word-using-two-fingers)<span id = 1320></span>|62.1%|Hard|||
 |1326|[Minimum Number of Taps to Open to Water a Garden](#1326-minimum-number-of-taps-to-open-to-water-a-garden)<span id = 1326></span>|43.0%|Hard|||
 |1335|[Minimum Difficulty of a Job Schedule](#1335-minimum-difficulty-of-a-job-schedule)<span id = 1335></span>|57.1%|Hard|||
@@ -190,7 +190,7 @@
 |1373|[Maximum Sum BST in Binary Tree](#1373-maximum-sum-bst-in-binary-tree)<span id = 1373></span>|41.0%|Hard|||
 |1388|[Pizza With 3n Slices](#1388-pizza-with-3n-slices)<span id = 1388></span>|44.3%|Hard|||
 |1397|[Find All Good Strings](#1397-find-all-good-strings)<span id = 1397></span>|37.1%|Hard|||
-|1402|[Reducing Dishes](#1402-reducing-dishes)<span id = 1402></span>|72.9%|Hard|||
+|1402|[Reducing Dishes](#1402-reducing-dishes)<span id = 1402></span>|72.9%|Hard|2020.08.03||
 |1405|[Longest Happy String](#1405-longest-happy-string)<span id = 1405></span>|48.0%|Medium|||
 |1406|[Stone Game III](#1406-stone-game-iii)<span id = 1406></span>|55.8%|Hard|||
 |1411|[Number of Ways to Paint N × 3 Grid](#1411-number-of-ways-to-paint-n-×-3-grid)<span id = 1411></span>|61.4%|Hard|||
@@ -6269,11 +6269,31 @@ public:
 
 ## 1314. Matrix Block Sum
 
+Given a m * n matrix mat and an integer K, return a matrix answer where each answer[i][j] is the sum of all elements mat[r][c] for i - K <= r <= i + K, j - K <= c <= j + K, and (r, c) is a valid position in the matrix.
+
+给你一个 m * n 的矩阵 mat 和一个整数 K ，请你返回一个矩阵 answer ，其中每个 answer[i][j] 是所有满足下述条件的元素 mat[r][c] 的和： 
+
+i - K <= r <= i + K, j - K <= c <= j + K 
+(r, c) 在矩阵内。
+
 **Example**
 
 ```
+Example 1:
+Input: mat = [[1,2,3],[4,5,6],[7,8,9]], K = 1
+Output: [[12,21,16],[27,45,33],[24,39,28]]
 
+Example 2:
+Input: mat = [[1,2,3],[4,5,6],[7,8,9]], K = 2
+Output: [[45,45,45],[45,45,45],[45,45,45]]
 ```
+
+**Constraints:**
+
+ - m == mat.length
+ - n == mat[i].length
+ - 1 <= m, n, K <= 100
+ - 1 <= mat[i][j] <= 100
 
 ---
 
@@ -6281,7 +6301,33 @@ public:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int K) {
+        int m = mat.size(), n = mat[0].size(), psum[m+1][n+1];
+        memset(psum, 0, sizeof(psum));
 
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                psum[i+1][j+1] = mat[i][j]
+                               + psum[i][j+1]
+                               + psum[i+1][j]
+                               - psum[i][j];
+            }
+        }
+
+        vector<vector<int>> res(m, vector<int>(n));
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                res[i][j] = psum[min(m, i+K+1)][min(n, j+K+1)]
+                          - psum[min(m, i+K+1)][max(0, j-K)]
+                          - psum[max(0, i-K)][min(n, j+K+1)]
+                          + psum[max(0, i-K)][max(0, j-K)];
+            }
+        }
+        return res;
+    }
+};
 ```
 
 ### C Solution
@@ -6765,19 +6811,49 @@ public:
 
 ## 1262. Greatest Sum Divisible by Three
 
+Given an array nums of integers, we need to find the maximum possible sum of elements of the array such that it is divisible by three.
+
+给定一个整数数组，我们需要找到该数组元素的最大可能和，以使其可以被三整除。
+
 **Example**
 
 ```
+Example 1:
+Input: nums = [3,6,5,1,8]
+Output: 18
+Explanation: Pick numbers 3, 6, 1 and 8 their sum is 18 (maximum sum divisible by 3).
 
+Example 2:
+Input: nums = [4]
+Output: 0
+Explanation: Since 4 is not divisible by 3, do not pick any number.
 ```
+
+**Constraints:**
+
+ - 1 <= nums.length <= 4 * 10^4
+ - 1 <= nums[i] <= 10^4
 
 ---
 
 ### Cpp Solution
-**分析：**
+**分析：** 思路清晰，重要的是状态的保持（易错）。
 
 ```cpp
-
+class Solution {
+public:
+    int maxSumDivThree(vector<int>& nums) {
+        vector<int> dp = {0, 0, 0}, tmp(3);
+        for (int num : nums) {
+            tmp[0] = dp[0], tmp[1] = dp[1], tmp[2] = dp[2];
+            for (int t: tmp) {
+                int mod = (t + num) % 3;
+                dp[mod] = max(dp[mod], t + num);
+            }
+        }
+        return dp[0];
+    }
+};
 ```
 
 ### C Solution
@@ -7222,10 +7298,34 @@ int countSquares(int** matrix, int matrixSize, int* matrixColSize){
 
 ## 1402. Reducing Dishes
 
+A chef has collected data on the satisfaction level of his n dishes. Chef can cook any dish in 1 unit of time.
+
+Like-time coefficient of a dish is defined as the time taken to cook that dish including previous dishes multiplied by its satisfaction level  i.e.  time[i]*satisfaction[i]
+
+Return the maximum sum of Like-time coefficient that the chef can obtain after dishes preparation.
+
+Dishes can be prepared in any order and the chef can discard some dishes to get this maximum value.
+
+一个厨师收集了他 n 道菜的满意程度 satisfaction ，这个厨师做出每道菜的时间都是 1 单位时间。
+
+一道菜的 「喜爱时间」系数定义为烹饪这道菜以及之前每道菜所花费的时间乘以这道菜的满意程度，也就是 time[i]*satisfaction[i] 。
+
+请你返回做完所有菜 「喜爱时间」总和的最大值为多少。
+
+你可以按 任意 顺序安排做菜的顺序，你也可以选择放弃做某些菜来获得更大的总和。
+
 **Example**
 
 ```
+Example 1:
+Input: satisfaction = [-1,-8,0,5,-9]
+Output: 14
+Explanation: After Removing the second and last dish, the maximum total Like-time coefficient will be equal to (-1*1 + 0*2 + 5*3 = 14). Each dish is prepared in one unit of time.
 
+Example 2:
+Input: satisfaction = [4,3,2]
+Output: 20
+Explanation: Dishes can be prepared in any order, (2*1 + 3*2 + 4*3 = 20)
 ```
 
 ---
@@ -7234,7 +7334,25 @@ int countSquares(int** matrix, int matrixSize, int* matrixColSize){
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int maxSatisfaction(vector<int>& satis) {
+        int n = satis.size(), res = 0;
 
+        vector<int> ssum(satis);
+        sort(satis.begin(), satis.end());
+        for (int i = n - 2; i >= 0; i--) ssum[i] += ssum[i+1];
+
+        for (int i = n - 1; i >= 0; i--) {
+            if (ssum[i] > 0) {
+                res += ssum[i];
+            } else {
+                break;
+            }
+        }
+        return res;
+    }
+};
 ```
 
 ### C Solution
