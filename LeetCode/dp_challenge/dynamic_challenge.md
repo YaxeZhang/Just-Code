@@ -168,7 +168,7 @@
 |1240|[Tiling a Rectangle with the Fewest Squares](#1240-tiling-a-rectangle-with-the-fewest-squares)<span id = 1240></span>|49.4%|Hard|||
 |1246|[Palindrome Removal](#1246-palindrome-removal)<span id = 1246></span>|46.0%|Hard|||
 |1259|[Handshakes That Don't Cross](#1259-handshakes-that-don't-cross)<span id = 1259></span>|53.3%|Hard|||
-|1262|[Greatest Sum Divisible by Three](#1262-greatest-sum-divisible-by-three)<span id = 1262></span>|47.4%|Medium|2020。07.31||
+|1262|[Greatest Sum Divisible by Three](#1262-greatest-sum-divisible-by-three)<span id = 1262></span>|47.4%|Medium|2020.07.31||
 |1269|[Number of Ways to Stay in the Same Place After Some Steps](#1269-number-of-ways-to-stay-in-the-same-place-after-some-steps)<span id = 1269></span>|43.0%|Hard|||
 |1273|[Delete Tree Nodes](#1273-delete-tree-nodes)<span id = 1273></span>|63.4%|Medium|||
 |1277|[Count Square Submatrices with All Ones](#1277-count-square-submatrices-with-all-ones)<span id = 1277></span>|72.9%|Medium|2020.07.20|2020.07.22|
