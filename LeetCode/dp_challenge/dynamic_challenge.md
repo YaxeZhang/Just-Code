@@ -187,7 +187,7 @@
 |1363|[Largest Multiple of Three](#1363-largest-multiple-of-three)<span id = 1363></span>|33.4%|Hard|||
 |1367|[Linked List in Binary Tree](#1367-linked-list-in-binary-tree)<span id = 1367></span>|39.5%|Medium|2020.08.03||
 |1372|[Longest ZigZag Path in a Binary Tree](#1372-longest-zigzag-path-in-a-binary-tree)<span id = 1372></span>|53.6%|Medium|2020.08.03||
-|1373|[Maximum Sum BST in Binary Tree](#1373-maximum-sum-bst-in-binary-tree)<span id = 1373></span>|41.0%|Hard|||
+|1373|[Maximum Sum BST in Binary Tree](#1373-maximum-sum-bst-in-binary-tree)<span id = 1373></span>|41.0%|Hard|2020.08.04||
 |1388|[Pizza With 3n Slices](#1388-pizza-with-3n-slices)<span id = 1388></span>|44.3%|Hard|||
 |1397|[Find All Good Strings](#1397-find-all-good-strings)<span id = 1397></span>|37.1%|Hard|||
 |1402|[Reducing Dishes](#1402-reducing-dishes)<span id = 1402></span>|72.9%|Hard|2020.08.03||
@@ -7305,11 +7305,25 @@ private:
 
 ## 1373. Maximum Sum BST in Binary Tree
 
+Given a binary tree root, the task is to return the maximum sum of all keys of any sub-tree which is also a Binary Search Tree (BST).
+
+Assume a BST is defined as follows:
+
+ - The left subtree of a node contains only nodes with keys less than the node's key.
+ - The right subtree of a node contains only nodes with keys greater than the node's key.
+ - Both the left and right subtrees must also be binary search trees.
+
+给你一棵以 root 为根的 二叉树 ，请你返回 任意 二叉搜索子树的最大键值和。
+
+二叉搜索树的定义如下：
+
+ - 任意节点的左子树中的键值都 小于 此节点的键值。
+ - 任意节点的右子树中的键值都 大于 此节点的键值。
+ - 任意节点的左子树和右子树都是二叉搜索树。
+
 **Example**
 
-```
-
-```
+[二叉树例子难顶，点链接](https://leetcode-cn.com/problems/maximum-sum-bst-in-binary-tree/)
 
 ---
 
@@ -7317,7 +7331,36 @@ private:
 **分析：**
 
 ```cpp
+class Solution {
+public:
+    int maxSumBST(TreeNode* root) {
+        dfs(root, 0);
+        return res;
+    }
 
+private:
+    int res = 0, _min = -1e5, _max = 1e5;
+
+    pair<int, int> dfs(TreeNode* root, int pos) {
+        if (!root) return pos ? make_pair(_max, 0) : make_pair(_min, 0);
+
+        auto left = dfs(root->left, 0);
+        auto right = dfs(root->right, 1);
+
+        if (left.first >= root->val || right.first <= root->val) {
+            return pos ? make_pair(_min, 0) : make_pair(_max, 0);
+        }
+
+        int cur_sum = root->val + left.second + right.second;
+        res = max(res, cur_sum);
+
+        if (pos) {
+            return {left.first == _min ? root->val : left.first, cur_sum};
+        } else {
+            return {right.first == _max ? root->val : right.first, cur_sum};
+        }
+    }
+};
 ```
 
 ### C Solution
