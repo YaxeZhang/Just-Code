@@ -1,6 +1,6 @@
 # Just-Code
 
-![](https://img.shields.io/badge/Author-Yaxe.Zhang-blue) ![](https://img.shields.io/badge/LeetCode-540%2F1522-brightgreen) ![](https://img.shields.io/badge/%E5%89%91%E6%8C%87offer-66%2F66-green) ![](https://img.shields.io/badge/Lisense-MIT-yellow)
+![](https://img.shields.io/badge/Author-Yaxe.Zhang-blue) ![](https://img.shields.io/badge/LeetCode-551%2F1522-brightgreen) ![](https://img.shields.io/badge/%E5%89%91%E6%8C%87offer-66%2F66-green) ![](https://img.shields.io/badge/Lisense-MIT-yellow)
 
  - 逐步收录常见面试算法题，包括 **剑指offer** 和 **LeetCode** 。
  - 持续更新，如果对您有帮助，小手一点， Star 走一走，靴靴！
