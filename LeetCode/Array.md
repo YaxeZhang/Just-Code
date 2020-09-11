@@ -1421,6 +1421,22 @@ class Solution:
         return max(A + B)
 ```
 
+```python
+class Solution:
+    def maxProduct(self, A):
+        if not A: return 0
+
+        _max = _min = 1
+        res = float('-inf')
+        for a in A:
+            if a < 0:
+                _max, _min = _min, _max
+            _max = max(_max * a, a)
+            _min = min(_min * a, a)
+            res = max(res, _max)
+
+        return res
+```
 [返回目录](#00)
 
 ## 88. Merge Sorted Array
