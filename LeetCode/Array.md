@@ -11,7 +11,7 @@
  - [118. Pascal's Triangle](#118-pascals-triangle)
  - [119. Pascal's Triangle II](#119-pascals-triangle-ii)
  - [169. Majority Element](#169-majority-element)
- - [229	Majority Element II]
+ - [229. Majority Element II](#229-majority-element-ii)
  - [274. H-Index](#274-hindex)
  - [275. H-Index II](#275-hindex-ii)
  - [243	Shortest Word Distance]
@@ -436,6 +436,68 @@ class Solution:
                 if not cnt:
                     mor, cnt = v, 1
         return mor
+```
+
+[返回目录](#00)
+
+## 229. Majority Element II
+
+Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+
+Note: The algorithm should run in linear time and in O(1) space.
+
+给定一个大小为n的整数数组，请查找所有出现次数大于 n / 3倍的元素。 
+
+注意：该算法应在线性时间和O（1）空间中运行。
+
+**Example**
+
+```
+Example 1:
+Input: [3,2,3]
+Output: [3]
+
+Example 2:
+Input: [1,1,1,3,3,2,2,2]
+Output: [1,2]
+```
+
+---
+
+### Python Solution
+**分析：** 摩尔投票法进阶
+
+```python
+class Solution:
+
+    def majorityElement(self, nums):
+        if not nums:
+            return []
+        
+        # 1st pass
+        count1, count2, candidate1, candidate2 = 0, 0, None, None
+        for n in nums:
+            if candidate1 == n:
+                count1 += 1
+            elif candidate2 == n:
+                count2 += 1
+            elif count1 == 0:
+                candidate1 = n
+                count1 += 1
+            elif count2 == 0:
+                candidate2 = n
+                count2 += 1
+            else:
+                count1 -= 1
+                count2 -= 1
+        
+        # 2nd pass
+        result = []
+        for c in [candidate1, candidate2]:
+            if nums.count(c) > len(nums)//3:
+                result.append(c)
+
+        return result
 ```
 
 [返回目录](#00)
